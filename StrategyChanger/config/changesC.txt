@@ -1,0 +1,2 @@
+3:%S4c - trzeci kwadrant - oznaczajacy za³o¿enie, ze trend jest horyzontalny i
+4:%nale¿y otwierac pozycje d³ugie wg zasady Buy Limit

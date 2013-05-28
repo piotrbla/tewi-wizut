@@ -1,0 +1,2 @@
+3:%S4d - czwarty kwadrant - oznaczajacy za³o¿enie, ze trend jest spadkowy i
+4:%nale¿y otwierac pozycje krótkie

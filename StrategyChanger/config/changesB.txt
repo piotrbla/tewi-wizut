@@ -1,0 +1,2 @@
+3:%S4b - drugi kwadrant - oznaczajacy za³o¿enie, ze trend jest horyzontalny i
+4:%nale¿y otwierac pozycje krótkie wg zasady Sell Limit

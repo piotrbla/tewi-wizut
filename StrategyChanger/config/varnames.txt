@@ -1,0 +1,15 @@
+bestM{A}
+bestparam{A}VolLength
+bestparam{A}Duration
+bestparam{A}Buffer
+bestparam{A}VolThreshold
+bestparam{A}SL
+param{A}Length
+param{A}VolLength
+param{A}Duration
+param{A}VolThreshold
+param{A}Buffer
+param{A}SL
+sumR{A}
+R{A}
+l{A}
