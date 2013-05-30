@@ -145,7 +145,7 @@ for paramCLength=bestMa
                         lastCandle = kon-max(paramCLength, paramCVolLength) - paramCDuration;
                         for i=pocz:lastCandle
                             
-                            if maxes(i) - paramCBuffer >C(i,4) && volCverages(i)<paramCVolThreshold
+                            if maxes(i) - paramCBuffer >verificationC(i,4) && volCverages(i)<paramCVolThreshold
                                 Ra(i)=verificationC(i+paramCDuration,4)-verificationC(i+1,1)-spread; %zysk z i-tej pozycji long zamykanej na zamkniêciu po paramCDuration kroku
                                 L=min(verificationC(i+1:i+paramCDuration,3));
                                 

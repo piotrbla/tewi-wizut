@@ -145,11 +145,11 @@ for paramDLength=bestMa
                         lastCandle = kon-max(paramDLength, paramDVolLength) - paramDDuration;
                         for i=pocz:lastCandle
                             
-                            if maxes(i) - paramDBuffer >C(i,4) && volDverages(i)<paramDVolThreshold
-                                Ra(i)=-C(i+paramDDuration,4)+C(i+1,1)-spread; %zysk z i-tej pozycji long zamykanej na zamkniêciu po paramDDuration kroku
-                                H=max(C(i+1:i+paramDDuration,2));
+                            if maxes(i) - paramDBuffer >verificationC(i,4) && volDverages(i)<paramDVolThreshold
+                                Ra(i)=-verificationC(i+paramDDuration,4)+verificationC(i+1,1)-spread; %zysk z i-tej pozycji long zamykanej na zamkniêciu po paramDDuration kroku
+                                H=max(verificationC(i+1:i+paramDDuration,2));
                                 
-                                if (C(i+1,1)-H)<-paramDSL
+                                if (verificationC(i+1,1)-H)<-paramDSL
                                     Ra(i)=-paramDSL;
                                     ls=ls+1;
                                 end
