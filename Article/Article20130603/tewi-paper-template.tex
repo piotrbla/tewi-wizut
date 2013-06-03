@@ -33,7 +33,7 @@
   \inst{1}West Pomeranian University of Technology\\
   Faculty of Computer Science\\
   ul.Żołnierska 49, 71-210 Szczecin Poland\\
-  {awilinski,pblaszynski}@wi.ps.pl, @wi.ps.pl
+  \{awilinski, pblaszynski, abera, wnowicki, kbuda\}@wi.ps.pl
 }
 \keywords{algorithmic trading, forecasting, financial markets, simple rules, computational intelligence, investment strategies}
 
@@ -51,13 +51,14 @@ In article are shown studies of the possibly simplest investment strategy of alg
 \end{abstract}
 
 \section{Introduction}
-\indent For centuries predicting future events was a great challenge for many fields of science. Probably next to the meteorology, most important is the prediction of changes in the financial markets. It's a big still unresolved task that intrigues and motivates the continuing search. Modern computing capabilities allow to change researcher relationship to predictive challenge. If the aim is to be effective investment, not the successful prediction, research target should be changed. Many scientific papers was devoted to the problem of investment efficiency, also including the best quality papers, as well as work of at least several Nobel Prize winners. Among the many highly sophisticated research methods, for years was examined the ability of simple patterns classification in the time series. Trying to take advantage of this simple patterns (classification rules) in investment strategies.\\
-\indent The aim of papper is to verify thesis about effectiveness of such simple rules of opening and closing position on trading markets. High frequency open positions algo trading are considering here. The strategy is based on the basic concept - should be as simple as possible, impossible to achieve by human not assisted with machine, should reject the idea of "predictions" of the future and be based on idea of responding to market behaviour. Such strategies are being tested for at least several decades and rather has not good reviews. Most studies cover intersections of moving averages as premise of classifier opening positions rule or remaining idle. Usually these conditions turn out to be too easy to achieve satisfactory transaction efficiency.\\
+\indent For centuries predicting future events was a great challenge for many fields of science \cite{ball07, wu12}. Probably next to the meteorology, most important is the prediction of changes in the financial markets \cite{krutsinger99, satchwell05, schwager02}. It's a big still unresolved task that intrigues and motivates the continuing search \cite{fama91, fama98}. Modern computing capabilities allow to change researcher relationship to predictive challenge. If the aim is to be effective investment, not the successful prediction, research target should be changed. Many scientific papers was devoted to the problem of investment efficiency, also including the best quality papers, as well as work of at least several Nobel Prize winners. Among the many highly sophisticated research methods \cite{fujimoto03, kompa08, pawlak02, pedrycz97, rua09, raghuraj09, wilinski09} , for years was examined the ability of simple patterns classification in the time series \cite{brock92, cai05, gencay99, lebaron99, satchwell05}. Trying to take advantage of this simple patterns (classification rules) in investment strategies.\\
+\indent The aim of papper is to verify thesis about effectiveness of such simple rules of opening and closing position on trading markets. High frequency open positions algo trading are considering here \cite{muriel04}. The strategy is based on the basic concept - should be as simple as possible, impossible to achieve by human not assisted with machine, should reject the idea of "predictions" of the future and be based on idea of responding to market behaviour. Such strategies are being tested for at least several decades and rather has not good reviews. Most studies cover intersections of moving averages as premise of classifier opening positions rule or remaining idle. Usually these conditions turn out to be too easy to achieve satisfactory transaction efficiency.\\
 \indent Close terms in such investment strategies are also very simple. They are mostly based on similar terms, resulting from mean values or number of bars that elapsed since open.
 Similar concept will be considered in this study. This concept belongs simple rules group, extracted from repeated patterns in the time series of financial instruments. Most commonly, these rules include a group or sequence of conditions besides using moving averages also uses differences in average, first derivative, standard deviation (Bollinger Bands) or pivot points. Friesen, Weller i Dunham \cite{friesen09} say that these methods were for many years rather neglected by the academic community, despite frequent, or perhaps because of, use by trade practitioners on the stock exchange. This opinion is not completely correct, because even Eugene Fama, creator of the efficient markets theory \cite{fama91}, admitted later that  there is little evidence of of simple rules efficiency \cite{fama98}. Cai and Keasey \cite{cai05} noted both predictive and investing efficiency of simplest rules based on differences in derivatives averages and levels of price direction changes. Tian, Wan and Guo \cite{tian02} reported the effectiveness of certain rules for some markets and total unsuitable on other. This opinion has become an inspiration for the authors to consider a number of markets. They distinguish growing and mature markets. A wealth of simple rules ideas is work of Krutsinger \cite{krutsinger99}, collection of interviews with the most prominent modern practices – american market experts. Experts, which Phillip Ball \cite{ball07} writes, that deserves to be published, because they achieve financial success, so uncommon in academic.
 It is easy to see that the majority of these excellent traders succeed within a certain period of time, and today the implementation of their methods gives poor results. This contradicts the general philosophy of these practitioners (but not all of them), that exists mysterious patterns or rules, that are characteristic for specific markets, which provide success.
 \section{Strategy characteristics}
-\indent The essence of the concept is the idea of simultaneous open long and short positions based on various signals, in this case the intersection graph (values of exchange rate  and stock index) and average of the last m closing of this price.
+\indent The essence of the concept is the idea of simultaneous open long and short positions based on various signals, in this case the intersection graph (values of exchange rate  and stock index) and average of the last m closing of this price.\\
+Equally simple is the closing rule of each opened position. It's closed at the close of (i+1) bar (fig. 1).
 Let C be considering constantly changing prices of value, and Ci closing price of I OHLC bar (Open, High, Low, Close). Denote Cmi as average of m last close
 \begin{equation} \label{label-of-equation-1}
   C_{mi} = (C_{i-m} + C_{i-m+1} + … + C_{i} ) / m; 
@@ -68,7 +69,9 @@ At the moment of I bar closing, value can be compared with the Cmi average. Depe
 2. If Ci  > Cmi  short position will be open
 3. If Ci  < Cmi  long position will be open
 4. If Ci  < Cmi  short position will be open
-Fig. 1. Quadrant of four possible open position.
+
+Each of these decisions is usually attributed to reasons arising from the conviction of the investor why and what happens in a moment. Should be noted that each of the above decisions is taken basing on average of different number of last close bar prices. Therefore, in the general case at the close moment close of I bar when it should make decision of open (short or long) it could happen that may occur up to four different levels of the average value calculated for the last m bars (different for each contractual quadrant).\\
+These situations are shown in Figure 1
 
 \begin{figure}[h]
  \centering
@@ -189,10 +192,6 @@ vestibulum. Quisque ullamcorper, ligula in placerat imperdiet, risus risus
 malesuada dolor, ut scelerisque ipsum nisi eu urna. Mauris bibendum tortor
 condimentum mauris.  
 
-
-\subsection{Some notes on references}\label{bib}
-Examples of citing: \cite{wilinski09}, \cite{wilinski09,
-tian02, satchwell05}. 
 
 %%%%%%%%%% USE ____BIBTEX____ TO GENERATE YOUR REFERENCES 
 %%%%%%%%%%% PLEASE UNCOMMENT THE TWO FOLLOWING LINES 
