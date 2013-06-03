@@ -11,6 +11,7 @@
 \usepackage{amsthm}
 \usepackage{txfonts}
 \usepackage{epstopdf}
+\usepackage{placeins}
 
 \usepackage{polski}
 \usepackage[utf8]{inputenc}
@@ -91,70 +92,81 @@ S1s & -111.077 & -0.99744078 & NaN & 4946\\
  \end{center} 
  \end{table}
 
+\begin{figure}[h]
+ \centering
+ \includegraphics[width=\textwidth]{Rysunek0_all2.png}
+ \caption{Symbolic quadrant of response (second line) for market movement (first line)}
+\end{figure}
+\FloatBarrier
 
 \begin{figure}[h]
 \centering
-\begin{minipage}{.40\linewidth}
-\centering \includegraphics[width=0.9\textwidth]{S1a.eps}
+\begin{minipage}{.49\linewidth}
+\centering \includegraphics[width=\textwidth]{S1a.eps}
 \subcaption{Profit - S1a}
 \label{jedno}
 \end{minipage}
-\begin{minipage}{.40\linewidth}
-\centering \includegraphics[width=0.9\textwidth]{S1b.eps}
+\begin{minipage}{.49\linewidth}
+\centering \includegraphics[width=\textwidth]{S1b.eps}
 \subcaption{Profit - S1b}
 \label{dwu}
 \end{minipage}
 \\
-\begin{minipage}{.40\linewidth}
-\centering \includegraphics[width=0.9\textwidth]{S1c.eps}
+\begin{minipage}{.49\linewidth}
+\centering \includegraphics[width=\textwidth]{S1c.eps}
 \subcaption{Profit- S1c}
 \label{cztero}
 \end{minipage}
-\begin{minipage}{.40\linewidth}
+\begin{minipage}{.49\linewidth}
 \centering 
-\includegraphics[width=0.9\textwidth]{S1d.eps}
+\includegraphics[width=\textwidth]{S1d.eps}
 \subcaption{Profit - S1d}
 \label{mansard}
 \end{minipage}
-\begin{minipage}{.8\linewidth}
+\begin{minipage}{\linewidth}
 \centering 
-\includegraphics[width=0.9\textwidth]{S1s.eps}
+\includegraphics[width=\textwidth]{S1s.eps}
 \label{mansard}
 \end{minipage}
 \caption{EURJPY market results}
 \end{figure}
+\FloatBarrier
 
 \begin{figure}[h]
 \centering
-\begin{minipage}{.40\linewidth}
-\centering \includegraphics[width=0.9\textwidth]{rysunek2a.png}
+\centering 
+\includegraphics[width=\textwidth]{rysunek1pp.png}
+\caption{All versions}
+\end{figure}
+\FloatBarrier
+
+\begin{figure}[h]
+\centering
+\begin{minipage}{.49\linewidth}
+\centering \includegraphics[width=\textwidth]{rysunek2a.png}
 \subcaption{Version a}
 \label{jedno}
 \end{minipage}
-\begin{minipage}{.40\linewidth}
-\centering \includegraphics[width=0.9\textwidth]{rysunek2b.png}
+\begin{minipage}{.49\linewidth}
+\centering \includegraphics[width=\textwidth]{rysunek2b.png}
 \subcaption{Version b}
 \label{dwu}
 \end{minipage}
 \\
-\begin{minipage}{.40\linewidth}
-\centering \includegraphics[width=0.9\textwidth]{rysunek2c.png}
+\begin{minipage}{.49\linewidth}
+\centering \includegraphics[width=\textwidth]{rysunek2c.png}
 \subcaption{Version c}
 \label{cztero}
 \end{minipage}
-\begin{minipage}{.40\linewidth}
+\begin{minipage}{.49\linewidth}
 \centering 
-\includegraphics[width=0.9\textwidth]{rysunek2d.png}
+\includegraphics[width=\textwidth]{rysunek2d.png}
 \subcaption{Version d}
 \label{mansard}
 \end{minipage}
-\begin{minipage}{.8\linewidth}
-\centering 
-\includegraphics[width=0.9\textwidth]{rysunek1pp.png}
-\label{mansard}
-\end{minipage}
-\caption{All versions}
+\caption{Separate strategies}
 \end{figure}
+\FloatBarrier
 
 
 \section{Conclusions}
