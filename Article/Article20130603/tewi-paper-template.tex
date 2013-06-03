@@ -1,0 +1,190 @@
+% vim:encoding=utf8 ft=tex sts=2 sw=2 et:
+% Copyright (c) 2009 Jaroslaw Koszuk
+%
+% $Id$
+
+\documentclass{tewiart}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{amsthm}
+\usepackage{txfonts}
+\usepackage{epstopdf}
+
+\usepackage{polski}
+\usepackage[utf8]{inputenc}
+\usepackage[table]{xcolor}
+\usepackage{array}
+\usepackage{subcaption}
+
+\newtheorem{definition}{Definition}
+\newtheorem{theorem}[definition]{Theorem}
+\newtheorem{corollary}[definition]{Corollary}
+\newtheorem{proposition}[definition]{Proposition}
+\newtheorem{example}[definition]{Example}
+
+
+\title{Magnitude of simple rules in investment strategies of algorithmic trading}
+\headtitle{Magnitude of simple rules in investment strategies of algorithmic trading\dots}
+\author{Antoni Wiliński\inst{1}, Piotr Błaszyński\inst{1}, Aneta Bera\inst{1}, \\ Wojciech Nowicki\inst{1}, Katarzyna Buda\inst{1}}
+\headauthor{A. One, A. Two}
+\affiliation{%
+  \inst{1}West Pomeranian University of Technology\\
+  Faculty of Computer Science\\
+  ul.Żolnierska 49, 71-210 Szczecin Poland\\
+  {awilinski,pblaszynski}@wi.ps.pl, @wi.ps.pl
+}
+\keywords{algorithmic trading, forecasting, financial markets, simple rules, computational intelligence, investment strategies}
+
+\begin{document}
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{logotewi.png}
+\end{figure}
+
+\maketitle
+
+\begin{abstract}
+In article are shown studies of the possibly simplest investment strategy of algo trading. The authors' intention was to prove the thesis that in the greedy algorithmic trading directed to the appropriate response, not to forecast, there are almost always opportunities to achieve profit. This paper presents the results of tests for over twenty core markets - currency pairs, indices and commodities. Introduced the original concept of quadrant of openings on each bar. In principle, the strategy is not relevant investment (studies were conducted without transaction costs), only cognitive in order to develop
+\end{abstract}
+
+\section{Introduction}
+\indent For centuries predicting future events was a great challenge for many fields of science. Probably next to the meteorology, most important is the prediction of changes in the financial markets. It's a big still unresolved task that intrigues and motivates the continuing search. Modern computing capabilities allow to change researcher relationship to predictive challenge. If the aim is to be effective investment, not the successful prediction, research target should be changed. Many scientific papers was devoted to the problem of investment efficiency, also including the best quality papers, as well as work of at least several Nobel Prize winners. Among the many highly sophisticated research methods, for years was examined the ability of simple patterns classification in the time series. Trying to take advantage of this simple patterns (classification rules) in investment strategies.\\
+\indent The aim of papper is to verify thesis about effectiveness of such simple rules of opening and closing position on trading markets. High frequency open positions algo trading are considering here. The strategy is based on the basic concept - should be as simple as possible, impossible to achieve by human not assisted with machine, should reject the idea of "predictions" of the future and be based on idea of responding to market behaviour. Such strategies are being tested for at least several decades and rather has not good reviews. Most studies cover intersections of moving averages as premise of classifier opening positions rule or remaining idle. Usually these conditions turn out to be too easy to achieve satisfactory transaction efficiency.\\
+\indent Close terms in such investment strategies are also very simple. They are mostly based on similar terms, resulting from mean values or number of bars that elapsed since open.
+Similar concept will be considered in this study. This concept belongs simple rules group, extracted from repeated patterns in the time series of financial instruments. Most commonly, these rules include a group or sequence of conditions besides using moving averages also uses differences in average, first derivative, standard deviation (Bollinger Bands) or pivot points. Friesen, Weller i Dunham \cite{friesen09} say that these methods were for many years rather neglected by the academic community, despite frequent, or perhaps because of, use by trade practitioners on the stock exchange. This opinion is not completely correct, because even Eugene Fama, creator of the efficient markets theory \cite{fama91}, admitted later that  there is little evidence of of simple rules efficiency \cite{fama98}. Cai and Keasey \cite{cai05} noted both predictive and investing efficiency of simplest rules based on differences in derivatives averages and levels of price direction changes. Tian, Wan and Guo \cite{tian02} reported the effectiveness of certain rules for some markets and total unsuitable on other. This opinion has become an inspiration for the authors to consider a number of markets. They distinguish growing and mature markets. A wealth of simple rules ideas is work of Krutsinger \cite{krutsinger99}, collection of interviews with the most prominent modern practices – american market experts. Experts, which Phillip Ball \cite{ball07} writes, that deserves to be published, because they achieve financial success, so uncommon in academic.
+It is easy to see that the majority of these excellent traders succeed within a certain period of time, and today the implementation of their methods gives poor results. This contradicts the general philosophy of these practitioners (but not all of them), that exists mysterious patterns or rules, that are characteristic for specific markets, which provide success.
+\section{Strategy characteristics}
+\indent The essence of the concept is the idea of simultaneous open long and short positions based on various signals, in this case the intersection graph (values of exchange rate  and stock index) and average of the last m closing of this price.
+Let C be considering constantly changing prices of value, and Ci closing price of I OHLC bar (Open, High, Low, Close). Denote Cmi as average of m last close
+\begin{equation} \label{label-of-equation-1}
+  C_{mi} = (C_{i-m} + C_{i-m+1} + … + C_{i} ) / m; 
+\end{equation}
+
+At the moment of I bar closing, value can be compared with the Cmi average. Depending on the investor's beliefs about the existence of a particular trend are thus four possible decision-making situations:
+1. If Ci  > Cmi  long position will be open
+2. If Ci  > Cmi  short position will be open
+3. If Ci  < Cmi  long position will be open
+4. If Ci  < Cmi  short position will be open
+Fig. 1. Quadrant of four possible open position.
+
+
+\section{The test results}
+The study of strategy was carried out on the following markets:
+currency pairs: EURUSD...
+stock indexes: 
+commodities: 
+
+\begin{table}[!t]
+\caption{Profits for all strategy quadrants} 
+ \begin{center} 
+ \begin{tabular}{|l|l|l|l|l|} 
+ \hline \textbf{strategy} & \textbf{profit} & \textbf{bestCalmar} & \textbf{bestMALength} & \textbf{la} \\ \hline  
+S1a & -3.148 & -0.9218155 & 43 & 168\\ \hline 
+S1b & -2.34 & -0.5721271 & 53 & 158\\ \hline 
+S1c & -46.021 & -0.99206708 & 8 & 1788\\ \hline 
+S1d & -62.466 & -0.99572799 & 9 & 1877\\ \hline 
+S1s & -111.077 & -0.99744078 & NaN & 4946\\ 
+\hline \end{tabular} 
+ \end{center} 
+ \end{table}
+
+
+\begin{figure}[h]
+\centering
+\begin{minipage}{.40\linewidth}
+\centering \includegraphics[width=0.9\textwidth]{S1a.eps}
+\subcaption{Profit - S1a}
+\label{jedno}
+\end{minipage}
+\begin{minipage}{.40\linewidth}
+\centering \includegraphics[width=0.9\textwidth]{S1b.eps}
+\subcaption{Profit - S1b}
+\label{dwu}
+\end{minipage}
+\\
+\begin{minipage}{.40\linewidth}
+\centering \includegraphics[width=0.9\textwidth]{S1c.eps}
+\subcaption{Profit- S1c}
+\label{cztero}
+\end{minipage}
+\begin{minipage}{.40\linewidth}
+\centering 
+\includegraphics[width=0.9\textwidth]{S1d.eps}
+\subcaption{Profit - S1d}
+\label{mansard}
+\end{minipage}
+\begin{minipage}{.8\linewidth}
+\centering 
+\includegraphics[width=0.9\textwidth]{S1s.eps}
+\label{mansard}
+\end{minipage}
+\caption{EURJPY market results}
+\end{figure}
+
+\begin{figure}[h]
+\centering
+\begin{minipage}{.40\linewidth}
+\centering \includegraphics[width=0.9\textwidth]{rysunek2a.png}
+\subcaption{Version a}
+\label{jedno}
+\end{minipage}
+\begin{minipage}{.40\linewidth}
+\centering \includegraphics[width=0.9\textwidth]{rysunek2b.png}
+\subcaption{Version b}
+\label{dwu}
+\end{minipage}
+\\
+\begin{minipage}{.40\linewidth}
+\centering \includegraphics[width=0.9\textwidth]{rysunek2c.png}
+\subcaption{Version c}
+\label{cztero}
+\end{minipage}
+\begin{minipage}{.40\linewidth}
+\centering 
+\includegraphics[width=0.9\textwidth]{rysunek2d.png}
+\subcaption{Version d}
+\label{mansard}
+\end{minipage}
+\begin{minipage}{.8\linewidth}
+\centering 
+\includegraphics[width=0.9\textwidth]{rysunek1pp.png}
+\label{mansard}
+\end{minipage}
+\caption{All versions}
+\end{figure}
+
+
+\section{Conclusions}
+Ut purus. Nullam facilisis porttitor enim. Vestibulum nulla massa, ultricies
+sed, molestie luctus, imperdiet eget, mi. \\
+\indent Integer commodo ipsum vitae enim. Morbi mollis nunc suscipit nisl.
+Class aptent taciti sociosqu ad litora torquent per conubia nostra, per
+inceptos himenaeos. Nam urna lacus, placerat posuere, dapibus eget, gravida
+at, lorem. Aliquam nec justo eu dui semper fringilla. Aliquam vitae urna.
+Morbi mattis consectetur ante. Ut ante massa, vestibulum ut, accumsan ac,
+convallis quis, orci. Pellentesque at ipsum vitae quam laoreet tristique. Cras
+vel nunc. Nulla facilisi.\\
+\indent Pellentesque fringilla nulla vitae metus varius faucibus. Fusce aliquet
+vehicula risus. Donec pulvinar viverra lectus. Nam tristique. Nulla malesuada
+metus nec purus. Ut aliquam diam. Phasellus eu dui vel ipsum aliquet
+vestibulum. Quisque ullamcorper, ligula in placerat imperdiet, risus risus
+malesuada dolor, ut scelerisque ipsum nisi eu urna. Mauris bibendum tortor
+condimentum mauris.  
+
+
+\subsection{Some notes on references}\label{bib}
+Examples of citing: \cite{wilinski09}, \cite{wilinski09,
+tian02, satchwell05}. 
+
+%%%%%%%%%% USE ____BIBTEX____ TO GENERATE YOUR REFERENCES 
+%%%%%%%%%%% PLEASE UNCOMMENT THE TWO FOLLOWING LINES 
+
+\bibliography{references-tewi}
+\bibliographystyle{aiaa-tewi}
+
+
+
+\end{document}

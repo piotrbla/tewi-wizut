@@ -1,0 +1,44 @@
+\begin{thebibliography}{1}
+\newcommand{\enquote}[1]{{\em #1}}
+
+\bibitem{friesen09}
+Friesen~G.C.F, Weller~P, D.~L., \enquote{Price trends and patterns in technical
+  analysis: A theoretical and empirical examination.} Journal of Banking \&
+  Finance, Vol.~33, 2009, pp.~1089--1100.
+
+\bibitem{fama91}
+E., F., \enquote{Efficient capital markets.} Journal of Financial Economics,
+  Vol.~11, 1991, pp.~1575--1617.
+
+\bibitem{fama98}
+E., F., \enquote{Market efficiency, long-term returns, and behavioral finance.}
+  Journal of Financial Economics, Vol.~49, 1998, pp.~283--306.
+
+\bibitem{cai05}
+Cai~B.M., Cai~C.X., K.~K., \enquote{Market Efficiency and Returns to Simple
+  Technical Trading Rules: Further Evidence form US, UK, Asian and Cinese Stock
+  Markets.} Asia-Pacific Financial Markets, Springer, 2005, pp.~45--60.
+
+\bibitem{tian02}
+Tian~G.G., Wan~G.H., G.~M., \enquote{Market efficiency and the returns to
+  simple technical trading rules : New evidence from U.S. equity makets and
+  Chinese equity markets.} Asia-Pacific Financial Markets., Vol.~9, 2002,
+  pp.~241--288.
+
+\bibitem{krutsinger99}
+J., K., {\em Systemy transakcyjne.Sekrety mistrzów.\/}, Wig-Press, Warszawa,
+  1999, (in Polish).
+
+\bibitem{ball07}
+P., B., {\em Masa krytyczna. Jak jedno z drugiego wynika.\/}, Insignis Krakow,
+  2007, (in Polish).
+
+\bibitem{wilinski09}
+A., W., {\em GMDH - Group Method of Data Handling in algorithmic trading
+  prediction tasks on financial markets.\/}, Warszawa, 2009, (in Polish).
+
+\bibitem{satchwell05}
+Ch., S., {\em Pattern Recognition and Trading Decisions.\/}, McGraw Hill, New
+  York, 2005.
+
+\end{thebibliography}
