@@ -25,8 +25,8 @@
 \newtheorem{example}[definition]{Example}
 
 
-\title{Magnitude of simple rules in investment strategies of algorithmic trading}
-\headtitle{Magnitude of simple rules in investment strategies of algorithmic trading\dots}
+\title{Meaning of simple rules in investment strategies of algorithmic trading}
+\headtitle{Meaning of simple rules in investment strategies of algorithmic trading\dots}
 \author{Antoni Wiliński\inst{1}, Piotr Błaszyński\inst{1}, Aneta Bera\inst{1}, \\ Wojciech Nowicki\inst{1}, Katarzyna Buda\inst{1}}
 \headauthor{Antoni Wiliński, Piotr Błaszyński}
 \affiliation{%
@@ -58,22 +58,19 @@ Similar concept will be considered in this study. This concept belongs simple ru
 It is easy to see that the majority of these excellent traders succeed within a certain period of time, and today the implementation of their methods gives poor results. This contradicts the general philosophy of these practitioners (but not all of them), that exists mysterious patterns or rules, that are characteristic for specific markets, which provide success.
 \section{Strategy characteristics}
 \indent The essence of the concept is the idea of simultaneous open long and short positions based on various signals, in this case the intersection graph (values of exchange rate  and stock index) and average of the last m closing of this price.\\
-Equally simple is the closing rule of each opened position. It's closed at the close of (i+1) bar (fig. 1).
-Let C be considering constantly changing prices of value, and Ci closing price of I OHLC bar (Open, High, Low, Close). Denote Cmi as average of m last close
+Equally simple is the closing rule of each opened position. It's closed at the close of (i+1)th bar (Fig. 1).
+Let C be considering constantly changing prices of value, and $C_i$ closing price of i-th OHLC bar (Open, High, Low, Close). Denote $C_{m_{i}}$ as average of m last close
 \begin{equation} \label{label-of-equation-1}
-  C_{m_{i}} = \frac{C_{i-m} + C_{i-m+1} + … + C_{i}}{m}; 
+  C_{m_{i}} = \frac{C_{i-m} + C_{i-m+1} + … + C_{i}}{m+1}; \hspace{1em}m>0; 
 \end{equation}
+ 
+At the moment of i-th bar closing, value can be compared with the $C_{m_{i}}$ average. Depending on the investor's beliefs about the existence of a particular trend are thus four possible decision-making situations:
+\begin{equation} If\ C_i  > C_{m_{i}}\   long\ position\ will\ be\ open;\ m=m_b. \end{equation}
+\begin{equation} If\ C_i  > C_{m_{i}}\   short\ position\ will\ be\ open;\ m=m_b. \end{equation}
+\begin{equation} If\ C_i  < C_{m_{i}}\   long\ position\ will\ be\ open;\ m=m_c. \end{equation}
+\begin{equation} If\ C_i  < C_{m_{i}}\   short\ position\ will\ be\ open;\ m=m_d. \end{equation}
 
-At the moment of I bar closing, value can be compared with the $C_{m_{i}}$ average. Depending on the investor's beliefs about the existence of a particular trend are thus four possible decision-making situations:
-\begin{enumerate}
-\item If $C_i  > C_{m_{i}}$  long position will be open,
-\item If $C_i  > C_{m_{i}}$  short position will be open,
-\item If $C_i  < C_{m_{i}}$  long position will be open,
-\item If $C_i  < C_{m_{i}}$  short position will be open.
-\end{enumerate}
-
-
-Each of these decisions is usually attributed to reasons arising from the conviction of the investor why and what happens in a moment. Should be noted that each of the above decisions is taken basing on average of different number of last close bar prices. Therefore, in the general case at the close moment close of I bar when it should make decision of open (short or long) it could happen that may occur up to four different levels of the average value calculated for the last m bars (different for each contractual quadrant).\\
+Each of these decisions is usually attributed to reasons arising from the conviction of the investor why and what happens in a moment. Should be noted that each of the above decisions is taken basing on average of different number of last close bar prices. Therefore, in the general case at the close moment close of i-th bar when it should make decision of open (short or long) it could happen that may occur up to four different levels of the average value calculated for the last m bars (different for each contractual quadrant).\\
 These situations are shown in Figure 1
 
 The situation described by a set of investment decisions (2) - (5) can be presented in the form of a contractual quadrant - Figure 1
@@ -86,33 +83,21 @@ The situation described by a set of investment decisions (2) - (5) can be presen
 \end{figure}
 \FloatBarrier
 
+
+
+In this quadrant in quarters a) and b) we have situations (2) and (3) - ie, the closing value of the i bar $C_i$ is greater than the average of the last m bars. The first line in those quarters is addressed to top - market is on the rise. In the quarter, a) reaction to the growth of the market is open a long position (2). The investor behaves as if he was convinced of the existence of a growing trend. In the quarter b) investors react on market growth is short position open. The investor behaves as if he predicted horizontal trend.
+
+Conversely in quarters, c) and d) the first movement of the market is declining and investor reaction is recorded appropriately in decisions (4) and (5). In quarter c) investor behaves as if he predicted horizontal trend and opens long position (4) and in quarter d) in believe of drowdown trend he opens short position (5). \\
+These situations are both shown in Figure 2\\
 \begin{figure}[h]
 \centering
 \centering 
 \includegraphics[width=\textwidth]{rysunek1pp.eps}
-\caption{All versions}
+\caption{All possible situations for four different moving averages}
 \end{figure}
 \FloatBarrier
-
-In this quadrant in quarters a) and b) we have situations (2) and (3) - ie, the closing value of the i bar Ci is greater than the average of the last m bars. The first line in those quarters is addressed to top - market is on the rise. In the quarter, a) reaction to the growth of the market is open a long position (2). The investor behaves as if he was convinced of the existence of a growing trend. In the quarter b) investors react on market growth is short position open. The investor behaves as if he predicted horizontal trend.
-
-Conversely in quarters, c) and d) the first movement of the market is declining and investor reaction is recorded appropriately in decisions (4) and (5). In quarter c) investor behaves as if he predicted horizontal trend and opens long position (4) and in quarter d) in believe of drowdown trend he opens short position (5). \\
-These situations are both shown in Figure 2\\
-\indent Figure 2 shows the situation at the close of (i-1) bar marked as Ci-1. The investor is following the situation in the I bar and at the moment of its close may immediately calculate each of the four average (1). Depending on the direction in which market has changed (upwards or downwards) we are dealing with quarters a and b of quadrant (If there is a price rise of the observed asset) or quarters c and d if there is a decrease.
+\indent Figure 2 shows the situation at the close of (i-1) bar marked as $C_{i-1}$. The investor is following the situation in the i-th bar and at the moment of its close may immediately calculate each of the four average (1). Depending on the direction in which market has changed (upwards or downwards) we are dealing with quarters a and b of quadrant (If there is a price rise of the observed asset) or quarters c and d if there is a decrease.
 Because, at the moment of end of the i bar it can be calculated  value of each of the four average it can also be checked, if some of opening conditions (2)-(5) are passed. These four situations extracted from Figure 2 are shown in Figure 3, where in turn are explained  decision-making situations for the four quarters quadrant (Fig. 1)\\
-\indent The following sketches from a) to d) shows the change in the market against a particular average from Cdmi to Cami.\\
-\indent Each of these averages is counted step by step (bar) separately for each of the four situations, and of course the condition to open a position associated with a particular situation may occur or not. For example, if the closing value of the I bar in the situation a) will be below Cami this not open long position.\\
-\indent Extremely important in this strategy is the one and only parameter - number of last bar closures for average calculation. In each quarter of quadrant, in the general case the number is different. It is determined for a dedicated n number of bars, acting learner section of the time series so that for example for quarter a) :\\
-\begin{equation}
-	m_a = argmax (\sum y_i  )
-\end{equation}
-where
-$yi = C_{i+1} - C_{i}$ dla i=1, ..., n, for and complying  condition (2)
-So ma is the parameter learned on a particular section of a time series. This m  value,for which achieves a maximum gain of opened positions (for quarter a) long). On another length of time series, by (6) it could have different value. Similarly, for the parameters ,b, mc and md.\\
-Use of this strategy makes the investor no longer think about the market in the traditional way trying to recognize what kind of a trend at the moment there is or whether this trend has just changed. Machine that is learned the optimal value of m for each quarter of quadrant takes over this role and makes decisions in every of four possible investment situations. Take these decisions only when each of four calculated optimal moving averages condition is satisfied to open specific position.
-These strategy has been tested on the following markets as simple as possible. When was satisfied, one or more of the opening conditions (2) – (5) then position has been opened and closed at the close of the (i +1) bar.
-
-
 \begin{figure}[h]
 \centering
 \begin{minipage}{.49\linewidth}
@@ -140,16 +125,33 @@ These strategy has been tested on the following markets as simple as possible. W
 \caption{Separate strategies}
 \end{figure}
 \FloatBarrier
+\indent The following sketches from a) to d) shows the change in the market against a particular average from $C^d_{m_{i}}$ to $C^a_{m_{i}}$.\\
+\indent Each of these averages is counted step by step (bar) separately for each of the four situations, and of course the condition to open a position associated with a particular situation may occur or not. For example, if the closing value of the i-th bar in the situation a) will be below Cami this not open long position.\\
+\indent Extremely important in this strategy is the one and only parameter - number of last bar closures for average calculation. In each quarter of quadrant, in the general case the number is different. It is determined for a dedicated n number of bars, acting learner section of the time series so that for example for quarter a) :\\
+\begin{equation}
+	m_a = argmax (\sum y_i  )
+\end{equation}
+where:\\
+$yi = C_{i+1} - C_{i}$ dla i=1, ..., n, for and complying  condition (2).\\
+So ma is the parameter learned on a particular section of a time series. This m  value,for which achieves a maximum gain of opened positions (for quarter a) long). On another length of time series, by (6) it could have different value. Similarly, for the parameters ,b, mc and md.\\
+Use of this strategy makes the investor no longer think about the market in the traditional way trying to recognize what kind of a trend at the moment there is or whether this trend has just changed. Machine that is learned the optimal value of m for each quarter of quadrant takes over this role and makes decisions in every of four possible investment situations. Take these decisions only when each of four calculated optimal moving averages condition is satisfied to open specific position.
+These strategy has been tested on the following markets as simple as possible. When was satisfied, one or more of the opening conditions (2) – (5) then position has been opened and closed at the close of the (i +1) bar.
+
+
+
 
 
 \section{The test results}
 The study of strategy was carried out on the following markets:
-currency pairs: EURUSD...
-stock indexes: 
-commodities: 
-
+\begin{itemize}
+\item currency pairs: EURUSD, EURJPY, USDJPY, GBPUSD,
+\item indexes: FUS500, BOSSAPLN,
+\item commodities: FGOLD. FSILVER.
+\end{itemize}
+BOSSAPLN is currency index that represents ratio of PLN to four other currencies. Every currency pair used to calculate index has other weight USDPLN (40\%), EURPLN (50\%), GBPPLN (5\%), CHFPLN (5\%).
+\newpage
 \begin{table}[!t]
-\caption{Profits for all strategy quadrants} 
+\caption{Profits for all strategy quadrants for EURJPY} 
  \begin{center} 
  \begin{tabular}{|l|l|l|l|l|} 
  \hline \textbf{strategy} & \textbf{profit} & \textbf{bestCalmar} & \textbf{bestMALength} & \textbf{la} \\ \hline  
@@ -157,7 +159,7 @@ S1a & 26.177 & 5.5909868 & 24 & 2764\\ \hline
 S1b & -14.774 & -0.67029627 & 6 & 2660\\ \hline 
 S1c & 15.736 & 2.4898734 & 6 & 2332\\ \hline 
 S1d & -4.57 & -0.47001954 & 21 & 2226\\ \hline 
-S1s & 22.54 & 3.2459677 & NaN & 4975\\ 
+S1s & 22.54 & 3.2459677 & Group of MA & 4975\\ 
 \hline \end{tabular} 
  \end{center} 
  \end{table}
@@ -200,11 +202,341 @@ S1s & 22.54 & 3.2459677 & NaN & 4975\\
 \end{figure}
 \FloatBarrier
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\begin{table}[!t]
+\caption{Profits for all strategy quadrants for FSILVER} 
+ \begin{center} 
+ \begin{tabular}{|l|l|l|l|l|} 
+ \hline \textbf{strategy} & \textbf{profit} & \textbf{bestCalmar} & \textbf{bestMALength} & \textbf{la} \\ \hline  
+S1a & -5.31 & -0.64520049 & 81 & 2582\\ \hline 
+S1b & 17.22 & 5.8571429 & 10 & 2508\\ \hline 
+S1c & 4.17 & 0.55525965 & 10 & 2473\\ \hline 
+S1d & 6.95 & 1.3314176 & 81 & 2336\\ \hline 
+S1s & 21.96 & 5.5454545 & Group of MA & 4918\\ 
+\hline \end{tabular} 
+ \end{center} 
+ \end{table}
+\FloatBarrier
+
+\begin{figure}[h]
+\centering
+\begin{minipage}{.49\linewidth}
+\centering 
+\includegraphics[width=0.82\textwidth]{images/S1a_silver.eps}
+\subcaption{Profit - S1a}
+\label{jedno}
+\end{minipage}
+\begin{minipage}{.49\linewidth}
+\centering 
+\includegraphics[width=0.82\textwidth]{images/S1b_silver.eps}
+\subcaption{Profit - S1b}
+\label{dwu}
+\end{minipage}
+\\
+\begin{minipage}{.49\linewidth}
+\centering 
+\includegraphics[width=0.82\textwidth]{images/S1c_silver.eps}
+\subcaption{Profit- S1c}
+\label{cztero}
+\end{minipage}
+\begin{minipage}{.49\linewidth}
+\centering 
+\includegraphics[width=0.82\textwidth]{images/S1d_silver.eps}
+\subcaption{Profit - S1d}
+\label{mansard}
+\end{minipage}
+\begin{minipage}{\linewidth}
+\centering 
+\includegraphics[width=0.6\textwidth]{images/S1s_silver.eps}
+\label{mansard}
+\subcaption{Profit - S1s}
+\end{minipage}
+\caption{FSILVER market results}
+\end{figure}
+\FloatBarrier
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\begin{table}[!t]
+\caption{Profits for all strategy quadrants for BOSSAPLN} 
+ \begin{center} 
+ \begin{tabular}{|l|l|l|l|l|} 
+ \hline \textbf{strategy} & \textbf{profit} & \textbf{bestCalmar} & \textbf{bestMALength} & \textbf{la} \\ \hline  
+S1a & 5.87 & 1.9898305 & 21 & 2474\\ \hline 
+S1b & 2.86 & 0.6059322 & 5 & 2416\\ \hline 
+S1c & 10.91 & 4.3293651 & 5 & 2547\\ \hline 
+S1d & -2.23 & -0.4247619 & 21 & 2502\\ \hline 
+S1s & 17.91 & 4.3470874 & Group of MA & 4978\\ 
+\hline \end{tabular} 
+ \end{center} 
+ \end{table}
+\FloatBarrier
+
+\begin{figure}[h]
+\centering
+\begin{minipage}{.49\linewidth}
+\centering 
+\includegraphics[width=0.82\textwidth]{images/S1a_bossa.eps}
+\subcaption{Profit - S1a}
+\label{jedno}
+\end{minipage}
+\begin{minipage}{.49\linewidth}
+\centering 
+\includegraphics[width=0.82\textwidth]{images/S1b_bossa.eps}
+\subcaption{Profit - S1b}
+\label{dwu}
+\end{minipage}
+\\
+\begin{minipage}{.49\linewidth}
+\centering 
+\includegraphics[width=0.82\textwidth]{images/S1c_bossa.eps}
+\subcaption{Profit- S1c}
+\label{cztero}
+\end{minipage}
+\begin{minipage}{.49\linewidth}
+\centering 
+\includegraphics[width=0.82\textwidth]{images/S1d_bossa.eps}
+\subcaption{Profit - S1d}
+\label{mansard}
+\end{minipage}
+\begin{minipage}{\linewidth}
+\centering 
+\includegraphics[width=0.6\textwidth]{images/S1s_bossa.eps}
+\label{mansard}
+\subcaption{Profit - S1s}
+\end{minipage}
+\caption{BOSSAPLN market results}
+\end{figure}
+\FloatBarrier
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\begin{table}[!t]
+\caption{Profits for all strategy quadrants for FUS500} 
+ \begin{center} 
+ \begin{tabular}{|l|l|l|l|l|} 
+ \hline \textbf{strategy} & \textbf{profit} & \textbf{bestCalmar} & \textbf{bestMALength} & \textbf{la} \\ \hline  
+S1a & 274.89 & 5.4433663 & 83 & 3200\\ \hline 
+S1b & -70.94 & -0.47328041 & 15 & 2798\\ \hline 
+S1c & 291.62 & 4.2584696 & 15 & 2186\\ \hline 
+S1d & -106.67 & -0.73237212 & 82 & 1723\\ \hline 
+S1s & 344.29 & 2.0821893 & Group of MA & 4916\\ 
+\hline \end{tabular} 
+ \end{center} 
+ \end{table}
+\FloatBarrier
+
+\begin{figure}[h]
+\centering
+\begin{minipage}{.49\linewidth}
+\centering 
+\includegraphics[width=0.82\textwidth]{images/S1a_fus.eps}
+\subcaption{Profit - S1a}
+\label{jedno}
+\end{minipage}
+\begin{minipage}{.49\linewidth}
+\centering 
+\includegraphics[width=0.82\textwidth]{images/S1b_fus.eps}
+\subcaption{Profit - S1b}
+\label{dwu}
+\end{minipage}
+\\
+\begin{minipage}{.49\linewidth}
+\centering 
+\includegraphics[width=0.82\textwidth]{images/S1c_fus.eps}
+\subcaption{Profit- S1c}
+\label{cztero}
+\end{minipage}
+\begin{minipage}{.49\linewidth}
+\centering 
+\includegraphics[width=0.82\textwidth]{images/S1d_fus.eps}
+\subcaption{Profit - S1d}
+\label{mansard}
+\end{minipage}
+\begin{minipage}{\linewidth}
+\centering 
+\includegraphics[width=0.6\textwidth]{images/S1s_fus.eps}
+\label{mansard}
+\subcaption{Profit - S1s}
+\end{minipage}
+\caption{FUS500 market results}
+\end{figure}
+\FloatBarrier
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\begin{table}[!t]
+\caption{Profits for all strategy quadrants for FGOLD} 
+ \begin{center} 
+ \begin{tabular}{|l|l|l|l|l|} 
+ \hline \textbf{strategy} & \textbf{profit} & \textbf{bestCalmar} & \textbf{bestMALength} & \textbf{la} \\ \hline  
+S1a & 61.16 & 0.58503922 & 51 & 2578\\ \hline 
+S1b & 227.58 & 2.8169328 & 5 & 2519\\ \hline 
+S1c & 30.38 & 0.12023588 & 5 & 2470\\ \hline 
+S1d & 248.21 & 1.5167125 & 51 & 2370\\ \hline 
+S1s & 599.88 & 4.6027776 & Group of MA & 4948\\ 
+\hline \end{tabular} 
+ \end{center} 
+ \end{table}
+\FloatBarrier
+
+\begin{figure}[h]
+\centering
+\begin{minipage}{.49\linewidth}
+\centering 
+\includegraphics[width=0.82\textwidth]{images/S1a_gold.eps}
+\subcaption{Profit - S1a}
+\label{jedno}
+\end{minipage}
+\begin{minipage}{.49\linewidth}
+\centering 
+\includegraphics[width=0.82\textwidth]{images/S1b_gold.eps}
+\subcaption{Profit - S1b}
+\label{dwu}
+\end{minipage}
+\\
+\begin{minipage}{.49\linewidth}
+\centering 
+\includegraphics[width=0.82\textwidth]{images/S1c_gold.eps}
+\subcaption{Profit- S1c}
+\label{cztero}
+\end{minipage}
+\begin{minipage}{.49\linewidth}
+\centering 
+\includegraphics[width=0.82\textwidth]{images/S1d_gold.eps}
+\subcaption{Profit - S1d}
+\label{mansard}
+\end{minipage}
+\begin{minipage}{\linewidth}
+\centering 
+\includegraphics[width=0.6\textwidth]{images/S1s_gold.eps}
+\label{mansard}
+\subcaption{Profit - S1s}
+\end{minipage}
+\caption{FGOLD market results}
+\end{figure}
+\FloatBarrier
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\begin{table}[!t]
+\caption{Profits for all strategy quadrants for GBPUSD} 
+ \begin{center} 
+ \begin{tabular}{|l|l|l|l|l|} 
+ \hline \textbf{strategy} & \textbf{profit} & \textbf{bestCalmar} & \textbf{bestMALength} & \textbf{la} \\ \hline  
+S1a & 0.05736 & 1.061436 & 92 & 2588\\ \hline 
+S1b & 0.12055 & 3.4101839 & 5 & 2513\\ \hline 
+S1c & 0.15356 & 3.1116515 & 5 & 2475\\ \hline 
+S1d & 0.01724 & 0.31254532 & 92 & 2319\\ \hline 
+S1s & 0.36007 & 6.892611 & Group of MA & 4907\\ 
+\hline \end{tabular} 
+ \end{center} 
+ \end{table}
+\FloatBarrier
+
+\begin{figure}[h]
+\centering
+\begin{minipage}{.49\linewidth}
+\centering 
+\includegraphics[width=0.82\textwidth]{images/S1a_gbpusd.eps}
+\subcaption{Profit - S1a}
+\label{jedno}
+\end{minipage}
+\begin{minipage}{.49\linewidth}
+\centering 
+\includegraphics[width=0.82\textwidth]{images/S1b_gbpusd.eps}
+\subcaption{Profit - S1b}
+\label{dwu}
+\end{minipage}
+\\
+\begin{minipage}{.49\linewidth}
+\centering 
+\includegraphics[width=0.82\textwidth]{images/S1c_gbpusd.eps}
+\subcaption{Profit- S1c}
+\label{cztero}
+\end{minipage}
+\begin{minipage}{.49\linewidth}
+\centering 
+\includegraphics[width=0.82\textwidth]{images/S1d_gbpusd.eps}
+\subcaption{Profit - S1d}
+\label{mansard}
+\end{minipage}
+\begin{minipage}{\linewidth}
+\centering 
+\includegraphics[width=0.6\textwidth]{images/S1s_gbpusd.eps}
+\label{mansard}
+\subcaption{Profit - S1s}
+\end{minipage}
+\caption{GBPUSD market results}
+\end{figure}
+\FloatBarrier
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\begin{table}[!t]
+\caption{Profits for all strategy quadrants for USDJPY} 
+ \begin{center} 
+ \begin{tabular}{|l|l|l|l|l|} 
+ \hline \textbf{strategy} & \textbf{profit} & \textbf{bestCalmar} & \textbf{bestMALength} & \textbf{la} \\ \hline  
+S1a & 17.189 & 8.2362242 & 18 & 2693\\ \hline 
+S1b & -9.802 & -0.73511324 & 54 & 2665\\ \hline 
+S1c & 5.65 & 2.0582878 & 54 & 2280\\ \hline 
+S1d & 1.867 & 0.60715447 & 18 & 2287\\ \hline 
+S1s & 14.854 & 5.682479 & Group of MA & 4945\\ 
+\hline \end{tabular} 
+ \end{center} 
+ \end{table}
+\FloatBarrier
+
+\begin{figure}[h]
+\centering
+\begin{minipage}{.49\linewidth}
+\centering 
+\includegraphics[width=0.82\textwidth]{images/S1a_usdjpy.eps}
+\subcaption{Profit - S1a}
+\label{jedno}
+\end{minipage}
+\begin{minipage}{.49\linewidth}
+\centering 
+\includegraphics[width=0.82\textwidth]{images/S1b_usdjpy.eps}
+\subcaption{Profit - S1b}
+\label{dwu}
+\end{minipage}
+\\
+\begin{minipage}{.49\linewidth}
+\centering 
+\includegraphics[width=0.82\textwidth]{images/S1c_usdjpy.eps}
+\subcaption{Profit- S1c}
+\label{cztero}
+\end{minipage}
+\begin{minipage}{.49\linewidth}
+\centering 
+\includegraphics[width=0.82\textwidth]{images/S1d_usdjpy.eps}
+\subcaption{Profit - S1d}
+\label{mansard}
+\end{minipage}
+\begin{minipage}{\linewidth}
+\centering 
+\includegraphics[width=0.6\textwidth]{images/S1s_usdjpy.eps}
+\label{mansard}
+\subcaption{Profit - S1s}
+\end{minipage}
+\caption{USDJPY market results}
+\end{figure}
+\FloatBarrier
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Conclusions}
 \indent Suggested simple strategy is suitable only for algorithmic trading, even in absolute simplest form it seems to be interesting. As it’s been written in the introduction, more from cognitive point of view, than for the transaction value.\\
 \indent This strategy can be modified in many ways.  Eg. in case of suggestions of simultaneous opening long and short positions better is to abandon work than opening both positions (due to transaction costs). The opening of another position in the same direction, eg. long position after closing the previous long position is senseless, it’s better to continue already opened position. These are two simplest ways to improve strategy. There are probably many ways to filter openings that allow to preserve only the most valuable due to profit events. Purpose of this paper was to prove the thesis, that even the simplest strategy has some potential profit, whose using is fascinating challenge.\\
-\indent The authors believe, due to observing results of experiments, that the thesis of this dormant potential has been acknowledged. 
-
+\indent The authors believe, due to observing results of experiments, that the thesis of this dormant potential has been acknowledged. \\
+The results show that depending on the current market characteristics, it was possible to temporarily disable some quarters from trade to get better profits. Of course, they should still be calculated in the background, to be able include in trade if market characteristic will change.
 
 
 %%%%%%%%%% USE ____BIBTEX____ TO GENERATE YOUR REFERENCES 
