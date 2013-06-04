@@ -132,7 +132,7 @@ Because, at the moment of end of the i bar it can be calculated  value of each o
 	m_a = argmax (\sum y_i  )
 \end{equation}
 where:\\
-$yi = C_{i+1} - C_{i}$ dla i=1, ..., n, for and complying  condition (2).\\
+$yi = C_{i+1} - C_{i}$ for i=1, ..., n and complying  condition (2).\\
 So ma is the parameter learned on a particular section of a time series. This m  value,for which achieves a maximum gain of opened positions (for quarter a) long). On another length of time series, by (6) it could have different value. Similarly, for the parameters ,b, mc and md.\\
 Use of this strategy makes the investor no longer think about the market in the traditional way trying to recognize what kind of a trend at the moment there is or whether this trend has just changed. Machine that is learned the optimal value of m for each quarter of quadrant takes over this role and makes decisions in every of four possible investment situations. Take these decisions only when each of four calculated optimal moving averages condition is satisfied to open specific position.
 These strategy has been tested on the following markets as simple as possible. When was satisfied, one or more of the opening conditions (2) – (5) then position has been opened and closed at the close of the $(i +1)$th bar.
