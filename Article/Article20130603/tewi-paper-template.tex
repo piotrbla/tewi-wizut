@@ -53,8 +53,8 @@ In article are shown studies of the possibly simplest investment strategy of alg
 \section{Introduction}
 \indent For centuries predicting future events was a great challenge for many fields of science \cite{ball07, wu12}. Probably next to the meteorology, most important is the prediction of changes in the financial markets \cite{krutsinger99, satchwell05, schwager02}. It's a big still unresolved task that intrigues and motivates the continuing search \cite{fama91, fama98}. Modern computing capabilities allow to change researcher relationship to predictive challenge. If the purpose of this research is to be effective investment, not the successful prediction, research target should be changed. Many scientific papers was devoted to the problem of investment efficiency, also including the best quality papers, as well as work of at least several Nobel Prize winners. Among the many highly sophisticated research methods \cite{fujimoto03, kompa08, pawlak02, pedrycz97, rua09, raghuraj09, wilinski09} , for years was examined the ability of simple patterns classification in the time series \cite{brock92, cai05, gencay99, lebaron99, satchwell05}. Trying to take advantage of this simple patterns (classification rules) in investment strategies.\\
 \indent The purpose of this papper is to verify thesis about effectiveness of such simple rules of opening and closing position on trading markets. High frequency open positions algo trading are considering here \cite{muriel04}. The strategy is based on the basic concept - should be as simple as possible, impossible to achieve by human not assisted with machine, should reject the idea of "predictions" of the future and be based on idea of responding to market behaviour. Such strategies are being tested for at least several decades and rather has not good reviews. Most studies cover intersections of moving averages as premise of classifier opening positions rule or remaining idle. Usually these conditions turn out to be too easy to achieve satisfactory transaction efficiency.\\
-\indent Close terms in such investment strategies are also very simple. They are mostly based on similar terms, resulting from mean values or number of bars that elapsed since open.Other popular methods of closing such positions are Stop Loss and Take Profit.
-Similar concept will be considered in this paper. This concept belongs to group of simple rules, extracted from repeated patterns in the time series of financial instruments. Most commonly, these rules include a group or sequence of conditions besides using moving averages also uses differences in average, first derivative, standard deviation (Bollinger Bands) or pivot points. Friesen, Weller i Dunham \cite{friesen09} say that these methods were for many years rather neglected by the academic community, despite frequent, or perhaps because of, use by trade practitioners on the stock exchange. This opinion is not completely correct, because even Eugene Fama, creator of the efficient markets theory \cite{fama91}, admitted later that  there is little evidence of of simple rules efficiency \cite{fama98}. Cai and Keasey \cite{cai05} noted both predictive and investing efficiency of simplest rules based on differences in derivatives averages and levels of price direction changes. Tian, Wan and Guo \cite{tian02} reported the effectiveness of certain rules for some markets and total unsuitable on other. This opinion has become an inspiration for the authors to consider a number of markets. They distinguish growing and mature markets. A wealth of simple rules ideas is work of Krutsinger \cite{krutsinger99}, collection of interviews with the most prominent modern practices – american market experts. Experts, which Phillip Ball \cite{ball07} writes, that deserves to be published, because they achieve financial success, so uncommon in academic.
+\indent Close terms in such investment strategies are also very simple. They are mostly based on similar terms, resulting from mean values or number of bars that elapsed since open. Other popular methods of closing such positions are Stop Loss and Take Profit.
+Similar concept will be considered in this paper. This concept belongs to group of simple rules, extracted from repeated patterns in the time series of financial instruments. Most commonly, these rules include a group or sequence of conditions besides using moving averages also uses differences in average, first derivative, standard deviation (Bollinger Bands) or pivot points. Friesen, Weller i Dunham \cite{friesen09} say that these methods were for many years rather neglected by the academic community, despite frequent, or perhaps because of, use by trade practitioners on the stock exchange. This opinion is not completely correct, because even Eugene Fama, creator of the efficient markets theory \cite{fama91}, admitted later that  there is little evidence of simple rules efficiency \cite{fama98}. Cai and Keasey \cite{cai05} noted both predictive and investing efficiency of simplest rules based on differences in derivatives averages and levels of price direction changes. Tian, Wan and Guo \cite{tian02} reported the effectiveness of certain rules for some markets and total unsuitable on other. This opinion has become an inspiration for the authors to consider a number of markets. They distinguish growing and mature markets. A wealth of simple rules ideas is work of Krutsinger \cite{krutsinger99}, collection of interviews with the most prominent modern practices – american market experts. Experts, which Phillip Ball \cite{ball07} writes, that deserves to be published, because they achieve financial success, so uncommon in academic.
 It is easy to see that the majority of these excellent traders succeed within a certain period of time, and today the implementation of their methods gives poor results. This contradicts the general philosophy of these practitioners (but not all of them), that exists mysterious patterns or rules, that are characteristic for specific markets, which provide success.
 \section{Strategy characteristics}
 \indent The essence of the concept is the idea of simultaneous open long and short positions based on various signals, in this case the intersection graph (values of exchange rate  and stock index) and average of the last m closing of this price.\\
@@ -65,7 +65,7 @@ Let C be considering constantly changing prices of value, and $C_i$ closing pric
 \end{equation}
  
 At the moment of i-th bar closing, value can be compared with the $C_{m_{i}}$ average. Depending on the investor's beliefs about the existence of a particular trend are thus four possible decision-making situations:
-\begin{equation} If\ C_i  > C_{m_{i}}\   long\ position\ will\ be\ open;\ m=m_b. \end{equation}
+\begin{equation} If\ C_i  > C_{m_{i}}\   long\ position\ will\ be\ open;\ m=m_a. \end{equation}
 \begin{equation} If\ C_i  > C_{m_{i}}\   short\ position\ will\ be\ open;\ m=m_b. \end{equation}
 \begin{equation} If\ C_i  < C_{m_{i}}\   long\ position\ will\ be\ open;\ m=m_c. \end{equation}
 \begin{equation} If\ C_i  < C_{m_{i}}\   short\ position\ will\ be\ open;\ m=m_d. \end{equation}
@@ -201,20 +201,18 @@ S1s & 22.54 & 3.25 & Group of MA & 4975\\
 \caption{EURJPY market results}
 \end{figure}
 \FloatBarrier
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
 \begin{table}[!t]
-\caption{Profits for all strategy quadrants for FSILVER} 
+\caption{Profits for all strategy quadrants for USDJPY} 
  \begin{center} 
  \begin{tabular}{|l|l|l|l|l|} 
  \hline \textbf{strategy} & \textbf{profit} & \textbf{bestCalmar} & \textbf{bestMALength} & \textbf{la} \\ \hline  
-S1a & -5.31 & -0.65 & 81 & 2582\\ \hline 
-S1b & 17.22 & 5.86 & 10 & 2508\\ \hline 
-S1c & 4.17 & 0.56 & 10 & 2473\\ \hline 
-S1d & 6.95 & 1.33 & 81 & 2336\\ \hline 
-S1s & 21.96 & 5.55 & Group of MA & 4918\\ 
+S1a & 17.19 & 8.24 & 18 & 2693\\ \hline 
+S1b & -9.80 & -0.74 & 54 & 2665\\ \hline 
+S1c & 5.65 & 2.06 & 54 & 2280\\ \hline 
+S1d & 1.87 & 0.61 & 18 & 2287\\ \hline 
+S1s & 14.85 & 5.68 & Group of MA & 4945\\ 
 \hline \end{tabular} 
  \end{center} 
  \end{table}
@@ -224,51 +222,51 @@ S1s & 21.96 & 5.55 & Group of MA & 4918\\
 \centering
 \begin{minipage}{.49\linewidth}
 \centering 
-\includegraphics[width=0.82\textwidth]{images/S1a_silver.eps}
+\includegraphics[width=0.82\textwidth]{images/S1a_usdjpy.eps}
 \subcaption{Profit - S1a}
 \label{jedno}
 \end{minipage}
 \begin{minipage}{.49\linewidth}
 \centering 
-\includegraphics[width=0.82\textwidth]{images/S1b_silver.eps}
+\includegraphics[width=0.82\textwidth]{images/S1b_usdjpy.eps}
 \subcaption{Profit - S1b}
 \label{dwu}
 \end{minipage}
 \\
 \begin{minipage}{.49\linewidth}
 \centering 
-\includegraphics[width=0.82\textwidth]{images/S1c_silver.eps}
+\includegraphics[width=0.82\textwidth]{images/S1c_usdjpy.eps}
 \subcaption{Profit- S1c}
 \label{cztero}
 \end{minipage}
 \begin{minipage}{.49\linewidth}
 \centering 
-\includegraphics[width=0.82\textwidth]{images/S1d_silver.eps}
+\includegraphics[width=0.82\textwidth]{images/S1d_usdjpy.eps}
 \subcaption{Profit - S1d}
 \label{mansard}
 \end{minipage}
 \begin{minipage}{\linewidth}
 \centering 
-\includegraphics[width=0.6\textwidth]{images/S1s_silver.eps}
+\includegraphics[width=0.6\textwidth]{images/S1s_usdjpy.eps}
 \label{mansard}
 \subcaption{Profit - S1s}
 \end{minipage}
-\caption{FSILVER market results}
+\caption{USDJPY market results}
 \end{figure}
 \FloatBarrier
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
 \begin{table}[!t]
-\caption{Profits for all strategy quadrants for BOSSAPLN} 
+\caption{Profits for all strategy quadrants for GBPUSD} 
  \begin{center} 
  \begin{tabular}{|l|l|l|l|l|} 
  \hline \textbf{strategy} & \textbf{profit} & \textbf{bestCalmar} & \textbf{bestMALength} & \textbf{la} \\ \hline  
-S1a & 5.87 & 1.99 & 21 & 2474\\ \hline 
-S1b & 2.86 & 0.61 & 5 & 2416\\ \hline 
-S1c & 10.91 & 4.33 & 5 & 2547\\ \hline 
-S1d & -2.23 & -0.42 & 21 & 2502\\ \hline 
-S1s & 17.91 & 4.35 & Group of MA & 4978\\ 
+S1a & 0.06 & 1.06 & 92 & 2588\\ \hline 
+S1b & 0.12 & 3.41 & 5 & 2513\\ \hline 
+S1c & 0.15 & 3.11 & 5 & 2475\\ \hline 
+S1d & 0.02 & 0.31 & 92 & 2319\\ \hline 
+S1s & 0.36 & 6.89 & Group of MA & 4907\\ 
 \hline \end{tabular} 
  \end{center} 
  \end{table}
@@ -278,39 +276,38 @@ S1s & 17.91 & 4.35 & Group of MA & 4978\\
 \centering
 \begin{minipage}{.49\linewidth}
 \centering 
-\includegraphics[width=0.82\textwidth]{images/S1a_bossa.eps}
+\includegraphics[width=0.82\textwidth]{images/S1a_gbpusd.eps}
 \subcaption{Profit - S1a}
 \label{jedno}
 \end{minipage}
 \begin{minipage}{.49\linewidth}
 \centering 
-\includegraphics[width=0.82\textwidth]{images/S1b_bossa.eps}
+\includegraphics[width=0.82\textwidth]{images/S1b_gbpusd.eps}
 \subcaption{Profit - S1b}
 \label{dwu}
 \end{minipage}
 \\
 \begin{minipage}{.49\linewidth}
 \centering 
-\includegraphics[width=0.82\textwidth]{images/S1c_bossa.eps}
+\includegraphics[width=0.82\textwidth]{images/S1c_gbpusd.eps}
 \subcaption{Profit- S1c}
 \label{cztero}
 \end{minipage}
 \begin{minipage}{.49\linewidth}
 \centering 
-\includegraphics[width=0.82\textwidth]{images/S1d_bossa.eps}
+\includegraphics[width=0.82\textwidth]{images/S1d_gbpusd.eps}
 \subcaption{Profit - S1d}
 \label{mansard}
 \end{minipage}
 \begin{minipage}{\linewidth}
 \centering 
-\includegraphics[width=0.6\textwidth]{images/S1s_bossa.eps}
+\includegraphics[width=0.6\textwidth]{images/S1s_gbpusd.eps}
 \label{mansard}
 \subcaption{Profit - S1s}
 \end{minipage}
-\caption{BOSSAPLN market results}
+\caption{GBPUSD market results}
 \end{figure}
 \FloatBarrier
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
 \begin{table}[!t]
@@ -369,6 +366,63 @@ S1s & 344.29 & 2.08 & Group of MA & 4916\\
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
 \begin{table}[!t]
+\caption{Profits for all strategy quadrants for BOSSAPLN} 
+ \begin{center} 
+ \begin{tabular}{|l|l|l|l|l|} 
+ \hline \textbf{strategy} & \textbf{profit} & \textbf{bestCalmar} & \textbf{bestMALength} & \textbf{la} \\ \hline  
+S1a & 5.87 & 1.99 & 21 & 2474\\ \hline 
+S1b & 2.86 & 0.61 & 5 & 2416\\ \hline 
+S1c & 10.91 & 4.33 & 5 & 2547\\ \hline 
+S1d & -2.23 & -0.42 & 21 & 2502\\ \hline 
+S1s & 17.91 & 4.35 & Group of MA & 4978\\ 
+\hline \end{tabular} 
+ \end{center} 
+ \end{table}
+\FloatBarrier
+
+\begin{figure}[h]
+\centering
+\begin{minipage}{.49\linewidth}
+\centering 
+\includegraphics[width=0.82\textwidth]{images/S1a_bossa.eps}
+\subcaption{Profit - S1a}
+\label{jedno}
+\end{minipage}
+\begin{minipage}{.49\linewidth}
+\centering 
+\includegraphics[width=0.82\textwidth]{images/S1b_bossa.eps}
+\subcaption{Profit - S1b}
+\label{dwu}
+\end{minipage}
+\\
+\begin{minipage}{.49\linewidth}
+\centering 
+\includegraphics[width=0.82\textwidth]{images/S1c_bossa.eps}
+\subcaption{Profit- S1c}
+\label{cztero}
+\end{minipage}
+\begin{minipage}{.49\linewidth}
+\centering 
+\includegraphics[width=0.82\textwidth]{images/S1d_bossa.eps}
+\subcaption{Profit - S1d}
+\label{mansard}
+\end{minipage}
+\begin{minipage}{\linewidth}
+\centering 
+\includegraphics[width=0.6\textwidth]{images/S1s_bossa.eps}
+\label{mansard}
+\subcaption{Profit - S1s}
+\end{minipage}
+\caption{BOSSAPLN market results}
+\end{figure}
+\FloatBarrier
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\begin{table}[!t]
 \caption{Profits for all strategy quadrants for FGOLD} 
  \begin{center} 
  \begin{tabular}{|l|l|l|l|l|} 
@@ -421,18 +475,19 @@ S1s & 599.88 & 4.60 & Group of MA & 4948\\
 \FloatBarrier
 
 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
 \begin{table}[!t]
-\caption{Profits for all strategy quadrants for GBPUSD} 
+\caption{Profits for all strategy quadrants for FSILVER} 
  \begin{center} 
  \begin{tabular}{|l|l|l|l|l|} 
  \hline \textbf{strategy} & \textbf{profit} & \textbf{bestCalmar} & \textbf{bestMALength} & \textbf{la} \\ \hline  
-S1a & 0.06 & 1.06 & 92 & 2588\\ \hline 
-S1b & 0.12 & 3.41 & 5 & 2513\\ \hline 
-S1c & 0.15 & 3.11 & 5 & 2475\\ \hline 
-S1d & 0.02 & 0.31 & 92 & 2319\\ \hline 
-S1s & 0.36 & 6.89 & Group of MA & 4907\\ 
+S1a & -5.31 & -0.65 & 81 & 2582\\ \hline 
+S1b & 17.22 & 5.86 & 10 & 2508\\ \hline 
+S1c & 4.17 & 0.56 & 10 & 2473\\ \hline 
+S1d & 6.95 & 1.33 & 81 & 2336\\ \hline 
+S1s & 21.96 & 5.55 & Group of MA & 4918\\ 
 \hline \end{tabular} 
  \end{center} 
  \end{table}
@@ -442,93 +497,40 @@ S1s & 0.36 & 6.89 & Group of MA & 4907\\
 \centering
 \begin{minipage}{.49\linewidth}
 \centering 
-\includegraphics[width=0.82\textwidth]{images/S1a_gbpusd.eps}
+\includegraphics[width=0.82\textwidth]{images/S1a_silver.eps}
 \subcaption{Profit - S1a}
 \label{jedno}
 \end{minipage}
 \begin{minipage}{.49\linewidth}
 \centering 
-\includegraphics[width=0.82\textwidth]{images/S1b_gbpusd.eps}
+\includegraphics[width=0.82\textwidth]{images/S1b_silver.eps}
 \subcaption{Profit - S1b}
 \label{dwu}
 \end{minipage}
 \\
 \begin{minipage}{.49\linewidth}
 \centering 
-\includegraphics[width=0.82\textwidth]{images/S1c_gbpusd.eps}
+\includegraphics[width=0.82\textwidth]{images/S1c_silver.eps}
 \subcaption{Profit- S1c}
 \label{cztero}
 \end{minipage}
 \begin{minipage}{.49\linewidth}
 \centering 
-\includegraphics[width=0.82\textwidth]{images/S1d_gbpusd.eps}
+\includegraphics[width=0.82\textwidth]{images/S1d_silver.eps}
 \subcaption{Profit - S1d}
 \label{mansard}
 \end{minipage}
 \begin{minipage}{\linewidth}
 \centering 
-\includegraphics[width=0.6\textwidth]{images/S1s_gbpusd.eps}
+\includegraphics[width=0.6\textwidth]{images/S1s_silver.eps}
 \label{mansard}
 \subcaption{Profit - S1s}
 \end{minipage}
-\caption{GBPUSD market results}
+\caption{FSILVER market results}
 \end{figure}
 \FloatBarrier
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newpage
-\begin{table}[!t]
-\caption{Profits for all strategy quadrants for USDJPY} 
- \begin{center} 
- \begin{tabular}{|l|l|l|l|l|} 
- \hline \textbf{strategy} & \textbf{profit} & \textbf{bestCalmar} & \textbf{bestMALength} & \textbf{la} \\ \hline  
-S1a & 17.19 & 8.24 & 18 & 2693\\ \hline 
-S1b & -9.80 & -0.74 & 54 & 2665\\ \hline 
-S1c & 5.65 & 2.06 & 54 & 2280\\ \hline 
-S1d & 1.87 & 0.61 & 18 & 2287\\ \hline 
-S1s & 14.85 & 5.68 & Group of MA & 4945\\ 
-\hline \end{tabular} 
- \end{center} 
- \end{table}
-\FloatBarrier
-
-\begin{figure}[h]
-\centering
-\begin{minipage}{.49\linewidth}
-\centering 
-\includegraphics[width=0.82\textwidth]{images/S1a_usdjpy.eps}
-\subcaption{Profit - S1a}
-\label{jedno}
-\end{minipage}
-\begin{minipage}{.49\linewidth}
-\centering 
-\includegraphics[width=0.82\textwidth]{images/S1b_usdjpy.eps}
-\subcaption{Profit - S1b}
-\label{dwu}
-\end{minipage}
-\\
-\begin{minipage}{.49\linewidth}
-\centering 
-\includegraphics[width=0.82\textwidth]{images/S1c_usdjpy.eps}
-\subcaption{Profit- S1c}
-\label{cztero}
-\end{minipage}
-\begin{minipage}{.49\linewidth}
-\centering 
-\includegraphics[width=0.82\textwidth]{images/S1d_usdjpy.eps}
-\subcaption{Profit - S1d}
-\label{mansard}
-\end{minipage}
-\begin{minipage}{\linewidth}
-\centering 
-\includegraphics[width=0.6\textwidth]{images/S1s_usdjpy.eps}
-\label{mansard}
-\subcaption{Profit - S1s}
-\end{minipage}
-\caption{USDJPY market results}
-\end{figure}
-\FloatBarrier
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
