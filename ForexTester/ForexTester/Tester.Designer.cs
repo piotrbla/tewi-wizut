@@ -77,6 +77,8 @@ namespace ForexTester
             // chkMatlab
             // 
             this.chkMatlab.AutoSize = true;
+            this.chkMatlab.Checked = true;
+            this.chkMatlab.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkMatlab.Location = new System.Drawing.Point(53, 36);
             this.chkMatlab.Name = "chkMatlab";
             this.chkMatlab.Size = new System.Drawing.Size(110, 17);
