@@ -47,7 +47,7 @@ namespace ForexTester
             //var data = File.ReadAllLines("EURUSD1." + m_ValuesFileExtension );
             //var data = File.ReadAllLines("EURUSD60." + m_ValuesFileExtension);
             var data = File.ReadAllLines(cmbFiles.SelectedItem + "." + m_ValuesFileExtension);
-
+            var compareDate = new DateTime(2012, 07, 09, 8, 0, 0);
             m_candles = new List<Candle>(data.Select(s => s.Split(',')).Select(values => new Candle
                 {
                     Date = values[0],
@@ -57,7 +57,7 @@ namespace ForexTester
                     Low = Convert.ToDouble(values[4].Replace(".", ",")),
                     Close = Convert.ToDouble(values[5].Replace(".", ",")),
                     Volume = Convert.ToDouble(values[6].Replace(".", ","))
-                }).ToList());
+                }).Where(v => Convert.ToDateTime( v.Date + " " + v.Time)> compareDate).ToList());
             ComputeAverages();
             if (chkMatlab.Checked)
                 GenerateToMatlab();
