@@ -61,19 +61,22 @@ It is easy to see that the majority of these excellent traders succeed within a 
 Equally simple is the closing rule of each opened position. It's closed at the close of (i+1) bar (fig. 1).
 Let C be considering constantly changing prices of value, and Ci closing price of I OHLC bar (Open, High, Low, Close). Denote Cmi as average of m last close
 \begin{equation} \label{label-of-equation-1}
-  C_{mi} = (C_{i-m} + C_{i-m+1} + … + C_{i} ) / m; 
+  C_{m_{i}} = \frac{C_{i-m} + C_{i-m+1} + … + C_{i}}{m}; 
 \end{equation}
 
-At the moment of I bar closing, value can be compared with the Cmi average. Depending on the investor's beliefs about the existence of a particular trend are thus four possible decision-making situations:
-1. If Ci  > Cmi  long position will be open
-2. If Ci  > Cmi  short position will be open
-3. If Ci  < Cmi  long position will be open
-4. If Ci  < Cmi  short position will be open
+At the moment of I bar closing, value can be compared with the $C_{m_{i}}$ average. Depending on the investor's beliefs about the existence of a particular trend are thus four possible decision-making situations:
+\begin{enumerate}
+\item If $C_i  > C_{m_{i}}$  long position will be open,
+\item If $C_i  > C_{m_{i}}$  short position will be open,
+\item If $C_i  < C_{m_{i}}$  long position will be open,
+\item If $C_i  < C_{m_{i}}$  short position will be open.
+\end{enumerate}
+
 
 Each of these decisions is usually attributed to reasons arising from the conviction of the investor why and what happens in a moment. Should be noted that each of the above decisions is taken basing on average of different number of last close bar prices. Therefore, in the general case at the close moment close of I bar when it should make decision of open (short or long) it could happen that may occur up to four different levels of the average value calculated for the last m bars (different for each contractual quadrant).\\
 These situations are shown in Figure 1
 
-\begin{figure}[h]
+\begin{figure}[h!]
  \centering
  \includegraphics[width=\textwidth]{Rysunek0_all2.eps}
  \caption{Symbolic quadrant of response (second line) for market movement (first line)}
