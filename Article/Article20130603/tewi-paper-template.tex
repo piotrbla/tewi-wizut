@@ -76,6 +76,9 @@ At the moment of I bar closing, value can be compared with the $C_{m_{i}}$ avera
 Each of these decisions is usually attributed to reasons arising from the conviction of the investor why and what happens in a moment. Should be noted that each of the above decisions is taken basing on average of different number of last close bar prices. Therefore, in the general case at the close moment close of I bar when it should make decision of open (short or long) it could happen that may occur up to four different levels of the average value calculated for the last m bars (different for each contractual quadrant).\\
 These situations are shown in Figure 1
 
+The situation described by a set of investment decisions (2) - (5) can be presented in the form of a contractual quadrant - Figure 1
+
+
 \begin{figure}[h!]
  \centering
  \includegraphics[width=\textwidth]{Rysunek0_all2.eps}
@@ -90,6 +93,25 @@ These situations are shown in Figure 1
 \caption{All versions}
 \end{figure}
 \FloatBarrier
+
+In this quadrant in quarters a) and b) we have situations (2) and (3) - ie, the closing value of the i bar Ci is greater than the average of the last m bars. The first line in those quarters is addressed to top - market is on the rise. In the quarter, a) reaction to the growth of the market is open a long position (2). The investor behaves as if he was convinced of the existence of a growing trend. In the quarter b) investors react on market growth is short position open. The investor behaves as if he predicted horizontal trend.
+
+Conversely in quarters, c) and d) the first movement of the market is declining and investor reaction is recorded appropriately in decisions (4) and (5). In quarter c) investor behaves as if he predicted horizontal trend and opens long position (4) and in quarter d) in believe of drowdown trend he opens short position (5). \\
+These situations are both shown in Figure 2\\
+\indent Figure 2 shows the situation at the close of (i-1) bar marked as Ci-1. The investor is following the situation in the I bar and at the moment of its close may immediately calculate each of the four average (1). Depending on the direction in which market has changed (upwards or downwards) we are dealing with quarters a and b of quadrant (If there is a price rise of the observed asset) or quarters c and d if there is a decrease.
+Because, at the moment of end of the i bar it can be calculated  value of each of the four average it can also be checked, if some of opening conditions (2)-(5) are passed. These four situations extracted from Figure 2 are shown in Figure 3, where in turn are explained  decision-making situations for the four quarters quadrant (Fig. 1)\\
+\indent The following sketches from a) to d) shows the change in the market against a particular average from Cdmi to Cami.\\
+\indent Each of these averages is counted step by step (bar) separately for each of the four situations, and of course the condition to open a position associated with a particular situation may occur or not. For example, if the closing value of the I bar in the situation a) will be below Cami this not open long position.\\
+\indent Extremely important in this strategy is the one and only parameter - number of last bar closures for average calculation. In each quarter of quadrant, in the general case the number is different. It is determined for a dedicated n number of bars, acting learner section of the time series so that for example for quarter a) :\\
+\begin{equation}
+	m_a = argmax (sum (y_i ) ) (6)
+\end{equation}
+where
+yi = Ci+1 - Ci dla i=1, ..., n, for and complying  condition (2)
+So ma is the parameter learned on a particular section of a time series. This m  value,for which achieves a maximum gain of opened positions (for quarter a) long). On another length of time series, by (6) it could have different value. Similarly, for the parameters ,b, mc and md.\\
+Use of this strategy makes the investor no longer think about the market in the traditional way trying to recognize what kind of a trend at the moment there is or whether this trend has just changed. Machine that is learned the optimal value of m for each quarter of quadrant takes over this role and makes decisions in every of four possible investment situations. Take these decisions only when each of four calculated optimal moving averages condition is satisfied to open specific position.
+These strategy has been tested on the following markets as simple as possible. When was satisfied, one or more of the opening conditions (2) – (5) then position has been opened and closed at the close of the (i +1) bar.
+
 
 \begin{figure}[h]
 \centering
