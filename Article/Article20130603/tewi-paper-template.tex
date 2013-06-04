@@ -58,19 +58,19 @@ Similar concept will be considered in this paper. This concept belongs to group 
 It is easy to see that the majority of these excellent traders succeed within a certain period of time, and today the implementation of their methods gives poor results. This contradicts the general philosophy of these practitioners (but not all of them), that exists mysterious patterns or rules, that are characteristic for specific markets, which provide success.
 \section{Strategy characteristics}
 \indent The essence of the concept is the idea of simultaneous open long and short positions based on various signals, in this case the intersection graph (values of exchange rate  and stock index) and average of the last m closing of this price.\\
-Equally simple is the closing rule of each opened position. It's closed at the close of (i+1)th bar (Fig. 1).
-Let C be considering constantly changing prices of value, and $C_i$ closing price of i-th OHLC bar (Open, High, Low, Close). Denote $C_{m_{i}}$ as average of m last close
+Equally simple is the closing rule of each opened position. It's closed at the close of $(i+1)$th bar (Fig. 1).
+Let $C$ be considering constantly changing prices of value, and $C_i$ closing price of i-th OHLC bar (Open, High, Low, Close). Denote $C_{m_{i}}$ as average of m last close
 \begin{equation} \label{label-of-equation-1}
-  C_{m_{i}} = \frac{C_{i-m} + C_{i-m+1} + … + C_{i}}{m+1}; \hspace{1em}m>0; 
+  C_{m_{i}} = \frac{C_{i-m} + C_{i-m+1} + … + C_{i}}{m+1}; \hspace{1em}m>0. 
 \end{equation}
  
 At the moment of i-th bar closing, value can be compared with the $C_{m_{i}}$ average. Depending on the investor's beliefs about the existence of a particular trend are thus four possible decision-making situations:
-\begin{equation} If\ C_i  > C_{m_{i}}\   long\ position\ will\ be\ open;\ m=m_a. \end{equation}
-\begin{equation} If\ C_i  > C_{m_{i}}\   short\ position\ will\ be\ open;\ m=m_b. \end{equation}
-\begin{equation} If\ C_i  < C_{m_{i}}\   long\ position\ will\ be\ open;\ m=m_c. \end{equation}
+\begin{equation} If\ C_i  > C_{m_{i}}\   long\ position\ will\ be\ open;\ m=m_a; \end{equation}
+\begin{equation} If\ C_i  > C_{m_{i}}\   short\ position\ will\ be\ open;\ m=m_b; \end{equation}
+\begin{equation} If\ C_i  < C_{m_{i}}\   long\ position\ will\ be\ open;\ m=m_c; \end{equation}
 \begin{equation} If\ C_i  < C_{m_{i}}\   short\ position\ will\ be\ open;\ m=m_d. \end{equation}
 
-Each of these decisions is usually attributed to reasons arising from the conviction of the investor why and what happens in a moment. Should be noted that each of the above decisions is taken basing on average of different number of last close bar prices. Therefore, in the general case at the close moment close of i-th bar when it should make decision of open (short or long) it could happen that may occur up to four different levels of the average value calculated for the last m bars (different for each contractual quadrant).\\
+Each of these decisions is usually attributed to reasons arising from the conviction of the investor why and what happens in a moment. It should be noted that each of the above decisions is taken basing on average of different number of last close bar prices. Therefore, in the general case at the close moment close of i-th bar when it should make decision of open (short or long) it could happen that may occur up to four different levels of the average value calculated for the last m bars (different for each contractual quadrant).\\
 These situations are shown in Figure 1
 
 The situation described by a set of investment decisions (2) - (5) can be presented in the form of a contractual quadrant - Figure 1
@@ -96,7 +96,7 @@ These situations are both shown in Figure 2\\
 \caption{All possible situations for four different moving averages}
 \end{figure}
 \FloatBarrier
-\indent Figure 2 shows the situation at the close of (i-1) bar marked as $C_{i-1}$. The investor is following the situation in the i-th bar and at the moment of its close may immediately calculate each of the four average (1). Depending on the direction in which market has changed (upwards or downwards) we are dealing with quarters a and b of quadrant (If there is a price rise of the observed asset) or quarters c and d if there is a decrease.
+\indent Figure 2 shows the situation at the close of (i-1) bar marked as $C_{i-1}$. The investor is following the situation in the i-th bar and at the moment of its close may immediately calculate each of the four average (1). Depending on the direction in which market has changed (upwards or downwards) we are dealing with quarters $a$ and $b$ of quadrant (If there is a price rise of the observed asset) or quarters $c$ and $d$ if there is a decrease.
 Because, at the moment of end of the i bar it can be calculated  value of each of the four average it can also be checked, if some of opening conditions (2)-(5) are passed. These four situations extracted from Figure 2 are shown in Figure 3, where in turn are explained  decision-making situations for the four quarters quadrant (Fig. 1)\\
 \begin{figure}[h]
 \centering
@@ -126,7 +126,7 @@ Because, at the moment of end of the i bar it can be calculated  value of each o
 \end{figure}
 \FloatBarrier
 \indent The following sketches from a) to d) shows the change in the market against a particular average from $C^d_{m_{i}}$ to $C^a_{m_{i}}$.\\
-\indent Each of these averages is counted step by step (bar) separately for each of the four situations, and of course the condition to open a position associated with a particular situation may occur or not. For example, if the closing value of the i-th bar in the situation a) will be below Cami this not open long position.\\
+\indent Each of these averages is counted step by step (bar) separately for each of the four situations, and of course the condition to open a position associated with a particular situation may occur or not. For example, if the closing value of the i-th bar in the situation a) will be below $C^a_{m_{i}}$ this not open long position.\\
 \indent Extremely important in this strategy is the one and only parameter - number of last bar closures for average calculation. In each quarter of quadrant, in the general case the number is different. It is determined for a dedicated n number of bars, acting learner section of the time series so that for example for quarter a) :\\
 \begin{equation}
 	m_a = argmax (\sum y_i  )
