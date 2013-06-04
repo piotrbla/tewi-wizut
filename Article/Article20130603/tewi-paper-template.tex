@@ -28,7 +28,7 @@
 \title{Meaning of simple rules in investment strategies of algorithmic trading}
 \headtitle{Meaning of simple rules in investment strategies of algorithmic trading\dots}
 \author{Antoni Wiliński\inst{1}, Piotr Błaszyński\inst{1}, Aneta Bera\inst{1}, \\ Wojciech Nowicki\inst{1}, Katarzyna Buda\inst{1}}
-\headauthor{Antoni Wiliński, Piotr Błaszyński}
+\headauthor{Antoni Wiliński, Piotr Błaszyński et al.}
 \affiliation{%
   \inst{1}West Pomeranian University of Technology\\
   Faculty of Computer Science\\
@@ -141,6 +141,7 @@ These strategy has been tested on the following markets as simple as possible. W
 
 
 \section{The test results}
+\indent The charts below shows the curves of capital accumulation for each quater of quadrant. Each graph represents one decision-making situation with the best parameter, number of last closures to calculate moving average. Fifth diagram shows the (S1s) cumulative strategy value. Which is the sum of profit of all open positions at this moment. Of course all component strategies are calculated for the best parameter for each of them.\\
 The study of strategy was carried out on the following markets:
 \begin{itemize}
 \item currency pairs: EURUSD, EURJPY, USDJPY, GBPUSD,
@@ -535,6 +536,7 @@ S1s & 21.96 & 5.55 & Group of MA & 4918\\
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Conclusions}
 \indent Suggested simple strategy is suitable only for algorithmic trading, even in absolute simplest form it seems to be interesting. As it’s been written in the introduction, more from cognitive point of view, than for the transaction value.\\
+Surprisingly strategy S1s is a fast and very simple way of receiving really good results, because it is sort of adding each quadrant in one file. In this case results show how surplus grows bigger than loss.
 \indent This strategy can be modified in many ways.  Eg. in case of suggestions of simultaneous opening long and short positions better is to abandon work than opening both positions (due to transaction costs). The opening of another position in the same direction, eg. long position after closing the previous long position is senseless, it’s better to continue already opened position. These are two simplest ways to improve strategy. There are probably many ways to filter openings that allow to preserve only the most valuable due to profit events. Purpose of this paper was to prove the thesis, that even the simplest strategy has some potential profit, whose using is fascinating challenge.\\
 \indent The authors believe, due to observing results of experiments, that the thesis of this dormant potential has been acknowledged. \\
 The results show that depending on the current market characteristics, it was possible to temporarily disable some quarters from trade to get better profits. Of course, they should still be calculated in the background, to be able include in trade if market characteristic will change.
