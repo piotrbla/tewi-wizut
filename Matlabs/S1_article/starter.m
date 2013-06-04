@@ -7,7 +7,7 @@ mb=6;
 mc=6;
 md=21;
 
-EURJPY;
+EURJPY60;
 rynek = 'eurjpy';
 
 

@@ -5,10 +5,11 @@ function [] = S1b (C,mb,rynek)
 %nale¿y otwierac pozycje krótkie wg zasady Sell Limit
 
 candlesCount = size(C,1);
+candlesCount(1)=5000;
 bestSumRb = -Inf;
 bestCalmarb = -Inf;
 
-for mb=mb%10:50
+for mb=mb
     means=zeros(1, candlesCount);
     kon=candlesCount-1;
     for i=2:kon
@@ -73,4 +74,4 @@ plot(bestSumAll);
 xlabel('Candles');
 ylabel('Profit');
 set(hFig, 'PaperPositionMode','auto');   %# WYSIWYG
-print(hFig,'-depsc', '-r0',mfilename);
+print(hFig,'-depsc', '-r0',[mfilename '_' rynek]);

@@ -5,11 +5,12 @@ function [] = S1c (C,mc,rynek)
 %nale¿y otwierac pozycje d³ugie wg zasady Buy Limit
 
 candlesCount = size(C,1);
+candlesCount(1)=5000;
 bestSumRc = -Inf;
 bestCalmarc = -Inf;
 
 
-for mc=mc%10:50%8:70
+for mc=mc
     means=zeros(1, candlesCount);
     kon=candlesCount-1;
     for i=2:kon
@@ -73,4 +74,4 @@ plot(bestSumAll)
 xlabel('Candles');
 ylabel('Profit');
 set(hFig, 'PaperPositionMode','auto')   %# WYSIWYG
-print(hFig,'-depsc', '-r0',mfilename)
+print(hFig,'-depsc', '-r0',[mfilename '_' rynek])

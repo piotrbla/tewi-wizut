@@ -80,4 +80,4 @@ plot(bestSumAll)
 xlabel('Candles');
 ylabel('Profit');
 set(hFig, 'PaperPositionMode','auto')   %# WYSIWYG
-print(hFig,'-depsc', '-r0',mfilename)
+print(hFig,'-depsc', '-r0',[mfilename '_' rynek])

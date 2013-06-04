@@ -5,10 +5,11 @@ function [] = S1a (C,ma,rynek)
 %nale¿y otwierac pozycje d³ugie wg zasady Buy Stop
 
 candlesCount = size(C,1);
+candlesCount(1)=5000;
 bestSumRa = -Inf;
 bestCalmara = -Inf;
 
-for ma=ma%10:50
+for ma=ma
     means=zeros(1, candlesCount);
     kon=candlesCount-1;
     for i=2:kon
@@ -73,4 +74,4 @@ plot(bestSumAll);
 xlabel('Candles');
 ylabel('Profit');
 set(hFig, 'PaperPositionMode','auto') ;  %# WYSIWYG
-print(hFig,'-depsc', '-r0',mfilename);
+print(hFig,'-depsc', '-r0',[mfilename '_' rynek]);
