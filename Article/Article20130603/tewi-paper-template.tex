@@ -58,7 +58,7 @@ Similar concept will be considered in this paper. This concept belongs to group 
 It is easy to see that the majority of these excellent traders succeed within a certain period of time, and today the implementation of their methods gives poor results. This contradicts the general philosophy of these practitioners (but not all of them), that exists mysterious patterns or rules, that are characteristic for specific markets, which provide success.
 \section{Strategy characteristics}
 \indent The essence of the concept is the idea of simultaneous open long and short positions based on various signals, in this case the intersection graph (values of exchange rate  and stock index) and average of the last m closing of this price.\\
-Equally simple is the closing rule of each opened position. It's closed at the close of $(i+1)$th bar (Fig. 1).
+Equally simple is the closing rule of each opened position. It's closed at the close of $(i+1)$-th bar (Fig. 1).
 Let $C$ be considering constantly changing prices of value, and $C_i$ closing price of i-th OHLC bar (Open, High, Low, Close). Denote $C_{m_{i}}$ as average of m last close
 \begin{equation} \label{label-of-equation-1}
   C_{m_{i}} = \frac{C_{i-m} + C_{i-m+1} + … + C_{i}}{m+1}; \hspace{1em}m>0. 
@@ -131,7 +131,7 @@ Because, at the moment of end of the i bar it can be calculated  value of each o
 	m_a = argmax (\sum y_i  )
 \end{equation}
 where: $yi = C_{i+1} - C_{i}$ for i=1, ..., n and complying  condition (2).\\
-\indent So ma is the parameter learned on a particular section of a time series. This m  value,for which achieves a maximum gain of opened positions (for quarter a) long). On another length of time series, by (6) it could have different value. Similarly, for the parameters ,b, mc and md.\\
+\indent So $m_{a}$ is the parameter learned on a particular section of a time series. This m value,for which achieves a maximum gain of opened positions (for quarter a) long). On another length of time series, by (6) it could have different value. Similarly, for the parameters $m_{b}$, $m_{c}$ and $m_{d}$.\\
 Use of this strategy makes the investor no longer think about the market in the traditional way trying to recognize what kind of a trend at the moment there is or whether this trend has just changed. Machine that is learned the optimal value of m for each quarter of quadrant takes over this role and makes decisions in every of four possible investment situations. Take these decisions only when each of four calculated optimal moving averages condition is satisfied to open specific position.
 These strategy has been tested on the following markets as simple as possible. When was satisfied, one or more of the opening conditions (2) – (5) then position has been opened and closed at the close of the $(i +1)$th bar.
 
