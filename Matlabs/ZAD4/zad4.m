@@ -14,9 +14,9 @@ pip = 0.0001; % wielkosc pipsa na danym rynku
 spread = 2.8 * pip; % spread dla rynku
 
 % Parametry podstawowe
-VparamALength = [5:4:30]; % liczba swiec dla obliczenia sredniej
-VparamAVolLength = [5:4:30]; % liczba sweic wstecz dla obliczenia sredniego wolumenu
-VparamADuration = [5:2:30]; % dlugosc trwania otwartej pozycji
+VparamALength = [5:3:30]; % liczba swiec dla obliczenia sredniej
+VparamAVolLength = [5:3:30]; % liczba sweic wstecz dla obliczenia sredniego wolumenu
+VparamADuration = [5:3:30]; % dlugosc trwania otwartej pozycji
 VparamAVolThreshold = 0;%[10:-10:-10]; % prog dla volumenu
 VparamABuffer =  [-2*pip:-4*pip:-10*pip]; % wielkosc bufora
 VparamASL = 8*spread;%[8*spread:3*spread:20*spread]; % wartosc stop loss
@@ -59,8 +59,10 @@ for vo = 0:vvo
 	
 		maxes=zeros(1, paramASectionLearn);
 		kon=(sectionLearnStart+paramASectionLearn)-1;
-		for i=2:kon
-			maxes(i) = max(C(i-min(i-1,paramALength):i,4));
+		ii=1;
+		for i=sectionLearnStart:kon
+			maxes(ii) = max(C(i-min(i-1,paramALength):i,4));
+			ii=ii+1;
 		end
 	
 		for vj = 1:length(VparamAVolLength)
@@ -69,8 +71,10 @@ for vo = 0:vvo
 		disp(['# Postep: ', num2str(round(iterCounter/iterTotal*100)), '%   Czas: ', num2str(toc(tStart))]);
 
 			volAverages=zeros(1, paramASectionLearn);
-			for i=2:kon
-				volAverages(i) = mean(C(i-min(i-1,paramAVolLength):i,5))-C(i,5);
+			ii=1;
+			for i=sectionLearnStart:kon
+				volAverages(ii) = mean(C(i-min(i-1,paramAVolLength):i,5))-C(i,5);
+				ii=ii+1;
 			end
 
 			for vk = 1:length(VparamADuration)
@@ -106,14 +110,14 @@ for vo = 0:vvo
 		end
 	end
 	maxes=zeros(1, max(VparamASectionTest)+max(bestparamALength,bestparamAVolLength) + bestparamADuration);
+	volAverages=zeros(1, max(VparamASectionTest)+max(bestparamALength,bestparamAVolLength) + bestparamADuration);
 	poczDanychTest = bigPoint+paramASectionLearn-max(bestparamALength,bestparamAVolLength);
 	kon=bigPoint+paramASectionLearn + max(VparamASectionTest)+ bestparamADuration-1;
+	ii=1;
 	for i=poczDanychTest:kon
-		maxes(i) = max(C(i-min(i-1,bestparamALength):i,4));
-	end
-	volAverages=zeros(1, max(VparamASectionTest)+max(bestparamALength,bestparamAVolLength) + bestparamADuration);
-	for i=poczDanychTest:kon
-		volAverages(i) = mean(C(i-min(i-1,bestparamAVolLength):i,5))-C(i,5);
+		maxes(ii) = max(C(i-min(i-1,bestparamALength):i,4));
+		volAverages(ii) = mean(C(i-min(i-1,bestparamAVolLength):i,5))-C(i,5);
+		ii=ii+1;
 	end
 	
 	for vp = 1:length(VparamASectionTest)
