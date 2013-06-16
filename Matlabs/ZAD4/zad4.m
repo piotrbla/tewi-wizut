@@ -96,7 +96,7 @@ for vo = 0:vvo
 							[ sumReturn,Calmar ] = Sa (C(bigPoint:bigPoint+paramASectionLearn+paramADuration,:),spread,paramALength, paramAVolLength, paramADuration, paramAVolThreshold, paramABuffer, paramASL, maxes, volAverages,1, paramASectionLearn);
 							if bestReturn<sumReturn
 								bestReturn=sumReturn;
-								%bestCalmar=Calmar;
+								bestCalmar=Calmar;
 								bestparamALength = paramALength;
 								bestparamAVolLength = paramAVolLength ;
 								bestparamADuration = paramADuration;
@@ -115,7 +115,7 @@ for vo = 0:vvo
 		end
     end
     
-    paramy=[bigPoint; sumReturn; Calmar; bestparamALength; bestparamAVolLength; ...
+    paramy=[bigPoint; bestReturn; bestCalmar; bestparamALength; bestparamAVolLength; ...
         bestparamADuration;  bestparamAVolThreshold; bestparamABuffer; bestparamASL];
     param_str = '%4.2f\t%4.2f\t%4.2f\t%4.2f\t%4.2f\t%4.2f\t%4.2f\t%4.2f\t%4.2f\n';
     fprintf(fileID, param_str, paramy);
