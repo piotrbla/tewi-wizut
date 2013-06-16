@@ -25,6 +25,11 @@ VparamASL = 8*spread;%[8*spread:3*spread:20*spread]; % wartosc stop loss
 VparamASectionLearn = [100 500 1000 2000]; % dlugosc
 VparamASectionTest = [50 100 200 400]; % dlugosc
  
+% Przygotowanie pliku do zapisu
+fileID =fopen([mfilename '.txt'],'w');
+formatSpec = 'bigPoint\tReturn\tCalmar\tparamALength\tparamAVolLength\tparamADuration\tparamAVolThreshold\tparamABuffer\tparamASL\n';
+fprintf(fileID,formatSpec);         
+
 %%%%%%%%%%%%%%%%%%%%%%
 
 bestReturn=-10000;
@@ -108,7 +113,13 @@ for vo = 0:vvo
 				end
 			end
 		end
-	end
+    end
+    
+    paramy=[bigPoint; sumReturn; Calmar; bestparamALength; bestparamAVolLength; ...
+        bestparamADuration;  bestparamAVolThreshold; bestparamABuffer; bestparamASL];
+    param_str = '%4.2f\t%4.2f\t%4.2f\t%4.2f\t%4.2f\t%4.2f\t%4.2f\t%4.2f\t%4.2f\n';
+    fprintf(fileID, param_str, paramy);
+    
 	maxes=zeros(1, max(VparamASectionTest)+max(bestparamALength,bestparamAVolLength) + bestparamADuration);
 	volAverages=zeros(1, max(VparamASectionTest)+max(bestparamALength,bestparamAVolLength) + bestparamADuration);
 	poczDanychTest = bigPoint+paramASectionLearn-max(bestparamALength,bestparamAVolLength);
@@ -124,8 +135,10 @@ for vo = 0:vvo
 		paramASectionTest = VparamASectionTest(vp);
 		[ sumReturn,Calmar ] = Sa (C(poczDanychTest:kon,:),spread,bestparamALength, bestparamAVolLength, bestparamADuration, bestparamAVolThreshold, bestparamABuffer, bestparamASL, maxes, volAverages,max(bestparamALength,bestparamAVolLength),paramASectionTest);
 		sectionResult(vp) = sectionResult(vp) + sumReturn;
-	end
+    end
+
 end
-sectionResult
+sectionResult;
 nazwa=[mfilename,'.','csv'];
 csvwrite(nazwa,sectionResult);
+fclose(fileID);
