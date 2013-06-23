@@ -8,17 +8,17 @@ tStart=tic;
 
 %%%%%%%%%%%%%%%%%%%%%%
 % Ustawienia:
-load ('bossapln60');
-pip = 0.01; % wielkosc pipsa na danym rynku
-spread = 10 * pip; % spread dla rynku
+eurusd;
+pip = 0.00001; % wielkosc pipsa na danym rynku
+spread = 16 * pip; % spread dla rynku
 
 % Parametry podstawowe
-VparamALength = [5:2:30]; % liczba swiec dla obliczenia sredniej
-VparamAVolLength = [5:2:30]; % liczba sweic wstecz dla obliczenia sredniego wolumenu
-VparamADuration = [5:2:30]; % dlugosc trwania otwartej pozycji
+VparamALength = [5:5:30]; % liczba swiec dla obliczenia sredniej
+VparamAVolLength = [5:5:30]; % liczba sweic wstecz dla obliczenia sredniego wolumenu
+VparamADuration = [5:5:30]; % dlugosc trwania otwartej pozycji
 VparamAVolThreshold = [10:-5:-10]; % prog dla volumenu
 VparamABuffer =  [-2*pip:-2*pip:-20*pip]; % wielkosc bufora
-VparamASL = [8*spread:2*spread:20*spread]; % wartosc stop loss
+VparamASL = [10*spread:5*spread:20*spread]; % wartosc stop loss
 
 % Parametry dla zadania 5
 VparamASectionLearn = [100 500 1000 2000]; % dlugosc
