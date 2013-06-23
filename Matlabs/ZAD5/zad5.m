@@ -9,19 +9,20 @@ tStart=tic;
 %%%%%%%%%%%%%%%%%%%%%%
 % Ustawienia:
 eurusd;
+mfilename = 'eurusd';
 pip = 0.00001; % wielkosc pipsa na danym rynku
 spread = 16 * pip; % spread dla rynku
 
 % Parametry podstawowe
-VparamALength = [5:5:30]; % liczba swiec dla obliczenia sredniej
-VparamAVolLength = [5:5:30]; % liczba sweic wstecz dla obliczenia sredniego wolumenu
-VparamADuration = [5:5:30]; % dlugosc trwania otwartej pozycji
-VparamAVolThreshold = [10:-5:-10]; % prog dla volumenu
-VparamABuffer =  [-2*pip:-2*pip:-20*pip]; % wielkosc bufora
-VparamASL = [10*spread:5*spread:20*spread]; % wartosc stop loss
+VparamALength = 5:5:30; % liczba swiec dla obliczenia sredniej
+VparamAVolLength = 5:5:30; % liczba sweic wstecz dla obliczenia sredniego wolumenu
+VparamADuration = 5:5:30; % dlugosc trwania otwartej pozycji
+VparamAVolThreshold = 10:-5:-10; % prog dla volumenu
+VparamABuffer =  -2*pip:-2*pip:-20*pip; % wielkosc bufora
+VparamASL = 10*spread:5*spread:20*spread; % wartosc stop loss
 
 % Parametry dla zadania 5
-VparamASectionLearn = [100 500 1000 2000]; % dlugosc
+VparamASectionLearn = 600:100:1500; % 2 przebieg (dla tych najlepszych = wyn) wyn-75 : 25 : wyn+75; % dlugosc
 paramASectionTest = 250; % dlugosc
 
 %%%%%%%%%%%%%%%%%%%%%%
@@ -62,60 +63,60 @@ for vo = 0:vvo
 	bestReturn=-10000;
 	sectionLearnStart = bigPoint+2;
 	
-	for vi = 1:length(VparamALength)
-		paramALength = VparamALength(vi);
-	
-		maxes=zeros(1, paramASectionLearn);
-		kon=(sectionLearnStart+paramASectionLearn)-1;
-		ii=1;
-		for i=sectionLearnStart:kon
-			maxes(ii) = max(C(i-min(i-1,paramALength):i,4));
-			ii=ii+1;
-		end
-	
-		for vj = 1:length(VparamAVolLength)
-			paramAVolLength = VparamAVolLength(vj);
-		
-		%disp(['# Postep: ', num2str(round(iterCounter/iterTotal*100)), '%   Czas: ', num2str(toc(tStart))]);
-
-			volAverages=zeros(1, paramASectionLearn);
-			ii=1;
-			for i=sectionLearnStart:kon
-				volAverages(ii) = mean(C(i-min(i-1,paramAVolLength):i,5))-C(i,5);
-				ii=ii+1;
-			end
-
-			for vk = 1:length(VparamADuration)
-				paramADuration = VparamADuration(vk);
-			
-				for vl = 1:length(VparamAVolThreshold)
-					paramAVolThreshold =  VparamAVolThreshold(vl);
-				
-					for vm = 1:length(VparamABuffer)
-						paramABuffer = VparamABuffer(vm);
-					
-						for vn = 1:length(VparamASL)
-							paramASL = VparamASL(vn);	
-							[ sumReturn,Calmar ] = Sa (C(bigPoint:bigPoint+paramASectionLearn+paramADuration,:),spread,paramALength, paramAVolLength, paramADuration, paramAVolThreshold, paramABuffer, paramASL, maxes, volAverages,1, paramASectionLearn);
-							if bestReturn<sumReturn
-								bestReturn=sumReturn;
-								bestCalmar=Calmar;
-								bestparamALength = paramALength;
-								bestparamAVolLength = paramAVolLength ;
-								bestparamADuration = paramADuration;
-								bestparamABuffer = paramABuffer;
-								bestparamAVolThreshold = paramAVolThreshold;
-								bestparamASL = paramASL;
-								disp(['> zysk: ', num2str(sumReturn)]);
-							end
-						
-						   iterCounter = iterCounter + 1;
-						
-						end
-					end
-				end
-			end
-		end
+    for vi = 1:length(VparamALength)
+        paramALength = VparamALength(vi);
+        
+        maxes=zeros(1, paramASectionLearn);
+        kon=(sectionLearnStart+paramASectionLearn)-1;
+        ii=1;
+        for i=sectionLearnStart:kon
+            maxes(ii) = max(C(i-min(i-1,paramALength):i,4));
+            ii=ii+1;
+        end
+        
+        for vj = 1:length(VparamAVolLength)
+            paramAVolLength = VparamAVolLength(vj);
+            
+            %disp(['# Postep: ', num2str(round(iterCounter/iterTotal*100)), '%   Czas: ', num2str(toc(tStart))]);
+            
+            volAverages=zeros(1, paramASectionLearn);
+            ii=1;
+            for i=sectionLearnStart:kon
+                volAverages(ii) = mean(C(i-min(i-1,paramAVolLength):i,5))-C(i,5);
+                ii=ii+1;
+            end
+            
+            for vk = 1:length(VparamADuration)
+                paramADuration = VparamADuration(vk);
+                
+                for vl = 1:length(VparamAVolThreshold)
+                    paramAVolThreshold =  VparamAVolThreshold(vl);
+                    
+                    for vm = 1:length(VparamABuffer)
+                        paramABuffer = VparamABuffer(vm);
+                        
+                        for vn = 1:length(VparamASL)
+                            paramASL = VparamASL(vn);
+                            [ sumReturn,Calmar ] = Sa (C(bigPoint:bigPoint+paramASectionLearn+paramADuration,:),spread,paramALength, paramAVolLength, paramADuration, paramAVolThreshold, paramABuffer, paramASL, maxes, volAverages,1, paramASectionLearn);
+                            if bestReturn<sumReturn
+                                bestReturn=sumReturn;
+                                bestCalmar=Calmar;
+                                bestparamALength = paramALength;
+                                bestparamAVolLength = paramAVolLength ;
+                                bestparamADuration = paramADuration;
+                                bestparamABuffer = paramABuffer;
+                                bestparamAVolThreshold = paramAVolThreshold;
+                                bestparamASL = paramASL;
+                                disp(['> zysk: ', num2str(sumReturn)]);
+                            end
+                            
+                            iterCounter = iterCounter + 1;
+                            
+                        end
+                    end
+                end
+            end
+        end
     end
     
     paramy=[bigPoint; bestReturn; bestCalmar; bestparamALength; bestparamAVolLength; ...
@@ -123,16 +124,16 @@ for vo = 0:vvo
     param_str = '%4.2f\t%4.2f\t%4.2f\t%4.2f\t%4.2f\t%4.2f\t%4.2f\t%4.2f\t%4.2f\n';
     fprintf(fileID, param_str, paramy);
     
-	maxes=zeros(1, paramASectionTest+max(bestparamALength,bestparamAVolLength) + bestparamADuration);
-	volAverages=zeros(1, paramASectionTest+max(bestparamALength,bestparamAVolLength) + bestparamADuration);
-	poczDanychTest = bigPoint+paramASectionLearn-max(bestparamALength,bestparamAVolLength);
-	kon=bigPoint+paramASectionLearn + paramASectionTest+ bestparamADuration-1;
-	ii=1;
-	for i=poczDanychTest:kon
-		maxes(ii) = max(C(i-min(i-1,bestparamALength):i,4));
-		volAverages(ii) = mean(C(i-min(i-1,bestparamAVolLength):i,5))-C(i,5);
-		ii=ii+1;
-	end
+    maxes=zeros(1, paramASectionTest+max(bestparamALength,bestparamAVolLength) + bestparamADuration);
+    volAverages=zeros(1, paramASectionTest+max(bestparamALength,bestparamAVolLength) + bestparamADuration);
+    poczDanychTest = bigPoint+paramASectionLearn-max(bestparamALength,bestparamAVolLength);
+    kon=bigPoint+paramASectionLearn + paramASectionTest+ bestparamADuration-1;
+    ii=1;
+    for i=poczDanychTest:kon
+        maxes(ii) = max(C(i-min(i-1,bestparamALength):i,4));
+        volAverages(ii) = mean(C(i-min(i-1,bestparamAVolLength):i,5))-C(i,5);
+        ii=ii+1;
+    end
 	
 	[ sumReturn,Calmar ] = Sa (C(poczDanychTest:kon,:),spread,bestparamALength, bestparamAVolLength, bestparamADuration, bestparamAVolThreshold, bestparamABuffer, bestparamASL, maxes, volAverages,max(bestparamALength,bestparamAVolLength),paramASectionTest);
 	sectionResult(vr) = sectionResult(vr) + sumReturn;
