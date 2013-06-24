@@ -18,11 +18,12 @@ VparamALength = 5:5:30; % liczba swiec dla obliczenia sredniej
 VparamAVolLength = 5:5:30; % liczba sweic wstecz dla obliczenia sredniego wolumenu
 VparamADuration = 5:5:30; % dlugosc trwania otwartej pozycji
 VparamAVolThreshold = 10:-5:-10; % prog dla volumenu
-VparamABuffer =  -2*pip:-2*pip:-20*pip; % wielkosc bufora
+VparamABuffer =  -2*pip:-6*pip:-20*pip; % wielkosc bufora
 VparamASL = 10*spread:5*spread:20*spread; % wartosc stop loss
 
 % Parametry dla zadania 5
 VparamASectionLearn = 600:100:1500; % 2 przebieg (dla tych najlepszych = wyn) wyn-75 : 25 : wyn+75; % dlugosc
+%VparamASectionLearn = 1500;%600:100:1500; % 2 przebieg (dla tych najlepszych = wyn) wyn-75 : 25 : wyn+75; % dlugosc
 paramASectionTest = 250; % dlugosc
 
 %%%%%%%%%%%%%%%%%%%%%%
@@ -53,12 +54,14 @@ sectionResult = zeros(1,length(VparamASectionLearn));
 
 for vr = 1:length(VparamASectionLearn)
 	paramASectionLearn = VparamASectionLearn(vr);
-	vvo = floor((candlesCount - paramASectionLearn) / paramASectionTest) - 2;
+	sectionCounter = floor((candlesCount - paramASectionLearn) / paramASectionTest) - 2;
 	%disp(['# Postep: ', num2str(round(iterCounter/iterTotal*100)), '% - nowy okres uczacy Czas: ', num2str(toc(tStart))]);
 	disp(['# Postep - nowy okres uczacy: ', num2str(paramASectionLearn)]);
-for vo = 0:vvo
-	
-	bigPoint = (vo*paramASectionTest) + 1;%% poczatek naszego duzego okna uczacego
+for startingSection = 0:sectionCounter
+%for startingSection = 0:sectionCounter
+%	disp(['# startingSection', num2str(startingSection), ...
+%           '  sectionCounter:', num2str(sectionCounter), '  vr:', num2str(vr)]);
+	bigPoint = (startingSection*paramASectionTest) + 1;%% poczatek naszego duzego okna uczacego
 	disp(['# Postep - przesuniecie okna na ', num2str(bigPoint), ' swiece dla okresu ', num2str(paramASectionLearn), ' Czas: ', num2str(toc(tStart))]);
 	bestReturn=-10000;
 	sectionLearnStart = bigPoint+2;
@@ -66,11 +69,11 @@ for vo = 0:vvo
     for vi = 1:length(VparamALength)
         paramALength = VparamALength(vi);
         
-        maxes=zeros(1, paramASectionLearn);
+        maxes=zeros(paramASectionLearn,2);
         kon=(sectionLearnStart+paramASectionLearn)-1;
         ii=1;
         for i=sectionLearnStart:kon
-            maxes(ii) = max(C(i-min(i-1,paramALength):i,4));
+            maxes(ii,1) = max(C(i-min(i-1,paramALength):i,4));
             ii=ii+1;
         end
         
@@ -124,13 +127,13 @@ for vo = 0:vvo
     param_str = '%4.2f\t%4.2f\t%4.2f\t%4.2f\t%4.2f\t%4.2f\t%4.2f\t%4.2f\t%4.2f\n';
     fprintf(fileID, param_str, paramy);
     
-    maxes=zeros(1, paramASectionTest+max(bestparamALength,bestparamAVolLength) + bestparamADuration);
+    maxes=zeros(paramASectionTest+max(bestparamALength,bestparamAVolLength) + bestparamADuration, 2);
     volAverages=zeros(1, paramASectionTest+max(bestparamALength,bestparamAVolLength) + bestparamADuration);
     poczDanychTest = bigPoint+paramASectionLearn-max(bestparamALength,bestparamAVolLength);
     kon=bigPoint+paramASectionLearn + paramASectionTest+ bestparamADuration-1;
     ii=1;
     for i=poczDanychTest:kon
-        maxes(ii) = max(C(i-min(i-1,bestparamALength):i,4));
+        maxes(ii,1) = max(C(i-min(i-1,bestparamALength):i,4));
         volAverages(ii) = mean(C(i-min(i-1,bestparamAVolLength):i,5))-C(i,5);
         ii=ii+1;
     end
