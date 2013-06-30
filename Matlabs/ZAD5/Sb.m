@@ -12,19 +12,20 @@ recordReturn=0;  %rekord zysku
 recordDrawdown=0;  %rekord obsuniecia
 pocz = pocz + 1;
 lastCandle = pocz + ilosc - 2;
-
+compared = maxes(pocz:lastCandle,1) + paramBBuffer <C(pocz:lastCandle,4);
 for i=pocz:lastCandle
-    
-    if maxes(i) + paramBBuffer <C(i,4) && volAverages(i)<paramBVolThreshold
-        Rb(i)=-C(i+paramBDuration,4)+C(i+1,1)-spread; %zysk z i-tej pozycji long zamykanej na zamkniÍciu po paramADuration kroku
-        H=max(C(i+1:i+paramBDuration,2));
-        
-        if (C(i+1,1)-H)<-paramBSL
-            Rb(i)=-paramBSL;
-            ls=ls+1;
+    if compared(i-pocz+1)
+        if volAverages(i)<paramBVolThreshold
+            Rb(i)=-C(i+paramBDuration,4)+C(i+1,1)-spread; %zysk z i-tej pozycji long zamykanej na zamkniÍciu po paramADuration kroku
+            H=max(C(i+1:i+paramBDuration,2));
+            
+            if (C(i+1,1)-H)<-paramBSL
+                Rb(i)=-paramBSL;
+                ls=ls+1;
+            end
+            
+            lb=lb+1;
         end
-        
-        lb=lb+1;
     end
     sumRb(i)=sumRb(i-1) + Rb(i);  %krzywa narastania kapita≥u
     
@@ -32,9 +33,7 @@ for i=pocz:lastCandle
         recordReturn=sumRb(i);
     end
     
-    dZ(i)=sumRb(i)-recordReturn; %rÛznica pomiedzy bieøπcπ wartoscia kapita≥u skumulowanego a dotychczasowym rekordem
-    
-    if dZ(i)<recordDrawdown
+    if sumRb(i)-recordReturn<recordDrawdown
         recordDrawdown=dZ(i);  %obsuniecie maksymalne
     end
 end
