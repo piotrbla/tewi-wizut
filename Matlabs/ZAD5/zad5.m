@@ -8,21 +8,20 @@ tStart=tic;
 
 %%%%%%%%%%%%%%%%%%%%%%
 % Ustawienia:
-eurusd;
-mfilename = 'eurusd';
-pip = 0.00001; % wielkosc pipsa na danym rynku
-spread = 16 * pip; % spread dla rynku
+load ('bossapln60');
+pip = 0.01; % wielkosc pipsa na danym rynku
+spread = 10 * pip; % spread dla rynku
 
 % Parametry podstawowe
-VparamALength = 5:5:30; % liczba swiec dla obliczenia sredniej
-VparamAVolLength = 5:5:30; % liczba sweic wstecz dla obliczenia sredniego wolumenu
-VparamADuration = 5:5:30; % dlugosc trwania otwartej pozycji
-VparamAVolThreshold = 10:-5:-10; % prog dla volumenu
+VparamALength = 5:5:10; % liczba swiec dla obliczenia sredniej
+VparamAVolLength = 5:5:10; % liczba sweic wstecz dla obliczenia sredniego wolumenu
+VparamADuration = 5:5:10; % dlugosc trwania otwartej pozycji
+VparamAVolThreshold = 10:-10:-10; % prog dla volumenu
 VparamABuffer =  -2*pip:-6*pip:-20*pip; % wielkosc bufora
 VparamASL = 10*spread:5*spread:20*spread; % wartosc stop loss
 
 % Parametry dla zadania 5
-VparamASectionLearn = 600:100:1500; % 2 przebieg (dla tych najlepszych = wyn) wyn-75 : 25 : wyn+75; % dlugosc
+VparamASectionLearn = 600:100:700;%600:100:1500; % 2 przebieg (dla tych najlepszych = wyn) wyn-75 : 25 : wyn+75; % dlugosc
 %VparamASectionLearn = 1500;%600:100:1500; % 2 przebieg (dla tych najlepszych = wyn) wyn-75 : 25 : wyn+75; % dlugosc
 paramASectionTest = 250; % dlugosc
 
@@ -30,8 +29,8 @@ paramASectionTest = 250; % dlugosc
  
 % Przygotowanie pliku do zapisu
 fileID =fopen([mfilename '.txt'],'w');
-formatSpec = 'bigPoint\tReturn\tCalmar\tparamALength\tparamAVolLength\tparamADuration\tparamAVolThreshold\tparamABuffer\tparamASL\n';
-fprintf(fileID,formatSpec);  
+%formatSpec = 'bigPoint\tReturn\tCalmar\tparamALength\tparamAVolLength\tparamADuration\tparamAVolThreshold\tparamABuffer\tparamASL\n';
+%fprintf(fileID,formatSpec);  
 
 bestReturn=-10000;
 cSizes = size(C);
@@ -51,7 +50,7 @@ iterCounter = 0;
 
 % ZAD4
 sectionResult = zeros(1,length(VparamASectionLearn));
-
+bigSum = zeros(cSizes,length(VparamASectionLearn));
 for vr = 1:length(VparamASectionLearn)
 	paramASectionLearn = VparamASectionLearn(vr);
 	sectionCounter = floor((candlesCount - paramASectionLearn) / paramASectionTest) - 2;
@@ -100,7 +99,7 @@ for startingSection = 0:sectionCounter
                         
                         for vn = 1:length(VparamASL)
                             paramASL = VparamASL(vn);
-                            [ sumReturn,Calmar ] = Sa (C(bigPoint:bigPoint+paramASectionLearn+paramADuration,:),spread,paramALength, paramAVolLength, paramADuration, paramAVolThreshold, paramABuffer, paramASL, maxes, volAverages,1, paramASectionLearn);
+                            [ sumReturn,Calmar, sumRa ] = Sa (C(bigPoint:bigPoint+paramASectionLearn+paramADuration,:),spread,paramALength, paramAVolLength, paramADuration, paramAVolThreshold, paramABuffer, paramASL, maxes, volAverages,1, paramASectionLearn);
                             if bestReturn<sumReturn
                                 bestReturn=sumReturn;
                                 bestCalmar=Calmar;
@@ -122,10 +121,10 @@ for startingSection = 0:sectionCounter
         end
     end
     
-    paramy=[bigPoint; bestReturn; bestCalmar; bestparamALength; bestparamAVolLength; ...
-        bestparamADuration;  bestparamAVolThreshold; bestparamABuffer; bestparamASL];
-    param_str = '%4.2f\t%4.2f\t%4.2f\t%4.2f\t%4.2f\t%4.2f\t%4.2f\t%4.2f\t%4.2f\n';
-    fprintf(fileID, param_str, paramy);
+    %paramy=[bigPoint; bestReturn; bestCalmar; bestparamALength; bestparamAVolLength; ...
+    %    bestparamADuration;  bestparamAVolThreshold; bestparamABuffer; bestparamASL];
+    %param_str = '%4.2f\t%4.2f\t%4.2f\t%4.2f\t%4.2f\t%4.2f\t%4.2f\t%4.2f\t%4.2f\n';
+    %fprintf(fileID, param_str, paramy);
     
     maxes=zeros(paramASectionTest+max(bestparamALength,bestparamAVolLength) + bestparamADuration, 2);
     volAverages=zeros(1, paramASectionTest+max(bestparamALength,bestparamAVolLength) + bestparamADuration);
@@ -138,16 +137,34 @@ for startingSection = 0:sectionCounter
         ii=ii+1;
     end
 	
-	[ sumReturn,Calmar ] = Sa (C(poczDanychTest:kon,:),spread,bestparamALength, bestparamAVolLength, bestparamADuration, bestparamAVolThreshold, bestparamABuffer, bestparamASL, maxes, volAverages,max(bestparamALength,bestparamAVolLength),paramASectionTest);
+	[ sumReturn,Calmar, sumRa ] = Sa (C(poczDanychTest:kon,:),spread,bestparamALength, bestparamAVolLength, bestparamADuration, bestparamAVolThreshold, bestparamABuffer, bestparamASL, maxes, volAverages,max(bestparamALength,bestparamAVolLength),paramASectionTest);
 	sectionResult(vr) = sectionResult(vr) + sumReturn;
+	sumRa = sumRa + bigSum(max([1 poczDanychTest-1]),vr);
+	bigSum(poczDanychTest:kon,vr) = sumRa;
 
 end
 end
 sectionResult;
 nazwa=[mfilename,'.','csv'];
-csvwrite(nazwa,sectionResult);
+%csvwrite(nazwa,sectionResult);
 fprintf(fileID, '\n\nWynik koncowy\n');
 for i=1:length(sectionResult)
 	fprintf(fileID, '%i\t%2.5\n');
 end
 fclose(fileID);
+
+%% ZAPIS WYKRESU
+[temp bigMax] = max(sectionResult);
+sumRa = bigSum(:,bigMax);
+sumRa = sumRa(sumRa~=0);
+hFig = figure(1);
+set(hFig, 'Position', [200 200 640 480])
+plot(sumRa)
+title(['Zysk skumulowany - strategia: ', mfilename]);
+xlabel('Liczba úwiec');
+ylabel('Zysk');
+set(hFig, 'PaperPositionMode','auto')   %# WYSIWYG
+print(hFig,'-dpng', '-r0',mfilename)
+
+%% ZAPIS NAJLEPSZEGO ZYSKU SKUMULOWANEGO (bigSum)
+csvwrite(nazwa,sumRa);
