@@ -34,7 +34,7 @@ for i=pocz:lastCandle
     end
     
     if sumRc(i)-recordReturn<recordDrawdown
-        recordDrawdown=dZ(i);  %obsuniecie maksymalne
+        recordDrawdown=sumRc(i)-recordReturn;  %obsuniecie maksymalne
     end
 end
 sumReturn=sumRc(lastCandle);
