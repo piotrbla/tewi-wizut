@@ -7,7 +7,7 @@
 tStart=tic;
 
 % Przygotowanie pliku do zapisu
-fileID =fopen([mfilename '.txt'],'w');
+fileID =fopen([mfilename, num2str(length(VparamASectionLearn)),'.txt'],'w');
 formatSpec = 'bigPoint\tReturn\tCalmar\tparamALength\tparamAVolLength\tparamADuration\tparamAVolThreshold\tparamABuffer\tparamASL\n';
 fprintf(fileID,formatSpec);
 
@@ -102,7 +102,7 @@ for vr = 1:length(VparamASectionLearn)
         paramy(vr,:)=[bigPoint; bestReturn; bestCalmar; bestparamALength; bestparamAVolLength; ...
             bestparamADuration;  bestparamAVolThreshold; bestparamABuffer; bestparamASL];
         param_str = '%4.2f\t%4.2f\t%4.2f\t%4.2f\t%4.2f\t%4.2f\t%4.2f\t%4.2f\t%4.2f\n';
-        fprintf(fileID, param_str, paramy(vr));
+        fprintf(fileID, param_str, paramy(vr,:));
         
         maxes=zeros(paramASectionTest+max(bestparamALength,bestparamAVolLength) + bestparamADuration, 1);
         volAverages=zeros(1, paramASectionTest+max(bestparamALength,bestparamAVolLength) + bestparamADuration);
@@ -120,10 +120,10 @@ for vr = 1:length(VparamASectionLearn)
     end
 end
 sectionResult;
-nazwa=[mfilename,'.','csv'];
+nazwa=[mfilename, num2str(length(VparamASectionLearn)),'.','csv'];
 csvwrite(nazwa,sectionResult);
-fprintf(fileID, '\n\nWynik koncowy\n');
-for i=1:length(sectionResult)
-    fprintf(fileID, '%i\t%2.5\n');
-end
+fprintf(fileID, '\n\nWyniki koncowe\n');
+fprintf(fileID, '%i\t', VparamASectionLearn);
+fprintf(fileID, '\n');
+fprintf(fileID, '%2.5i\t', sectionResult);
 fclose(fileID);

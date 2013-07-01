@@ -7,25 +7,24 @@ close all
 USDCAD60_111120110000;
 mfilename = 'S4a-usdcad';
 pip = 0.00001; % wielkosc pipsa na danym rynku
-spread = 40 * pip; % spread dla rynku
+spread = 6000 * pip; % spread dla rynku
 
 VparamASectionLearn = 600:100:1500; % 2 przebieg (dla tych najlepszych = wyn) wyn-75 : 25 : wyn+75; % dlugosc
 paramASectionTest = 250; % dlugosc
 %%%%%%%%%%%%%%%%%%%%%%
 
 % Parametry podstawowe
-VparamALength = [20 44 2 8 14];% 26 38 50];% 32]; % liczba swiec dla obliczenia sredniej
-VparamAVolLength = [14 8 10 28 22];% 12 6 16 36 42 2];% 48];%2:2:30; % liczba sweic wstecz dla obliczenia sredniego wolumenu
-VparamADuration = [62 26 14 44 32];% 2 20 68 8 50];% 38]; % dlugosc trwania otwartej pozycji
+VparamALength = [20 44 2 8 14 26 38 50];% 32]; % liczba swiec dla obliczenia sredniej
+VparamAVolLength = [14 8 10 28 22 12 6 16 36 42 2];% 48];%2:2:30; % liczba sweic wstecz dla obliczenia sredniego wolumenu
+VparamADuration = [62 26 14 44 32 2 20 68 8 50];% 38]; % dlugosc trwania otwartej pozycji
 VparamAVolThreshold = [80 -100 30 100 -60]; % prog dla volumenu
 VparamABuffer = -10*pip:10*pip:10*pip; % wielkosc bufora
 VparamASL = [0.01 0.02];%8*spread:2*spread:30*spread; % wartosc stop loss
 
-
-zad5Sa_usdcad
+zad5Sa
 [u i] = max(sectionResult);
-VparamASectionLearn = (paramy(i,1)-1) - 75 : 25 : (paramy(i,1)-1) - 75;
-zad5Sa_usdcad
+VparamASectionLearn = VparamASectionLearn(i) - 75 : 25 : VparamASectionLearn(i) + 75;
+zad5Sa
 [u i] = max(sectionResult);
 
 bestReturn=-10000;
@@ -40,7 +39,7 @@ bestparamABuffer = 0;
 bestparamAVolThreshold = 0;
 bestparamASL = 0;
 lastCandle = 0 ;
-paramASectionLearn = paramy(i,1);
+paramASectionLearn = VparamASectionLearn(i);
 sectionCounter = floor((candlesCount - paramASectionLearn) / paramASectionTest) - 2;
 sectionResult = zeros(1,sectionCounter);
 
@@ -120,7 +119,7 @@ for startingSection = 0:sectionCounter
         ii=ii+1;
     end
     
-    [ sumReturn,Calmar ] = Sa (C(poczDanychTest:kon,:),spread, bestparamADuration, bestparamAVolThreshold, bestparamABuffer, bestparamASL, maxes, volAverages,max(bestparamALength,bestparamAVolLength),paramASectionTest);
+    [ sumReturn,Calmar ] = Sa (C(poczDanychTest:kon,:),spread,bestparamADuration, bestparamAVolThreshold, bestparamABuffer, bestparamASL, maxes, volAverages,max(bestparamALength,bestparamAVolLength),paramASectionTest);
     sectionResult(startingSection+2) = sectionResult(startingSection+1) + sumReturn;
     
 end

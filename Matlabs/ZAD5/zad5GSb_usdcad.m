@@ -21,10 +21,10 @@ VparamAVolThreshold = [80];% -100];% 30 100];% -60]; % prog dla volumenu
 VparamABuffer = -10*pip:10*pip:10*pip; % wielkosc bufora
 VparamASL = [0.01 0.02];%8*spread:2*spread:30*spread; % wartosc stop loss
 
-zad5Sb_usdcad
+zad5Sb
 [u i] = max(sectionResult);
-VparamASectionLearn = (paramy(i,1)-1) - 75 : 25 : (paramy(i,1)-1) - 75;
-zad5Sb_usdcad
+VparamASectionLearn = VparamASectionLearn(i) - 75 : 25 : VparamASectionLearn(i) + 75;
+zad5Sb
 [u i] = max(sectionResult);
 
 bestReturn=-10000;
@@ -39,7 +39,7 @@ bestparamABuffer = 0;
 bestparamAVolThreshold = 0;
 bestparamASL = 0;
 lastCandle = 0 ;
-paramASectionLearn = paramy(i,1);
+paramASectionLearn = VparamASectionLearn(i);
 sectionCounter = floor((candlesCount - paramASectionLearn) / paramASectionTest) - 2;
 sectionResult = zeros(1,sectionCounter);
 
