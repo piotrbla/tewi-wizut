@@ -1,4 +1,4 @@
-function [ sumReturn,Calmar,sumRa ] = Sb(C,spread,paramBLength,paramBVolLength,...
+function [ sumReturn,Calmar,sumRb ] = Sb(C,spread,paramBLength,paramBVolLength,...
     paramBDuration,paramBVolThreshold,paramBBuffer,paramBSL, maxes, volAverages, pocz, ilosc)
 
 cSizes = size(C);
@@ -34,7 +34,7 @@ for i=pocz:lastCandle
     end
     
     if sumRb(i)-recordReturn<recordDrawdown
-        recordDrawdown=sumRb(i)-recordReturn;  %obsuniecie maksymalne
+         recordDrawdown=sumRb(i)-recordReturn;  %obsuniecie maksymalne
     end
 end
 sumReturn=sumRb(lastCandle);
