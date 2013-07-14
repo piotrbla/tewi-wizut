@@ -162,6 +162,9 @@ print(hFig,'-dpng', '-r0',file_name)
 
 fileID =fopen([file_name '.txt'],'w');
 
+
+fprintf(fileID, 'D³ugoœæ okresu ucz¹cego: ');
+fprintf(fileID, '%i\n',paramASectionLearn);
 fprintf(fileID, 'Koñcowy wynik: ');
 fprintf(fileID, '%0.4f\n',bigSum(end));
 fprintf(fileID, 'Iloœæ przesuniêæ okna - uruchomieñ strategii: ');
