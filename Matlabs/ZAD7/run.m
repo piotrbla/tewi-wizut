@@ -25,7 +25,7 @@ VparamASL = [8*spread:3*spread:20*spread]; % wartosc stop loss
 
 paramASectionLearn = 725; % Tutaj ustawiamy nasz wynik z poprzedniego zadania (znaleziona optymalna d³ugoœc okresu ucz¹cego)
 
-maxLose = [5 6 7 8 9];%[5:2:15]; % Nie zmieniajcie tego parametru na ta chwile 
+maxLose = [5:2:15]; % Nie zmieniajcie tego parametru na ta chwile 
 
 %% Wywolanie odpowiedniej wersji strategie przy pomocy uchwytow
 file_name = 'bossapln_a';
