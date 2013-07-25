@@ -1,4 +1,4 @@
-function [] = zad7(C,pip,spread,file_name, ff1, ff2, VparamALength,VparamAVolLength,...
+function [] = zad8(C,pip,spread,file_name, ff1, ff2, VparamALength,VparamAVolLength,...
     VparamADuration,VparamAVolThreshold,VparamABuffer,VparamASL,paramASectionLearn, maxLose)
 %(C) Antoni WiliÅ„ski 2013
 %skrypt strategii S4 w projekcie TEWI
@@ -18,9 +18,9 @@ frequenty = 10; % co ile minut ma siê wyœiwetliæ monit o czasie
 % pip = 0.01; % wielkosc pipsa na danym rynku
 % spread = 10 * pip; % spread dla rynku
 %%%%%%%%%%%%%%%%%%%%%%
-display(['<< BADANIE: S4' lower(file_name(end)) ' ZAD7 '  upper(file_name(1:(end-2))) ' >>']);
+display(['<< BADANIE: S4' lower(file_name(end)) ' ZAD8 '  upper(file_name(1:(end-2))) ' >>']);
 fileID =fopen([file_name '.txt'],'w');
-fprintf(fileID, 'BADANIE: S4%s ZAD7 %s',  lower(file_name(end)), upper(file_name(1:(end-2))));
+fprintf(fileID, 'BADANIE: S4%s ZAD8 %s',  lower(file_name(end)), upper(file_name(1:(end-2))));
 fprintf(fileID, '\n\nDlugosc okresu uczacego: ');
 fprintf(fileID, '%i\n',paramASectionLearn);
 fprintf(fileID, 'Liczba dopuszczalnych strat\t Koncowy wynik\t Ilosc przesuniec okna\t');

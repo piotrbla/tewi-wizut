@@ -32,17 +32,17 @@ file_name = 'bossapln_a';
 zad8(C,pip,spread,file_name, @Sa, @Sa2, VparamALength,VparamAVolLength,...
     VparamADuration,VparamAVolThreshold,VparamABuffer,VparamASL,paramASectionLearn,maxLose);
 
-% file_name = 'bossapln_b';
-% zad7(C,pip,spread,file_name, @Sb, @Sb2, VparamALength,VparamAVolLength,...
-%     VparamADuration,VparamAVolThreshold,VparamABuffer,VparamASL,paramASectionLearn,maxLose);
-% 
-% % !!! Zmiana znaku bufora
-% VparamABuffer =  [2*pip:3*pip:20*pip]; % wielkosc bufora
-% 
-% file_name = 'bossapln_c';
-% zad7(C,pip,spread,file_name, @Sc, @Sc2, VparamALength,VparamAVolLength,...
-%     VparamADuration,VparamAVolThreshold,VparamABuffer,VparamASL,paramASectionLearn,maxLose);
-% 
-% file_name = 'bossapln_d';
-% zad7(C,pip,spread,file_name, @Sd, @Sd2, VparamALength,VparamAVolLength,...
-%     VparamADuration,VparamAVolThreshold,VparamABuffer,VparamASL,paramASectionLearn,maxLose);
+file_name = 'bossapln_b';
+zad8(C,pip,spread,file_name, @Sb, @Sb2, VparamALength,VparamAVolLength,...
+    VparamADuration,VparamAVolThreshold,VparamABuffer,VparamASL,paramASectionLearn,maxLose);
+
+% !!! Zmiana znaku bufora
+VparamABuffer =  [2*pip:3*pip:20*pip]; % wielkosc bufora
+
+file_name = 'bossapln_c';
+zad8(C,pip,spread,file_name, @Sc, @Sc2, VparamALength,VparamAVolLength,...
+    VparamADuration,VparamAVolThreshold,VparamABuffer,VparamASL,paramASectionLearn,maxLose);
+
+file_name = 'bossapln_d';
+zad8(C,pip,spread,file_name, @Sd, @Sd2, VparamALength,VparamAVolLength,...
+    VparamADuration,VparamAVolThreshold,VparamABuffer,VparamASL,paramASectionLearn,maxLose);
