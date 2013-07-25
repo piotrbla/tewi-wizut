@@ -28,21 +28,21 @@ paramASectionLearn = 725; % Tutaj ustawiamy nasz wynik z poprzedniego zadania (z
 maxLose = [5:2:15]; % Nie zmieniajcie tego parametru na ta chwile 
 
 %% Wywolanie odpowiedniej wersji strategie przy pomocy uchwytow
-file_name = 'bossapln_a';
+file_name = strcat(rynek, '_a');
 zad8(C,pip,spread,file_name, @Sa, @Sa2, VparamALength,VparamAVolLength,...
     VparamADuration,VparamAVolThreshold,VparamABuffer,VparamASL,paramASectionLearn,maxLose);
 
-file_name = 'bossapln_b';
+file_name = strcat(rynek, '_b');
 zad8(C,pip,spread,file_name, @Sb, @Sb2, VparamALength,VparamAVolLength,...
     VparamADuration,VparamAVolThreshold,VparamABuffer,VparamASL,paramASectionLearn,maxLose);
 
 % !!! Zmiana znaku bufora
 VparamABuffer =  [2*pip:3*pip:20*pip]; % wielkosc bufora
 
-file_name = 'bossapln_c';
+file_name = strcat(rynek, '_c');
 zad8(C,pip,spread,file_name, @Sc, @Sc2, VparamALength,VparamAVolLength,...
     VparamADuration,VparamAVolThreshold,VparamABuffer,VparamASL,paramASectionLearn,maxLose);
 
-file_name = 'bossapln_d';
+file_name = strcat(rynek, '_d');
 zad8(C,pip,spread,file_name, @Sd, @Sd2, VparamALength,VparamAVolLength,...
     VparamADuration,VparamAVolThreshold,VparamABuffer,VparamASL,paramASectionLearn,maxLose);
