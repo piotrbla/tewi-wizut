@@ -1,0 +1,10 @@
+S4L
+lerningBestReturn = 0.19453
+lerningBestCalmar = 0.20863
+testBestReturn = 1.4859
+testBestCalmar = 8.6043
+bestMa = 1000
+bestparamADuration = 402
+lerningBestLa = 175
+testBestLa = 331
+bestparamASL = 0.0464
