@@ -1,0 +1,7 @@
+Rate Of Change - najlepszy wynik
+
+Dlugosc cyklu: 	80
+Zysk skumulowany: 	13.58
+Calmar: 	0.85
+Liczba otwartych pozycji dlugich: 	187
+Liczba otwartych pozycji krotkich: 	187
