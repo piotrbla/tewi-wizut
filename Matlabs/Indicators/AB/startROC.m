@@ -4,12 +4,14 @@ clear
 
 EURJPY;
 spread = 0.03;
-k=5*4:4:50*4;
+k=89;%5*4:1:50*4;
 file_name = 'ROC_EURJPY_LS_SearchBestK';
 rynek = 'EURJPY';
 
 C_learn = C(1:round(size(C,1)*0.6),:);
 C_verrify = C(round(size(C,1)*0.6):end,:);
+
+fileID =fopen([file_name '.txt'],'w');
 
 bestProfit = -Inf;
 
@@ -18,6 +20,9 @@ for i=k
     if profit>bestProfit
         bestProfit = profit;
         bestK = i;
+        bestCalmar = Calmar;
+        bestiL = iL;
+        bestiS = iS;
         disp(['Wyniki uczenie --- Zysk: ' num2str(profit) ...
         ' --- Calmar: ' num2str(Calmar) ' dla: k=' num2str(i)...
         '. Otwartych pozycji dlugich: ' num2str(iL) ', krótkich: ' num2str(iS)]);
@@ -29,6 +34,15 @@ end
 disp(['Wyniki weryfikacja --- Zysk: ' num2str(profit) ...
     ' --- Calmar: ' num2str(Calmar) ' dla: k=' num2str(bestK)...
     '. Otwartych pozycji dlugich: ' num2str(iL) ', krótkich: ' num2str(iS)]);
+
+fprintf(fileID, 'Rate Of Change - najlepszy wynik\n\n');
+fprintf(fileID, 'OKRES UCZ¥CY\n');
+fprintf(fileID, 'D³ugoœæ cyklu: \t%i\n', bestK);
+fprintf(fileID, 'Zysk skumulowany: \t%0.2f\n', bestProfit);
+fprintf(fileID, 'Calmar: \t%0.2f\n', bestCalmar);
+fprintf(fileID, 'Liczba otwartych pozycji d³ugich: \t%i\n', bestiL);
+fprintf(fileID, 'Liczba otwartych pozycji krótkich: \t%i\n\n', bestiS);
+
 
 %%   ZAPIS
 hFig = figure(1);
@@ -42,7 +56,7 @@ hold off;
 set(hFig, 'PaperPositionMode','auto');
 print(hFig,'-dpng', '-r0',[file_name '_trend']);
 
-hFig = figure(1);
+hFig = figure(2);
 set(hFig, 'Position', [200 200 640 480]);
 plot(sumR(sumR~=0));
 hold on;
@@ -53,7 +67,7 @@ hold off;
 set(hFig, 'PaperPositionMode','auto');
 print(hFig,'-dpng', '-r0',[file_name '_zysk']);
 
-hFig = figure(1);
+hFig = figure(3);
 set(hFig, 'Position', [200 200 640 480]);
 h = plot(ROC_vec);
 hold on;
@@ -65,13 +79,13 @@ hold off;
 set(hFig, 'PaperPositionMode','auto');
 print(hFig,'-dpng', '-r0',[file_name '_krzywaROC']);
 
-fileID =fopen([file_name '.txt'],'w');
-fprintf(fileID, 'Rate Of Change - najlepszy wynik\n\n');
-fprintf(fileID, 'Dlugosc cyklu: \t%i\n', bestK);
+
+fprintf(fileID, 'OKRES WALIDUJ¥CY\n');
+fprintf(fileID, 'D³ugoœæ cyklu: \t%i\n', bestK);
 fprintf(fileID, 'Zysk skumulowany: \t%0.2f\n', profit);
 fprintf(fileID, 'Calmar: \t%0.2f\n', Calmar);
-fprintf(fileID, 'Liczba otwartych pozycji dlugich: \t%i\n', iL);
-fprintf(fileID, 'Liczba otwartych pozycji krotkich: \t%i\n', iS);
+fprintf(fileID, 'Liczba otwartych pozycji d³ugich: \t%i\n', iL);
+fprintf(fileID, 'Liczba otwartych pozycji krótkich: \t%i\n', iS);
 fclose(fileID);
 
 close all;
