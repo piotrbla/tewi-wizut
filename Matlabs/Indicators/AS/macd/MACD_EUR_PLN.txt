@@ -1,0 +1,40 @@
+=========UCZENIE=========
+
+MACD - najlepszy wynik ZYSK
+
+Okres 1: 	29
+Okres 2 	11
+Okres indykatora: 	4
+Zysk skumulowany: 	0.64
+
+
+MACD - najlepszy wynik CALMAR
+
+Okres 1: 	26
+Okres 2 	7
+Okres indykatora: 	7
+Calmar: 	23.11
+
+
+=========Weryfikacja=========
+
+MACD - najlepszy wynik ZYSK
+
+Okres 1: 	29
+Okres 2 	11
+Okres indykatora: 	4
+Zysk skumulowany: 	0.08
+Calmar: 	1.56
+Liczba otwartych pozycji dlugich: 	20
+Liczba otwartych pozycji krotkich: 	21
+
+
+MACD - najlepszy wynik CALMAR
+
+Okres 1: 	26
+Okres 2 	7
+Okres indykatora: 	7
+Zysk skumulowany: 	-0.16
+Calmar: 	-1.00
+Liczba otwartych pozycji dlugich: 	7
+Liczba otwartych pozycji krotkich: 	3
