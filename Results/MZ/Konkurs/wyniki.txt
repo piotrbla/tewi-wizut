@@ -1,0 +1,4 @@
+Zysk skumulowany(100) - Calmar: 1.636130e+00	1.465252e+00
+Zysk skumulowany(200) - Calmar: 1.626450e+00	1.415067e+00
+Zysk skumulowany(500) - Calmar: 2.406080e+00	3.829630e+00
+Zysk skumulowany - Suma okresow uczacych: 1.636130e+00	1.133615e+01
