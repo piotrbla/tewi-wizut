@@ -1,5 +1,5 @@
 personNumber = 1;
-for personInitials =strsplit('AB;KB;MZ', ';')
+for personInitials ={'AB','KB','MZ'}
 %for personInitials =strsplit('AB', ';')
     personalFileName = cell2mat(strcat('tewiMiC', personInitials, '.csv'));
     personalFileHandle = fopen(personalFileName, 'r');
@@ -81,5 +81,11 @@ for personInitials =strsplit('AB;KB;MZ', ';')
     personNumber = personNumber + 1;
     figure(personNumber);
     mesh(cumulativeReturnsPerCandle);
+    personNumber = personNumber + 1;
+    figure(personNumber);
+    plot(cumulativeReturns(end,:));
+    personNumber = personNumber + 1;
+    figure(personNumber);
+    plot(cumulativeReturnsPerCandle(end,:));
     personNumber = personNumber + 1;
 end

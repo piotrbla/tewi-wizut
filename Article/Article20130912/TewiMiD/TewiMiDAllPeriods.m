@@ -84,4 +84,10 @@ for personInitials =osoby
     figure(personNumber);
     mesh(cumulativeReturnsPerCandle);
     personNumber = personNumber + 1;
+    figure(personNumber);
+    plot(cumulativeReturns(end,:));
+    personNumber = personNumber + 1;
+    figure(personNumber);
+    plot(cumulativeReturnsPerCandle(end,:));
+    personNumber = personNumber + 1;
 end
