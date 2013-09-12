@@ -53,6 +53,12 @@ for personInitials =strsplit('AB;KB;MZ', ';')
             cumulativeReturns(i,j)= cumulativeReturns(i-1,j) + returns2d(i,j);
         end
     end
+    cumulativeReturnsPerCandle = cumulativeReturns;
+    for i=1:kon
+        for j=1:testSize
+            cumulativeReturnsPerCandle(i,j)= cumulativeReturnsPerCandle(i,j)/j;
+        end
+    end
     %tu liczymy calmars3d i kumulujemy zyski
 %     actualRecord = zysl(i);
 %     if actualRecord >returnRecord
@@ -72,5 +78,8 @@ for personInitials =strsplit('AB;KB;MZ', ';')
     
     figure(personNumber);
     mesh(cumulativeReturns);
+    personNumber = personNumber + 1;
+    figure(personNumber);
+    mesh(cumulativeReturnsPerCandle);
     personNumber = personNumber + 1;
 end
