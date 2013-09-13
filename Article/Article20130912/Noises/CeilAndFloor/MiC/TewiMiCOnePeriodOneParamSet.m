@@ -1,0 +1,375 @@
+function[returns]=TewiMiCOnePeriodOneParamSet(pocz, kon, b, wstp, wstk, lkr, SL, TP, op, bvol, vwst, ll3, bawe, bcawe, returns3d, Calmars3d, actualTestIndex)
+
+%(C) Antoni Wilinski
+%skrypt inspirowany pomys³em Richarda Seidenberga z Joe Krutsingera s. 120, z
+%uzyciem nietypowej przesunietej wstegi Bollingera rozwinietym w autorskich
+%badaniach
+%wstega, po której przekroczeniu barier (tu dolnej) otwierane sa ppozycje
+%d³ugie, zbudowana jest na minimach i maksimach z ostatnich swiec
+
+%tewiTwoB - próba wyg³adzenia krzywej kumulacji z uzyciem vol
+%tewiTwoB1 - badania na pierwszym odcinku ucz¹cym od 30 do 1000 swiec;
+
+%tewiTwoB1 przemianowano na TewiMiC1 (to strategia oparta na otwarciach
+%typu BuyLimit zwi¹zanych na dolnej barierze wstegi MiniMax
+
+%rozpatrywane dane:
+eurusd221012;
+
+
+m=size(C);
+
+
+F=C(pocz+1:end,:);  %macierz danych z "przysz³osci"
+C1=C(1:pocz,:);   %macierz danych do chwili bie¿¹cej
+
+
+ll=0; %liczba pozycji dlugich w badanym okresie
+ls=0;  %liczba poz krotkich
+lsll=0;
+
+
+spread=0.0002;
+
+
+zl=zeros(1,m(1));
+zs=zeros(1,m(1));
+zsp=zeros(1,m(1));
+zlp=zeros(1,m(1));
+zspd=zeros(1,m(1));
+zlpd=zeros(1,m(1));
+
+zl1=zeros(1,m(1));
+zl2=zeros(1,m(1));
+zl3=zeros(1,m(1));
+zl4=zeros(1,m(1));
+zl5=zeros(1,m(1));
+zl6=zeros(1,m(1));
+zl7=zeros(1,m(1));
+zl8=zeros(1,m(1));
+testSize=kon-pocz;
+returnRecord = 0;
+returns= zeros(kon, testSize);
+calmars= zeros(testSize, testSize);
+worstDrawdown = 0;
+
+lo1=0;
+lo2=0;
+l1=0;
+l2=0;
+l3=0;
+l4=0;
+l5=0;
+l6=0;
+l7=0;
+pp=0;
+pw=0;
+
+lop=0;
+lop(pocz-1)=0;
+l=0;  %licznik nowych œwiec
+j1=1;
+lll=0;
+
+
+
+
+pawe=1;
+cawe=1;
+
+
+
+for i=pocz:kon %40000:pocz+16000  %pêtla g³ówna, ka¿dy i-ty krok po pocz, to chwila bie¿¹ca, nie dysponuje siê informacj¹ od i+1 wprzód; dopisane 1000 œwiec to swiece z przysz³osci
+    lop(i)=lop(i-1);
+    otw(i)=0; %tyo otwarcia - 1 lub 2
+    
+    
+    max10(i)=max(C1(i-wstp:i-wstk,2)); %z kruts2d
+    min10(i)=min(C1(i-wstp:i-wstk,3));
+    
+    gwp(i)=max10(i);  %górna bariera wstêgi minimax
+    dwp(i)=min10(i);
+    
+    vol(i)=-mean(C1(i-vwst:i,5))+C1(i,5);
+    
+    if vol(i)>bvol
+        vo(i)=0;
+    else
+        vo(i)=1;  %warunek akceptowalny dla trendu horyzontalnego
+    end
+    
+    zz(i)=0;
+    %stol(i)=0;
+    
+    
+    %otwarcie 1. typu
+    if C1(i,1)<dwp(i)-b && lop(i-1)<op && vo(i)==1 && cawe==1 && pawe==1
+        ll=ll+1;
+        open(ll)=C1(i,1);
+        poczpoz(ll)=i;
+        lop(i)=lop(i)+1;
+        stol(ll)=0;
+        lo1=lo1+1;
+        otw(ll)=1;
+    end
+    
+    %otwarcie  2. typu
+    if C1(i,3)<dwp(i)-b && C1(i,1)>dwp(i)-b   && lop(i-1)<op  && vo(i)==1 && cawe==1 && pawe==1%%%otwarcie dlugiej z parametrami SL TP  gwp i lkr
+        ll=ll+1;
+        open(ll)=dwp(i)-b;
+        poczpoz(ll)=i;
+        lop(i)=lop(i)+1;
+        stol(ll)=0;
+        lo2=lo2+1;
+        otw(ll)=2;
+    end
+    
+    
+    sumcurr(i)=0;
+    
+    %sprawdzeniee warunków zamkniecia poprzednio otwartych pozycji
+    for j=1:ll  %(poprawiæ)
+        lll=lll+1;
+        
+        %zamkniecie 1. typu
+        if stol(j)==0
+            if i==poczpoz(j)+lkr && stol(j)==0 && otw(j)==1
+                zz(j)=C1(i,4)-open(j)-spread;  %(zwrot z pozycji)
+                lop(i)=lop(i)-1;
+                stol(j)=1;
+                zl1(j)=zz(j);
+                l1=l1+1;
+            end
+            
+            %zamkniêcie 2. typu
+            
+            if C1(i,1)-open(j)<-SL && stol(j)==0 && otw(j)==1 %&& i>poczpoz(j)
+                zz(j)=C1(i,1)-open(j)-spread;  %(zwrot z pozycji)
+                lop(i)=lop(i)-1;
+                stol(j)=1;
+                zl2(j)=zz(j);
+                l2=l2+1;
+                %l5=l5+1;
+            end
+            
+            %zamkniecie 3. typu
+            
+            if C1(i,3)-open(j)<-SL && stol(j)==0 && C1(i,1)-open(j)>-SL && otw(j)==1%&& i>poczpoz(j)
+                zz(j)=-SL-spread;  %(zwrot z pozycji)
+                lop(i)=lop(i)-1;
+                stol(j)=1;
+                zl3(j)=zz(j);
+                %l2=l2+1;
+                l3=l3+1;
+            end
+            
+            
+            
+            minl(i)=min(C1(i,2)-open(j), C1(i,2)-gwp(i));
+            
+            %zamkniecie 4. typu
+            
+            if C1(i,1)-open(j)>TP && stol(j)==0 && otw(j)==1%&& i>poczpoz(j)
+                zz(j)=C1(i,1)-open(j)-spread;  %(zwrot z pozycji)
+                lop(i)=lop(i)-1;
+                stol(j)=1;
+                zl4(j)=zz(j);
+                l4=l4+1;
+                
+            end
+            
+            %zamkniecie 5. typu
+            
+            if C1(i,2)-open(j)>TP && stol(j)==0 && otw(j)==1%&& i>poczpoz(j)
+                zz(j)=TP-spread;  %(zwrot z pozycji)
+                lop(i)=lop(i)-1;
+                stol(j)=1;
+                zl5(j)=zz(j);
+                l5=l5+1;
+                
+            end
+            
+            %zamkniêcie 6. typu
+            
+            if C1(i,1)>gwp(i) && stol(j)==0 && otw(j)==1 %&& i>poczpoz(j)
+                zz(j)=C1(i,1)-open(j)-spread;  %(zwrot z pozycji)
+                lop(i)=lop(i)-1;
+                stol(j)=1;
+                zl6(j)=zz(j);
+                l6=l6+1;
+            end
+            
+            %zamkniêcie 7. typu
+            
+            if C1(i,2)>gwp(i) && stol(j)==0 && otw(j)==1 %&& i>poczpoz(j)
+                zz(j)=gwp(i)-open(j)-spread;  %(zwrot z pozycji)
+                lop(i)=lop(i)-1;
+                stol(j)=1;
+                zl7(j)=zz(j);
+                l7=l7+1;
+            end
+            
+            %dla otw=2
+            
+            %zamkniecie 1. typu
+            if i==poczpoz(j)+lkr && stol(j)==0 && otw(j)==2
+                zz(j)=C1(i,4)-open(j)-spread;  %(zwrot z pozycji)
+                lop(i)=lop(i)-1;
+                stol(j)=1;
+                zl1(j)=zz(j);
+                l1=l1+1;
+            end
+            
+            %zamkniêcie 2. typu
+            
+            if C1(i,1)-open(j)<-SL && stol(j)==0 && otw(j)==2 && i>poczpoz(j)
+                zz(j)=C1(i,1)-open(j)-spread;  %(zwrot z pozycji)
+                lop(i)=lop(i)-1;
+                stol(j)=1;
+                zl2(j)=zz(j);
+                l2=l2+1;
+                %l5=l5+1;
+            end
+            
+            %zamkniecie 3. typu
+            
+            if C1(i,3)-open(j)<-SL && stol(j)==0 && C1(i,1)-open(j)>-SL && otw(j)==2 && i>poczpoz(j)
+                zz(j)=-SL-spread;  %(zwrot z pozycji)
+                lop(i)=lop(i)-1;
+                stol(j)=1;
+                zl3(j)=zz(j);
+                %l2=l2+1;
+                l3=l3+1;
+            end
+            
+            
+            
+            %zamkniecie 4. typu
+            
+            if C1(i,1)-open(j)>TP && stol(j)==0 && otw(j)==2 && i>poczpoz(j)
+                zz(j)=C1(i,1)-open(j)-spread;  %(zwrot z pozycji)
+                lop(i)=lop(i)-1;
+                stol(j)=1;
+                zl4(j)=zz(j);
+                l4=l4+1;
+                
+            end
+            
+            %zamkniecie 5. typu
+            
+            if C1(i,2)-open(j)>TP && stol(j)==0 && otw(j)==2 && i>poczpoz(j)
+                zz(j)=TP-spread;  %(zwrot z pozycji)
+                lop(i)=lop(i)-1;
+                stol(j)=1;
+                zl5(j)=zz(j);
+                l5=l5+1;
+                
+            end
+            
+            %zamkniêcie 6. typu
+            
+            if C1(i,1)>gwp(i) && stol(j)==0 && otw(j)==2 && i>poczpoz(j)
+                zz(j)=C1(i,1)-open(j)-spread;  %(zwrot z pozycji)
+                lop(i)=lop(i)-1;
+                stol(j)=1;
+                zl6(j)=zz(j);
+                l6=l6+1;
+            end
+            
+            %zamkniêcie 7. typu
+            
+            if C1(i,2)>gwp(i) && stol(j)==0 && otw(j)==2 && i>poczpoz(j)
+                zz(j)=gwp(i)-open(j)-spread;  %(zwrot z pozycji)
+                lop(i)=lop(i)-1;
+                stol(j)=1;
+                zl7(j)=zz(j);
+                l7=l7+1;
+            end
+            
+            
+            
+            curr(j)=C1(i,4)-open(j);
+            sumcurr(i)=sumcurr(i)+curr(j);
+            
+        end %if stol
+        
+        
+    end %j
+    
+    zysl(i)=sum(zz(1:ll));
+    
+    if sumcurr(i)<-bcawe
+        cawe=0;
+    else
+        cawe=1;
+    end
+    
+    if zysl(i-lkr-ll3)-zysl(i-lkr)>bawe
+        pawe=0;
+    else
+        pawe=1;
+    end
+    
+    if i>=pocz
+        l=l+1;
+        C1(pocz+l,:)=F(l,:);  %dodanie nowej œwiecy z macierzy F (przysz³ej, odcietej od przesz³³oœci); w tym miejscu powinien nastapiæ import swiecy z platfoermy brokerskiej
+        
+    end %if
+    if i>1 
+        actualReturn = zysl(i) - zysl(i-1);
+    else
+        actualReturn = 0;
+    end
+    actualStart = i-pocz+1;
+    for x=actualStart:testSize
+        returns(i,x)=actualReturn ;
+    end
+end %i
+
+
+zyl=sum(zz);
+%sharpe=zyl/std(zz)
+
+recZ=0;
+recO=0;
+for j=1:kon
+    %zysk(j)=sum(zk(1:j));
+    if zysl(j)>recZ
+        recZ=zysl(j);
+    end
+    dZ(j)=zysl(j)-recZ;
+    
+    if dZ(j)<recO
+        recO=dZ(j);  %obsuniecie maksymalne
+    end
+end
+Calmar=-(zyl)/recO;
+
+
+z1=sum(zl1);
+z2=sum(zl2);
+z3=sum(zl3);
+z4=sum(zl4);
+z5=sum(zl5);
+z6=sum(zl6);
+z7=sum(zl7);
+
+
+% [lo1 lo2]
+% 
+% [z1 z2 z3 z4 z5 z6 z7]
+% 
+% [l1 l2 l3 l4 l5 l6 l7]
+
+[zyl Calmar]
+
+% figure(3)
+% plot(C(:,4))
+% 
+% 
+% figure(4)
+% 
+% plot(zysl,'-g')
+% hold on
+
+
