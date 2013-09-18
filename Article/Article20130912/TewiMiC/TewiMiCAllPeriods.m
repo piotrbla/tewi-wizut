@@ -1,5 +1,5 @@
 personNumber = 1;
-for personInitials ={'AB','KB','MZ'}
+for personInitials ={'AB'};%,'KB','MZ'}
 %for personInitials =strsplit('AB', ';')
     personalFileName = cell2mat(strcat('tewiMiC', personInitials, '.csv'));
     personalFileHandle = fopen(personalFileName, 'r');
@@ -75,17 +75,55 @@ for personInitials ={'AB','KB','MZ'}
 %         calmars(x,actualStart)=actualCalmar;%interesuje nas tylko calmars(i,i)
 %     end
 
+    Tab =[];
+    for i=10:10:size(cumulativeReturns,2)
+        Calmar = obliczCalmara( cumulativeReturns(:,i) );
+        [cumulativeReturns(end,i) Calmar];
+        Tab(end+1,:) = [i,cumulativeReturns(end,i),Calmar];
+    end
+    MatrixToLatex( 'Wyniki_MiC.txt', Tab )
     
-    figure(personNumber);
+    hFig = figure(personNumber);
     mesh(cumulativeReturns);
+    xlabel('length of test period');
+    ylabel('candles count');
+    zlabel('cumulative return');
+    SaveGraph( hFig, 'mic' )
+    
     personNumber = personNumber + 1;
-    figure(personNumber);
+    hFig = figure(personNumber);
     mesh(cumulativeReturnsPerCandle);
+    xlabel('length of test period');
+    ylabel('candles count');
+    zlabel('cumulative return per candle');
+    SaveGraph( hFig, 'mic_percandle' )
+    
+    
     personNumber = personNumber + 1;
-    figure(personNumber);
+    hFig = figure(personNumber);
     plot(cumulativeReturns(end,:));
+    xlabel('length of test period');
+    ylabel('cumulative return');
+    SaveGraph( hFig, 'mic_end' )
+    
     personNumber = personNumber + 1;
-    figure(personNumber);
+    hFig = figure(personNumber);
     plot(cumulativeReturnsPerCandle(end,:));
+    xlabel('length of test period');
+    ylabel('cumulative return per candle');
+    SaveGraph( hFig, 'mic_percandle_end' )
+    
+    personNumber = personNumber + 1;
+    hFig = figure(personNumber);
+    plot(cumulativeReturns(:,100));
+    xlabel('candles count');
+    ylabel('cumulative return');
+    SaveGraph( hFig, 'mic_100' )
+    
+%     personNumber = personNumber + 1;
+%     figure(personNumber);
+%     plot(cumulativeReturnsPerCandle(:,100));
+    
+    
     personNumber = personNumber + 1;
 end
