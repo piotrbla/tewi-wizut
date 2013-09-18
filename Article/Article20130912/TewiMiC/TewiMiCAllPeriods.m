@@ -76,7 +76,7 @@ for personInitials ={'AB'};%,'KB','MZ'}
 %     end
 
     Tab =[];
-    for i=10:10:size(cumulativeReturns,2)
+    for i=[10:10:150 150:50:400]
         Calmar = obliczCalmara( cumulativeReturns(:,i) );
         [cumulativeReturns(end,i) Calmar];
         Tab(end+1,:) = [i,cumulativeReturns(end,i),Calmar];

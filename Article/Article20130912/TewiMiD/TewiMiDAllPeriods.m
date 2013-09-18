@@ -1,6 +1,6 @@
 personNumber = 1;
 
-osoby = {'AB', 'AW'};
+osoby = {'AB'};%, 'AW'};
 
 for personInitials =osoby
     %for personInitials =strsplit('AB', ';')
@@ -78,16 +78,55 @@ for personInitials =osoby
     %     end
     
     
-    figure(personNumber);
+    Tab =[];
+    for i=[10:10:150 150:50:400]
+        Calmar = obliczCalmara( cumulativeReturns(:,i) );
+        [cumulativeReturns(end,i) Calmar];
+        Tab(end+1,:) = [i,cumulativeReturns(end,i),Calmar];
+    end
+    MatrixToLatex( 'Wyniki_MiD.txt', Tab )
+    
+    hFig = figure(personNumber);
     mesh(cumulativeReturns);
+    xlabel('length of test period');
+    ylabel('candles count');
+    zlabel('cumulative return');
+    SaveGraph( hFig, 'mid' )
+    
     personNumber = personNumber + 1;
-    figure(personNumber);
+    hFig = figure(personNumber);
     mesh(cumulativeReturnsPerCandle);
+    xlabel('length of test period');
+    ylabel('candles count');
+    zlabel('cumulative return per candle');
+    SaveGraph( hFig, 'mid_percandle' )
+    
+    
     personNumber = personNumber + 1;
-    figure(personNumber);
+    hFig = figure(personNumber);
     plot(cumulativeReturns(end,:));
+    xlabel('length of test period');
+    ylabel('cumulative return');
+    SaveGraph( hFig, 'mid_end' )
+    
     personNumber = personNumber + 1;
-    figure(personNumber);
+    hFig = figure(personNumber);
     plot(cumulativeReturnsPerCandle(end,:));
+    xlabel('length of test period');
+    ylabel('cumulative return per candle');
+    SaveGraph( hFig, 'mid_percandle_end' )
+    
+    personNumber = personNumber + 1;
+    hFig = figure(personNumber);
+    plot(cumulativeReturns(:,100));
+    xlabel('candles count');
+    ylabel('cumulative return');
+    SaveGraph( hFig, 'mid_100' )
+    
+    %     personNumber = personNumber + 1;
+    %     figure(personNumber);
+    %     plot(cumulativeReturnsPerCandle(:,100));
+    
+    
     personNumber = personNumber + 1;
 end
