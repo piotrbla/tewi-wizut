@@ -1,4 +1,4 @@
-function[returns]=TewiMiCOnePeriodOneParamSet(pocz, kon, b, wstp, wstk, lkr, SL, TP, op, bvol, vwst, ll3, bawe, bcawe, returns3d, Calmars3d, actualTestIndex)
+function[returns, openings]=TewiMiCOnePeriodOneParamSet(pocz, kon, b, wstp, wstk, lkr, SL, TP, op, bvol, vwst, ll3, bawe, bcawe, returns3d, Calmars3d, actualTestIndex)
 
 %(C) Antoni Wilinski
 %skrypt inspirowany pomys³em Richarda Seidenberga z Joe Krutsingera s. 120, z
@@ -76,6 +76,7 @@ lll=0;
 
 pawe=1;
 cawe=1;
+openings = [];
 
 
 
@@ -124,6 +125,7 @@ for i=pocz:kon %40000:pocz+16000  %pêtla g³ówna, ka¿dy i-ty krok po pocz, to chw
         otw(ll)=2;
     end
     
+    openings(end+1,:) = [ll];
     
     sumcurr(i)=0;
     
@@ -327,7 +329,7 @@ for i=pocz:kon %40000:pocz+16000  %pêtla g³ówna, ka¿dy i-ty krok po pocz, to chw
 end %i
 
 
-zyl=sum(zz)
+zyl=sum(zz);
 %sharpe=zyl/std(zz)
 
 recZ=0;
@@ -343,7 +345,7 @@ for j=1:kon
         recO=dZ(j);  %obsuniecie maksymalne
     end
 end
-Calmar=-(zyl)/recO
+Calmar=-(zyl)/recO;
 
 
 z1=sum(zl1);

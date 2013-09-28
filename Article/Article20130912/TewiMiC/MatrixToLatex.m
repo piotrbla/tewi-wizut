@@ -1,7 +1,7 @@
 function [ ] = MatrixToLatex( file_name, Matrix )
 
 %%%%%%%%%%%%% LATEX %%%%%%%%%%%%%%%%
-pocz_table = '\\begin{table} \n \\begin{tabular}{|l|l|l|} \n \\hline test size & profit & Calmar\\\\ \\hline  \n';
+pocz_table = '\\begin{table} \n \\begin{tabular}{|l|l|l|l|l|l|} \n \\hline test size & profit & profit per canlde & Calmar & Open positions & Percentage [\\%%]\\\\ \\hline  \n';
 kon_table = '\\hline \\end{tabular} \n \\end{table}';
 
 mid_table = [];

@@ -12,24 +12,28 @@ for personInitials =osoby
     returns3d = zeros((scanPeriodCount + 3)* 100,testSize, scanPeriodCount);
     returns2d = zeros((scanPeriodCount + 3)* 100,testSize);
     calmars3d = zeros(testSize,testSize, scanPeriodCount);
+	open_pos = zeros(402,1);
     for i =1:scanPeriodCount
         C=textscan(personalFileHandle, '%d;%f;%f;%d;%d;%d;%f;%f;%d;%d;%d;%d;%f;%f\n');
-        pocz = cell2mat(C(1));
-        kon = pocz + testSize;
-        zyl = cell2mat(C(2));
-        b = cell2mat(C(3));
-        wstp = cell2mat(C(4));
-        wstk = cell2mat(C(5));
-        lkr = cell2mat(C(6));
-        SL = cell2mat(C(7));
-        TP = cell2mat(C(8));
-        bvol = cell2mat(C(9));
-        vwst = cell2mat(C(10));
-        ll3 = cell2mat(C(11));
-        bawe = cell2mat(C(12));
-        bcawe = cell2mat(C(13));
-        returns= TewiMiDOnePeriodOneParamSet(pocz, kon, b, wstp, wstk, lkr, SL, TP, bvol, vwst, ll3, bawe, bcawe);
-        returns3d(1:kon,:,i)= returns;
+%         if i>=8 && i<=9
+            pocz = cell2mat(C(1));
+            kon = pocz + testSize;
+            zyl = cell2mat(C(2));
+            b = cell2mat(C(3));
+            wstp = cell2mat(C(4));
+            wstk = cell2mat(C(5));
+            lkr = cell2mat(C(6));
+            SL = cell2mat(C(7));
+            TP = cell2mat(C(8));
+            bvol = cell2mat(C(9));
+            vwst = cell2mat(C(10));
+            ll3 = cell2mat(C(11));
+            bawe = cell2mat(C(12));
+            bcawe = cell2mat(C(13));
+            [returns, openings]= TewiMiDOnePeriodOneParamSet(pocz, kon, b, wstp, wstk, lkr, SL, TP, bvol, vwst, ll3, bawe, bcawe);
+            returns3d(1:kon,:,i)= returns;
+            open_pos = open_pos + openings;
+%         end
         %calmars3d do wyliczenia;
         %tu powinniœmy zwróciæ macierz
         %return dla poszczególnych okresów testowych - 400 kolumn x 400
@@ -78,13 +82,16 @@ for personInitials =osoby
     %     end
     
     
-    Tab =[];
-    for i=[10:10:150 150:50:400]
-        Calmar = obliczCalmara( cumulativeReturns(:,i) );
-        [cumulativeReturns(end,i) Calmar];
-        Tab(end+1,:) = [i,cumulativeReturns(end,i),Calmar];
-    end
-    MatrixToLatex( 'Wyniki_MiD.txt', Tab )
+%     Tab =[];
+%     for i=[10:10:150 200:50:400]
+%         Calmar = obliczCalmara( cumulativeReturns(:,i) );
+%         [cumulativeReturns(end,i) Calmar];
+%         Tab(end+1,:) = [i,round2(cumulativeReturns(end,i),0.0001),...
+%             round2(cumulativeReturnsPerCandle(end,i),0.0001)...
+%             ,round2(Calmar,0.0001), open_pos(i)...
+%             ,round2(open_pos(i)*100/(i*scanPeriodCount),0.01)];
+%     end
+%     MatrixToLatex( 'Wyniki_MiD.txt', Tab )
     
     hFig = figure(personNumber);
     mesh(cumulativeReturns);

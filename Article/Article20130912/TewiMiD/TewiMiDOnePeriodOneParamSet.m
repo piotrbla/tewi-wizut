@@ -1,4 +1,4 @@
-function[returns]=TewiMiDOnePeriodOneParamSet(pocz, kon, b, wstp, wstk, lkr, SL, TP, bvol, vwst, ll3, bawe, bcawe, returns3d, Calmars3d, actualTestIndex)
+function[returns, openings]=TewiMiDOnePeriodOneParamSet(pocz, kon, b, wstp, wstk, lkr, SL, TP, bvol, vwst, ll3, bawe, bcawe, returns3d, Calmars3d, actualTestIndex)
 
 %(C) Antoni Wilinski
 %skrypt inspirowany pomys³em Richarda Seidenberga z Joe Krutsingera s. 120, z
@@ -71,7 +71,7 @@ lll=0;
 
 pawe=1;
 cawe=1;
-
+openings = [];
 
 
 for i=pocz:kon%20:pocz+6100 %40000:pocz+16000  %pêtla g³ówna, ka¿dy i-ty krok po pocz, to chwila bie¿¹ca, nie dysponuje siê informacj¹ od i+1 wprzód; dopisane 1000 œwiec to swiece z przysz³osci
@@ -123,7 +123,7 @@ for i=pocz:kon%20:pocz+6100 %40000:pocz+16000  %pêtla g³ówna, ka¿dy i-ty krok po
         otw(ll)=2;
     end
     
-    
+    openings(end+1,:) = [ll];
     sumcurr(i)=0;
     
     
@@ -363,6 +363,10 @@ Calmar=-(zyl)/recO;
 l_open = lo1+lo2;
 
 [zyl Calmar]
+
+% disp(['Otwarcia: ' num2str(lo1) ' ' num2str(lo2)]);
+% disp(['Zamkniecia: 1)' num2str(l1) ' 2)' num2str(l2) ' 3)' num2str(l3)...
+%     ' 4)' num2str(l4) ' 5)' num2str(l5) ' 6)' num2str(l6) ' 7)' num2str(l7)]);
 
 end
 

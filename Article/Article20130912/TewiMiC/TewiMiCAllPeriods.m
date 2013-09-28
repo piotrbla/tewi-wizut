@@ -9,6 +9,7 @@ for personInitials ={'AB'};%,'KB','MZ'}
     returns3d = zeros((scanPeriodCount + 3)* 100,testSize, scanPeriodCount);
     returns2d = zeros((scanPeriodCount + 3)* 100,testSize);
     calmars3d = zeros(testSize,testSize, scanPeriodCount);
+    open_pos = zeros(402,1);
     for i =1:scanPeriodCount
         C=textscan(personalFileHandle, '%d;%f;%f;%d;%d;%d;%f;%f;%d;%d;%d;%d;%f;%f\n');
         pocz = cell2mat(C(1));
@@ -26,8 +27,9 @@ for personInitials ={'AB'};%,'KB','MZ'}
         ll3 = cell2mat(C(12));
         bawe = cell2mat(C(13));
         bcawe = cell2mat(C(14));
-        returns= TewiMiCOnePeriodOneParamSet(pocz, kon, b, wstp, wstk, lkr, SL, TP, op, bvol, vwst, ll3, bawe, bcawe);
+        [returns, openings]= TewiMiCOnePeriodOneParamSet(pocz, kon, b, wstp, wstk, lkr, SL, TP, op, bvol, vwst, ll3, bawe, bcawe);
         returns3d(1:kon,:,i)= returns;
+        open_pos = open_pos + openings;
         %calmars3d do wyliczenia; 
         %tu powinniœmy zwróciæ macierz
         %return dla poszczególnych okresów testowych - 400 kolumn x 400
@@ -75,50 +77,53 @@ for personInitials ={'AB'};%,'KB','MZ'}
 %         calmars(x,actualStart)=actualCalmar;%interesuje nas tylko calmars(i,i)
 %     end
 
-    Tab =[];
-    for i=[10:10:150 150:50:400]
-        Calmar = obliczCalmara( cumulativeReturns(:,i) );
-        [cumulativeReturns(end,i) Calmar];
-        Tab(end+1,:) = [i,cumulativeReturns(end,i),Calmar];
-    end
-    MatrixToLatex( 'Wyniki_MiC.txt', Tab )
-    
-    hFig = figure(personNumber);
-    mesh(cumulativeReturns);
-    xlabel('length of test period');
-    ylabel('candles count');
-    zlabel('cumulative return');
-    SaveGraph( hFig, 'mic' )
-    
-    personNumber = personNumber + 1;
-    hFig = figure(personNumber);
-    mesh(cumulativeReturnsPerCandle);
-    xlabel('length of test period');
-    ylabel('candles count');
-    zlabel('cumulative return per candle');
-    SaveGraph( hFig, 'mic_percandle' )
-    
-    
-    personNumber = personNumber + 1;
-    hFig = figure(personNumber);
-    plot(cumulativeReturns(end,:));
-    xlabel('length of test period');
-    ylabel('cumulative return');
-    SaveGraph( hFig, 'mic_end' )
-    
-    personNumber = personNumber + 1;
-    hFig = figure(personNumber);
-    plot(cumulativeReturnsPerCandle(end,:));
-    xlabel('length of test period');
-    ylabel('cumulative return per candle');
-    SaveGraph( hFig, 'mic_percandle_end' )
-    
-    personNumber = personNumber + 1;
-    hFig = figure(personNumber);
-    plot(cumulativeReturns(:,100));
-    xlabel('candles count');
-    ylabel('cumulative return');
-    SaveGraph( hFig, 'mic_100' )
+%     Tab =[];
+%     for i=[10:10:150 200:50:400]
+%         Calmar = obliczCalmara( cumulativeReturns(:,i) );
+%         [cumulativeReturns(end,i) Calmar];
+%         Tab(end+1,:) = [i,round2(cumulativeReturns(end,i),0.0001),...
+%             round2(cumulativeReturnsPerCandle(end,i),0.0001)...
+%             ,round2(Calmar,0.0001), open_pos(i)...
+%             ,round2(open_pos(i)*100/(i*scanPeriodCount),0.01)];
+%     end
+%     MatrixToLatex( 'Wyniki_MiC.txt', Tab )
+%     
+%     hFig = figure(personNumber);
+%     mesh(cumulativeReturns);
+%     xlabel('length of test period');
+%     ylabel('candles count');
+%     zlabel('cumulative return');
+%     SaveGraph( hFig, 'mic' )
+%     
+%     personNumber = personNumber + 1;
+%     hFig = figure(personNumber);
+%     mesh(cumulativeReturnsPerCandle);
+%     xlabel('length of test period');
+%     ylabel('candles count');
+%     zlabel('cumulative return per candle');
+%     SaveGraph( hFig, 'mic_percandle' )
+%     
+%     
+%     personNumber = personNumber + 1;
+%     hFig = figure(personNumber);
+%     plot(cumulativeReturns(end,:));
+%     xlabel('length of test period');
+%     ylabel('cumulative return');
+%     SaveGraph( hFig, 'mic_end' )
+%     
+%     personNumber = personNumber + 1;
+%     hFig = figure(personNumber);
+%     plot(cumulativeReturnsPerCandle(end,:));
+%     xlabel('length of test period');
+%     ylabel('cumulative return per candle');
+%     SaveGraph( hFig, 'mic_percandle_end' )
+%     
+%     personNumber = personNumber + 1;
+%     hFig = figure(personNumber);
+%     plot(cumulativeReturns(:,100));
+%     xlabel('candles count');
+%     ylabel('cumulative return');
+%     SaveGraph( hFig, 'mic_100' )
     
 %     personNumber = personNumber + 1;
 %     figure(personNumber);
@@ -127,3 +132,5 @@ for personInitials ={'AB'};%,'KB','MZ'}
     
     personNumber = personNumber + 1;
 end
+
+close all;
