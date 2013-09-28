@@ -1,0 +1,55 @@
+% vim:encoding=utf8 ft=tex sts=2 sw=2 et:
+% Copyright (c) 2009 Jaroslaw Koszuk
+%
+% $Id$
+
+\documentclass{tewiart}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{amsthm}
+\usepackage{txfonts}
+\usepackage{epstopdf}
+\usepackage{placeins}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[table]{xcolor}
+\usepackage{array}
+\usepackage{subcaption}
+
+\newtheorem{definition}{Definition}
+\newtheorem{theorem}[definition]{Theorem}
+\newtheorem{corollary}[definition]{Corollary}
+\newtheorem{proposition}[definition]{Proposition}
+\newtheorem{example}[definition]{Example}
+
+
+\title{Study on the effectiveness of the investment strategy based on a classifier with rules adapted by machine learning}
+\headtitle{Study on the effectiveness of the investment strategy based on a classifier with rules adapted by machine learning\dots}
+\author{Wiliński A.\inst{1}, Bera A.\inst{1}, Nowicki W.\inst{1}, Błaszyński P.\inst{1}}
+\headauthor{Wiliński A., Bera A. et al.}
+\affiliation{%
+  \inst{1}West Pomeranian University of Technology,Szczecin, Poland\\
+  \{awilinski, abera, wnowicki, pblaszynski\}@wi.zut.edu.pl
+}
+\keywords{machine learning,  cross validation, pattern recognition, classification, investment strategy, algotrading, forecasting, time series}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+In this paper authors examine two transactional strategies based on the classifier which opens positions using some rules and closes them using different rules. A rule set contains time-varying parameters that when matched allow to make an investment decision. Researches contain the study of variability of these parameters and the relationship between learning period and testing (using the learned parameters). The strategies are evaluated based on the time series of cumulative profit achieved in the test periods. The study was conducted on the most popular currency pair EURUSD sampled with interval of 1 hour.
+\end{abstract}
+
+\section{Introduction}
+INTRO
+
+
+\bibliography{references-tewi}
+\bibliographystyle{aiaa-tewi}
+
+
+
+\end{document}
