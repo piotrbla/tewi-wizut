@@ -18,6 +18,7 @@
 \usepackage[table]{xcolor}
 \usepackage{array}
 \usepackage{subcaption}
+\usepackage{hyperref}
 
 \newtheorem{definition}{Definition}
 \newtheorem{theorem}[definition]{Theorem}
@@ -45,17 +46,17 @@ In this paper authors examine two transactional strategies based on the classifi
 \end{abstract}
 
 \section{Introduction}
-The aim of this work is to verify the hypothesis of the possibility of extracting patterns from time series, that would be classifiable as those that provide more accurate and better statistic prognosis. Another important objective is to confirm the assumption, that the time series of financial markets have a "memory" about the effectiveness of the learned pattern in a period after the learning one.  This approach is consistent with the classic aim of machine learning shown by K.Murphy’ego [1], especially to financial markets described by Satchwell [2]. Authors also intend to follow the principle of reproducibility of studies by other researchers, as well as by themselves, in other data environments, to make sense of the use of computational intelligence in its reasonable reproducibility [3, 4], in extracting of the regularity from chaos [5,6]. \\
+The aim of this work is to verify the hypothesis of the possibility of extracting patterns from time series, that would be classifiable as those that provide more accurate and better statistic prognosis. Another important objective is to confirm the assumption, that the time series of financial markets have a "memory" about the effectiveness of the learned pattern in a period after the learning one.  This approach is consistent with the classic aim of machine learning shown by K.Murphy’ego \cite{Murphy}, especially to financial markets described by Satchwell \cite{Satchwell}. Authors also intend to follow the principle of reproducibility of studies by other researchers, as well as by themselves, in other data environments, to make sense of the use of computational intelligence in its reasonable reproducibility \cite{Polya, Donoho}, in extracting of the regularity from chaos \cite{Ball, Pedrycz}. \\
 
-The authors build an investment strategy with a relatively high complexity (measured by the number of factors included in the model), derived from a strategies group called strategy of simple rules (simple rules). In the literature those strategies are considered to be mainly strategies based on moving averages - their intersections and derivatives shown for example by Brock et al. [7], Cai et al. [8] and many other authors [9,10,11]. Of course, the world of algorithms as well as prediction methods using a completely different nature, such as regression [12], multiple regression [13, 14], Fourier and wavelet transforms, and many others [16, 17] is plenteous. The authors use these methods as a basis for comparison, however they focus on mentioned simple rules.\\
+The authors build an investment strategy with a relatively high complexity (measured by the number of factors included in the model), derived from a strategies group called strategy of simple rules (simple rules). In the literature those strategies are considered to be mainly strategies based on moving averages - their intersections and derivatives shown for example by Brock et al. \cite{Brock}, Cai et al. \cite{Cai} and many other authors \cite{Gencay, LeBaron, Tian}. Of course, the world of algorithms as well as prediction methods using a completely different nature, such as regression \cite{Muriel}, multiple regression \cite{Wilinski, Fujimoto}, Fourier and wavelet transforms, and many others \cite{Raghuraj, KleskWilinski} is plenteous. The authors use these methods as a basis for comparison, however they focus on mentioned simple rules.\\
 
 Authors propose strategy, that differs by suggesting different behaviors than the ones proposed when using Bollinger's Band, which has its foundation in a band built in an unusual way. According to the strategy based on that band, generally it can be assumed that the trend is horizontal and it is recommended to open position to the center of the band, after its cross by the price from the inside. In proposed strategies, authors use another band that is based on maxima of the maxima and minima of the minima of last several candles.\\
 
-In considered strategies authors move away from the principle of opening positions to the center of the band. In one modification, hereinafter referred to as sub strategy, position opens into the center of the band, whereas in another one, position opens on the outside. By treating the two considered sub strategies as an entirety and as strategies that are mutually retrieving (although a more appropriate word would be complementary) authors assume, that in the selected trading section, opening positions in opposite directions, of course not at the same time, can be done intentionally and effectively. During the trading, nature of the market (trend, volatility) may change. The market may be in some periods horizontal, in other trended. It is appropriate to seek all opportunities for profit. A similar philosophy is applied by several Krutsinger correspondents [18], , who belong to most prominent traders in US, who advocate unfounded reversal of the direction of opening the positions in case of series of failures.\\
+In considered strategies authors move away from the principle of opening positions to the center of the band. In one modification, hereinafter referred to as sub strategy, position opens into the center of the band, whereas in another one, position opens on the outside. By treating the two considered sub strategies as an entirety and as strategies that are mutually retrieving (although a more appropriate word would be complementary) authors assume, that in the selected trading section, opening positions in opposite directions, of course not at the same time, can be done intentionally and effectively. During the trading, nature of the market (trend, volatility) may change. The market may be in some periods horizontal, in other trended. It is appropriate to seek all opportunities for profit. A similar philosophy is applied by several Krutsinger correspondents \cite{Krutsinger}, , who belong to most prominent traders in US, who advocate unfounded reversal of the direction of opening the positions in case of series of failures.\\
 
-Returning to the issue of the complexity of the strategy, there are often opinions that the growing complexity of the prediction model is not indicated, because in learning section it  leads to overfitting [1,8,14] resulting in a greater error in the test sections. The problem of selecting the proper ratio between learning and testing phase is still unsolved for the non-stationary time series [5,19]. In this situation the right approach seems to be the use of the idea of computational intelligence [4,6] by which the empirical justification hypothesis entitles to use the model.\\
+Returning to the issue of the complexity of the strategy, there are often opinions that the growing complexity of the prediction model is not indicated, because in learning section it  leads to overfitting \cite{Murphy, Cai, Fujimoto}  resulting in a greater error in the test sections. The problem of selecting the proper ratio between learning and testing phase is still unsolved for the non-stationary time series \cite{Ball, Ivakhnenko}. In this situation the right approach seems to be the use of the idea of computational intelligence \cite{Polya, Pedrycz} by which the empirical justification hypothesis entitles to use the model.\\
 
-Therefore authors use two rather complex strategies (described below), achieving results that are in their assessment rewarding. They draw attention to the fact that the satisfaction problem belongs to the other sciences and depends on the trader's individual perception of the relationship between profit and risk, greed and fear [20]. However, the issue of emotions in the trade is not considered here, but only noticed.\\
+Therefore authors use two rather complex strategies (described below), achieving results that are in their assessment rewarding. They draw attention to the fact that the satisfaction problem belongs to the other sciences and depends on the trader's individual perception of the relationship between profit and risk, greed and fear \cite{Kahneman}. However, the issue of emotions in the trade is not considered here, but only noticed.\\
 
 The tests were deliberately performed in a fragment of the time series of a heavily diversified course, which contains both rising and downward trends as well as horizontal elements (Fig. \ref{timeSeries}). It is the time series, consisting of 4734 1-hour candles, of the most important and the most fluent currency pair EURUSD from 22.10.2012.
 \begin{figure}[h!]
@@ -91,7 +92,7 @@ These parameters will determine whether the strategy will earn or lose. Appropri
 \begin{itemize}
 \item p1 --- the number of candles, based on which the calculation of the current value of the band barrier is made; for researched time series, value of p1 generally ranges from 10 to 30;
 \item p2 --- number of steps forward, after which the position is closed in case none other close condition was met before; this value belongs to range from 3 to 40;
-\item p3 --– StopLoss condition; usually it remained in range from 0.002 to 0.017 expressed in values of EURUSD, which in researched period stayed in range from 1.2 to 1.4, as can be seen in \ref{timeSeries};
+\item p3 --– StopLoss condition; usually it remained in range from 0.002 to 0.017 expressed in values of EURUSD, which in researched period stayed in range from 1.2 to 1.4, as can be seen in Fig. \ref{timeSeries};
 \item p4 --– TakeProfit condition; generally ranged from 0.0015 to 0.009;
 \item p5 --- band buffer, offset from the barrier of the band defining the actual level of the expected crossing of the  price; ranged from -0.002 to 0.003;
 \item p6 --- maximum number of open positions at the same time; ranged from 3 to 20;
@@ -107,7 +108,7 @@ As mentioned before, the signal to open the position is the intersection of the 
 \begin{equation}
 \begin{split}
 if[(price < bottomBorder(p1) - buffor(p5)) \\ 
-and (current p6 < p6) and (Vol - meanVol(p7) < p8)] \\
+\text{and } (current p6 < p6) \text{ and } (Vol - meanVol(p7) < p8)] \\
 \text{then open position long}
 \end{split}
 \end{equation}
@@ -123,7 +124,7 @@ where:\\
 \begin{equation}
 \begin{split}
 if[(price < bottomBorder(p1) - buffor(p5)) \\ 
-and (current p6 < p6) and (Vol - meanVol(p7) > p8)] \\
+\text{and } (current p6 < p6) \text{ and } (Vol - meanVol(p7) > p8)] \\
 \text{then open position short}
 \end{split}
 \end{equation}
@@ -328,7 +329,7 @@ Additional conditions that are checked with each closing are the rules containin
 \end{figure}
 \FloatBarrier
 
-\begin{table} 
+\begin{table}[h!] 
 \caption{TABLE 1}
 \label{table1}
  \begin{tabular}{|l|l|l|l|l|l|} 
@@ -355,6 +356,7 @@ Additional conditions that are checked with each closing are the rules containin
  400 & 0.073 & 0.0002 & 0.5074 & 914 & 7.37 \\ 
  \hline \end{tabular} 
  \end{table}
+ \FloatBarrier
 
 %%%%%%%%%
 \begin{figure}[h!]
@@ -393,7 +395,7 @@ Additional conditions that are checked with each closing are the rules containin
 \end{figure}
 \FloatBarrier
 
-\begin{table} 
+\begin{table}[h!]
 \caption{TABLE 2}
 \label{table2}
  \begin{tabular}{|l|l|l|l|l|l|} 
@@ -420,10 +422,9 @@ Additional conditions that are checked with each closing are the rules containin
  400 & 0.1105 & 0.0003 & 8.1655 & 558 & 4.5 \\ 
  \hline \end{tabular} 
  \end{table}
-
+ \FloatBarrier
 \bibliography{references-tewi}
 \bibliographystyle{aiaa-tewi}
-
 
 
 \end{document}
