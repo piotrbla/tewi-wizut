@@ -108,7 +108,7 @@ As mentioned before, the signal to open the position is the intersection of the 
 \begin{split}
 if[(price < bottomBorder(p1) - buffor(p5)) \\ 
 and (current p6 < p6) and (Vol - meanVol(p7) < p8)] \\
-then open position long
+\text{then open position long}
 \end{split}
 \end{equation}
 where:\\
@@ -124,7 +124,7 @@ where:\\
 \begin{split}
 if[(price < bottomBorder(p1) - buffor(p5)) \\ 
 and (current p6 < p6) and (Vol - meanVol(p7) > p8)] \\
-then open position short
+\text{then open position short}
 \end{split}
 \end{equation}
 
@@ -155,7 +155,7 @@ Profit =PriceO (i+k)-Price(i);
 
 \item Position will be closed if inside the opening of the next (i + k)-th - the candle after i-th candle, in which the position was opened, following condition is met: 
 \begin{equation}
-(PriceO(i+k)-Price(i) )>-SL and (LowPrice(i+k)-Price(i))<-SL
+(PriceO(i+k)-Price(i) )>-SL \text{ and } (LowPrice(i+k)-Price(i))<-SL
 \end{equation} 
 Then the profit (in this case loss) will be calculated as:
 \begin{equation}
@@ -173,7 +173,7 @@ Profit =PriceO (i+k)-Price(i);
 
 \item Position will be closed if inside the opening of the next (i + k)-th - the candle after i-th candle, in which the position was opened, following condition is met: 
 \begin{equation}
-(PriceO(i+k)-Price(i) )<TP and (HighPrice(i+k)-Price(i))>TP
+(PriceO(i+k)-Price(i) )<TP \text{ and } (HighPrice(i+k)-Price(i))>TP
 \end{equation} 
 Then the profit will be calculated as:
 \begin{equation}
@@ -215,7 +215,7 @@ Profit =-PriceO (i+k) +  Price(i) ;
 
 \item Position will be closed if inside the opening of the next (i + k)-th - the candle after i-th candle, in which the position was opened, following condition is met:
 \begin{equation}
-(-PriceO (i+k)+price(i) )>-SL and (-HighPrice(i+k)+Price(i))<-SL
+(-PriceO (i+k)+price(i) )>-SL \text{ and } (-HighPrice(i+k)+Price(i))<-SL
 \end{equation}                          
 Then the profit (in this case loss) will be calculated as:
 \begin{equation}
@@ -234,7 +234,7 @@ Profit =-PriceO (i+k)  + Price(i) ;
 
 \item Position will be closed if inside the opening of the next (i + k)-th - the candle after i-th candle, in which the position was opened, following condition is met: 
 \begin{equation}
-(-PriceO(i+k)+price(i) )<TP and (-LowPrice(i+k)+Price(i))>TP
+(-PriceO(i+k)+price(i) )<TP \text{ and } (-LowPrice(i+k)+Price(i))>TP
 \end{equation}
 Then the profit will be calculated as:
 \begin{equation}
