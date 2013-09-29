@@ -310,9 +310,9 @@ Figures ~\ref{MiC100} and ~\ref{MiD100} on page ~\pageref{MiD100} shows the cumu
 
 It may be noted that the two policies, for the test period of 100, allow for systematic profit in examined period with only for small drawndowns. Profit for the strategy TewiMiC 0.355, for TewiMiD profit is several times smaller and amounts to 0.094. But second strategy has smaller drawndowns. In addition, it is confirmed with the higher Calmar ratio - 12.79, where the result for first of these strategies is 10.22. According to the authors, results are excellent, achieved on testing sections, not on the learning periods. On learning periods, of course, significantly better results were achieved with classifier matching. It is also clear that asymmetry results for the two strategies arise from different approaches - the first one is focused on horizontal trend, the other on a downward trend. The results depend on the nature of the market, which is automatically founded by learning strategies. Perhaps at another period of time, for other data these results could be different. In addition to the basic performance of the length of the test period equal to 100, a number of studies were conducted on different lengths of the testing period. There may be more favorable length of test window than arbitrarily selected window length of 100 candles.\\
 
-Below, we present four graphs showing the results of the strategy TewiMiC. The first of these (Figure \ref{Cum3DMiC} on page \pageref{Cum3DMiC}) shows the effect of test duration on the profit curve in time. To see more detail for how long the test period are achieved optimal results plotted showing 2D final profit for each of the three sizes.
- From Figure \ref{Cum3DMiCend} on page \pageref{Cum3DMiCend} shows that the number of candles for achieving a high and satisfactory results are attributable to 80-120.
- The window 100 reflects quite well so desired test section.
+Results for TewiMiC
+Below, we present four graphs showing the results of the strategy TewiMiC. The first of these (Figure \ref{Cum3DMiC} on page \pageref{Cum3DMiC}) shows the effect of test duration on the profit curve in time. To show how long in the test period optimal results are achieved we plotted 2D chart of final profit for each of the examined sizes. Figure \ref{Cum3DMiCend} on page \pageref{Cum3DMiCend} shows that the number of candles for achieving a high and satisfactory results are attributable to 80-120. The window size 100 reflects quite well expected test section.
+
 \begin{figure}[h!]
 \begin{minipage}{.45\linewidth}
 \begin{center}
@@ -332,13 +332,7 @@ Below, we present four graphs showing the results of the strategy TewiMiC. The f
 \end{figure}
 \FloatBarrier
 
-Due to the different length of the test period studied, more reliable value required in the decision is said earnings per candle, 
-or how much strategy can earn in one hour. This is shown in Figures \ref{Cum3DPerCMiC} and \ref{Cum3DPerCMiCend} On this basis, and Table \ref{table1} it can be concluded that the
- most effective strategy is for the period 60-110 test.
-It can therefore be concluded that the average window of 100 candles well " remembers" the learned classifier parameters. 
-Many times in the classification of patterns, it is important whether there are frequent. 
-Part of the dilemma is equivalent to earnings per candle but also in this one. 22 presented a large opening in
- the periods test items.\\
+Due to the different length of the test period studied, more reliable value required in the decision is earnings per candle, what means how much strategy can earn in one hour. This is shown in Figures \ref{Cum3DPerCMiC} and \ref{Cum3DPerCMiCend}. On this basis, and Table 1 it can be concluded that the strategy is most effective for the testing period length beetween 60 and 110 hours. It can therefore be concluded that the average window of 100 candles well "remembers" the learned classifier parameters. Many times in the classification of patterns, it is important whether patterns are frequent. Part of the dilemma is solved by introducing earnings per candle but also in Table. \ref{table1} a count of opened market positions in the testing periods are presented.\\
 
 \begin{figure}[h!]
 \centering
@@ -356,7 +350,7 @@ Part of the dilemma is equivalent to earnings per candle but also in this one. 2
 \label{Cum3DPerCMiCend}
 \end{center}
 \end{minipage}
-\caption{Cumulative Profit for one candle in time depending on the length of the trial for TewiMiC}
+\caption{Cumulative profit for one candle in time depending on the length of the testing period for TewiMiC}
 \end{figure}
 \FloatBarrier
 
@@ -395,6 +389,8 @@ Part of the dilemma is equivalent to earnings per candle but also in this one. 2
  \FloatBarrier
 
 %%%%%%%%%
+
+Results for TewiMiD 
 
 Figures ~\ref{Cum3DMiD} and ~\ref{Cum3DMiDend} on page ~\pageref{Cum3DMiDend} show the effect of the length of the test period the profit curve. If TewiMiD strategy makes it difficult to determine the optimal interval length of the trial.
 
