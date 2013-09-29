@@ -20,7 +20,6 @@
 \usepackage{subcaption}
 \usepackage{hyperref}
 
-
 \newtheorem{definition}{Definition}
 \newtheorem{theorem}[definition]{Theorem}
 \newtheorem{corollary}[definition]{Corollary}
@@ -290,20 +289,22 @@ Figure ~\ref{research_methods} on page ~\pageref{research_methods} shows how the
 Figures ~\ref{MiC100} and ~\ref{MiD100} on page ~\pageref{MiD100} show the cumulative profit for the test period equal to 100 for the two treatment strategies.
 
 \begin{figure}[h!]
+\begin{minipage}{.49\linewidth}
 \begin{center}
-\includegraphics[width=0.5\textwidth]{pictures/mic_100.png}
-\caption{Chart of the cumulative profit for the strategy for sustainable TewiMiC test period equal 100}
+\includegraphics[width=\textwidth]{pictures/mic_100.png}
+\subcaption{Sub strategy TewiMiC}
 \label{MiC100}
 \end{center}
-\end{figure}
-\FloatBarrier
-
-\begin{figure}[h!]
+\end{minipage}
+\begin{minipage}{.49\linewidth}
 \begin{center}
-\includegraphics[width=0.5\textwidth]{pictures/mid_100.png}
-\caption{Chart of the cumulative profit for the strategy for sustainable TewiMiD test period equal 100}
+\includegraphics[width=\textwidth]{pictures/mid_100.png}
+\subcaption{Sub strategy TewiMiD}
 \label{MiD100}
 \end{center}
+\end{minipage}
+
+\caption{Chart of the cumulative profit for the strategy for test period equal 100}
 \end{figure}
 \FloatBarrier
 
@@ -318,25 +319,26 @@ which is considered by learning strategies automatically. Perhaps at another tim
 In addition to the basic performance of the length of the test period equal to 100, a number of studies conducted on different lengths
  of the period. There may be more favorable long test window than arbitrarily selected window above the 100 candles.\\
 
-Below, we present four graphs showing the results of the strategy TewiMiC. The first of these (Figure \ref{Cum3DMiC} on page \pageref{Cum3DMiC}) shows the effect of test duration on the gain curve in time.\\
+Below, we present four graphs showing the results of the strategy TewiMiC. The first of these (Figure \ref{Cum3DMiC} on page \pageref{Cum3DMiC}) shows the effect of test duration on the gain curve in time.
 To see more detail for how long the test period are achieved optimal results plotted showing 2D final profit for each of the three sizes.
  From Figure \ref{Cum3DMiCend} on page \pageref{Cum3DMiCend} shows that the number of candles for achieving a high and satisfactory results are attributable to 80-120.
- The window 100 reflects quite well so desired test section.\\
+ The window 100 reflects quite well so desired test section.
 \begin{figure}[h!]
+\begin{minipage}{.45\linewidth}
 \begin{center}
-\includegraphics[width=0.5\textwidth]{pictures/cumulativeReturnsC.png}
-\caption{Results for TewiMiC}
+\includegraphics[width=\textwidth]{pictures/cumulativeReturnsC.png}
+\subcaption{Results in 3D}
 \label{Cum3DMiC}
 \end{center}
-\end{figure}
-\FloatBarrier
-
-\begin{figure}[h!]
+\end{minipage}
+\begin{minipage}{.45\linewidth}
 \begin{center}
-\includegraphics[width=0.5\textwidth]{pictures/mic_end.png}
-\caption{Earnings accumulated over time, depending on the length of the test period for TewiMIC}
+\includegraphics[width=\textwidth]{pictures/mic_end.png}
+\subcaption{Final results}
 \label{Cum3DMiCend}
 \end{center}
+\end{minipage}
+\caption{Earnings accumulated over time, depending on the length of the test period for TewiMIC}
 \end{figure}
 \FloatBarrier
 
@@ -349,23 +351,26 @@ Part of the dilemma is equivalent to earnings per candle but also in this one. 2
  the periods test items.\\
 
 \begin{figure}[h!]
+\centering
+\begin{minipage}{.45\linewidth}
 \begin{center}
-\includegraphics[width=0.5\textwidth]{pictures/cumulativeReturnsPerCandleC.png}
-\caption{The final cumulative profit depending on the length of the trial for TewiMiC}
+\includegraphics[width=\textwidth]{pictures/cumulativeReturnsPerCandleC.png}
+\subcaption{Results in 3D}
 \label{Cum3DPerCMiC}
 \end{center}
-\end{figure}
-\FloatBarrier
-
-
-\begin{figure}[h!]
+\end{minipage}
+\begin{minipage}{.45\linewidth}
 \begin{center}
-\includegraphics[width=0.5\textwidth]{pictures/mic_percandle_end.png}
-\caption{Cumulative Profit for one candle in time depending on the length of the trial for TewiMiC}
+\includegraphics[width=\textwidth]{pictures/mic_percandle_end.png}
+\subcaption{Final results}
 \label{Cum3DPerCMiCend}
 \end{center}
+\end{minipage}
+\caption{Cumulative Profit for one candle in time depending on the length of the trial for TewiMiC}
 \end{figure}
 \FloatBarrier
+
+
 
 \begin{table}[h!] 
 \caption{Final profits and Calmar ratio for the selected length of the test period for TewiMiC}
@@ -404,40 +409,43 @@ Part of the dilemma is equivalent to earnings per candle but also in this one. 2
 Figures ~\ref{Cum3DMiD} and ~\ref{Cum3DMiDend} on page ~\pageref{Cum3DMiDend} show the effect of the length of the test period the profit curve. If TewiMiD strategy makes it difficult to determine the optimal interval length of the trial.
 
 \begin{figure}[h!]
+\begin{minipage}{.45\linewidth}
 \begin{center}
-\includegraphics[width=0.442\textwidth]{pictures/cumulativeReturnsD.png}
-\caption{Earnings accumulated over time, depending on the length of the test period for TewiMID}
+\includegraphics[width=\textwidth]{pictures/cumulativeReturnsD.png}
+\subcaption{Results in 3D}
 \label{Cum3DMiD}
 \end{center}
-\end{figure}
-\FloatBarrier
-
-\begin{figure}[h!]
+\end{minipage}
+\begin{minipage}{.45\linewidth}
 \begin{center}
-\includegraphics[width=0.42\textwidth]{pictures/mid_end.png}
-\caption{The final cumulative profit depending on the length of the trial for TewiMiD}
+\includegraphics[width=\textwidth]{pictures/mid_end.png}
+\subcaption{Final results}
 \label{Cum3DMiDend}
 \end{center}
+\end{minipage}
+\caption{Earnings accumulated over time, depending on the length of the test period for TewiMID}
 \end{figure}
 \FloatBarrier
 
 It is possible, however, due to graphs showing earnings per hour --- candle (Figures \ref{Cum3DPerCMiD} and \ref{Cum3DPerCMiDend}), depending on the length of the period and a Table \ref{table2} listing the final results of the two studies. Similarly to the first strategy, this period falls on 60 - 90 candles.
 
 \begin{figure}[h!]
+\centering
+\begin{minipage}{.45\linewidth}
 \begin{center}
-\includegraphics[width=0.5\textwidth]{pictures/cumulativeReturnsPerCandleD.png}
-\caption{Cumulative Profit for one candle in time depending on the length of the trial for TewiMiD}
+\includegraphics[width=\textwidth]{pictures/cumulativeReturnsPerCandleD.png}
+\subcaption{Results in 3D}
 \label{Cum3DPerCMiD}
 \end{center}
-\end{figure}
-\FloatBarrier
-
-\begin{figure}[h!]
+\end{minipage}
+\begin{minipage}{.45\linewidth}
 \begin{center}
-\includegraphics[width=0.5\textwidth]{pictures/mid_percandle_end.png}
-\caption{The final cumulative profit per candle, depending on the length of the test period for TewiMiD}
+\includegraphics[width=\textwidth]{pictures/mid_percandle_end.png}
+\subcaption{Final results}
 \label{Cum3DPerCMiDend}
 \end{center}
+\end{minipage}
+\caption{Cumulative Profit for one candle in time depending on the length of the trial for TewiMiD}
 \end{figure}
 \FloatBarrier
 
@@ -472,7 +480,6 @@ It is possible, however, due to graphs showing earnings per hour --- candle (Fig
 \end{center}
  \end{table}
  \FloatBarrier
- 
 Of course, the optimal convergence test window length, at least approximately, is a great convenience in machine design algotradingu. It should be noted that the authors assume that it is possible to test whether each strategy separately and it is not necessarily synchronous learning rolling.\\
 
 \section{Conclusion}
@@ -481,9 +488,6 @@ Following a review of various lengths were obtained dependence validation period
 The real market means that from 2 to 5 days, it can be assumed that the re- learning the parameters of the strategy should be carried out 1-2 times a week. This frequency is quite practical even for manual search of optimal parameters without fully automatic trading. The options trading strategies ( substrategia TewiMiC and TewiMiD ) are complementary, since for each variant can develop a set of other parameters. Separate sets of parameters are adapted better to the outdoor during optimization nature of the market, allowing for example, often contain long positions in the market with more frequent by growth trends. It should be noted that a further optimizations discovered trends are short-term and during one cycle of validation can occur several changes in these trends, and they can be of different lengths. Then there is the situation that one of the variants of the strategy takes into account the length of trends for deviating significantly from trends indicated by the second variant. The two variants substrategii are part of an investment strategy that allows you to combine the target until the time the four options trading strategies. It is a fact of this study add to the substrategie associated with opening long positions based on condition ( order ) Buy Stop and short positions in accordance with the model Sell Limit. Interestingly according to the authors, may also improve the combined strategies through the synthesis of recommendations such as combining four variants, some of which (eg 3 ) indicates the need for the purchase, and some ( such as 1 ) the need to conclude the sale of stock, it contains a number of transactions indications resulting from the sum of the different options ( in the above example - two requests). This implies a lower cost ( for example, 2 times smaller ). Transaction costs for certain decisions [complete ] ( link to an article on the conference TEWI - you do not have ) so tests can be omitted, and the reduction significantly affects the efficiency improvement investment strategy. The studies take into account the transaction costs for the pessimistic (above average costs in popular brokers). In practical terms, the strategy is so big possibilities. With traditional software, e-commerce (such as Metatrader) does not have the possibility of converting a simple strategy parameters during operation. This implies the need for a hybrid solution, consisting for example of interprocess communication between the software and e-commerce program developed in universal high-level language (eg Matlab, C\#). Algotarding future will very likely be increasingly active domain for experts in algorithmization and programming and less and less economists and econometricians.\\
 
 \noindent Acknowledgment: Work done within the project TEWI financed from the Operational Programme of Innovative Economy in years 2012-2013.
-
-
-
  
 \bibliography{references-tewi}
 \bibliographystyle{aiaa-tewi}
