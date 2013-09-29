@@ -273,13 +273,12 @@ In both strategies a fixed period of learning are assumed (in the presented solu
 
 The main aim of the research was to obtain the most effective investment strategies by dynamic selection of test period duration. Later in this article were used concepts of learning period, a fixed-length 1000 candles but with different start in time. After this were test period, a variable-length immediately following a period of learning. The authors looks for the best (by the criteria described above) length of the test period in their research. This most preferred length of the learning period can be understood in two ways. This length can be changed after each learning period adjusted by additional current information feedback about profits or losses in the test period. It may also be the average length of the test window established on the basis of several recent validation.\\
 
-The process of finding the optimum parameters for both of the described strategy is divided into two stages. In the first step of the process pseudo-random strategy is used to find the boundaries of the parameter space in which may be the optimal solution. Calmar ratio value was used to assess the adequacy of randomly selected parameter combinations for a given period of learning. In the second stage PSO \cite{Kennedy}  algorithm was used, searching for solutions within prescribed limits of the first stage. The objective function was the Calmar ratio maximizing as in the first step. The above tactics was used for each stage of the learning period, then checked "sustainability" of designated sets of parameters for test periods of different lengths - the basic rate of 100 candles and the other in the range of 10-400.\\
-
+The process of finding the optimum parameters for both of the described strategy is divided into two stages. In the first step of the process pseudo-random strategy is used to find the boundaries of the parameter space in which may be the optimal solution. Calmar ratio value was used to assess the adequacy of randomly selected parameter combinations for a given period of learning. In the second stage PSO \cite{Kennedy}  algorithm was used, searching for solutions within prescribed limits of the first stage. The objective function was the Calmar ratio maximizing as in the first step. The above tactics was used for each stage of the learning period, then checked "sustainability" of designated sets of parameters for test periods of different lengths - the basic rate of 100 candles and the other in the range of 10-400.
 Figure ~\ref{research_methods} on page ~\pageref{research_methods} shows how the research was conducted. Knowing the historical data 1000 candles were used and approach described above in order to find optimal parameters for a given period was used for this dataset. After the parameters search, tests were performed on the current data. The strategy for the learned parameters should be used as long as it will bring satisfactory results on new data. When results were no longer good enough, the next parameters search were performed on next piece of historical data. Thus, the authors aim is to determine the point where it should parameters be recalculated. Additionally, the authors set out to test a new standard of quality prediction. Now, extending the period of testing can produce better results, but more slowly or with local drawndown in comparision to first period, when the classifier "remembers" the nature of the market. This new criteria is profit attributable to one candle of the testing period.\\
 
 \begin{figure}[h!]
 \begin{center}
-\includegraphics[width=0.45\textwidth]{pictures/metodyka_badan.png}
+\includegraphics[width=0.4\textwidth]{pictures/metodyka_badan.png}
 \caption{Methods of testing carried out to test the variable size window}
 \label{research_methods}
 \end{center}
@@ -291,14 +290,14 @@ Figures ~\ref{MiC100} and ~\ref{MiD100} on page ~\pageref{MiD100} shows the cumu
 \begin{figure}[h!]
 \begin{minipage}{.49\linewidth}
 \begin{center}
-\includegraphics[width=\textwidth]{pictures/mic_100.png}
+\includegraphics[width=0.9\textwidth]{pictures/mic_100.png}
 \subcaption{Sub strategy TewiMiC}
 \label{MiC100}
 \end{center}
 \end{minipage}
 \begin{minipage}{.49\linewidth}
 \begin{center}
-\includegraphics[width=\textwidth]{pictures/mid_100.png}
+\includegraphics[width=0.9\textwidth]{pictures/mid_100.png}
 \subcaption{Sub strategy TewiMiD}
 \label{MiD100}
 \end{center}
@@ -310,20 +309,20 @@ Figures ~\ref{MiC100} and ~\ref{MiD100} on page ~\pageref{MiD100} shows the cumu
 
 It may be noted that the two policies, for the test period of 100, allow for systematic profit in examined period with only for small drawndowns. Profit for the strategy TewiMiC 0.355, for TewiMiD profit is several times smaller and amounts to 0.094. But second strategy has smaller drawndowns. In addition, it is confirmed with the higher Calmar ratio - 12.79, where the result for first of these strategies is 10.22. According to the authors, results are excellent, achieved on testing sections, not on the learning periods. On learning periods, of course, significantly better results were achieved with classifier matching. It is also clear that asymmetry results for the two strategies arise from different approaches - the first one is focused on horizontal trend, the other on a downward trend. The results depend on the nature of the market, which is automatically founded by learning strategies. Perhaps at another period of time, for other data these results could be different. In addition to the basic performance of the length of the test period equal to 100, a number of studies were conducted on different lengths of the testing period. There may be more favorable length of test window than arbitrarily selected window length of 100 candles.\\
 
-Results for TewiMiC
+\textbf{Results for TewiMiC}\\
 Below, we present four graphs showing the results of the strategy TewiMiC. The first of these (Figure \ref{Cum3DMiC} on page \pageref{Cum3DMiC}) shows the effect of test duration on the profit curve in time. To show how long in the test period optimal results are achieved we plotted 2D chart of final profit for each of the examined sizes. Figure \ref{Cum3DMiCend} on page \pageref{Cum3DMiCend} shows that the number of candles for achieving a high and satisfactory results are attributable to 80-120. The window size 100 reflects quite well expected test section.
 
 \begin{figure}[h!]
-\begin{minipage}{.45\linewidth}
+\begin{minipage}{.49\linewidth}
 \begin{center}
-\includegraphics[width=\textwidth]{pictures/cumulativeReturnsC.png}
+\includegraphics[width=0.82\textwidth]{pictures/cumulativeReturnsC.png}
 \subcaption{Results in 3D}
 \label{Cum3DMiC}
 \end{center}
 \end{minipage}
-\begin{minipage}{.45\linewidth}
+\begin{minipage}{.49\linewidth}
 \begin{center}
-\includegraphics[width=\textwidth]{pictures/mic_end.png}
+\includegraphics[width=0.82\textwidth]{pictures/mic_end.png}
 \subcaption{Final results}
 \label{Cum3DMiCend}
 \end{center}
@@ -336,16 +335,16 @@ Due to the different length of the test period studied, more reliable value requ
 
 \begin{figure}[h!]
 \centering
-\begin{minipage}{.45\linewidth}
+\begin{minipage}{.49\linewidth}
 \begin{center}
-\includegraphics[width=\textwidth]{pictures/cumulativeReturnsPerCandleC.png}
+\includegraphics[width=0.82\textwidth]{pictures/cumulativeReturnsPerCandleC.png}
 \subcaption{Results in 3D}
 \label{Cum3DPerCMiC}
 \end{center}
 \end{minipage}
-\begin{minipage}{.45\linewidth}
+\begin{minipage}{.49\linewidth}
 \begin{center}
-\includegraphics[width=\textwidth]{pictures/mic_percandle_end.png}
+\includegraphics[width=0.82\textwidth]{pictures/mic_percandle_end.png}
 \subcaption{Final results}
 \label{Cum3DPerCMiCend}
 \end{center}
@@ -358,13 +357,13 @@ Due to the different length of the test period studied, more reliable value requ
 
 \begin{table}[h!] 
 \caption{Final profits and Calmar ratio for the selected length of the test period for TewiMiC}
-\scriptsize
+\tiny
 \label{table1}
 \begin{center}
 \begin{tabular}{|l|l|l|l|l|l|} 
  \hline size & profit & profit per canlde & Calmar & Open positions & Percentage [\%]\\ \hline  
-10 & -0.0192 & -0.0019 & -0.728 & 34 & 10.97 \\ 
- 20 & 0.0415 & 0.0021 & 2.1594 & 66 & 10.65 \\ 
+%10 & -0.0192 & -0.0019 & -0.728 & 34 & 10.97 \\ 
+ %20 & 0.0415 & 0.0021 & 2.1594 & 66 & 10.65 \\ 
  30 & 0.0812 & 0.0027 & 2.4182 & 93 & 10 \\ 
  40 & 0.0768 & 0.0019 & 1.4048 & 120 & 9.68 \\ 
  50 & 0.1176 & 0.0024 & 2.4069 & 134 & 8.65 \\ 
@@ -375,14 +374,12 @@ Due to the different length of the test period studied, more reliable value requ
  100 & 0.3548 & 0.0035 & 10.221 & 245 & 7.9 \\ 
  110 & 0.3294 & 0.003 & 9.4905 & 262 & 7.68 \\ 
  120 & 0.3172 & 0.0026 & 8.6479 & 283 & 7.61 \\ 
- 130 & 0.2854 & 0.0022 & 4.5295 & 304 & 7.54 \\ 
- 140 & 0.2512 & 0.0018 & 4.3911 & 335 & 7.72 \\ 
  150 & 0.2648 & 0.0018 & 4.6295 & 345 & 7.42 \\ 
  200 & 0.2194 & 0.0011 & 2.8244 & 482 & 7.77 \\ 
  250 & 0.2091 & 0.0008 & 2.2352 & 574 & 7.41 \\ 
  300 & 0.1684 & 0.0006 & 1.5345 & 720 & 7.74 \\ 
  350 & 0.1399 & 0.0004 & 1.0402 & 804 & 7.41 \\ 
- 400 & 0.073 & 0.0002 & 0.5074 & 914 & 7.37 \\ 
+400 & 0.073 & 0.0002 & 0.5074 & 914 & 7.37 \\ 
  \hline \end{tabular} 
 \end{center}
  \end{table}
@@ -390,21 +387,20 @@ Due to the different length of the test period studied, more reliable value requ
 
 %%%%%%%%%
 
-Results for TewiMiD 
-
+\textbf{Results for TewiMiD }\\
 Figures ~\ref{Cum3DMiD} and ~\ref{Cum3DMiDend} on page ~\pageref{Cum3DMiDend} shows the effect of the length of the test period on the profit curve. In case of TewiMiD strategy it is difficult to determine the optimal interval length of the testing period.
 
 \begin{figure}[h!]
-\begin{minipage}{.45\linewidth}
+\begin{minipage}{.459\linewidth}
 \begin{center}
-\includegraphics[width=\textwidth]{pictures/cumulativeReturnsD.png}
+\includegraphics[width=0.82\textwidth]{pictures/cumulativeReturnsD.png}
 \subcaption{Results in 3D}
 \label{Cum3DMiD}
 \end{center}
 \end{minipage}
-\begin{minipage}{.45\linewidth}
+\begin{minipage}{.49\linewidth}
 \begin{center}
-\includegraphics[width=\textwidth]{pictures/mid_end.png}
+\includegraphics[width=0.82\textwidth]{pictures/mid_end.png}
 \subcaption{Final results}
 \label{Cum3DMiDend}
 \end{center}
@@ -417,16 +413,16 @@ It is possible, however, due to graphs showing earnings per hour (candle) (Figur
 
 \begin{figure}[h!]
 \centering
-\begin{minipage}{.45\linewidth}
+\begin{minipage}{.49\linewidth}
 \begin{center}
-\includegraphics[width=\textwidth]{pictures/cumulativeReturnsPerCandleD.png}
+\includegraphics[width=0.82\textwidth]{pictures/cumulativeReturnsPerCandleD.png}
 \subcaption{Results in 3D}
 \label{Cum3DPerCMiD}
 \end{center}
 \end{minipage}
-\begin{minipage}{.45\linewidth}
+\begin{minipage}{.49\linewidth}
 \begin{center}
-\includegraphics[width=\textwidth]{pictures/mid_percandle_end.png}
+\includegraphics[width=0.82\textwidth]{pictures/mid_percandle_end.png}
 \subcaption{Final results}
 \label{Cum3DPerCMiDend}
 \end{center}
@@ -437,13 +433,13 @@ It is possible, however, due to graphs showing earnings per hour (candle) (Figur
 
 \begin{table}[h!]
 \caption{Final profits and Calmar ratio for the selected length of the test period for TewiMiD}
-\scriptsize
+\tiny
 \label{table2}
 \begin{center}
  \begin{tabular}{|l|l|l|l|l|l|} 
  \hline size & profit & profit per canlde & Calmar & Open positions & Percentage [\%]\\ \hline  
-10 & 0.0108 & 0.0011 & 2.3305 & 11 & 3.55 \\ 
- 20 & 0.0135 & 0.0007 & 2.4981 & 20 & 3.23 \\ 
+%10 & 0.0108 & 0.0011 & 2.3305 & 11 & 3.55 \\ 
+% 20 & 0.0135 & 0.0007 & 2.4981 & 20 & 3.23 \\ 
  30 & 0.0249 & 0.0008 & 4.2953 & 47 & 5.05 \\ 
  40 & 0.0401 & 0.001 & 8.012 & 60 & 4.84 \\ 
  50 & 0.0443 & 0.0009 & 8.868 & 66 & 4.26 \\ 
@@ -455,8 +451,8 @@ It is possible, however, due to graphs showing earnings per hour (candle) (Figur
  110 & 0.0921 & 0.0008 & 12.6559 & 150 & 4.4 \\ 
  120 & 0.0949 & 0.0008 & 13.0337 & 159 & 4.27 \\ 
  130 & 0.0955 & 0.0007 & 13.1243 & 178 & 4.42 \\ 
- 140 & 0.0998 & 0.0007 & 11.5503 & 188 & 4.33 \\ 
- 150 & 0.0974 & 0.0006 & 9.6789 & 194 & 4.17 \\ 
+% 140 & 0.0998 & 0.0007 & 11.5503 & 188 & 4.33 \\ 
+ %150 & 0.0974 & 0.0006 & 9.6789 & 194 & 4.17 \\ 
  200 & 0.1011 & 0.0005 & 9.464 & 263 & 4.24 \\ 
  250 & 0.0965 & 0.0004 & 9.0392 & 328 & 4.23 \\ 
  300 & 0.1008 & 0.0003 & 9.3983 & 410 & 4.41 \\ 
@@ -465,7 +461,7 @@ It is possible, however, due to graphs showing earnings per hour (candle) (Figur
  \hline \end{tabular} 
 \end{center}
  \end{table}
- \FloatBarrier
+
 Of course, the optimal convergence test window length, at least approximately, is a great convenience in design of automatic strategy for algotrading. It should be noted that the authors assume that it is possible to test each strategy separately and it is not required to synchronize.\\
 
 \section{Conclusion}
