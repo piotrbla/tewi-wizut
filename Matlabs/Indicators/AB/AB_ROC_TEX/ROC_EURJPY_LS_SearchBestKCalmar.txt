@@ -1,0 +1,15 @@
+Rate Of Change - najlepszy wynik
+
+OKRES UCZ¥CY
+D³ugoœæ cyklu: 	230
+Zysk skumulowany: 	12.82
+Calmar: 	3.83
+Liczba otwartych pozycji d³ugich: 	52
+Liczba otwartych pozycji krótkich: 	51
+
+OKRES WALIDUJ¥CY
+D³ugoœæ cyklu: 	230
+Zysk skumulowany: 	20.64
+Calmar: 	5.08
+Liczba otwartych pozycji d³ugich: 	28
+Liczba otwartych pozycji krótkich: 	29
