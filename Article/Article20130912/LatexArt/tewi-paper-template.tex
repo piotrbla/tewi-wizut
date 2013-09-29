@@ -52,7 +52,7 @@ The authors build an investment strategy with a relatively high complexity (meas
 
 Authors propose strategy, that differs by suggesting different behaviors than the ones proposed when using Bollinger's Band, which has its foundation in a band built in an unusual way. According to the strategy based on that band, generally it can be assumed that the trend is horizontal and it is recommended to open position to the center of the band, after its cross by the price from the inside. In proposed strategies, authors use another band that is based on maxima of the maxima and minima of the minima of last several candles.\\
 
-In considered strategies authors move away from the principle of opening positions to the center of the band. In one modification, hereinafter referred to as sub strategy, position opens into the center of the band, whereas in another one, position opens on the outside. By treating the two considered sub strategies as an entirety and as strategies that are mutually retrieving (although a more appropriate word would be complementary) authors assume, that in the selected trading section, opening positions in opposite directions, of course not at the same time, can be done intentionally and effectively. During the trading, nature of the market (trend, volatility) may change. The market may be in some periods horizontal, in other trended. It is appropriate to seek all opportunities for profit. A similar philosophy is applied by several Krutsinger correspondents \cite{Krutsinger}, , who belong to most prominent traders in US, who advocate unfounded reversal of the direction of opening the positions in case of series of failures.\\
+In considered strategies authors move away from the principle of opening positions to the center of the band. In one modification, hereinafter referred to as sub strategy, position opens into the center of the band, whereas in another one, position opens on the outside. By treating the two considered sub strategies as an entirety and as strategies that are mutually retrieving (although a more appropriate word would be complementary) authors assume, that in the selected trading section, opening positions in opposite directions, of course not at the same time, can be done intentionally and effectively. During the trading, nature of the market (trend, volatility) may change. The market may be in some periods horizontal, in other trended. It is appropriate to seek all opportunities for profit. A similar philosophy is applied by several Krutsinger correspondents \cite{Krutsinger}, who belong to most prominent traders in US, who advocate unfounded reversal of the direction of opening the positions in case of series of failures.\\
 
 Returning to the issue of the complexity of the strategy, there are often opinions that the growing complexity of the prediction model is not indicated, because in learning section it  leads to overfitting \cite{Murphy, Cai, Fujimoto}  resulting in a greater error in the test sections. The problem of selecting the proper ratio between learning and testing phase is still unsolved for the non-stationary time series \cite{Ball, Ivakhnenko}. In this situation the right approach seems to be the use of the idea of computational intelligence \cite{Polya, Pedrycz} by which the empirical justification hypothesis entitles to use the model.\\
 
@@ -140,9 +140,9 @@ The result of that is that we have two distinctly different opening conditions.
 \subsection{Conditions of closing}
 In both sub strategies there are 7 cases of closing the open positions, which results in their complexity - both in terms of logic and calculation. This complexity, however, exhausts all the possible surprises and does not  leave any opportunity for the unexpected market behavior. Of course, depending on the values of the parameters, frequency occurrences of closure cases can be very different.\\
 
-Firstly the terms for closing the long positions that were opened by conditions for TewiMiC will be presented.
+\noindent Firstly the terms for closing the long positions that were opened by conditions for TewiMiC will be presented.
 \begin{enumerate}
-\item Opened long position will be closed, if at the close of the candle \textit{(i + p2)} the position remained open, where \textit{i} - number of candle, which was opened;
+\item Opened long position will be closed, if at the close of the candle (i + p2) the position remained open, where i - number of candle, which was opened;
 
 \item Position will be closed if at the opening of the next (i + k)-th - the candle after i-th candle, in which the position was opened, following condition is met: 
 \begin{equation}
@@ -154,7 +154,7 @@ Then the profit (in this case loss) will be calculated as:
 Profit =PriceO (i+k)-Price(i);
 \end{equation}
 
-\item Position will be closed if inside the opening of the next (i + k)-th - the candle after i-th candle, in which the position was opened, following condition is met: 
+\item Position will be closed if inside the next (i + k)-th - the candle after i-th candle, in which the position was opened, following condition is met: 
 \begin{equation}
 (PriceO(i+k)-Price(i) )>-SL \text{ and } (LowPrice(i+k)-Price(i))<-SL
 \end{equation} 
@@ -162,6 +162,7 @@ Then the profit (in this case loss) will be calculated as:
 \begin{equation}
 Profit =-SL;
 \end{equation}
+where LowPrice(i+k) – is a minimum value of (i+k)-th candle;
 
 \item Position will be closed if at the opening of the next (i + k)-th - the candle after i-th candle, in which the position was opened, following condition is met: 
 \begin{equation}
@@ -172,7 +173,7 @@ Then the profit will be calculated as:
 Profit =PriceO (i+k)-Price(i);
 \end{equation}
 
-\item Position will be closed if inside the opening of the next (i + k)-th - the candle after i-th candle, in which the position was opened, following condition is met: 
+\item Position will be closed if inside the next (i + k)-th - the candle after i-th candle, in which the position was opened, following condition is met: 
 \begin{equation}
 (PriceO(i+k)-Price(i) )<TP \text{ and } (HighPrice(i+k)-Price(i))>TP
 \end{equation} 
@@ -191,7 +192,7 @@ Then the profit will be calculated as:
 Profit =PriceO (i+k) -  Price(i) ;
 \end{equation}
 
-\item Position will be closed if inside the opening of the next (i + k)-th - the candle after i-th candle, in which the position was opened, following condition is met: 
+\item Position will be closed if inside the next (i + k)-th - the candle after i-th candle, in which the position was opened, following condition is met: 
 \begin{equation}
 Price(i+k) >topBorder(i+k)
 \end{equation} 
@@ -202,10 +203,12 @@ Profit =topBorder (i+k) -  Price(i) ;
 
 \end{enumerate}
 
-In sub strategy TewiMiD conditions will look slightly different.
+\noindent In sub strategy TewiMiD conditions will look slightly different.
 \begin{enumerate}
 \item Opened short position will be closed if at the close of the candle (i + p2)-th the position remained open;\\
-Position will be closed if at the opening of the next (i + k)-th - the candle after i-th candle, in which the position was opened, following condition is met:
+
+
+\item Position will be closed if at the opening of the next (i + k)-th - the candle after i-th candle, in which the position was opened, following condition is met:
 \begin{equation}
 Price(i)-PriceO(i+k)<-SL
 \end{equation}                                      
@@ -214,7 +217,7 @@ Then the profit (in this case loss) will be calculated as:
 Profit =-PriceO (i+k) +  Price(i) ;
 \end{equation}
 
-\item Position will be closed if inside the opening of the next (i + k)-th - the candle after i-th candle, in which the position was opened, following condition is met:
+\item Position will be closed if inside the next (i + k)-th - the candle after i-th candle, in which the position was opened, following condition is met:
 \begin{equation}
 (-PriceO (i+k)+price(i) )>-SL \text{ and } (-HighPrice(i+k)+Price(i))<-SL
 \end{equation}                          
@@ -233,7 +236,7 @@ Profit =-PriceO (i+k)  + Price(i) ;
 \end{equation} 
 
 
-\item Position will be closed if inside the opening of the next (i + k)-th - the candle after i-th candle, in which the position was opened, following condition is met: 
+\item Position will be closed if inside the next (i + k)-th - the candle after i-th candle, in which the position was opened, following condition is met: 
 \begin{equation}
 (-PriceO(i+k)+price(i) )<TP \text{ and } (-LowPrice(i+k)+Price(i))>TP
 \end{equation}
@@ -270,24 +273,24 @@ In both strategies a fixed period of learning are assumed (in the presented solu
 
 The main aim of the research was to obtain the most effective investment strategies by dynamic selection of test period duration. Later in this article were used concepts of learning period, a fixed-length 1000 candles but with different start in time. After this were test period, a variable-length immediately following a period of learning. The authors looks for the best (by the criteria described above) length of the test period in their research. This most preferred length of the learning period can be understood in two ways. This length can be changed after each learning period adjusted by additional current information feedback about profits or losses in the test period. It may also be the average length of the test window established on the basis of several recent validation.\\
 
-The process of finding the optimum parameters for both of the described strategy is divided into two stages. In the first step of the process pseudo-random strategy is used to find the boundaries of the parameter space in which may be the optimal solution. Calmar ratio value was used to assess the adequacy of randomly selected parameter combinations for a given period of learning. In the second stage PSO [Kennedy, Eberhart]  algorithm was used, searching for solutions within prescribed limits of the first stage. The objective function was the Calmar ratio maximizing as in the first step. The above tactics was used for each stage of the learning period, then checked "sustainability" of designated sets of parameters for test periods of different lengths - the basic rate of 100 candles and the other in the range of 10-400.\\
+The process of finding the optimum parameters for both of the described strategy is divided into two stages. In the first step of the process pseudo-random strategy is used to find the boundaries of the parameter space in which may be the optimal solution. Calmar ratio value was used to assess the adequacy of randomly selected parameter combinations for a given period of learning. In the second stage PSO \cite{Kennedy}  algorithm was used, searching for solutions within prescribed limits of the first stage. The objective function was the Calmar ratio maximizing as in the first step. The above tactics was used for each stage of the learning period, then checked "sustainability" of designated sets of parameters for test periods of different lengths - the basic rate of 100 candles and the other in the range of 10-400.\\
 
-Figure ~\ref{metodyka} on page ~\pageref{metodyka} shows how the research was conducted . Knowing the historical data recoiled by 1000 candles and they used the approach described above in order to find optimal parameters for a given period . After the appointment of tests performed on the current data. The strategy of the learned parameters should be used as long as it will bring satisfactory results on new data. When results are no longer good enough , the following parameters for the re-designation of historical data. Thus, the authors aim is to determine the point where it should be re- conversion parameters. Additionally, the authors set out to test a new standard of quality prediction. Now, extending the period of testing can produce better results, but more slowly or can not slip out of the local capital than some initial period, when the classic "remembers" the nature of the market . This new criterion is profit attributable to one candle variable of the test period.\\
+Figure ~\ref{metodyka} on page ~\pageref{metodyka} shows how the research was conducted. Knowing the historical data recoiled by 1000 candles and they used the approach described above in order to find optimal parameters for a given period. After the appointment of tests performed on the current data. The strategy of the learned parameters should be used as long as it will bring satisfactory results on new data. When results are no longer good enough, the following parameters for the re-designation of historical data. Thus, the authors aim is to determine the point where it should be re- conversion parameters. Additionally, the authors set out to test a new standard of quality prediction. Now, extending the period of testing can produce better results, but more slowly or can not slip out of the local capital than some initial period, when the classic "remembers" the nature of the market. This new criterion is profit attributable to one candle variable of the test period.\\
 
 \begin{figure}[h!]
 \begin{center}
-\includegraphics[width=0.6\textwidth]{pictures/metodyka_badan.png}
+\includegraphics[width=0.45\textwidth]{pictures/metodyka_badan.png}
 \caption{Methods of testing carried out to test of the variable size window}
 \label{metodyka}
 \end{center}
 \end{figure}
 \FloatBarrier
 
-Figures ~\ref{MiC100} and 4 ~\ref{MiD100} on page ~\pageref{MiD100}show the cumulative profit for the test period equal to 100 for the two treatment strategies .
+Figures ~\ref{MiC100} and ~\ref{MiD100} on page ~\pageref{MiD100} show the cumulative profit for the test period equal to 100 for the two treatment strategies.
 
 \begin{figure}[h!]
 \begin{center}
-\includegraphics[width=0.7\textwidth]{pictures/mic_100.png}
+\includegraphics[width=0.5\textwidth]{pictures/mic_100.png}
 \caption{Chart of the cumulative profit for the strategy for sustainable TewiMiC test period equal 100}
 \label{MiC100}
 \end{center}
@@ -296,67 +299,67 @@ Figures ~\ref{MiC100} and 4 ~\ref{MiD100} on page ~\pageref{MiD100}show the cumu
 
 \begin{figure}[h!]
 \begin{center}
-\includegraphics[width=0.7\textwidth]{pictures/mid_100.png}
+\includegraphics[width=0.5\textwidth]{pictures/mid_100.png}
 \caption{Chart of the cumulative profit for the strategy for sustainable TewiMiD test period equal 100}
 \label{MiD100}
 \end{center}
 \end{figure}
 \FloatBarrier
 
-It may be noted that the two policies , the test period of 100 , the products allow for systematic performance gain over the period with
- only small landslides . Profit for the final strategy is TewiMiC 0355 , for TewiMiD profit is several times smaller and amounts to 0.094 . 
-Smaller decreases are for the second strategy. In addition, it confirms the higher the Calmar ratio - 12.79 , 
-when the first of these strategies is on 10.22 .
-According to the authors , these are excellent , achieved on sections of the test , not the learning episodes .
- The latter , of course, achieved significantly better results matching classifier . It is also understood asymmetry results for the two strategies
- - the first one is focused on horizontal trend , the other on a downward trend . The results depend on the nature of the market , 
-which is considered by learning strategies automatically. Perhaps at another time , for other data these results could be different.
-In addition to the basic performance of the length of the test period equal to 100 , a number of studies conducted on different lengths
- of the period. There may be more favorable long test window than arbitrarily selected window above the 100 candles .\\
+It may be noted that the two policies, the test period of 100, the products allow for systematic performance gain over the period with
+ only small landslides. Profit for the final strategy is TewiMiC 0.355, for TewiMiD profit is several times smaller and amounts to 0.094. 
+Smaller decreases are for the second strategy. In addition, it confirms the higher the Calmar ratio - 12.79, 
+when the first of these strategies is on 10.22.
+According to the authors, these are excellent, achieved on sections of the test, not the learning episodes.
+ The latter, of course, achieved significantly better results matching classifier. It is also understood asymmetry results for the two strategies
+ - the first one is focused on horizontal trend, the other on a downward trend. The results depend on the nature of the market, 
+which is considered by learning strategies automatically. Perhaps at another time, for other data these results could be different.
+In addition to the basic performance of the length of the test period equal to 100, a number of studies conducted on different lengths
+ of the period. There may be more favorable long test window than arbitrarily selected window above the 100 candles.\\
 
+Below, we present four graphs showing the results of the strategy TewiMiC. The first of these (Figure \ref{Cum3DMiC} on page \pageref{Cum3DMiC}) shows the effect of test duration on the gain curve in time.\\
+To see more detail for how long the test period are achieved optimal results plotted showing 2D final profit for each of the three sizes.
+ From Figure \ref{Cum3DMiCend} on page \pageref{Cum3DMiCend} shows that the number of candles for achieving a high and satisfactory results are attributable to 80-120.
+ The window 100 reflects quite well so desired test section.\\
 \begin{figure}[h!]
 \begin{center}
-\includegraphics[width=0.7\textwidth]{pictures/cumulativeReturnsC.png}
+\includegraphics[width=0.5\textwidth]{pictures/cumulativeReturnsC.png}
 \caption{Results for TewiMiC}
 \label{Cum3DMiC}
 \end{center}
 \end{figure}
 \FloatBarrier
 
-Below, we present four graphs showing the results of the strategy TewiMiC . The first of these shows the effect of test duration on the gain curve in time.
-
 \begin{figure}[h!]
 \begin{center}
-\includegraphics[width=0.7\textwidth]{pictures/mic_end.png}
-\caption{Earnings accumulated over time , depending on the length of the test period for TewiMIC}
+\includegraphics[width=0.5\textwidth]{pictures/mic_end.png}
+\caption{Earnings accumulated over time, depending on the length of the test period for TewiMIC}
 \label{Cum3DMiCend}
 \end{center}
 \end{figure}
 \FloatBarrier
-To see more detail for how long the test period are achieved optimal results plotted showing 2D final profit for each of the three sizes.
- From Figure 4 shows that the number of candles for achieving a high and satisfactory results are attributable to 80-120 .
- The window 100 reflects quite well so desired test section.\\
+
+Due to the different length of the test period studied, more reliable value required in the decision is said earnings per candle, 
+or how much strategy can earn in one hour. This is shown in Figures \ref{Cum3DPerCMiC} and \ref{Cum3DPerCMiCend} On this basis, and Table \ref{table1} it can be concluded that the
+ most effective strategy is for the period 60-110 test.
+It can therefore be concluded that the average window of 100 candles well " remembers" the learned classifier parameters. 
+Many times in the classification of patterns, it is important whether there are frequent. 
+Part of the dilemma is equivalent to earnings per candle but also in this one. 22 presented a large opening in
+ the periods test items.\\
 
 \begin{figure}[h!]
 \begin{center}
-\includegraphics[width=0.7\textwidth]{pictures/cumulativeReturnsPerCandleC.png}
+\includegraphics[width=0.5\textwidth]{pictures/cumulativeReturnsPerCandleC.png}
 \caption{The final cumulative profit depending on the length of the trial for TewiMiC}
 \label{Cum3DPerCMiC}
 \end{center}
 \end{figure}
 \FloatBarrier
 
-Due to the different length of the test period studied , more reliable value required in the decision is said earnings per candle , 
-or how much strategy can earn in one hour. This is shown in Figures 7 and 8 On this basis , and Table 1 it can be concluded that the
- most effective strategy is for the period 60-110 test .
-It can therefore be concluded that the average window of 100 candles well " remembers" the learned classifier parameters . 
-Many times in the classification of patterns , it is important whether there are frequent . 
-Part of the dilemma is equivalent to earnings per candle but also in this one. 22 presented a large opening in
- the periods test items.\\
 
 \begin{figure}[h!]
 \begin{center}
-\includegraphics[width=0.7\textwidth]{pictures/mic_percandle_end.png}
+\includegraphics[width=0.5\textwidth]{pictures/mic_percandle_end.png}
 \caption{Cumulative Profit for one candle in time depending on the length of the trial for TewiMiC}
 \label{Cum3DPerCMiCend}
 \end{center}
@@ -365,8 +368,10 @@ Part of the dilemma is equivalent to earnings per candle but also in this one. 2
 
 \begin{table}[h!] 
 \caption{Final profits and Calmar ratio for the selected length of the test period for TewiMiC}
+\scriptsize
 \label{table1}
- \begin{tabular}{|l|l|l|l|l|l|} 
+\begin{center}
+\begin{tabular}{|l|l|l|l|l|l|} 
  \hline size & profit & profit per canlde & Calmar & Open positions & Percentage [\%]\\ \hline  
 10 & -0.0192 & -0.0019 & -0.728 & 34 & 10.97 \\ 
  20 & 0.0415 & 0.0021 & 2.1594 & 66 & 10.65 \\ 
@@ -389,17 +394,18 @@ Part of the dilemma is equivalent to earnings per candle but also in this one. 2
  350 & 0.1399 & 0.0004 & 1.0402 & 804 & 7.41 \\ 
  400 & 0.073 & 0.0002 & 0.5074 & 914 & 7.37 \\ 
  \hline \end{tabular} 
+\end{center}
  \end{table}
  \FloatBarrier
 
 %%%%%%%%%
 
-Figures ~\ref{Cum3DMiD} and 4 ~\ref{Cum3DMiDend} on page ~\pageref{Cum3DMiDend} show the effect of the length of the test period the profit curve. If TewiMiD strategy makes it difficult to determine the optimal interval length of the trial .
+Figures ~\ref{Cum3DMiD} and ~\ref{Cum3DMiDend} on page ~\pageref{Cum3DMiDend} show the effect of the length of the test period the profit curve. If TewiMiD strategy makes it difficult to determine the optimal interval length of the trial.
 
 \begin{figure}[h!]
 \begin{center}
-\includegraphics[width=0.7\textwidth]{pictures/cumulativeReturnsD.png}
-\caption{Earnings accumulated over time , depending on the length of the test period for TewiMID}
+\includegraphics[width=0.442\textwidth]{pictures/cumulativeReturnsD.png}
+\caption{Earnings accumulated over time, depending on the length of the test period for TewiMID}
 \label{Cum3DMiD}
 \end{center}
 \end{figure}
@@ -407,18 +413,18 @@ Figures ~\ref{Cum3DMiD} and 4 ~\ref{Cum3DMiDend} on page ~\pageref{Cum3DMiDend} 
 
 \begin{figure}[h!]
 \begin{center}
-\includegraphics[width=0.7\textwidth]{pictures/mid_end.png}
+\includegraphics[width=0.42\textwidth]{pictures/mid_end.png}
 \caption{The final cumulative profit depending on the length of the trial for TewiMiD}
 \label{Cum3DMiDend}
 \end{center}
 \end{figure}
 \FloatBarrier
 
-It is possible , however, due to graphs showing earnings per hour ( candle ), depending on the length of the period and a table listing the final results of the two studies . Similarly to the first strategy, this period falls on 60 - 90 candles.
+It is possible, however, due to graphs showing earnings per hour --- candle (Figures \ref{Cum3DPerCMiD} and \ref{Cum3DPerCMiDend}), depending on the length of the period and a Table \ref{table2} listing the final results of the two studies. Similarly to the first strategy, this period falls on 60 - 90 candles.
 
 \begin{figure}[h!]
 \begin{center}
-\includegraphics[width=0.7\textwidth]{pictures/cumulativeReturnsPerCandleD.png}
+\includegraphics[width=0.5\textwidth]{pictures/cumulativeReturnsPerCandleD.png}
 \caption{Cumulative Profit for one candle in time depending on the length of the trial for TewiMiD}
 \label{Cum3DPerCMiD}
 \end{center}
@@ -427,8 +433,8 @@ It is possible , however, due to graphs showing earnings per hour ( candle ), de
 
 \begin{figure}[h!]
 \begin{center}
-\includegraphics[width=0.7\textwidth]{pictures/mid_percandle_end.png}
-\caption{The final cumulative profit per candle , depending on the length of the test period for TewiMiD}
+\includegraphics[width=0.5\textwidth]{pictures/mid_percandle_end.png}
+\caption{The final cumulative profit per candle, depending on the length of the test period for TewiMiD}
 \label{Cum3DPerCMiDend}
 \end{center}
 \end{figure}
@@ -436,7 +442,9 @@ It is possible , however, due to graphs showing earnings per hour ( candle ), de
 
 \begin{table}[h!]
 \caption{Final profits and Calmar ratio for the selected length of the test period for TewiMiD}
+\scriptsize
 \label{table2}
+\begin{center}
  \begin{tabular}{|l|l|l|l|l|l|} 
  \hline size & profit & profit per canlde & Calmar & Open positions & Percentage [\%]\\ \hline  
 10 & 0.0108 & 0.0011 & 2.3305 & 11 & 3.55 \\ 
@@ -460,14 +468,16 @@ It is possible , however, due to graphs showing earnings per hour ( candle ), de
  350 & 0.0924 & 0.0003 & 7.2935 & 467 & 4.3 \\ 
  400 & 0.1105 & 0.0003 & 8.1655 & 558 & 4.5 \\ 
  \hline \end{tabular} 
+\end{center}
  \end{table}
  \FloatBarrier
  
-Of course, the optimal convergence test window length , at least approximately , is a great convenience in machine design algotradingu . It should be noted that the authors assume that it is possible to test whether each strategy separately and it is not necessarily synchronous learning rolling .\\
+Of course, the optimal convergence test window length, at least approximately, is a great convenience in machine design algotradingu. It should be noted that the authors assume that it is possible to test whether each strategy separately and it is not necessarily synchronous learning rolling.\\
 
+\section{Conclusion}
 
-Following a review of various lengths were obtained dependence validation periods shown in Figures 6 and 10 It shows a fairly obvious that a good fit to the data parameters of the test will continue for some time after the end of the learner . This is due to the assumption that the prevailing trends in the market for a different direction , the nature of which is well explored during the learning process . The authors have found that the use of optimization methods derived from the area of artificial intelligence, including the PSO [21], given good and quickly reaches the optimum values of the rules of the classifier, and good results in the initial stages of the test. For longer test periods, it can be indeed get good results overall , however, the effectiveness of the strategy per unit time decreases significantly. In the applied learning scheme uses a learning period of fixed length . The test results obtained allow to conclude that the constant average length of the test window is more efficient and easier to manage than a strategy adaptively changing the length of the period. Discovered during the period of effective learning strategies properties for a short time - for test data period was a time of both strategies from about 50 to 120 hours at 1000 hours of learning time. \\
-The real market means that from 2 to 5 days, it can be assumed that the re- learning the parameters of the strategy should be carried out 1-2 times a week. This frequency is quite practical even for manual search of optimal parameters without fully automatic trading. The options trading strategies ( substrategia TewiMiC and TewiMiD ) are complementary, since for each variant can develop a set of other parameters. Separate sets of parameters are adapted better to the outdoor during optimization nature of the market, allowing for example, often contain long positions in the market with more frequent by growth trends. It should be noted that a further optimizations discovered trends are short-term and during one cycle of validation can occur several changes in these trends, and they can be of different lengths. Then there is the situation that one of the variants of the strategy takes into account the length of trends for deviating significantly from trends indicated by the second variant. The two variants substrategii are part of an investment strategy that allows you to combine the target until the time the four options trading strategies . It is a fact of this study add to the substrategie associated with opening long positions based on condition ( order ) Buy Stop and short positions in accordance with the model Sell Limit. Interestingly according to the authors , may also improve the combined strategies through the synthesis of recommendations such as combining four variants , some of which (eg 3 ) indicates the need for the purchase , and some ( such as 1 ) the need to conclude the sale of stock, it contains a number of transactions indications resulting from the sum of the different options ( in the above example - two requests) . This implies a lower cost ( for example, 2 times smaller ). Transaction costs for certain decisions [complete ] ( link to an article on the conference TEWI - you do not have ) so tests can be omitted , and the reduction significantly affects the efficiency improvement investment strategy. The studies take into account the transaction costs for the pessimistic (above average costs in popular brokers). In practical terms , the strategy is so big possibilities. With traditional software, e-commerce (such as Metatrader) does not have the possibility of converting a simple strategy parameters during operation. This implies the need for a hybrid solution , consisting for example of interprocess communication between the software and e-commerce program developed in universal high-level language (eg Matlab, C\#). Algotarding future will very likely be increasingly active domain for experts in algorithmization and programming and less and less economists and econometricians .
+Following a review of various lengths were obtained dependence validation periods shown in Figures \ref{Cum3DMiDend} and \ref{Cum3DMiDend} It shows a fairly obvious that a good fit to the data parameters of the test will continue for some time after the end of the learner. This is due to the assumption that the prevailing trends in the market for a different direction, the nature of which is well explored during the learning process. The authors have found that the use of optimization methods derived from the area of artificial intelligence, including the PSO \cite{Kennedy}, given good and quickly reaches the optimum values of the rules of the classifier, and good results in the initial stages of the test. For longer test periods, it can be indeed get good results overall, however, the effectiveness of the strategy per unit time decreases significantly. In the applied learning scheme uses a learning period of fixed length. The test results obtained allow to conclude that the constant average length of the test window is more efficient and easier to manage than a strategy adaptively changing the length of the period. Discovered during the period of effective learning strategies properties for a short time - for test data period was a time of both strategies from about 50 to 120 hours at 1000 hours of learning time. \\
+The real market means that from 2 to 5 days, it can be assumed that the re- learning the parameters of the strategy should be carried out 1-2 times a week. This frequency is quite practical even for manual search of optimal parameters without fully automatic trading. The options trading strategies ( substrategia TewiMiC and TewiMiD ) are complementary, since for each variant can develop a set of other parameters. Separate sets of parameters are adapted better to the outdoor during optimization nature of the market, allowing for example, often contain long positions in the market with more frequent by growth trends. It should be noted that a further optimizations discovered trends are short-term and during one cycle of validation can occur several changes in these trends, and they can be of different lengths. Then there is the situation that one of the variants of the strategy takes into account the length of trends for deviating significantly from trends indicated by the second variant. The two variants substrategii are part of an investment strategy that allows you to combine the target until the time the four options trading strategies. It is a fact of this study add to the substrategie associated with opening long positions based on condition ( order ) Buy Stop and short positions in accordance with the model Sell Limit. Interestingly according to the authors, may also improve the combined strategies through the synthesis of recommendations such as combining four variants, some of which (eg 3 ) indicates the need for the purchase, and some ( such as 1 ) the need to conclude the sale of stock, it contains a number of transactions indications resulting from the sum of the different options ( in the above example - two requests). This implies a lower cost ( for example, 2 times smaller ). Transaction costs for certain decisions [complete ] ( link to an article on the conference TEWI - you do not have ) so tests can be omitted, and the reduction significantly affects the efficiency improvement investment strategy. The studies take into account the transaction costs for the pessimistic (above average costs in popular brokers). In practical terms, the strategy is so big possibilities. With traditional software, e-commerce (such as Metatrader) does not have the possibility of converting a simple strategy parameters during operation. This implies the need for a hybrid solution, consisting for example of interprocess communication between the software and e-commerce program developed in universal high-level language (eg Matlab, C\#). Algotarding future will very likely be increasingly active domain for experts in algorithmization and programming and less and less economists and econometricians.
  
 \bibliography{references-tewi}
 \bibliographystyle{aiaa-tewi}
