@@ -1,0 +1,273 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[MeX]{polski}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage{placeins}
+\usepackage{listings}
+\usepackage[svgnames]{xcolor}
+ \lstset{literate={ą}{{\k{a}}}1 {ć}{{\'c}}1 {ę}{{\k{e}}}1 {ł}{{\l{}}}1 {ń}{{\'n}}1 {ó}{{\'o}}1 {ś}{{\'s}}1 {ż}{{\.z}}1 {ź}{{\'z}}1 {Ą}{{\k{A}}}1 {Ć}{{\'C}}1 {Ę}{{\k{E}}}1 {Ł}{{\L{}}}1 {Ń}{{\'N}}1 {Ó}{{\'O}}1 {Ś}{{\'S}}1 {Ż}{{\.Z}}1 {Ź}{{\'Z}}1 }
+ \lstset{breaklines=true}
+\lstset{language=Matlab,
+  keywords={break,case,catch,continue,else,elseif,end,for,function,
+     global,if,otherwise,persistent,return,switch,try,while},
+  basicstyle=\ttfamily,
+  keywordstyle=\color{blue},
+  commentstyle=\color{DarkGreen},
+  stringstyle=\color{dkgreen},
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  stepnumber=1,
+  numbersep=10pt,
+  backgroundcolor=\color{white},
+  tabsize=4,
+  showspaces=false,
+  showstringspaces=false}
+  
+\begin {document}
+\begin{center}
+\begin{large}
+Stochastic Slow - oscylator stochastyczny wolny : opis wskaźnika\\
+\end{large}
+Michał Zabłocki
+\end{center}
+%\baselineskip=22pt
+
+Stochastic Slow jest wolniejszą wersja podstawowego oscylatora stochastycznego. Składa się z dwóch linii oscylacyjnych: głównej linii oscylatora tzw. \%K oraz pomocniczej wygładzonej postaci tej linii tzw. \%D. Obie linie osiągają wartości z przedziału 0 - 100.  Sposób wyliczenia kolejnych wartości obu linii dla danego punktu w czasie przedstawiają wzory \ref{wzor_1} oraz \ref{wzor_2}.
+\begin{equation}
+\%K = \left[\begin{array}{c} \frac{ \sum_{j=0}^{2} (C_j - min(L_j, n))}{ \sum_{j=0}^{2} (max(H_j, n) - min(L_j, n))}\end{array}\right]\\
+\label{wzor_1}
+\end{equation}
+\begin{equation}
+\%D = SMA(\%K, 3)
+\label{wzor_2}
+\end{equation}
+
+\noindent Dodatkowo mogą być poszukiwane dywergencje względem wykresu cenowego. Możliwe jest też poszukiwanie tzw. odwróconych dywergencji. W tej wersji wskaźnik może być używany jako miernik wykupienia / wyprzedania rynku. Wadą wskaźnika jest to, że w mocnych ruchach trendowych skrajne stany rynku mogą być sygnalizowane przedwcześnie.
+Przy interpretacji wskaźnika najważniejszy jednak jest fakt, że wskazuje on momenty w których mogą być zawierane transakcje. Podstawowa zasada zakłada przyjęcie jako sygnału kupna sytuację gdy występują przecięcia linii \%D przez linię \%K od dołu. Natomiast, gdy linia \%D jest przecinana przez linię \%K od góry, to przyjmuje się taką sytuację za sygnał sprzedaży. Zostało to przedstawione na rysunku \ref{zasada}. \\
+\begin{figure}[h!]
+\centering
+\includegraphics[width = \textwidth]{ss.png}
+\caption{Fragment przebiegu kursu akcji (górny wykres) oraz odpowiadające jemu linie \%K i \%D wraz z sygnałami kupna --- błękitne strzałki oraz sygnałami sprzedaży --- pomarańczowe strzałki (dolny wykres)}
+\label{zasada}
+\end{figure}
+\FloatBarrier
+
+\noindent Poniższy listing przedstawia zaimplementowaną w środowisku MATLAB strategię wykorzystującą opisywany wskaźnik.
+\begin{scriptsize}
+\begin{lstlisting}
+maxes=zeros(candlesCount,1);
+mins=zeros(candlesCount,1);
+K=zeros(candlesCount,1);
+D=zeros(candlesCount,1);
+kon=candlesCount-1;
+for i=4:kon
+    maxes(i) = max(verificationC(i-min(i-1,paramMALength):i-1,2));
+    mins(i) = min(verificationC(i-min(i-1,paramMALength):i-1,3));
+    K(i) = 100 * (sum(verificationC(i-min(i-1,3):i-1,4)-mins(i-min(i-1,2):i)) / sum(maxes(i-min(i-1,2):i)-mins(i-min(i-1,2):i)));
+    D(i) = sum(K(i-min(i-1,2):i)) / min(i-1,3);
+end
+
+sumR=zeros(1,candlesCount);
+R=zeros(1,candlesCount);
+pocz=max(paramMALength, 10)+3;
+iL=0; %liczba otwieranych pozycji kupna
+iS=0; %liczba otwieranych pozycji sprzedarzy
+lastCandle = kon-paramMALength;
+recordReturn=0;  %rekord zysku
+recordDrawdown=0;  %rekord obsuniecia
+LastPos = 0; % zmienna do prz echowywa nia warto ś ci na otwarciu ostatniej pozycji
+for i=pocz:lastCandle
+    
+    if K(i-1) < D(i-1) && K(i) >= D(i) % warunek kupna
+        R(i)= - C(i+1,4)+LastPos-spread; % zamknięcie S
+        LastPos = C(i+1,1); % otwarcie L
+        iL=iL+1;
+    elseif K(i-1) > D(i-1) && K(i) <= D(i) % warunek sprzedaż y
+        R(i)=C(i+1,4)-LastPos-spread; % zamknięcie L
+        LastPos = C(i+1,1); % otwarcie S
+        iS=iS+1;
+    end
+    sumR(i)= sum(R(pocz:i));  %krzywa narastania kapitału
+    
+    if sumR(i)>recordReturn
+        recordReturn=sumR(i);
+    end
+    
+    if sumR(i)-recordReturn<recordDrawdown
+        recordDrawdown=sumR(i)-recordReturn;  %obsuniecie maksymalne
+    end
+end
+
+%wyniki końcowe
+sumReturn=sumR(lastCandle);
+Calmar=-sumReturn/recordDrawdown;  %wskaznik Calmara
+\end{lstlisting}
+\end{scriptsize}
+
+
+Na podstawie zebranych informacji dotyczących wskaźnika $Stochastic Slow$ utworzono prostą strategię inwestycyjną bazującą na regule: jeśli linia $\%D$ jest przecinana przez  linię $\%K$ od dołu, to otwierana jest pozycja długa ($L$), a zamykana pozycja krótka ($S$), która została wcześniej otwarta. Natomiast gdy linia \%D jest przecinana przez linię \%K od góry, to otwarta zostanie pozycja krótka, a zamknięta długa. Badania zostały przeprowadzone na parze walutowej $CADCHF$ (szereg czasowy przedstawiony na rysunku \ref{rys2}). \\
+\begin{figure}[h!]
+\centering
+\includegraphics[width = \textwidth]{szereg.png}
+\caption{Badany szereg czasowy z podziałem na część uczącą i testową}
+\label{rys2}
+\end{figure}
+\FloatBarrier
+Cały zbiór danych (świec) podzielony został na dwie części: uczącą ($60\%$ całości) oraz testową ($40\%$ całości). W przeprowadzonych badaniach poszukiwano optymalnej wartości parametru $n$ na okresie uczącym, następnie weryfikowano otrzymane wyniki na okresie testowym. Wybór optymalnej wartości parametru $n$ determinowano na dwa sposoby:
+\begin{itemize}
+\item otrzymanego zysku skumulowanego,
+\item wskaźnika Calamara.
+\end{itemize}
+
+\noindent \textbf{I Wyniki badań przy maksymalizacji po zysku.}\\
+\begin{figure}[h!]
+\centering
+\includegraphics[width = 0.6\textwidth]{SS_CADCHF_S4LS_zysk.png}
+\caption{Zysk skumulowany CADCHF na okresie testowym przy maksymalizacji według zysku}
+\end{figure}
+\FloatBarrier
+\begin{verbatim}
+OKRES UCZĄCY
+Zysk skumulowany:     0.2917
+Calmar:     0.4538
+Liczba otwartych pozycji długich:     400
+Liczba otwartych pozycji krótkich:     405
+
+OKRES WALIDUJĄCY
+Zysk skumulowany:     -1.3244
+Calmar:     -1
+Liczba otwartych pozycji długich:     244
+Liczba otwartych pozycji krótkich:     245
+\end{verbatim}
+\newpage
+\textbf{II Wyniki badań przy maksymalizacji po wskaźniku Calmara.}\\
+\begin{figure}[h!]
+\centering
+\includegraphics[width = 0.6\textwidth]{SS_CADCHF_S4LS_calmar.png}
+\caption{Zysk skumulowany EURJPY na okresie testowym przy maksymalizacji według Calmara}
+\end{figure}
+\FloatBarrier
+\begin{verbatim}
+OKRES UCZĄCY
+Zysk skumulowany:     0.2917
+Calmar:     0.4538
+Liczba otwartych pozycji długich:     400
+Liczba otwartych pozycji krótkich:     405
+
+OKRES WALIDUJĄCY
+Zysk skumulowany:     -1.3244
+Calmar:     -1
+Liczba otwartych pozycji długich:     244
+Liczba otwartych pozycji krótkich:     245
+\end{verbatim}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\begin{center}
+\begin{large}
+Mass Index - indeks masy : opis wskaźnika\\
+\end{large}
+\end{center}
+%\baselineskip=22pt
+
+Mass Index wskaźnik jest pomocny w identyfikacji punktów zwrotnych, poprzez mierzenie odległości pomiędzy cenami maksymalnymi a minimalnymi. Według autora zmiana kierunku trendu następuje w momencie zaobserwowania tzw. wybrzuszenia zwrotnego, czyli wejścia wskaźnika ponad poziom 27 i następnie spadku poniżej 26,5. Wskaźnik nie identyfikuje jednak kierunku trendu, ustala jedynie punkt zwrotny. Sposób wyliczenia kolejnych wartości wskaźnika dla danego punktu w czasie przedstawia wzór \ref{wzor_3}.
+\begin{equation}
+Mass Index = \sum_{0}^{24} \left[\begin{array}{c} \frac{ EMA(H - L, 9)}{ EMA(EMA(H-L, 9), 9)}\end{array}\right]\\
+\label{wzor_3}
+\end{equation}
+
+\noindent Sama interpretacja wskaźnika nie pozwala na wskazanie momentów w których mogą być zawierane konkretne transakcje (kopno/sprzedarz). W określeniu czy jest to sygnał kupna czy sprzedaży autor zaleca stosowanie 9- dniowej ekspotencjalnej średniej na wykresie notowań. Dlatego przyjeliśmy zasadę, która zakłada, że po wystąpieniu wybrzuszenia zwrotnego przyjmujemy jako sygnał kupna sytuację gdy wartość ceny zamknięcia przewyższa wartość 9- dniowej ekspotencjalnej średniej. Natomiast, gdy wartość ceny zamknięcia jest mniejsza od wartość 9- dniowej ekspotencjalnej średniej, to przyjmuje się taką sytuację za sygnał sprzedaży. Zostało to przedstawione na rysunku \ref{kupsprz2}. \\
+\begin{figure}[h!]
+\centering
+\includegraphics[width = \textwidth]{mi2.png}
+\caption{Fragment przebiegu kursu akcji z naniesioną  9- dniową ekspotencjalną średnią (górny wykres) oraz odpowiadające jemu wartości wskaźnika indeksu masy wraz z sygnałami kupna --- zielone strzałki oraz sygnałami sprzedaży --- czerwone strzałki (dolny wykres)}
+\label{kupsprz2}
+\end{figure}
+\FloatBarrier
+
+\noindent Poniższy listing przedstawia zaimplementowaną w środowisku MATLAB strategię wykorzystującą opisywany wskaźnik.
+\begin{scriptsize}
+\begin{lstlisting}
+bestiL = 0;
+bestiS = 0;
+HL = C(:,2) - C(:,3); % różnica H - L
+kon=candlesCount-1;
+MI = zeros(candlesCount,1);
+HLaverage = ema(HL,9);
+EMA2 = HLaverage(9:end) ./ ema(HLaverage(9:end),9);
+for i = 41:kon-16
+    MI(i) = sum(EMA2(i-24:i));
+end
+Caverages = ema(C(:,4),9);
+
+sumR=zeros(1,candlesCount);
+R=zeros(1,candlesCount);
+pocz=50;
+iL=0; %liczba otwieranych pozycji kupna
+iS=0; %liczba otwieranych pozycji sprzedarzy
+lastCandle = kon-16;
+recordReturn=0;  %rekord zysku
+recordDrawdown=0;  %rekord obsuniecia
+LastPos = 0;
+pic1 = false;
+
+for i=pocz:lastCandle
+    
+    if pic1 == false && MI(i) > 27 % warunek wystąpienia wybrzuszenia zwrotnego
+        pic1 = true;
+    end
+    if pic1 == true && MI(i) < 26.5 % warunek zawarcia transakcji
+        if C(i,4) > Caverages(i) % warunek kupna
+            R(i)= -C(i+1,4)-LastPos-spread; % zamknięcie S
+            LastPos = C(i+1,1); % otwarcie L
+            iL=iL+1;
+        elseif C(i,4) < Caverages(i) % warunek sprzedaży
+            R(i)=C(i+1,4)-LastPos-spread; % zamknięcie L
+            LastPos = C(i+1,1); % otwarcie S
+            iS=iS+1;
+        end
+        pic1 = false;
+    end
+    sumR(i)= sum(R(pocz:i));  %krzywa narastania kapitału
+    
+    if sumR(i)>recordReturn
+        recordReturn=sumR(i);
+    end
+    
+    if sumR(i)-recordReturn<recordDrawdown
+        recordDrawdown=sumR(i)-recordReturn;  %obsuniecie maksymalne
+    end
+end
+
+%wyniki końcowe
+sumReturn=sumR(lastCandle);
+Calmar=-sumReturn/recordDrawdown;  %wskaznik Calmara
+\end{lstlisting}
+\end{scriptsize}
+
+
+Na podstawie zebranych informacji dotyczących wskaźnika $Mass Index$ utworzono prostą strategię inwestycyjną bazującą na regule: jeśli wystąpi wybrzuszenie zwrotne oraz wartość ceny zamknięcia przewyższy wartość 9- dniowej ekspotencjalnej średniej, to otwierana jest pozycja długa ($L$), a zamknięta pozycja krótka ($S$), która została wcześniej otwarta . Natomiast, gdy wartość ceny zamknięcia będzie mniejsza od wartość 9- dniowej ekspotencjalnej średniej, to otwarta zostanie pozycja krótka ($S$), a zamknięta długa. Badania zostały przeprowadzone na parze walutowej $CADCHF$ (szereg czasowy przedstawiony na rysunku \ref{rys2}). \\
+
+Ze względu na to iż wszystkie parametry wzoru są arbitralnie ustawione, to zbiór danych (świec) nie został podzielony na dwie części: uczącą i testującą ($40\%$ całości). Na całym zbiorze danych weryfikowano skuteczność strategii. \\
+
+
+\newpage
+\noindent \textbf{I Wyniki badań.}\\
+\begin{figure}[h!]
+\centering
+\includegraphics[width = 0.6\textwidth]{MI_CADCHF_S4LS.png}
+\caption{Zysk skumulowany CADCHF na okresie testowym przy maksymalizacji według zysku}
+\end{figure}
+\FloatBarrier
+\begin{verbatim}
+OKRES WALIDUJĄCY
+Zysk skumulowany:     -8.3942
+Calmar:     -1
+Liczba otwartych pozycji długich:     5
+Liczba otwartych pozycji krótkich:     3
+\end{verbatim}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end {document}

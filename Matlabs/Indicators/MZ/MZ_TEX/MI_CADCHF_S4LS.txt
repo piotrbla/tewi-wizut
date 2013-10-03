@@ -1,0 +1,5 @@
+OKRES WALIDUJ¡CY
+Zysk skumulowany:     -8.3942
+Calmar:     -1
+Liczba otwartych pozycji d³ugich:     5
+Liczba otwartych pozycji krótkich:     3
