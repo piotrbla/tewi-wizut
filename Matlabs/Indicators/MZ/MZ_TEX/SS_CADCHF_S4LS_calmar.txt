@@ -1,0 +1,11 @@
+OKRES UCZ¡CY
+Zysk skumulowany:     0.2917
+Calmar:     0.4538
+Liczba otwartych pozycji d³ugich:     400
+Liczba otwartych pozycji krótkich:     405
+
+OKRES WALIDUJ¡CY
+Zysk skumulowany:     -1.3244
+Calmar:     -1
+Liczba otwartych pozycji d³ugich:     244
+Liczba otwartych pozycji krótkich:     245
