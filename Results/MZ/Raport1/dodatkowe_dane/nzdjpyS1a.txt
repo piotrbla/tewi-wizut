@@ -1,0 +1,4 @@
+Zysk skumulowany:     13.72
+Calmar:     2.4636
+Liczba otwartych pozycji:     1026
+ma:     119
