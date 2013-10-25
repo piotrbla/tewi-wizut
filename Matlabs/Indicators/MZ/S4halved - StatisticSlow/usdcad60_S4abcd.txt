@@ -1,0 +1,40 @@
+S4_1
+lerningBestReturn = 0.03972
+lerningBestCalmar = 2.0559
+lerningBestLa = 108
+testBestReturn = -0.92182
+testBestCalmar = -0.71274
+testBestLa = 96
+parametry = {5             8            22            14            14            16            26            15           100        0.0056}
+
+
+S4_2
+lerningBestReturn = 0.06964
+lerningBestCalmar = 2.9534
+lerningBestLa = 77
+testBestReturn = -2.5991
+testBestCalmar = -0.97223
+testBestLa = 62
+parametry = {25           16           16           24           26            4           16           25           40       0.0068}
+
+
+S4_3
+lerningBestReturn = 0.07
+lerningBestCalmar = 2.6316
+lerningBestLa = 68
+testBestReturn = -0.5615
+testBestCalmar = -0.45083
+testBestLa = 44
+parametry = {15           28            4           14           14           30           22           25           50       0.0068}
+
+
+S4_4
+lerningBestReturn = 0.06636
+lerningBestCalmar = 1.5354
+lerningBestLa = 123
+testBestReturn = -2.0221
+testBestCalmar = -0.94329
+testBestLa = 102
+parametry = {15            4           24           14           20            8           26           25           90       0.0044}
+
+
