@@ -1,0 +1,13 @@
+\begin{table} 
+ \begin{tabular}{|l|l|} 
+ \hline \multicolumn{2}{|c|}{Results} \\ \hline 
+Profit & 0.268\\ \hline  
+Calmar & 1.617\\ \hline  
+MCC & 0.054\\ \hline  
+p1 & 47\\ \hline  
+p2 & 22\\ \hline  
+p3 & 170\\ \hline  
+p4 & 0.0054\\ \hline  
+p5 & -52\\ \hline  
+\end{tabular} 
+ \end{table}

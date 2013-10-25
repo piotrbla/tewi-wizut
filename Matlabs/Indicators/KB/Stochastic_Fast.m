@@ -16,9 +16,9 @@ C=paramSectionLearn(:,4);
 %Parametry 
 pip = 0.01; % wielkosc pipsa na danym rynku
 spread = 1.8 * pip; % spread dla rynku
-pip =1; % wielkosc pipsa na danym rynku
+% pip =1; % wielkosc pipsa na danym rynku
 
-bestReturn = -1000;
+bestReturn = -100;
 bestMa = 0;
 %Czêœæ ucz¹ca
 
@@ -51,14 +51,16 @@ for paramALengthL=10:100 %liczba œwiec wstecz ( do max)
     WinReturn=0;
     DownReturn=0;
     CalmarLearn=0;
-    BestCalLEarn=0;
+    BestCalLearn=0;
     
     for j=2:lastCandleLearn
         
-        if ValK(j)>ValD(j) || ValK(j)<=ValD(j)
+        if ValK(j)>ValD(j) && ValK(j-1)<=ValD(j)
             Ra(j)=C(j+krok)-O(j+1)-spread ;% zysk z j-tej pozycji long zamykanej na zamkniêciu po 1 kroku 
+          else if ValK(j)<ValD(j) && ValK(j-1)>=ValD(j) 
+            Ra(j)=-C(j+krok)+O(j+1)+spread; 
+               end
         end
-
         sumRa(j)=sumRa(j-1)+Ra(j); %krzywa narastania kapita³u
         
         if sumRa(j)>WinReturn
@@ -72,63 +74,80 @@ for paramALengthL=10:100 %liczba œwiec wstecz ( do max)
      
     end
     chwi=chwi+1;   
+sumFinal=sumRa(lastCandleLearn);
+CalmarLearn=-sumFinal/DownReturn;
+
+if bestReturn < sumFinal
+    bestMa=paramALengthL;
 end
-[roz miej]=max(sumRa);
-bestMa=paramZakrespocz(miej);
+end
+
 % bestMa=miej;
 sumFinal=sumRa(lastCandleLearn);
 CalmarLearn=-sumFinal/DownReturn;
 
-O=paramSectionTest(:,1);
-L=paramSectionTest(:,3);
-H=paramSectionTest(:,2);
-C=paramSectionTest(:,4);
+%---------------------------------------------------------------------------test!!!!!
+O1=0;
+H1=0;
+L1=0;
+C1=0;
+O1=paramSectionTest(:,1);
+L1=paramSectionTest(:,3);
+H1=paramSectionTest(:,2);
+C1=paramSectionTest(:,4);
 
-
-tmp=countCandleTest-1;
-ValK2=zeros(1, countCandleLearn);
-
-%----------------test
-for paramALengthT=bestMa %liczba œwiec wstecz ( do max)
+% 
+% 
+ tmp=countCandleTest-1;
+ ValK2=zeros(1, countCandleTest);
+% 
+% %----------------test
+chwi=1;
+for paramALengthT=bestMa; %liczba œwiec wstecz ( do max)
+    chwi=chwi;
+    paramZakrespocz(chwi)=paramALengthT;
    for i=2:tmp
-       max3=max(H(max(i-paramALengthT, 1):i));
+       max3=max(H1(max(i-paramALengthT, 1):i));
        min3=min(L(max(i-paramALengthT, 1):i));
-      ValK2(i)=100*(C(i)-min3)/(max3-min3);
+      ValK2(i)=100*(C1(i)-min3)/(max3-min3);
    end
     ValD2=ema(ValK2,3);
-    sumRaTest=zeros(1,tmp);
-    RaTest=zeros(1,tmp);
+    sumRaT=zeros(1,tmp);
+    RaT=zeros(1,tmp);
    lastCandleTest=tmp;
-    
-    
+       
     %-------------obliczanie zysków
-    WinReturnTest=0;
-    DownReturnTest=0;
+    WinReturnT=0;
+    DownReturnT=0;
     CalmarTest=0;
     BestCalTest=0;
     
     for j=2:lastCandleTest
         
-        if ValK2(j)>ValD2(j) && ValK2(j)<=ValD2(j)
-            RaTest(j)=C(j+krok)-O(j+1)-spread ;% zysk z j-tej pozycji long zamykanej na zamkniêciu po 1 kroku 
+    if ValK2(j)>ValD2(j) && ValK2(j-1)<=ValD2(j)
+            RaT(j)=C1(j+krok)-O1(j+1)-spread ;% zysk z j-tej pozycji long zamykanej na zamkniêciu po 1 kroku 
+          else if ValK2(j)<ValD2(j) && ValK2(j-1)>=ValD2(j) 
+            RaT(j)=-C1(j+krok)+O1(j+1)+spread; 
+               end
         end
-
-        sumRaTest(j)=sumRaTest(j-1)+RaTest(j); %krzywa narastania kapita³u
+        sumRaT(j)=sumRaT(j-1)+RaT(j); %krzywa narastania kapita³u
         
-        if sumRaTest(j)>WinReturnTest
-            WinReturnTest=sumRaTest(j);
+        if sumRaT(j)>WinReturnT
+            WinReturnT=sumRaT(j);
         end
         
-        DownReturnTmpTest=sumRaTest(j)-WinReturnTest;
-        if  DownReturnTmpTest<DownReturnTest
-            DownReturnTest= DownReturnTmpTest;
+        DownReturnTmpT=sumRaT(j)-WinReturnT;
+        if  DownReturnTmpT<DownReturnT
+            DownReturnT= DownReturnTmpT;
         end
      
     end
-  
+    chwi=chwi+1;   
 end
-sumFinTest=sumRaTest(lastCandleTest);
-CalmarTest=-sumFinal/DownReturn;  
+ 
+
+sumFinalT=sumRaT(lastCandleTest);
+CalmarTest=-sumFinalT/DownReturnT;  
 
 hFig1 = figure(1);
 set(hFig1, 'Position', [200 200 640 480]);
@@ -139,33 +158,33 @@ ylabel('Zysk');
 set(hFig1, 'PaperPositionMode','auto')   %# WYSIWYG
 print(hFig1,'-dpng', '-r0',[mfilename '_ZyskUcz'])
 
-hFig1 = figure(2);
-set(hFig1, 'Position', [200 200 640 480]);
-plot(sumRaTest);
+hFig2 = figure(2);
+set(hFig2, 'Position', [200 200 640 480]);
+plot(sumRaT);
 title(['Return: ', mfilename]);
 xlabel('Candles count');
 ylabel('Zysk');
-set(hFig1, 'PaperPositionMode','auto')   %# WYSIWYG
-print(hFig1,'-dpng', '-r0',[mfilename '_ZyskTest'])
+set(hFig2, 'PaperPositionMode','auto')   %# WYSIWYG
+print(hFig2,'-dpng', '-r0',[mfilename '_ZyskTest'])
 
-hFig2 = figure(3);
-set(hFig2, 'Position', [200 200 640 480]);
-plot(ValK(3:300),'r');
+hFig3 = figure(3);
+set(hFig3, 'Position', [200 200 640 480]);
+plot(ValK(3:100),'r');
 hold on;
-plot(ValD(3:300));
+plot(ValD(3:100));
 title(['Stochastic Fast - strategia: ', mfilename]);
 xlabel('Candles count');
 ylabel('Oscillator');
-set(hFig2, 'PaperPositionMode','auto')   %# WYSIWYG
-print(hFig2,'-dpng', '-r0', [mfilename '_K_i_D_uczace'] )
+set(hFig3, 'PaperPositionMode','auto')   %# WYSIWYG
+print(hFig3,'-dpng', '-r0', [mfilename '_K_i_D_uczace'] )
 
-hFig2 = figure(4);
-set(hFig2, 'Position', [200 200 640 480]);
-plot(ValK2(3:300),'r');
+hFig4 = figure(4);
+set(hFig4, 'Position', [200 200 640 480]);
+plot(ValK2(3:100),'r');
 hold on;
-plot(ValD2(3:300));
+plot(ValD2(3:100));
 title(['Stochastic Fast - strategia: ', mfilename]);
 xlabel('Candles count');
 ylabel('Oscillator');
-set(hFig2, 'PaperPositionMode','auto')   %# WYSIWYG
-print(hFig2,'-dpng', '-r0', [mfilename '_K_i_D_testujace'])
+set(hFig4, 'PaperPositionMode','auto')   %# WYSIWYG
+print(hFig4,'-dpng', '-r0', [mfilename '_K_i_D_testujace'])

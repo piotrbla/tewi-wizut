@@ -1,0 +1,7 @@
+\begin{table} 
+ \begin{tabular}{|l|l|l|} 
+ \hline  & actual = profit & actual = loss\\ \hline  
+prediction = profit & 79 & 42\\ \hline  
+prediction = loss & 2649 & 3063\\ \hline  
+\end{tabular} 
+ \end{table}
