@@ -44,13 +44,13 @@ namespace generator
                 writer.WriteLine(@"\begin{figure}[h]");
                 writer.WriteLine(@"\centering");
                 var loopIndex = 0;
-                foreach (var pictureFile in Directory.GetFiles(authorInitials, string.Format(filenameFormat + ".png", "*")))
+                foreach (var pictureFile in Directory.GetFiles(authorInitials, string.Format(filenameFormat + ".eps", "*")))
                 {
                     writer.WriteLine(loopIndex == 4
-                                         ? @"\begin{minipage}{.49\linewidth}"
-                                         : @"\begin{minipage}{\linewidth}");
+                                         ? @"\begin{minipage}{\linewidth}"
+                                         : @"\begin{minipage}{.49\linewidth}");
                     writer.WriteLine(@"\centering");
-                    var widthValue = (loopIndex == 4) ? "0.82" : "0.6";
+                    var widthValue = (loopIndex == 4) ? "0.6" : "0.82";
                     writer.WriteLine(@"\includegraphics[width=" + widthValue + @"\textwidth]{images/" + Path.GetFileName(pictureFile) + "}");
                     writer.WriteLine(@"\subcaption{Profit - " + pictureFile.Substring(variantNamePlace, 3) + "}");
                     writer.WriteLine(@"\label{" + labels[loopIndex]  + "}");
@@ -62,6 +62,7 @@ namespace generator
                 }
                 writer.WriteLine(@"\caption{" + marketName  + " market results}");
                 writer.WriteLine(@"\end{figure}");
+                writer.WriteLine(@"\FloatBarrier");
             }
             return File.ReadAllText(texFilePath);
         }
