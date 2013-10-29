@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using System.Windows.Forms;
 using System.IO;
 using generator.Properties;
@@ -33,6 +34,10 @@ namespace generator
             builderAb.Append(oneChartGeneratorAb.Generate("gbpchf{0}", "GBPCHF"));
             builderAb.Append(oneChartGeneratorAb.Generate("silver{0}", "SILVER"));
             File.WriteAllText(Path.Combine(outputFolder, "AB.tex"), builderAb.ToString());
+            StringBuilder allContent = new StringBuilder();
+            allContent.Append(File.ReadAllText("MZ.txt"));
+            allContent.Append(File.ReadAllText("AB.txt"));
+            File.WriteAllText(Path.Combine(outputFolder, "MAIN.tex"), allContent.ToString());
             toolStripStatusLabel1.Text = Resources.btnGenerateClickGenerated;
         }
     }
