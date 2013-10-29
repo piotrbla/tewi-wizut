@@ -34,11 +34,18 @@ namespace generator
             builderAb.Append(oneChartGeneratorAb.Generate("gbpchf{0}", "GBPCHF"));
             builderAb.Append(oneChartGeneratorAb.Generate("silver{0}", "SILVER"));
             File.WriteAllText(Path.Combine(outputFolder, "AB.tex"), builderAb.ToString());
-            StringBuilder allContent = new StringBuilder();
-            allContent.Append(File.ReadAllText("MZ.txt"));
-            allContent.Append(File.ReadAllText("AB.txt"));
-            File.WriteAllText(Path.Combine(outputFolder, "MAIN.tex"), allContent.ToString());
+            WriteMainFile(outputFolder, "MZ;AB");
             toolStripStatusLabel1.Text = Resources.btnGenerateClickGenerated;
+        }
+
+        private static void WriteMainFile(string outputFolder, string initials )
+        {
+            StringBuilder allContent = new StringBuilder();
+            foreach (var initial in initials.Split(new char[] {';'}))
+            {
+                allContent.Append(File.ReadAllText(Path.Combine(outputFolder, initial + ".tex")));
+            }
+            File.WriteAllText(Path.Combine(outputFolder, "MAIN.tex"), allContent.ToString());
         }
     }
 }
