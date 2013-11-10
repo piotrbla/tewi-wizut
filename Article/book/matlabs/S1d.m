@@ -74,7 +74,7 @@ set(hFig, 'Position', [200 200 840 400]);
 bestSumAll = bestSumAll(bestSumAll~=0);
 plot(bestSumAll);
 xlim([0 length(bestSumAll)]);
-xlabel('Candles');
-ylabel('Profit');
+xlabel('Swiece');
+ylabel('Skumulowany zysk');
 set(hFig, 'PaperPositionMode','auto') ;  %# WYSIWYG
 print(hFig,'-depsc', '-r0',[mfilename '_' rynek]);
