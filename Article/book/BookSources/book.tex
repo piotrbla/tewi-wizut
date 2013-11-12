@@ -1,0 +1,76 @@
+%%%%%%%%%%%%%%%%%%%% book.tex %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  root file for the chapters
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[envcountsame,envcountchap]{svmono}
+
+% choose options for [] as required from the list
+% in the Reference Guide, Sect. 2.2
+
+\usepackage{makeidx}         % allows index generation
+\usepackage{graphicx}        % standard LaTeX graphics tool
+                             % when including figure files
+\usepackage{multicol}        % used for the two-column index
+\usepackage[bottom]{footmisc}% places footnotes at page bottom
+% etc.
+% see the list of further useful packages
+% in the Reference Guide, Sects. 2.3, 3.1-3.3
+% Pakiety dołączane do artykułu TEWI - lista do przejrzenia
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{amsthm}
+\usepackage{txfonts}
+\usepackage{epstopdf}
+\usepackage{placeins}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[table]{xcolor}
+\usepackage{array}
+\usepackage{subcaption}
+\captionsetup{compatibility=false}%http://tex.stackexchange.com/questions/31906/subcaption-package-compatibility-issue
+
+% ^^^^^^^Pakiety dołączane do artykułu TEWI - powyższa lista do przejrzenia^^^^^^^
+
+
+\makeindex             % used for the subject index
+                       % please use the style svind.ist with
+                       % your makeindex program
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\author{Antoni Wiliński, Aneta Bera, Katarzyna Buda, Piotr Błaszyński, Łukasz Brzosko, Kamil Knyszyński, Wojciech Nowicki, Tomasz Nyczaj, Artur Pietrzyk, Anton Smoliński, Michał Zabłocki}
+\title{Badania algorytmicznych strategii inwestycyjnych???\\
+{\small Praca wykonana w ramach projektu TEWI finansowanego z Programu Operacyjnego Innowacyjna Gospodarka w latach 2012-2013}}
+\subtitle{-- Podtytuł --}
+\maketitle
+
+\frontmatter%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\include{dedic}
+\include{pref}
+
+\tableofcontents
+
+
+\mainmatter%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\include{part}
+\include{chapter1Introduction}
+\include{chapter3SimpleRules}
+%\appendix
+%\include{appendix}
+
+\backmatter%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\include{solutions}
+\include{referenc}
+\printindex
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}
+
+
+
+
+
