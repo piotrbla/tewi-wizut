@@ -1,0 +1,4 @@
+S4L
+sumReturn = 18.4184
+Calmar = 2.3641
+la = 8777
