@@ -15,6 +15,14 @@
 % see the list of further useful packages
 % in the Reference Guide, Sects. 2.3, 3.1-3.3
 % Pakiety dołączane do artykułu TEWI - lista do przejrzenia
+\usepackage{polski}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{listings}
+\usepackage[svgnames]{xcolor}
+
+
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{graphicx}
@@ -24,10 +32,27 @@
 \usepackage{placeins}
 \usepackage[english]{babel}
 \usepackage[utf8]{inputenc}
-\usepackage[table]{xcolor}
 \usepackage{array}
 \usepackage{subcaption}
 \captionsetup{compatibility=false}%http://tex.stackexchange.com/questions/31906/subcaption-package-compatibility-issue
+
+ \lstset{literate={ą}{{\k{a}}}1 {ć}{{\'c}}1 {ę}{{\k{e}}}1 {ł}{{\l{}}}1 {ń}{{\'n}}1 {ó}{{\'o}}1 {ś}{{\'s}}1 {ż}{{\.z}}1 {ź}{{\'z}}1 {Ą}{{\k{A}}}1 {Ć}{{\'C}}1 {Ę}{{\k{E}}}1 {Ł}{{\L{}}}1 {Ń}{{\'N}}1 {Ó}{{\'O}}1 {Ś}{{\'S}}1 {Ż}{{\.Z}}1 {Ź}{{\'Z}}1 }
+ \lstset{breaklines=true}
+\lstset{language=Matlab,
+  keywords={break,case,catch,continue,else,elseif,end,for,function,
+     global,if,otherwise,persistent,return,switch,try,while},
+  basicstyle=\ttfamily,
+  keywordstyle=\color{blue},
+  commentstyle=\color{DarkGreen},
+  stringstyle=\color{dkgreen},
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  stepnumber=1,
+  numbersep=10pt,
+  backgroundcolor=\color{white},
+  tabsize=4,
+  showspaces=false,
+  showstringspaces=false}
 
 % ^^^^^^^Pakiety dołączane do artykułu TEWI - powyższa lista do przejrzenia^^^^^^^
 
@@ -56,7 +81,7 @@
 
 \mainmatter%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \include{part}
-\include{chapter1Introduction}
+\include{chapter1Indicators}
 \include{chapter3SimpleRules}
 %\appendix
 %\include{appendix}
