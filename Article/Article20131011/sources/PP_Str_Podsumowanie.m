@@ -64,27 +64,31 @@ FND=0;
 
 k1=47;
 t1=22;
-l1=165;
+l1=170;
 b1=0.0054;
 vp1=-52;
+p1=1;
 
 k2=178;
 t2=139;
 l2=31;
 b2=0.0016;
 vp2=-246;
+p2=1;
 
 k3=52;
 t3=23;
 l3=177;
 b3=0.0018;
 vp3=-129;
+p3=1;
 
 k4=91;
 t4=2;
 l4=76;
 b4=0.0072;
 vp4=-190;
+p4=1;
 
 begin1=k1+l1+1;%Zmienna do wyznaczenia najmniejszego i, dla którego mo¿emy iterowaæ
 if (t1+1>begin1)
@@ -235,6 +239,7 @@ if (i>=begin2)
     sumR2a(i)=sum(R2a(begin2:i));
 end
 if (i>=begin3)
+       %Warunek zwi¹zany ze sprawdzeniem krzywej zysku skumulowanego
     if SS1(i)>C(i,4) && C(i,4)>SS2(i) && v3(i)==0 %otwarcie pozycji d³ugiej je¿eli cena jest pomiêdzy SS2 i SS1
         R3(i)=C(i+k3,4)-C(i,4)-spread;
         if p3==1  %czy dotychczasowy przebieg krzywej zysku skumulowanego sumR3 sugeruje, by otworzyæ pozycjê
@@ -264,13 +269,12 @@ if (i>=begin3)
         end        
     end
     
-    %Warunek zwi¹zany ze sprawdzeniem krzywej zysku skumulowanego
     if sumR3(i-k3-l3)-sumR3(i-k3)>b3
         p3=0;
     else
         p3=1;
     end 
-    
+ 
     %Obliczanie zysku skumulowanego
     sumR3(i)=sum(R3(begin3:i));
     sumR3a(i)=sum(R3a(begin3:i));
@@ -320,18 +324,22 @@ suma(i)=sumR4a(i)+sumR3a(i)+sumR2a(i)+sumR1a(i);
 end  
 
 sumaA=sumR1a(6000)
+CalmarA=obliczCalmara(sumR1a)
 MCCA=(TPA*TNA-FPA*FNA)/sqrt((TPA+FPA)*(TPA+FNA)*(TNA+FPA)*(TNA+FNA))
 macierzA=[TPA FPA;FNA TNA]
 
 sumaB=sumR2a(6000)
+CalmarB=obliczCalmara(sumR2a)
 MCCB=(TPB*TNB-FPB*FNB)/sqrt((TPB+FPB)*(TPB+FNB)*(TNB+FPB)*(TNB+FNB))
 macierzB=[TPB FPB;FNB TNB]
 
 sumaC=sumR3a(6000)
+CalmarC=obliczCalmara(sumR3a)
 MCCC=(TPC*TNC-FPC*FNC)/sqrt((TPC+FPC)*(TPC+FNC)*(TNC+FPC)*(TNC+FNC))
 macierzC=[TPC FPC;FNC TNC]
 
 sumaD=sumR4a(6000)
+CalmarD=obliczCalmara(sumR4a)
 MCCD=(TPD*TND-FPD*FND)/sqrt((TPD+FPD)*(TPD+FND)*(TND+FPD)*(TND+FND))
 macierzD=[TPD FPD;FND TND]
 
@@ -340,8 +348,16 @@ TN=TNA+TNB+TNC+TND;
 FP=FPA+FPB+FPC+FPD;
 FN=FNA+FNB+FNC+FND;
 suma(end)
+CalmarS=obliczCalmara(suma)
 MCC=(TP*TN-FP*FN)/sqrt((TP+FP)*(TP+FN)*(TN+FP)*(TN+FN))
 macierz=[TP FP;FN TN]
-
+file_name = 'PivotPointsA';
+SaveGraph( sumR1a, file_name );
+file_name = 'PivotPointsB';
+SaveGraph( sumR2a, file_name );
+file_name = 'PivotPointsC';
+SaveGraph( sumR3a, file_name );
+file_name = 'PivotPointsD';
+SaveGraph( sumR4a, file_name );
 file_name = 'PivotPointsPodsumowanie';
 SaveGraph( suma, file_name );
