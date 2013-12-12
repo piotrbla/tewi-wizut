@@ -21,7 +21,6 @@ The authors examine two transactional strategies based on the classifier which o
 The paper is well writen and is easy to follow. The key concepts are clearly explained.
 The methodology is appropriated, as well as the references. The paper is of interest for the scope of the journal.
 
-In the introduction, please try to use indirect style and not to refer to "the authors" recurrently.
 Please carefully proofread the paper and improve the English.
 
 Please try to remark the innovations presented in the paper. The evaluations should also be improved. The results should be compared to the related work.
