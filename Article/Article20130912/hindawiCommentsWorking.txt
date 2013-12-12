@@ -1,21 +1,12 @@
 Editor # 1
-Recommendation: This manuscript is rigorous and provides a useful contribution to its area of research and should be published.
-1. The manuscript is concerned with study on the effectiveness of the investment strategy based on a classifier with rules adapted by machine learning, which is interesting. It is relevant and within the scope of the journal.
-2. However the manuscript, in its present form, contains several weaknesses. Adequate revisions to the following points should be undertaken in order to justify recommendation for publication.
-3. Full names should be shown for all abbreviations in their first occurrence in texts. For example, US in p.2, OHLC in p.4, SL in p.8, TP in p.8, PSO in p.11, 2D in p.13, etc.
 4. For readers to quickly catch the contribution in this work, it would be better to highlight major difficulties and challenges, and your original achievements to overcome them, in a clearer way in abstract and introduction.
-5. It is mentioned in p.3 that “…However, the issue of emotions in the trade is not considered here, but only noticed. …” Why it is not considered? How it can be considered? More justifications should be provided on this issue.
 6. It is mentioned in p.11 that the process pseudo-random strategy is adopted to find the boundaries of the parameter space. What are other feasible alternatives? What are the advantages of adopting this particular strategy over others in this case? How will this affect the results? The authors should provide more details on this.
 7. It is mentioned in p.11 that PSO algorithm was used to search for solutions within prescribed limits of the first stage. What are other feasible alternatives? What are the advantages of adopting this particular algorithm over others in this case? How will this affect the results? The authors should provide more details on this.
 8. Some key parameters are mentioned but some others are not. The rationale on the choice of the particular set of parameters should be explained. Have the authors experimented with other sets of values? What are the sensitivities of these parameters on the results? More details should be provided.
 9. Some assumptions are stated in various sections. More justifications should be provided on these assumptions. Evaluation on how they will affect the results should be made.
 10. Moreover, the manuscript could be substantially improved by relying and citing more on recent literatures about real-life applications of various soft computing techniques in different fields such as the followings:.
-? Huang, Z.K., et al., “A New Image Thresholding Method Based on Gaussian Mixture Model,” Applied Mathematics and Computation 205 (2): 899-907 2008.
-? Taormina, R., et al., “Artificial Neural Network simulation of hourly groundwater levels in a coastal aquifer system of the Venice lagoon”, Engineering Applications of Artificial Intelligence 25 (8): 1670-1676 2012.
-? Wu, C.L., et al., “Predicting monthly streamflow using data-driven models coupled with data-preprocessing techniques,” Water Resources Research 45, W08432, doi:10.1029/2007WR006737, 2009.
-? Zhang, J., et al., “Multilayer Ensemble Pruning via Novel Multi-sub-swarm Particle Swarm Optimization,” Journal of Universal Computer Science 15 (4): 840-858 2009.
-? Cheng, C.T., et al., “Long-term prediction of discharges in Manwan Reservoir using artificial neural network models,” Lecture Notes in Computer Science 3498: 1040-1045 2005.
-? Chau, K.W., “Application of a PSO-based neural network in analysis of outcomes of construction claims,” Automation in Construction 16 (5): 642-646 2007.
+Add references
+
 11. Some inconsistencies and minor errors that needed attention are:
 ? In p.11, “…but with diffeerent start in time...” should read “…but with different start in time...”
 ? In p.16, “…It shows a fairly obvious that a good fit...” should read “…It is fairly obvious that a good fit...”
