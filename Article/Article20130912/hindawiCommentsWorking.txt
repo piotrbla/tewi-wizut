@@ -1,15 +1,10 @@
 Editor # 1
 4. For readers to quickly catch the contribution in this work, it would be better to highlight major difficulties and challenges, and your original achievements to overcome them, in a clearer way in abstract and introduction.
-6. It is mentioned in p.11 that the process pseudo-random strategy is adopted to find the boundaries of the parameter space. What are other feasible alternatives? What are the advantages of adopting this particular strategy over others in this case? How will this affect the results? The authors should provide more details on this.
-7. It is mentioned in p.11 that PSO algorithm was used to search for solutions within prescribed limits of the first stage. What are other feasible alternatives? What are the advantages of adopting this particular algorithm over others in this case? How will this affect the results? The authors should provide more details on this.
 8. Some key parameters are mentioned but some others are not. The rationale on the choice of the particular set of parameters should be explained. Have the authors experimented with other sets of values? What are the sensitivities of these parameters on the results? More details should be provided.
 9. Some assumptions are stated in various sections. More justifications should be provided on these assumptions. Evaluation on how they will affect the results should be made.
 10. Moreover, the manuscript could be substantially improved by relying and citing more on recent literatures about real-life applications of various soft computing techniques in different fields such as the followings:.
 Add references
 
-11. Some inconsistencies and minor errors that needed attention are:
-? In p.11, “…but with diffeerent start in time...” should read “…but with different start in time...”
-? In p.16, “…It shows a fairly obvious that a good fit...” should read “…It is fairly obvious that a good fit...”
 12. In the conclusion section, the limitations of this study, suggested improvements of this work and future directions should be highlighted.
 Editor # 2
 Recommendation: This manuscript is either seriously flawed or does not provide a useful contribution to its area of research and should be rejected.
