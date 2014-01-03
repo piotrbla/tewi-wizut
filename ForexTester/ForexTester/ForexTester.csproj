@@ -50,6 +50,7 @@
     <Compile Include="Candle.cs" />
     <Compile Include="ChartDrawing.cs" />
     <Compile Include="Strategies\BaseStrategy.cs" />
+    <Compile Include="Strategies\EarthWorm.cs" />
     <Compile Include="Strategies\S1DParallel.cs" />
     <Compile Include="Strategies\S1CParallel.cs" />
     <Compile Include="Strategies\S1BParallel.cs" />

@@ -15,7 +15,7 @@ namespace ForexTester
         public void Draw(List<Candle> candles)
         {
             m_chart.Series.Clear();
-            var candlesSeries = m_chart.Series.Add("candles");
+            var candlesSeries = m_chart.Series.Add("returns");
             candlesSeries.ChartType = SeriesChartType.Candlestick;
             var upperLinesSeries = m_chart.Series.Add("upperLines");
             upperLinesSeries.ChartType = SeriesChartType.Line;
@@ -42,13 +42,27 @@ namespace ForexTester
                         oldChannel.Points.Add(new DataPoint(x, candle.Close));
                     }
 
-                    //upperLinesSeries.Points.Add(new DataPoint(x, candle.Close + delta * candle.Close));
-                    //midLinesSeries.Points.Add(new DataPoint(x, candle.Close));
-                    //lowerLinesSeries.Points.Add(new DataPoint(x, candle.Close-delta*candle.Close));
+                    upperLinesSeries.Points.Add(new DataPoint(x, candle.Close + delta * candle.Close));
+                    midLinesSeries.Points.Add(new DataPoint(x, candle.Close));
+                    lowerLinesSeries.Points.Add(new DataPoint(x, candle.Close-delta*candle.Close));
                 }
                 x++;
                 if (x > 50)
                     break;
+            }
+
+        }
+
+        public void DrawReturn(List<double> returns)
+        {
+            m_chart.Series.Clear();
+            var midLinesSeries = m_chart.Series.Add("returns");
+            midLinesSeries.ChartType = SeriesChartType.Line;
+            var x = 0;
+            foreach (var returnValue in returns)
+            {
+                midLinesSeries.Points.Add(new DataPoint(x, returnValue));
+                x++;
             }
 
         }
