@@ -61,7 +61,7 @@ namespace ForexTester
             this.chart1.ChartAreas.Add(chartArea1);
             this.chart1.Location = new System.Drawing.Point(14, 436);
             this.chart1.Name = "chart1";
-            this.chart1.Size = new System.Drawing.Size(1880, 619);
+            this.chart1.Size = new System.Drawing.Size(1869, 619);
             this.chart1.TabIndex = 1;
             this.chart1.Text = "chart1";
             // 
