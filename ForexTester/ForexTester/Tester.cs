@@ -37,9 +37,12 @@ namespace ForexTester
         private void Button1Click(object sender, EventArgs e)
         {
             LoadData();
-            ComputeLines();
-            var chartDrawing = new ChartDrawing(chart1);
-            chartDrawing.Draw(m_candles);
+            if (!chkDrawReturns.Checked)
+            {
+                ComputeLines();
+                var chartDrawing = new ChartDrawing(chart1);
+                chartDrawing.Draw(m_candles);
+            }
         }
 
         private void LoadData()
@@ -105,18 +108,13 @@ namespace ForexTester
         {
             var watch = new Stopwatch();
             watch.Start();
-            //var s = new S4(m_candles);
-            //var s = new S4Parallel(m_candles);
-            //var s = new S1A(m_candles.GetRange(0, 5000));
-            S1Parallel s  =
-               new S1AParallel(m_candles.GetRange(0, 5000));
+            var s = new EarthWorm(m_candles);
             s.ComputeStrategy(cmbFiles.SelectedItem);
-            s = new S1BParallel(m_candles.GetRange(0, 5000));
-            s.ComputeStrategy(cmbFiles.SelectedItem);
-            s = new S1CParallel(m_candles.GetRange(0, 5000));
-            s.ComputeStrategy(cmbFiles.SelectedItem);
-            s = new S1DParallel(m_candles.GetRange(0, 5000));
-            s.ComputeStrategy(cmbFiles.SelectedItem);
+            if (chkDrawReturns.Checked)
+            {
+                var chartDrawing = new ChartDrawing(chart1);
+                chartDrawing.DrawReturn(s.GetSumReturns());
+            }
 
 
             watch.Stop();

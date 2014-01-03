@@ -41,6 +41,7 @@ namespace ForexTester
             this.cmbFiles = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.txtStatus = new System.Windows.Forms.TextBox();
+            this.chkDrawReturns = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -112,11 +113,24 @@ namespace ForexTester
             this.txtStatus.Size = new System.Drawing.Size(1763, 331);
             this.txtStatus.TabIndex = 6;
             // 
+            // chkDrawReturns
+            // 
+            this.chkDrawReturns.AutoSize = true;
+            this.chkDrawReturns.Checked = true;
+            this.chkDrawReturns.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkDrawReturns.Location = new System.Drawing.Point(202, 36);
+            this.chkDrawReturns.Name = "chkDrawReturns";
+            this.chkDrawReturns.Size = new System.Drawing.Size(126, 17);
+            this.chkDrawReturns.TabIndex = 7;
+            this.chkDrawReturns.Text = "Draw strategy returns";
+            this.chkDrawReturns.UseVisualStyleBackColor = true;
+            // 
             // Tester
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1895, 1067);
+            this.Controls.Add(this.chkDrawReturns);
             this.Controls.Add(this.txtStatus);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cmbFiles);
@@ -143,6 +157,7 @@ namespace ForexTester
         private System.Windows.Forms.ComboBox cmbFiles;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtStatus;
+        private System.Windows.Forms.CheckBox chkDrawReturns;
     }
 }
 
