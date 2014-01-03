@@ -1,0 +1,4 @@
+Suma skumulowana: 0.0360
+ Calmar: 0.6482
+ p1: 20, p2: 1
+ long: 1403, short: 1133
