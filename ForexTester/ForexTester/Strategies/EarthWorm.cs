@@ -27,21 +27,26 @@ namespace ForexTester.Strategies
             var bestReturn = -120.0;
             var candlesCount = Candles.Count;
             var bestCalmar = 0.0;
-            var bestMa = 0;
+            var bestParam1 = 0;
+            var bestParam2 = 0;
             var shortPositionOpen = 0;
             var longPositionOpen = 0;
             const double defaultSpread = 0.0002;
             using (var writer = new StreamWriter(filename, false))
             {
                 writer.WriteLine("results");
-                for (var param1 = 20; param1 <= 20; param1 += 1)
+                //const int param1 = 215;
+                for (var param1 = 10; param1 <= 80; param1 += 1)
                 {
-                    for (var param2 = 1; param2 <= 1; param2++)
+                   // const int param2 = 3;
+                    for (var param2 = 1; param2 <= 40; param2++)
+                        //for (var param2 = 1; param2 <= param1 / 2 + 1; param2++)
                     {
                         var transactionState = TransactionStates.None;
                         var candlesBegin = param1 + 1;
                         var kon = candlesCount - 1;
                         var lastCandle = kon;
+                        var isPosition = false;
                         sumRa = new List<double>(candlesCount);
                         var returnValues = new List<double>(candlesCount);
                         var drawdowns = new List<double>(candlesCount);
@@ -66,6 +71,7 @@ namespace ForexTester.Strategies
                                 shortPositionOpen++;
                                 positionReturn = Candles[i].Close - Candles[i + 1].Close - spread;
                                 transactionState = TransactionStates.Short;
+                                isPosition = true;
                                 writer.WriteLine("OTWARCIE Short: \t\t '{0} {1}'\t{2}\t{3}", Candles[i].Date, Candles[i].Time, GetDouble(positionReturn), GetDouble(Candles[i].Close));
 
                             }
@@ -75,12 +81,13 @@ namespace ForexTester.Strategies
                                 longPositionOpen++;
                                 positionReturn = -Candles[i].Close + Candles[i + 1].Close - spread;
                                 transactionState = TransactionStates.Long;
+                                isPosition = true;
                                 writer.WriteLine("OTWARCIE  LONG: \t\t '{0} {1}'\t{2}\t{3}", Candles[i].Date, Candles[i].Time, GetDouble(positionReturn), GetDouble(Candles[i].Close));
                             }
                             returnValues.Add(positionReturn);
                             sumRa.Add(sumRa[i - 1] + returnValues[i]); //krzywa narastania kapitału
-                        }
 
+                        }
 
                         var recordReturn = 0.0; //rekord zysku
                         var recordDrawdown = 0.0; //rekord obsuniecia
@@ -103,9 +110,10 @@ namespace ForexTester.Strategies
                         {
                             bestReturn = sumReturn;
                             bestCalmar = calmar;
-                            bestMa = param1;
-                            writer.WriteLine("{0}\t{1}\t{2}",
-                                                GetDouble(sumReturn), GetDouble(param1),
+                            bestParam1 = param1;
+                            bestParam2 = param2;
+                            writer.WriteLine("{0}\t{1}\t{2}\t{3}",
+                                                GetDouble(sumReturn), GetDouble(param1), GetDouble(param2),
                                                 GetDouble(calmar));
                         }
                     }
@@ -113,8 +121,8 @@ namespace ForexTester.Strategies
             }
             using (var writer = new StreamWriter(filename, true))
             {
-                writer.WriteLine("{0}\t{1}\t{2}",
-                        GetDouble(bestReturn), GetDouble(bestMa),
+                writer.WriteLine("{0}\t{1}\t{2}\t{3}",
+                        GetDouble(bestReturn), GetDouble(bestParam1), GetDouble(bestParam2),
                         GetDouble(bestCalmar));
             }
 
