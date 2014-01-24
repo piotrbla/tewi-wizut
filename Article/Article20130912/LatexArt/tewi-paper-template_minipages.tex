@@ -143,39 +143,42 @@ In both sub strategies there are 7 cases of closing the open positions, which re
 
 \noindent Firstly the terms for closing the long positions that were opened by conditions for TewiMiC will be presented.
 \begin{enumerate}
-\item Opened long position will be closed, if at the close of the candle (i + p2) the position remained open, where i - number of candle, which was opened;
+\item Opened long position will be closed, if at the close of the candle (i + p2) the position remained open, where \textit{i} is number of candle, which was opened;
 
-\item Position will be closed if at the opening of the next (i + k)-th - the candle after i-th candle, in which the position was opened, following condition is met: 
+\item Position will be closed if at the opening of the next (i + k)th, the candle after \textit{i}th candle, in which the position was opened, following condition is met: 
 \begin{equation}
 PriceO(i+k)-Price(i) <-SL
 \end{equation} 
-where \textit{PriceO(i+k)} is the opening value for (i+k)-th candle and \textit{SL} is Stop Loss (level of acceptable risk in one trade) in pips;\\
+where \textit{PriceO(i+k)} is the opening value for \textit{(i+k)}th candle and \textit{SL} is StopLoss (level of acceptable risk in one trade) in pips;\\
 Then the profit (in this case loss) will be calculated as:
 \begin{equation}
 Profit =PriceO (i+k)-Price(i);
 \end{equation}
 
-\item Position will be closed if inside the next (i + k)-th - the candle after i-th candle, in which the position was opened, following condition is met: 
+\item Position will be closed if inside the next \textit{(i + k)}th, the candle after \textit{i}th candle, in which the position was opened, following condition is met: 
 \begin{equation}
-(PriceO(i+k)-Price(i) )>-SL \text{ and } (LowPrice(i+k)-Price(i))<-SL
+\begin{split}
+(PriceO(i+k)-Price(i) )>-SL,\\
+(LowPrice(i+k)-Price(i))<-SL.
+\end{split}
 \end{equation} 
 Then the profit (in this case loss) will be calculated as:
 \begin{equation}
 Profit =-SL;
 \end{equation}
-where LowPrice(i+k) – is a minimum value of (i+k)-th candle;
+where LowPrice(\textit{i+k}) is a minimum value of (\textit{i+k})th candle;
 
 \item Position will be closed if at the opening of the next (i + k)-th - the candle after i-th candle, in which the position was opened, following condition is met: 
 \begin{equation}
 PriceO(i+k)-Price(i)>TP
 \end{equation} 
-where \textit{TP} is Take Profit (maximum reward level in single trade) in pips;\\
+where \textit{TP} is TakeProfit (maximum reward level in single trade) in pips;\\
 Then the profit will be calculated as:
 \begin{equation}
 Profit =PriceO (i+k)-Price(i);
 \end{equation}
 
-\item Position will be closed if inside the next (i + k)-th - the candle after i-th candle, in which the position was opened, following condition is met: 
+\item Position will be closed if inside the next (\textit{i + k})th - the candle after \textit{i}th candle, in which the position was opened, following condition is met: 
 \begin{equation}
 (PriceO(i+k)-Price(i) )<TP \text{ and } (HighPrice(i+k)-Price(i))>TP
 \end{equation} 
@@ -185,7 +188,7 @@ Profit =TP;
 \end{equation}
 where \textit{HighPrice(i+k)} is the maximum value for (i+k) candle;
 
-\item Position will be closed if at the opening of the next (i + k)-th - the candle after i-th candle, in which the position was opened, following condition is met: 
+\item Position will be closed if at the opening of the next (\textit{i + k})th - the candle after \textit{i}th candle, in which the position was opened, following condition is met: 
 \begin{equation}
 PriceO(i+k) >topBorder(i+k)
 \end{equation} 
@@ -194,7 +197,7 @@ Then the profit will be calculated as:
 Profit =PriceO (i+k) -  Price(i) ;
 \end{equation}
 
-\item Position will be closed if inside the next (i + k)-th - the candle after i-th candle, in which the position was opened, following condition is met: 
+\item Position will be closed if inside the next (\textit{i + k})th - the candle after \textit{i}th candle, in which the position was opened, following condition is met: 
 \begin{equation}
 Price(i+k) >topBorder(i+k)
 \end{equation} 
@@ -207,10 +210,10 @@ Profit =topBorder (i+k) -  Price(i) ;
 
 \noindent In sub strategy TewiMiD conditions will look slightly different.
 \begin{enumerate}
-\item Opened short position will be closed if at the close of the candle (i + p2)-th the position remained open;\\
+\item Opened short position will be closed if at the close of the candle (\textit{i + p2})th the position remained open;\\
 
 
-\item Position will be closed if at the opening of the next (i + k)-th - the candle after i-th candle, in which the position was opened, following condition is met:
+\item Position will be closed if at the opening of the next (\textit{i + k})th - the candle after \textit{i}th candle, in which the position was opened, following condition is met:
 \begin{equation}
 Price(i)-PriceO(i+k)<-SL
 \end{equation}                                      
@@ -219,7 +222,7 @@ Then the profit (in this case loss) will be calculated as:
 Profit =-PriceO (i+k) +  Price(i) ;
 \end{equation}
 
-\item Position will be closed if inside the next (i + k)-th - the candle after i-th candle, in which the position was opened, following condition is met:
+\item Position will be closed if inside the next (\textit{i + k})th - the candle after \textit{i}th candle, in which the position was opened, following condition is met:
 \begin{equation}
 (-PriceO (i+k)+price(i) )>-SL \text{ and } (-HighPrice(i+k)+Price(i))<-SL
 \end{equation}                          
@@ -228,7 +231,7 @@ Then the profit (in this case loss) will be calculated as:
 Profit =-SL; 
 \end{equation}
 
-\item Position will be closed if at the opening of the next (i + k)-th - the candle after i-th candle, in which the position was opened, following condition is met:
+\item Position will be closed if at the opening of the next (\textit{i + k})th - the candle after \textit{i}th candle, in which the position was opened, following condition is met:
 \begin{equation}
 Price(i)-PriceO(i+k)>TP
 \end{equation}                                           
@@ -238,7 +241,7 @@ Profit =-PriceO (i+k)  + Price(i) ;
 \end{equation} 
 
 
-\item Position will be closed if inside the next (i + k)-th - the candle after i-th candle, in which the position was opened, following condition is met: 
+\item Position will be closed if inside the next (\textit{i + k})th - the candle after \textit{i}th candle, in which the position was opened, following condition is met: 
 \begin{equation}
 (-PriceO(i+k)+price(i) )<TP \text{ and } (-LowPrice(i+k)+Price(i))>TP
 \end{equation}
@@ -247,7 +250,7 @@ Then the profit will be calculated as:
 Profit =TP; 
 \end{equation}
 
-\item Position will be closed if at the opening of the next (i + k)-th - the candle after i-th candle, in which the position was opened, following condition is met: 
+\item Position will be closed if at the opening of the next (\textit{i + k})th - the candle after \textit{i}th candle, in which the position was opened, following condition is met: 
 \begin{equation}
 PriceO(i+k) >bottomBorder(i+k)
 \end{equation}                          
@@ -256,7 +259,7 @@ Then the profit will be calculated as:
 Profit =-PriceO (i+k)  + Price(i) ;
 \end{equation}
 
-\item Position will be closed when inside the opening of the next (i + k)-th - the candle after i-th candle, in which the position was opened, following condition is met:
+\item Position will be closed when inside the opening of the next (\textit{i + k})th - the candle after \textit{i}th candle, in which the position was opened, following condition is met:
 \begin{equation}
 Price(i+k) >bottomBorder(i+k)
 \end{equation}                           
