@@ -77,10 +77,10 @@ The objective of the two strategies considered is to make investment decisions a
 The values of barriers forming a band are calculated using the maximum and minimum values of the last candle (OHLC - Open, High, Low, Close prices). In the case of the upper band, it is the maximum of the maximal values of the n last candles, whereas in the case of the bottom band, it is the minimum of the minimal values of m last candles. 
 
 \begin{equation}
-topBorder = \max{(H_{i-n},...,H_{i-1})}
-\end{equation}
-\begin{equation}
-bottomBorder = \min{(L_{i-m},...,L_{i-1})}
+\begin{split}
+topBorder = \max{(H_{i-n},...,H_{i-1})}, \\ 
+bottomBorder = \min{(L_{i-m},...,L_{i-1})}.
+\end{split}
 \end{equation}
 
 As mentioned earlier, strategy comes in two versions that differ in terms of opening the positions when crossing the band. These differences result from different investor assumption about currently prevailing market trend. In the first case it is believed that the trend has just started and positions need to be opened in accordance with it. In the second case, the play is against the trend. The two considered variants, TewiMiC and TewiMiD, are based on excesses of the lower limit of the band. TewiMiD implies existence of a downward trend, for which when crossing (down) the lower limit of the band, a short position (assuming the price drop) is opened. This is known in literature and in trading as Sell Stop model. \\
@@ -230,7 +230,7 @@ Profit =-SL;
 
 \item Position will be closed if at the opening of the next (i + k)-th - the candle after i-th candle, in which the position was opened, following condition is met:
 \begin{equation}
-Price(i)-PriceO(i+k>TP
+Price(i)-PriceO(i+k)>TP
 \end{equation}                                           
 Then the profit will be calculated as:
 \begin{equation}
