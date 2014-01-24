@@ -92,17 +92,17 @@ Considered strategies are based on a objects classification (events that meet th
 
 These parameters will determine whether the strategy will earn or lose. Appropriate selection of parameter values is therefore a key optimization issue in the use of the strategy. Considered strategies have 11 parameters, which are subject of optimization.
 \begin{itemize}
-\item p1 --- the number of candles, based on which the calculation of the current value of the band barrier is made; for researched time series, value of p1 generally ranges from 10 to 30;
-\item p2 --- number of steps forward, after which the position is closed in case none other close condition was met before; this value belongs to range from 3 to 40;
-\item p3 --– StopLoss condition; usually it remained in range from 0.002 to 0.017 expressed in values of EURUSD, which in researched period stayed in range from 1.2 to 1.4, as can be seen in Fig. \ref{timeSeries};
-\item p4 --– TakeProfit condition; generally ranged from 0.0015 to 0.009;
-\item p5 --- band buffer, offset from the barrier of the band defining the actual level of the expected crossing of the  price; ranged from -0.002 to 0.003;
-\item p6 --- maximum number of open positions at the same time; ranged from 3 to 20;
-\item p7 --- number of candles that determines average volume value; generally ranged from 2 to 10;
-\item p8 --- maximum value of the difference between the current value of the volume and the average value calculated on the basis of p7 candles back; ranged from 150 to 500;
-\item p9 --- number of candles on the cumulative profit curve, based on which current drawdown is calculated; ranged from 5 to 25;
-\item p10 --- highest acceptable drawdown on the cumulative yield curve; generally ranged from 0.0021 to 0.008;
-\item p11 --- acceptable amount of the cumulative loss for all currently open positions; ranged from 0.0005 to 0.003;
+\item p1 is the number of candles, based on which the calculation of the current value of the band barrier is made; for researched time series, value of p1 generally ranges from 10 to 30;
+\item p2 is number of steps forward, after which the position is closed in case none other close condition was met before; this value belongs to range from 3 to 40;
+\item p3 is StopLoss condition; usually it remained in range from 0.002 to 0.017 expressed in values of EURUSD, which in researched period stayed in range from 1.2 to 1.4, as can be seen in Fig. \ref{timeSeries};
+\item p4 is TakeProfit condition; generally ranged from 0.0015 to 0.009;
+\item p5 is band buffer, offset from the barrier of the band defining the actual level of the expected crossing of the  price; ranged from -0.002 to 0.003;
+\item p6 is maximum number of open positions at the same time; ranged from 3 to 20;
+\item p7 is the number of candles that determines average volume value; generally ranged from 2 to 10;
+\item p8 is maximum value of the difference between the current value of the volume and the average value calculated on the basis of p7 candles back; ranged from 150 to 500;
+\item p9 is the number of candles on the cumulative profit curve, based on which current drawdown is calculated; ranged from 5 to 25;
+\item p10 is highest acceptable drawdown on the cumulative yield curve; generally ranged from 0.0021 to 0.008;
+\item p11 is acceptable amount of the cumulative loss for all currently open positions; ranged from 0.0005 to 0.003;
 \end{itemize}
 
 \subsection{Conditions of opening}
@@ -115,12 +115,12 @@ if[(price < bottomBorder(p1) - buffor(p5)) \\
 \end{split}
 \end{equation}
 where:\\
-\textit{price} – current value for EURUSD;\\
-\textit{bottomBorder(p1)} – value of lower band barrier for parameter p1; here minimum of last p1 minima; \\
-\textit{buffor(p5)} – value of buffer that moves said barrier;\\
-\textit{current p6} – number of currently opened positions;\\
-\textit{Vol} – current value of volume (in the candle);\\
-\textit{meanVol(p7)} – mean of volume of last p7 candles;\\
+\textit{price} is current value for EURUSD;\\
+\textit{bottomBorder(p1)} is value of lower band barrier for parameter p1; here minimum of last p1 minima; \\
+\textit{buffor(p5)} is value of buffer that moves said barrier;\\
+\textit{current p6} is number of currently opened positions;\\
+\textit{Vol} is current value of volume (in the candle);\\
+\textit{meanVol(p7)} is mean of volume of last p7 candles;\\
 
 \noindent and the opening condition for TewiMiD is:
 \begin{equation}
