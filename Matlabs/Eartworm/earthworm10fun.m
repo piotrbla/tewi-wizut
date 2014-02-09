@@ -79,7 +79,11 @@ for i=pocz:kon%  p1+1+pocz:kon %m(1)-30000
                 z = -p5StopLoss + (openPrice - C(i-1, 4));
                 posState = constNone;
                 pos=1;
-                if czyTestowy info = sprintf('%d : %s : lts = %d #3 SL dlugiej przy %0.5f', i, Daty{i}, lts, C(i, 3)); disp(info); end
+                if czyTestowy 
+                    info = sprintf('%d : %s : lts = %d #3 SL dlugiej przy %0.5f', i, Daty{i}, lts, C(i, 3)); 
+                    disp(info); 
+                end
+                
             end
         end
         if posState == constShort
@@ -87,29 +91,55 @@ for i=pocz:kon%  p1+1+pocz:kon %m(1)-30000
                 z = -p5StopLoss - (openPrice - C(i-1, 4));
                 posState = constNone;
                 pos=1;
-                if czyTestowy info = sprintf('%d : %s : lts = %d #4 SL krotkiej przy %0.5f', i, Daty{i}, lts, C(i, 3)); disp(info); end
+                if czyTestowy 
+                    info = sprintf('%d : %s : lts = %d #4 SL krotkiej przy %0.5f', i, Daty{i}, lts, C(i, 3)); 
+                    disp(info); 
+                end
             end
         end
     end
 
     sumz(i)=sumz(i-1)+z;
-  
-    if pos==0 && i>p3+1 && sumz(i-1)-sumz(i-p3-1)<p4
-        posState=-posState;
-        sumz(i)=sumz(i)- z-constSpread;
-        if posState~=constShort
-            z=C(i,1)-C(i,4);
-            if czyTestowy info = sprintf('%d : %s : lts = %d #5 zamkniecie krotkiej przy %0.5f', i, Daty{i}, lts, C(i, 1)); disp(info); end
+    changePositionMode=false;
+    if posState~=constNone && pos==0 && i>p3+1 && sumz(i-1)-sumz(i-p3-1)<p4
+        if changePositionMode
+            posState=-posState;
+            sumz(i)=sumz(i)- z-constSpread;
+            if posState~=constShort
+                z=C(i,1)-C(i,4);
+                if czyTestowy 
+                    info = sprintf('%d : %s : lts = %d #5 zamkniecie krotkiej przy %0.5f', i, Daty{i}, lts, C(i, 1)); 
+                    disp(info); 
+                end
+            end
+            if posState~=constLong
+                z=-C(i,1)+C(i,4);
+                if czyTestowy 
+                    info = sprintf('%d : %s : lts = %d #6 zamkniecie dlugiej przy %0.5f', i, Daty{i}, lts, C(i, 1)); 
+                    disp(info); 
+                end
+            end
+            sumz(i)=sumz(i)+z;%tak powinno byæ, poniewa¿ jesteœmy na pocz¹tku œwiecy i-tej, 
+            %tu podejmujemy decyzje, a zysk liczymy za i-t¹ œwiecê
+            openPrice = C(i,1); 
+        else
+            sumz(i)=sumz(i)- z-constSpread;
+            if posState==constShort
+                if czyTestowy 
+                    info = sprintf('%d : %s : lts = %d #7 zamkniecie krotkiej przy %0.5f', i, Daty{i}, lts, C(i, 1)); 
+                    disp(info); 
+                end
+            end
+            if posState==constLong
+                if czyTestowy 
+                    info = sprintf('%d : %s : lts = %d #8 zamkniecie dlugiej przy %0.5f', i, Daty{i}, lts, C(i, 1)); 
+                    disp(info); 
+                end
+            end
+            posState=constNone;
+            openPrice = 0; 
         end
-        if posState~=constLong
-            z=-C(i,1)+C(i,4);
-            if czyTestowy info = sprintf('%d : %s : lts = %d #6 zamkniecie dlugiej przy %0.5f', i, Daty{i}, lts, C(i, 1)); disp(info); end
-        end
-        sumz(i)=sumz(i)+z;%tak powinno byæ, poniewa¿ jesteœmy na pocz¹tku œwiecy i-tej, 
-        %tu podejmujemy decyzje, a zysk liczymy za i-t¹ œwiecê
-        openPrice = C(i,1); 
     end
-    
 end
 lastPosState=posState;
 lastOpenPrice= openPrice;
