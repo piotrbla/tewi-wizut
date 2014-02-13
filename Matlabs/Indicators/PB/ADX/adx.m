@@ -16,47 +16,51 @@ Daty = Data{2};
 fclose(fid);
 
 
-AdxPeriod=14;
-AdxBegin=3;
-AdxEnd=200;
-PlusSdiBuffer=zeros(1, AdxEnd);
-MinusSdiBuffer=zeros(1, AdxEnd);
-for i=AdxBegin:AdxEnd
+adxPeriod=14;
+adxBegin=53;
+adxEnd=200;
+plusSdiBuffer=zeros(1, adxEnd);
+minusSdiBuffer=zeros(1, adxEnd);
+adxBegin = adxBegin - adxPeriod;
+if adxBegin<1
+    adxBegin=1;
+end
+for i=adxBegin:adxEnd
     
-    price_low = C(i-1, 3);
-    price_high = C(i-1, 2);
-    pdm = price_high - C(i-2, 2);
-    mdm = C(i-2, 3) - price_low;
-    if(pdm<0) 
-        pdm=0;  % +DM
+    priceLow = C(i-1, 3);
+    priceHigh = C(i-1, 2);
+    higherPriceDiff = priceHigh - C(i-2, 2);
+    lowerPriceDiff = C(i-2, 3) - priceLow;
+    if(higherPriceDiff<0) 
+        higherPriceDiff=0;  % +DM
     end
-    if mdm<0
-        mdm=0;  % -DM
+    if lowerPriceDiff<0
+        lowerPriceDiff=0;  % -DM
     end
-    if pdm==mdm
-        pdm=0; 
-        mdm=0;
+    if higherPriceDiff==lowerPriceDiff
+        higherPriceDiff=0; 
+        lowerPriceDiff=0;
     else
-        if pdm<mdm 
-            pdm=0;
+        if higherPriceDiff<lowerPriceDiff 
+            higherPriceDiff=0;
         else
-            if mdm<pdm
-                mdm=0;
+            if lowerPriceDiff<higherPriceDiff
+                lowerPriceDiff=0;
             end
         end
     end
-    num1=abs(price_high-price_low);
-    num2=abs(price_high-C(i-2, 4));
-    num3=abs(price_low-C(i-2, 4));
-    tr=max(num1,num2);
-    tr=max(tr, num3);
+    candleRange=abs(priceHigh-priceLow);
+    candleRangeHigh=abs(priceHigh-C(i-2, 4));
+    candleRangeLow=abs(priceLow-C(i-2, 4));
+    trueRange=max(candleRange,candleRangeHigh);
+    trueRange=max(trueRange, candleRangeLow);
     %       counting plus/minus direction
-    if tr==0 
-        PlusSdiBuffer(i)=0;
-        MinusSdiBuffer(i)=0;
+    if trueRange==0 
+        plusSdiBuffer(i)=0;
+        minusSdiBuffer(i)=0;
     else
-        PlusSdiBuffer(i)=100.0*pdm/tr; 
-        MinusSdiBuffer(i)=100.0*mdm/tr;
+        plusSdiBuffer(i)=100.0*higherPriceDiff/trueRange; 
+        minusSdiBuffer(i)=100.0*lowerPriceDiff/trueRange;
     end
 %     if i<=AdxBegin+AdxPeriod 
 %         continue;
@@ -65,34 +69,34 @@ for i=AdxBegin:AdxEnd
 end
 
    %apply EMA to +DI
-   PlusDiBuffer=ema(PlusSdiBuffer, AdxPeriod);
-   MinusDiBuffer=ema(MinusSdiBuffer, AdxPeriod);
-   DiffBuffer=zeros(1, AdxEnd);
-   for x=1:length(PlusDiBuffer)
-       if PlusDiBuffer(x)>MinusDiBuffer(x)
-        DiffBuffer(x)=1;
+   plusDiBuffer=ema(plusSdiBuffer, adxPeriod);
+   minusDiBuffer=ema(minusSdiBuffer, adxPeriod);
+   diffBuffer=zeros(1, adxEnd);
+   for x=1:length(plusDiBuffer)
+       if plusDiBuffer(x)>minusDiBuffer(x)
+        diffBuffer(x)=1;
        else
-        DiffBuffer(x)=0;
+        diffBuffer(x)=0;
        end
    end
-   TempBuffer=zeros(1, AdxEnd);
-   for i=AdxBegin:AdxEnd
-	div=abs(PlusDiBuffer(i)+MinusDiBuffer(i));
-    if div==0.00 || isnan(PlusDiBuffer(i)) 
-        TempBuffer(i)=0;
+   tempBuffer=zeros(1, adxEnd);
+   for i=adxBegin:adxEnd
+	div=abs(plusDiBuffer(i)+minusDiBuffer(i));
+    if div==0.00 || isnan(plusDiBuffer(i)) 
+        tempBuffer(i)=0;
     else
-        TempBuffer(i)=100*(abs(PlusDiBuffer(i)-MinusDiBuffer(i))/div);
+        tempBuffer(i)=100*(abs(plusDiBuffer(i)-minusDiBuffer(i))/div);
     end
    end
     % //---- ADX is exponential moving average on DX
-    ADXBuffer=ema(TempBuffer, AdxPeriod);
-   x=AdxBegin:AdxEnd;
+    adxBuffer=ema(tempBuffer, adxPeriod);
+   x=adxBegin:adxEnd;
    figure(1);
-   plot(MinusDiBuffer, 'r');
+   plot(minusDiBuffer, 'r');
    hold on;
-   plot(PlusDiBuffer, 'g');
+   plot(plusDiBuffer, 'g');
    hold on;
-   plot(ADXBuffer, 'b');
+   plot(adxBuffer, 'b');
    
 %    figure(2);
 %    plot(DiffBuffer)
