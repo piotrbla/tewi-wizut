@@ -4,14 +4,11 @@ function [ testReturn, lastPosState, lastPosLearnState, lastOpenPrice, lastOpenP
 % fid = fopen('EURUSD60.csv','r');
 % Data = textscan(fid, '%f %f %f %f %f %s', 'delimiter',',', 'CollectOutput',true);
 % C = Data{1};
-% Daty = Data{2}; 
+% Daty = Data{2};
 % fclose(fid);
 
 spread=0.00016;
 
-name = ['EURUSD4_bySum_' num2str(kk)];
-fileID = fopen([name '.txt'],'w');
-fprintf(fileID, 'PoczU\t DataPocz\t KonU\t DataKon\t KonT\t DataKonT\t ZsykU\t CalmarU\t P1\t P2\t P3\t P4\t P5\t Long\t Short\t ZyskT\n');% fprintf(fileID, 'PoczU\t KonU\t KonT\t ZsykU\t CalmarU\t P1\t P2\t P3\t P4\t Long\t Short\t ZyskT\n');
 
 incr=500; %dlugosc okresu uczacego
 incrt=100; %dlugosc okresu testowego
@@ -44,6 +41,7 @@ if(timeout)
 end
 % PSO
 [ swarm, iterNum, best_l_op,best_zysk, best_calmar, lastPosLearnState, lastOpenPrice] = PSO(opcje,C,pocz,kon,spread, firstPosLearnState, lastOpenPrice);
+bestParticles = getBestQuarterParticles(swarm);
 paropt = swarm.best_position;
 ldopt = best_l_op;
 zyskU = best_zysk;
@@ -53,20 +51,21 @@ calmarU = best_calmar;
 
 
 %testowanie
-[ zyskT, CalmarT, sumzT, LongShortT, lastPosState, lastOpenPriceTest] = Adx10fun( C, spread, poczt, kont, paropt(1), paropt(2), paropt(3), paropt(4), paropt(5), firstPosState, lastOpenPriceTest );%, paropt(6), paropt(7));
-zyskT
-
-% fprintf(fileID, '%d\t %d\t %d\t %.4f\t %.4f\t %d\t %d\t %d\t %.4f\t %d\t %d\t %.4f\n\n', ...
-%     pocz, kon, kont, zyskU, calmarU, paropt(1), paropt(2), paropt(3), paropt(4), ldopt(1), ldopt(2), zyskT );
-fprintf(fileID, '%d\t %s\t %d\t %s\t %d\t %s\t %.4f\t %.4f\t %d\t %d\t %d\t %.4f\t %.4f\t %d\t %d\t %.4f\n\n', ...
-    pocz, Daty{pocz}, kon, Daty{kon}, kont, Daty{kont}, zyskU, calmarU, ...
-    paropt(1), paropt(2), paropt(3), paropt(4), paropt(5), ldopt(1), ldopt(2), zyskT );
-% fprintf(fileID, 'pocz: %d\t Daty{pocz}: %s\t ' + ...
-%     'kon: %d\t Daty{kon}: %s\t        %d\t  %s\t        %.4f\t %.4f\t 
-%     pocz, Daty{pocz}, kon, Daty{kon}, kont, Daty{kont}, zyskU, calmarU, ...
-%           d\t      %d\t       %d\t      %.4f\t     %.4f\t      %d\t       %d\t %.4f\n\n', ...
-%     paropt(1), paropt(2), paropt(3), paropt(4), paropt(5), ldopt(1), ldopt(2), zyskT );
+for iParticle = 1:length(bestParticles)
+    [ zyskT, CalmarT, sumzT, LongShortT, lastPosState, lastOpenPriceTest] = Adx10fun( C, spread, poczt, kont, paropt(1), paropt(2), paropt(3), paropt(4), paropt(5), firstPosState, lastOpenPriceTest );%, paropt(6), paropt(7));
+    
+    name = ['EURUSD4_bySum_' num2str(kk) '_particle_' num2str(iParticle)];
+    fileID = fopen([name '.txt'],'w');
+    fprintf(fileID, 'PoczU\t DataPocz\t KonU\t DataKon\t KonT\t DataKonT\t ZsykU\t CalmarU\t P1\t P2\t P3\t P4\t P5\t Long\t Short\t ZyskT\n');% fprintf(fileID, 'PoczU\t KonU\t KonT\t ZsykU\t CalmarU\t P1\t P2\t P3\t P4\t Long\t Short\t ZyskT\n');
+    fprintf(fileID, '%d\t %s\t %d\t %s\t %d\t %s\t %.4f\t %.4f\t %d\t %d\t %d\t %.4f\t %.4f\t %d\t %d\t %.4f\n\n', ...
+        pocz, Daty{pocz}, kon, Daty{kon}, kont, Daty{kont}, zyskU, calmarU, ...
+        paropt(1), paropt(2), paropt(3), paropt(4), paropt(5), ldopt(1), ldopt(2), zyskT );
+    fclose(fileID);
+end
 testReturn = zyskT;
-fclose(fileID);
+end
+
+function [ particles ] = getBestQuarterParticles( swarm )
+particles = swarm.particles;
 end
 

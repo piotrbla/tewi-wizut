@@ -15,7 +15,6 @@ constSpread = spread;
 openPrice = lastOpenPrice;
 for i=pocz:kon%  p1+1+pocz:kon %m(1)-30000
     lts=0; %licznik warunków zgodnosci z trendem spadkowym
-    volumeDownCount=0; %licznik warunków zgodnosci z trendem spadkowym
     z=0;
     pos=0; %znacznik otwarcia pozycji, jakiejkolwiek
     if i<=p1+1 %|| i<=p6VolumeBarrier + 1
@@ -26,16 +25,6 @@ for i=pocz:kon%  p1+1+pocz:kon %m(1)-30000
             lts=lts+1;
         end
     end
-%     for j=i-p6VolumeBarrier :i-1
-%         if C(j-1,5)>C(j,5)
-%             volumeDownCount = volumeDownCount +1;
-%         end
-%     end
-%     if volumeDownCount >p1/2 + p7VolumeBuffer
-%         isVolumeAdxDown = true;
-%     else
-%         isVolumeAdxDown = false;
-%     end
         
     if lts>p1/2+p2 %&& isVolumeAdxDown
         lds=lds+1;
