@@ -42,22 +42,20 @@ end
 % PSO
 [ swarm, iterNum, best_l_op,best_zysk, best_calmar, lastPosLearnState, lastOpenPrice] = PSO(opcje,C,pocz,kon,spread, firstPosLearnState, lastOpenPrice);
 bestParticles = getBestQuarterParticles(swarm);
-paropt = swarm.best_position;
 ldopt = best_l_op;
 zyskU = best_zysk;
 calmarU = best_calmar;
 
-%[ zyskU, calmarU, paropt, sumrec, ldopt] = Adx10opt( C, spread, pocz, kon, P1, P2, P3, P4);
-
-
 %testowanie
 for iParticle = 1:length(bestParticles)
+    paropt = bestParticles(iParticle).best_position;
+
     [ zyskT, CalmarT, sumzT, LongShortT, lastPosState, lastOpenPriceTest] = Adx10fun( C, spread, poczt, kont, paropt(1), paropt(2), paropt(3), paropt(4), paropt(5), firstPosState, lastOpenPriceTest );%, paropt(6), paropt(7));
     
     name = ['EURUSD4_bySum_' num2str(kk) '_particle_' num2str(iParticle)];
-    fileID = fopen([name '.txt'],'w');
-    fprintf(fileID, 'PoczU\t DataPocz\t KonU\t DataKon\t KonT\t DataKonT\t ZsykU\t CalmarU\t P1\t P2\t P3\t P4\t P5\t Long\t Short\t ZyskT\n');% fprintf(fileID, 'PoczU\t KonU\t KonT\t ZsykU\t CalmarU\t P1\t P2\t P3\t P4\t Long\t Short\t ZyskT\n');
-    fprintf(fileID, '%d\t %s\t %d\t %s\t %d\t %s\t %.4f\t %.4f\t %d\t %d\t %d\t %.4f\t %.4f\t %d\t %d\t %.4f\n\n', ...
+    fileID = fopen([name '.txt'], 'a');
+    %fprintf(fileID, 'PoczU\t DataPocz\t KonU\t DataKon\t KonT\t DataKonT\t ZsykU\t CalmarU\t P1\t P2\t P3\t P4\t P5\t Long\t Short\t ZyskT\n');% fprintf(fileID, 'PoczU\t KonU\t KonT\t ZsykU\t CalmarU\t P1\t P2\t P3\t P4\t Long\t Short\t ZyskT\n');
+    fprintf(fileID, '%d;%s;%d;%s;%d;%s;%.4f;%.4f;%d;%d;%d;%.4f;%.4f;%d;%d;%.4f\n\n', ...
         pocz, Daty{pocz}, kon, Daty{kon}, kont, Daty{kont}, zyskU, calmarU, ...
         paropt(1), paropt(2), paropt(3), paropt(4), paropt(5), ldopt(1), ldopt(2), zyskT );
     fclose(fileID);
@@ -66,6 +64,7 @@ testReturn = zyskT;
 end
 
 function [ particles ] = getBestQuarterParticles( swarm )
-particles = swarm.particles;
+allParticles = nestedSortStruct(swarm.particles, 'best_position_value', 1);
+particles = allParticles(1:20);
 end
 

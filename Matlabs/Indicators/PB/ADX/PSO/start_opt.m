@@ -13,9 +13,9 @@ lastPosState = 0;
 lastPosLearnState = 0;
 lastOpenPrice=0;
 lastOpenPriceTest=0;
-for kk=[1:5]
+for kk=[1:51]
 %for kk=[1:26]
-    [returnTest, lastPosState, lastPosLearnState, lastOpenPrice, lastOpenPriceTest] = startAdx( C, Daty, kk, lastPosState, lastPosLearnState, lastOpenPrice, lastOpenPriceTest);
+    [returnTest, lastPosState, lastPosLearnState, lastOpenPrice, lastOpenPriceTest]     = startAdx( C, Daty, kk, lastPosState, lastPosLearnState, lastOpenPrice, lastOpenPriceTest);
     returns(kk)= returnTest;
     returnSum(kk) = sum(returns(1:kk));
 end

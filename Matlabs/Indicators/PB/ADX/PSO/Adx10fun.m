@@ -99,7 +99,7 @@ end
 lastPosState=posState;
 lastOpenPrice= openPrice;
 
-zysk = sumz(kon)%+zz(kon);
+zysk = sumz(kon);%+zz(kon);
 
 Calmar = obliczCalmara(sumz);
 
