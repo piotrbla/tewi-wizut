@@ -65,13 +65,13 @@ Algotrading is rapidly growing new form of trading on financial markets where in
 
 Such computer applications (bots) require carefully prepared and tested software that most often needs to adapt to the changing situations on the observed markets. Modern trends, in the development of this software, include sophisticated methods of: artificial intelligence, pattern recognition, classification and machine learning. Those methods are interpenetrating and complementary and are also expanded with information based on fundamental analysis, for example, automatically extracted from the Internet \cite{elder} [Schwager, Elder, … nasze hindawi].\\
 
-Strategy presented in this paper is an example of a solution that can be used fully automated or with investor’s assistance, who makes the decision manually. To use this software, it is necessary to make sure that there are reasonable premises of achieving the success. These conditions can be achieved through inductive thinking, involving the assumption that multiple validation of decision on data from the past substantiates the correctness of the decision in the future. If a certain set of rules in the strategy used to seek the pattern, leads to the success then these rules are a pattern that is encouraged for repeated use. If repeated use of said pattern results in more successes than failures, then the basic premise to consider the use of the pattern is rational [] \cite{elder} \cite{burke} \cite{burke}. Unfortunately, changing market is causing the pattern to become outdated therefore it is necessary to constantly update it. Search in the historical patterns, that could be effective in the data space not used for their determination ( to identify these patterns ), is a major challenge also applied in machine learning which is used in this paper.
+Strategy presented in this paper is an example of a solution that can be used fully automated or with investor’s assistance, who makes the decision manually. To use this software, it is necessary to make sure that there are reasonable premises of achieving the success. These conditions can be achieved through inductive thinking, involving the assumption that multiple validation of decision on data from the past substantiates the correctness of the decision in the future. If a certain set of rules in the strategy used to seek the pattern, leads to the success then these rules are a pattern that is encouraged for repeated use. If repeated use of said pattern results in more successes than failures, then the basic premise to consider the use of the pattern is rational []. Unfortunately, changing market is causing the pattern to become outdated therefore it is necessary to constantly update it. Search in the historical patterns, that could be effective in the data space not used for their determination ( to identify these patterns ), is a major challenge also applied in machine learning which is used in this paper.
 The article is organized as follows: at first authors describe an authored strategy based on an entirely innovative, according to the authors, concept of an artificial worm. Subsequently extensive studies of effectiveness of presented strategy in terms of prediction and the aspect of investment are carried out. At the end the conclusions resulting from the study are presented and also cited bibliographic sources are included.
 
 \section{Strategy characteristics}
 In presented strategy, a metaphorical procedure is often used to explain heuristic algorithms of artificial intelligence. Said procedure is a reference to an inspiration derived from the nature.\\
 
-Let's consider an artificial worm, which behaves like its natural inspirer. Let this artificial worm have a length of p1 candles (vectors representing the knowledge about events occurring within the contractual part of the time series). Let her movement come down to the successive ,,eating'' one candle and simultaneous ,,discarding'' of one candle --- always having p1 candles. Thus the earthworm moves incrementally at length of time called the period of the candle. I-th candle is  defined as a row of data of values  Oi, Hi, Li, Ci (Open, High, Low and Close). These values represent (in order): the value at the beginning of this period, the maximum value within the period, the minimum and the closing values - at the end of the candle.\\
+Let's consider an artificial worm, which behaves like its natural inspirer. Let this artificial worm have a length of p1 candles (vectors representing the knowledge about events occurring within the contractual part of the time series). Let her movement come down to the successive ,,eating'' one candle and simultaneous ,,discarding'' of one candle --- always having p1 candles. Thus the earthworm moves incrementally at length of time called the period of the candle. I-th candle is  defined as a row of data of values  $Oi$, $Hi$, $Li$, $Ci$ (Open, High, Low and Close). These values represent (in order): the value at the beginning of this period, the maximum value within the period, the minimum and the closing values - at the end of the candle.\\
 Let's assume that candle can have color (often in a number of brokerage platforms, this procedure is used). Therefore candles may be red (when the opening of the candle is higher than its closing $Oi>Ci$) and green (when the situation is opposite $Oi <Ci$).\\
 Let's also assume --- it is a primary strategy rule - that when an artificial earthworm has a significant advantage of red candles, a short position is opened or continued. When earthworm has the significant advantage of green candles, a long position is opened or continued. Imprecise term ,,significant'' is defined by the use of the second parameter p2 according to the rules:
 \begin{equation}
@@ -536,32 +536,8 @@ The direction of further research will test the hypothesis that the variability 
 
 
 
-\bibliography{article_main}
-%\begin{thebibliography}{4}
-
-%\bibitem{jour} Smith, T.F., Waterman, M.S.: Identification of Common Molecular
-%Subsequences. J. Mol. Biol. 147, 195--197 (1981)
-%
-%\bibitem{lncschap} May, P., Ehrlich, H.C., Steinke, T.: ZIB Structure Prediction Pipeline:
-%Composing a Complex Biological Workflow through Web Services. In: Nagel,
-%W.E., Walter, W.V., Lehner, W. (eds.) Euro-Par 2006. LNCS, vol. 4128,
-%pp. 1148--1158. Springer, Heidelberg (2006)
-%
-%\bibitem{book} Foster, I., Kesselman, C.: The Grid: Blueprint for a New Computing
-%Infrastructure. Morgan Kaufmann, San Francisco (1999)
-%
-%\bibitem{proceeding1} Czajkowski, K., Fitzgerald, S., Foster, I., Kesselman, C.: Grid
-%Information Services for Distributed Resource Sharing. In: 10th IEEE
-%International Symposium on High Performance Distributed Computing, pp.
-%181--184. IEEE Press, New York (2001)
-%
-%\bibitem{proceeding2} Foster, I., Kesselman, C., Nick, J., Tuecke, S.: The Physiology of the
-%Grid: an Open Grid Services Architecture for Distributed Systems
-%Integration. Technical report, Global Grid Forum (2002)
-%
-%\bibitem{url} National Center for Biotechnology Information, \url{http://www.ncbi.nlm.nih.gov}
-
-%\end{thebibliography}
+\bibliography{bibliography}
+\bibliographystyle{splncs}
 
 
 
