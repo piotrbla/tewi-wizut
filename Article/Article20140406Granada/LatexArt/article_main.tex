@@ -65,7 +65,7 @@ Algotrading is rapidly growing new form of trading on financial markets where in
 
 Such computer applications (bots) require carefully prepared and tested software that most often needs to adapt to the changing situations on the observed markets. Modern trends, in the development of this software, include sophisticated methods of: artificial intelligence, pattern recognition, classification and machine learning. Those methods are interpenetrating and complementary and are also expanded with information based on fundamental analysis, for example, automatically extracted from the Internet \cite{elder}\cite{Wilinski2014}\cite{Schwager1996}.\\
 
-Strategy presented in this paper is an example of a solution that can be used fully automated or with investor’s assistance, who makes the decision manually. To use this software, it is necessary to make sure that there are reasonable premises of achieving the success. These conditions can be achieved through inductive thinking, involving the assumption that multiple validation of decision on data from the past substantiates the correctness of the decision in the future. If a certain set of rules in the strategy used to seek the pattern, leads to the success then these rules are a pattern that is encouraged for repeated use. If repeated use of said pattern results in more successes than failures, then the basic premise to consider the use of the pattern is rational []. Unfortunately, changing market is causing the pattern to become outdated therefore it is necessary to constantly update it. Search in the historical patterns, that could be effective in the data space not used for their determination ( to identify these patterns ), is a major challenge also applied in machine learning which is used in this paper.
+Strategy presented in this paper is an example of a solution that can be used fully automated or with investor’s assistance, who makes the decision manually. To use this software, it is necessary to make sure that there are reasonable premises of achieving the success. These conditions can be achieved through inductive thinking, involving the assumption that multiple validation of decision on data from the past substantiates the correctness of the decision in the future. If a certain set of rules in the strategy used to seek the pattern, leads to the success then these rules are a pattern that is encouraged for repeated use. If repeated use of said pattern results in more successes than failures, then the basic premise to consider the use of the pattern is rational []. Unfortunately, changing market is causing the pattern to become outdated therefore it is necessary to constantly update it. Search in the historical patterns, that could be effective in the data space not used for their determination (to identify these patterns), is a major challenge also applied in machine learning which is used in this paper.
 The article is organized as follows: at first authors describe an authored strategy based on an entirely innovative, according to the authors, concept of an artificial worm. Subsequently extensive studies of effectiveness of presented strategy in terms of prediction and the aspect of investment are carried out. At the end the conclusions resulting from the study are presented and also cited bibliographic sources are included.
 
 \section{Strategy characteristics}
@@ -244,14 +244,14 @@ Zci = sum ( Zi ) \text{ from } i = 1 \text{ to the current i value;}
 \end{equation}
 \item There is a possible local subsidence Zci capital by introducing two additional parameters to manage the risk.\\
 p3 --- the number of steps back on the curve of the cumulative profit for the determination of Zci --- p3 for comparison with the present value of Zci;
-p4 --- maximum size of the capital subsidence (eg for the currency pair EURUSD measured in pips ) , which if exceeded will trigger the closure position:\\
+p4 --- maximum size of the capital subsidence (eg for the currency pair EURUSD measured in pips), which if exceeded will trigger the closure position:\\
 \begin{equation}
 \text{If } ( Zci - p3 - Zi ) <- p4 \text{ and } PositionState \neq 0 \text{ then } PositionState = 0
 \end{equation} 
 where PositionState --- is the type of open position (long or short) and PositionStates equal 0 means resignations from the opening position to the beginning of the next candle.
 \end{itemize}
 So, the above-described algorithm uses 5 parameters, as many as 3 of which are devoted to risk management strategy.\\
-
+%%PBStart
 The complexity of the algorithm is illustrated in Figure \ref{fig:fig7}, which in the form of a decision tree shows the individual steps and decisions made in the iteration on a single candle. This iteration was carried out both in the search for optimal parameters p1, ..., p5 and in the process they use in the testing phase for data not used in learning.\\
 
 The figure shows in a tree further decisions taken at the beginning of the candle and then reactions to any unacceptable change in course. The first examines the state of the position taken over from the closure of the previous candle. The next step is to work out decisions / recommendations as to the direction of the opening from the set {long, short, none}. After opening position is observed return of the open position. It can be positive or negative. If it is positive, it does not take up any additional decisions. If it is negative, it checks if it is not achieved the level of SL. In the case of a negative return of the items, except for testing, SL is not exceeded within a candle tested is also a condition resulting from the use of parameters (p3, p4). Tree is a state of complete items transmitted at the beginning of the next candle.
@@ -275,7 +275,7 @@ Table \ref{tab:tab1} summarizes the results for different time periods. The stud
 
 \begin{table}[h!]
 \centering
-\caption{The test results of the algorithm for different configurations of learning and testing periods for a couple EUEUSD.}
+\caption{The test results of the algorithm for different configurations of learning and testing periods for a currency pair EURUSD.}
 \label{tab:tab1}
 \begin{tabular}{|l|r|r|r|r|} \hline
 Learning/Test &	8	 &	10 &		15	 &	20 \\ \hline
@@ -378,6 +378,7 @@ Figure \ref{fig:fig10} and Figure \ref{fig:fig11} present the results.
 
 From these results it can be concluded that the strategy is working with a short shelf life characteristics. The best results are achieved in periods of about 10-20 candles, it is unlike any other strategy presented in \cite{Wilinski2014} where the best results were achieved for the test periods with a length of 80-100 candles.\\
 All the above presented results refer to simulations in Matlab.
+%%PBStop
 
 \section{Strategy Verification Using Online Trading Platform}
 From a conceptual point of view implementing automated trading strategies in Matlab environment is one of proper approaches. Matlab provides a number of features to rapidly prototype such algorithms, for e.g. built-in computation functions and charting tools. What is more, Matlab enables also intuitive operations on vectors and matrices as well as flexible insight into variables values that are produced by the algorithm which greatly facilitates computing process management.\\
@@ -531,7 +532,7 @@ Differences in results for the algorithm for Matlab and MetaTrader presented in 
 
 \section{Conclusions}
 
-Presented in the paper the concept of an innovative investment strategy gave satisfactory results for a certain pair as the result of periods of machine learning. For example, in the studied data for two key market currency pairs sampled every hour , the best value is 80 hours of teaching and 15 hours of testing. One can assume that this relationship may change in a different environment (for other markets, for other periods) by becoming a sort of next parameter that optimal values should be sought. It should be emphasized that the study was conducted on data not used in the learning phase and for the basic principle of machine learning achieved results that would have satisfied many a practice. It should also be noted that outside research conducted in environment completely specified (for constant unchanging data stored in Matlab ) was also performed simulations in terms of actual brokerage platform. The results obtained in both environments are similar in the sense of direction changes and logic behavior caused by the user received by the algorithm implemented in the Matlab and Metatrader. Differences explained in this work .
+Presented in the paper the concept of an innovative investment strategy gave satisfactory results for a certain pair as the result of periods of machine learning. For example, in the studied data for two key market currency pairs sampled every hour, the best value is 80 hours of teaching and 15 hours of testing. One can assume that this relationship may change in a different environment (for other markets, for other periods) by becoming a sort of next parameter that optimal values should be sought. It should be emphasized that the study was conducted on data not used in the learning phase and for the basic principle of machine learning achieved results that would have satisfied many a practice. It should also be noted that outside research conducted in environment completely specified (for constant unchanging data stored in Matlab) was also performed simulations in terms of actual brokerage platform. The results obtained in both environments are similar in the sense of direction changes and logic behavior caused by the user received by the algorithm implemented in the Matlab and Metatrader. Differences explained in this work.
 The direction of further research will test the hypothesis that the variability periods to test the learner can improve the quality of prediction. This hypothesis seems to be interesting against the background of previous experiences and results, eg for different studied strategies, including \cite{Wilinski2014} obtained surprisingly different optimal length of periods of learning and testing.
 
 
