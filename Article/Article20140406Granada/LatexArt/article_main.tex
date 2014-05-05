@@ -106,17 +106,10 @@ These features of the worm's intelligence may be extended, however, for this wor
 
 It is assumed that the time series is Si where $i = 1, 2, ...,$ and each word is a vector $Si = (Oi, Hi, Li, Ci)$ called candle consisting of  four values: Open, High, Low and Close of time between the time t and t +1. I is the final index of word which is the last word in time series that was taken under consideration.\\
 
-Figure \ref{fig:fig1} presents, as described above, earthworm in three successive states. After ,,swallowing'' the next candle worm loses the last one. Candles inside the body of the worm have different colors (presented in the form of solid lines (green) and dashed (red)). 
-\begin{figure}[ht]
-\centering
-\includegraphics[width = 0.4\textwidth]{figures/rys1.eps}
-\caption{An example of changes in fixed-length p1 (number of candles) worm, which is traversing the time series.}
-\label{fig:fig1}
-\end{figure}
-\FloatBarrier
+
 Artificial worm executes the following algorithm.\\
-The strategy is built on the principle of classical machine learning. Before starting to run the algorithm, on data located outside the environment that investor knows (like on the current market segments --- out-of-sample), it is necessary to ,,teach''  the values of parameters. Since we are dealing with time series,  the natural solution is that the period of learning preceding testing period.  This principle is presented in Figure \ref{fig:fig2}, which shows examples of learning periods and following them testing periods. Data from testing period was not used during learning. This figure shows also that in learning periods, the same data can be used several times by successively moving time frame by the number of steps corresponding to the length of the test window (of course only when  the length of the test period is shorter than the learning).\\
-In both periods the same algorithm based on the intelligent behavior of worm is used. Of course, the typical problem of machine learning is the proper selection of the length of learning and testing period [], what will be a subject of further research.\\
+The strategy is built on the principle of classical machine learning. Before starting to run the algorithm, on data located outside the environment that investor knows (like on the current market segments --- out-of-sample), it is necessary to ,,teach''  the values of parameters. Since we are dealing with time series,  the natural solution is that the period of learning preceding testing period.  This principle is presented in Figure \ref{fig:fig2}, which shows examples of learning periods and following them testing periods. Data from testing period was not used during learning.\\
+In both periods the same algorithm based on the intelligent behavior of worm is used. Of course, the typical problem of machine learning is the proper selection of the length of learning and testing period \cite{bishop2006pattern}, what will be a subject of further research.\\
 \begin{figure}[ht]
 \centering
 \includegraphics[width = 0.6\textwidth]{figures/rys2.png}
@@ -185,23 +178,7 @@ Zi = Ci-Ci +1- spread;
 where the $spread = 0$, when opened short position is continued;\\ 
 and $spread = cost$, when short position was opened after closing or opening a long position in case when there was no open position.
 \end{itemize}
-Figure \ref{fig:fig3} and \ref{fig:fig4} explain the definitions of profit within a single candle in case of opening (or the continuation of long and short position).
-\begin{figure}[h!]
-\centering
-\includegraphics[width = 0.5\textwidth]{figures/rys3.png}
-\caption{Method of calculating profit in the (i +1)-th candle, in which long position was opened.}
-\label{fig:fig3}
-\end{figure}
-\FloatBarrier
-\begin{figure}[h!]
-\centering
-\includegraphics[width = 0.5\textwidth]{figures/rys4.png}
-\caption{Method of calculating profit in the (i +1)-th candle, in which short position was opened.}
-\label{fig:fig4}
-\end{figure}
-\FloatBarrier
 
-Both figures show symbolically the changes of course, combining simple value at the opening and closing of the candle, ignoring the oscillations inside the candle.
 \begin{itemize}
 \item If as the result of the test the number of red and green candles in the body of the worm had not obtained any advantage from the color that would recommend to open defined position (worm was white), it is assumed to continue the position, which is open, without any cost of the transaction (with the value of $spread = 0$). If at the beginning of the candle, at the time of checking the recommendation, there was no open position then it can be assumed to continue without any position.
 \item Each of the profits calculated above is verified in terms of exceeding the allowable local position drawdown (within one candle). This additional risk management is widely used in automated trading and is called limiting losses --- Stop Loss (SL). In this algorithm, SL was introduced as the fifth parameter of the strategy --- p5.
@@ -221,19 +198,12 @@ where Li --– the lowest rate value in the i-th candle; SL --– absolute value
 where Hi --– the highest rate value in the i-th candle.
 \end{itemize}
 This way p5 parameter was used for securing in strategy the strong local changes in exchange rate within a single candle.\\
-The meaning of p5 parameter to the behavior of the worm and the occurrence of the closing position is explained in Figure \ref{fig:fig5} and Figure \ref{fig:fig6}. This time, unlike in Figures \ref{fig:fig3} and \ref{fig:fig4}, changes in exchange are inside the candle.
+The meaning of p5 parameter to the behavior of the worm and the occurrence of the closing position is explained in Figure \ref{fig:fig5}.
 \begin{figure}[h!]
 \centering
 \includegraphics[width = 0.5\textwidth]{figures/rys5.png}
 \caption{Method of calculating the profit (here: loss) in the case of necessity to use p5 parameter actuating mechanism SL for long positions.}
 \label{fig:fig5}
-\end{figure}
-\FloatBarrier
-\begin{figure}[h!]
-\centering
-\includegraphics[width = 0.5\textwidth]{figures/rys6.png}
-\caption{Method of calculating the profit (here: loss) in the case of necessity to use p5 parameter actuating mechanism SL for long positions.}
-\label{fig:fig6}
 \end{figure}
 \FloatBarrier
 
@@ -297,34 +267,9 @@ The table shows that the best results were obtained for the ratio of the learnin
 \end{figure}
 \FloatBarrier
 
-Tests were also made for another great importance and the currency pair GBPUSD 1h. The results are shown in Table \ref{tab:tab2} and in Figure \ref{fig:fig9}.
+Tests were also made for another great importance and the currency pair GBPUSD 1h. Results for the currency pair are worse than for EURUSD, however, reaffirm the overall efficiency of the algorithm.\\
 
-
-\begin{table}[h!]
-\centering
-\caption{The test results of the algorithm for different configurations of learning and testing periods for GBPUSD.}
-\label{tab:tab2}
-\begin{tabular}{|l|r|r|r|r|} \hline
-Learning\textbackslash Test &	8	 &	10	 &	15 &		20 \\ \hline
-40	 &	-0.1706	 &	0.0084 &		-0.1566	 &	-0.0877 \\ \hline
-60	 &	-0.1321	 &	-0.1668 &		-0.0070	 &	-0.0644 \\ \hline
-80	 &	-0.0175	 &	-0.1375 &		\textbf{0.0870}	 &	-0.0983 \\ \hline
-100	 &	-0.0744	 &	-0.0699	 &	-0.0174	 &	-0.1178 \\ \hline
-\end{tabular}
-\end{table}
-\FloatBarrier
-
-\begin{figure}[h!]
-\centering
-\includegraphics[width = 0.6\textwidth]{figures/rys9.png}
-\caption{Mileage accumulation of capital for 400 steps after 15 candles made of uses of the algorithm for the currency pair GBPUSD 1h.}
-\label{fig:fig9}
-\end{figure}
-\FloatBarrier
-
-Results for the currency pair are worse than for EURUSD, however, reaffirm the overall efficiency of the algorithm.\\
-
-It was also decided to test the effectiveness of the algorithm in terms of one candle 1h. The results are shown in Table 3\ref{tab:tab3} and Table \ref{tab:tab4}.
+It was also decided to test the effectiveness of the algorithm in terms of one candle 1h. The results are shown in Table \ref{tab:tab3} and Table \ref{tab:tab4}.
 
 \begin{table}[h!]
 \centering
@@ -355,7 +300,7 @@ Learning\textbackslash Test &	8	 & 	10 &		15	 &	20\\ \hline
 \FloatBarrier
 
 
-The best results are obtained in both cases (for both markets) for the ratio test to the learning period as 80/15. Result for EURUSD this means achievement of profit over 100 pips per month (approximately 550 hours of trading). This result is in terms of risk at Calmar ratio around 4 should be considered as engaging. Not much is worse than the result obtained for the other test pairs - GBPUSD.\\
+The best results are obtained in both cases (for both markets) for the ratio test to the learning period as 80/15. Result for EURUSD this means achievement of profit over 100 pips per month (approximately 550 hours of trading). This result is in terms of risk at Calmar ratio around 4 should be considered as engaging.\\
 
 In addition, effectiveness studies were carried out and optimized for different test periods. To these results can be compared with each other, has been carried out their link, and the results were divided by the length of the test period, expressed by the number of candles. 
 Figure \ref{fig:fig10} and Figure \ref{fig:fig11} present the results.
@@ -368,13 +313,6 @@ Figure \ref{fig:fig10} and Figure \ref{fig:fig11} present the results.
 \end{figure}
 \FloatBarrier
 
-\begin{figure}[h!]
-\centering
-\includegraphics[width = 0.6\textwidth]{figures/rys11.png}
-\caption{GBPUSD Results per candle.}
-\label{fig:fig11}
-\end{figure}
-\FloatBarrier
 
 From these results it can be concluded that the strategy is working with a short shelf life characteristics. The best results are achieved in periods of about 10-20 candles, it is unlike any other strategy presented in \cite{Wilinski2014} where the best results were achieved for the test periods with a length of 80-100 candles.\\
 All the above presented results refer to simulations in Matlab.
@@ -473,14 +411,6 @@ Dynamic p1-p5 & 	13 669,40 & 	17 260,00 & 	3590,60	 & 20,80\\ \hline
 \end{figure}
 \FloatBarrier
 
-When following charts are respectively compared:
-\begin{itemize}
-\item Figure \ref{fig:fig12} with Figure \ref{fig:fig13},
-\item Figure \ref{fig:fig14} with Figure \ref{fig:fig15},
-\item Figure \ref{fig:fig16} with Figure \ref{fig:fig17},
-\item Figure \ref{fig:fig18} with Figure \ref{fig:fig19}.
-\end{itemize}
-
 It is important to note that every first chart from each pair above was done in Matlab and every second chart was done in MetaTrader. In Matlab chart context, every point of abscissa axis represents testing period, while on ordinate axis there is a result of testing period (relative value), so that it can be assumed that chart was done in time domain. On the other hand, every abscissa on MetaTrader chart represents each opening of position, which means that chart is not linear related with time (however in cases presented in the article it is really similar to time domain), so that chart begins with first position opening and it is denoised in comparison to Matlab chart as every line are determined by opening and closing position, no matter how long this position has lasted. Despite those differences, corellation between Matlab and MetaTrader charts for the artificial worm algorithm executions is indisputable.
 
 \begin{figure}[h!]
@@ -498,43 +428,11 @@ It is important to note that every first chart from each pair above was done in 
 \end{figure}
 \FloatBarrier
 
-Differences in results for the algorithm for Matlab and MetaTrader presented in Table \ref{tab:tab2}. by level of 9-21\% are significant, but it is important to note they do not contest convergence in the algorithm execution in both environments. It is possible to do more detailed research on differences for balance accumulation for particular positions to align the algorithm execution. However for the article purposes conversion of scripts that has been done is sufficient and gives solid base to admit that the algorithm is applicable for market regarding its conceptual assumptions.
-
-\begin{figure}[h!]
-\centering
-\includegraphics[width = 0.6\textwidth]{figures/rys16.png}
-\caption{Balance (relative value) in Matlab for EURUSD [1h] in period 2012.01.20 - 2013.01.01 with fixed p1-p5.}
-\label{fig:fig16}
-\end{figure}
-\FloatBarrier
-\begin{figure}[h!]
-\centering
-\includegraphics[width = 0.6\textwidth]{figures/rys17.png}
-\caption{Balance (absolute values) in MetaTrader for EURUSD [1h] in period 2012.01.20 - 2013.01.01 with fixed p1-p5.}
-\label{fig:fig17}
-\end{figure}
-\FloatBarrier
-
-\begin{figure}[h!]
-\centering
-\includegraphics[width = 0.6\textwidth]{figures/rys18.png}
-\caption{Balance (relative values) in Matlab for EURUSD [1h] in period 2012.01.20 - 2013.01.01 with dynamic p1-p5.}
-\label{fig:fig18}
-\end{figure}
-\FloatBarrier
-\begin{figure}[h!]
-\centering
-\includegraphics[width = 0.6\textwidth]{figures/rys19.png}
-\caption{19 Balance (absolute values) in MetaTrader for EURUSD [1h] in period 2012.01.20 - 2013.01.01 with dynamic p1-p5.}
-\label{fig:fig19}
-\end{figure}
-\FloatBarrier
-
 \section{Conclusions}
 
 Presented in the paper the concept of an innovative investment strategy gave satisfactory results for a certain pair as the result of periods of machine learning. For example, in the studied data for two key market currency pairs sampled every hour, the best value is 80 hours of teaching and 15 hours of testing. One can assume that this relationship may change in a different environment (for other markets, for other periods) by becoming a sort of next parameter that optimal values should be sought. It should be emphasized that the study was conducted on data not used in the learning phase and for the basic principle of machine learning achieved results that would have satisfied many a practice. It should also be noted that outside research conducted in environment completely specified (for constant unchanging data stored in Matlab) was also performed simulations in terms of actual brokerage platform. The results obtained in both environments are similar in the sense of direction changes and logic behavior caused by the user received by the algorithm implemented in the Matlab and Metatrader. Differences explained in this work.
 The direction of further research will test the hypothesis that the variability periods to test the learner can improve the quality of prediction. This hypothesis seems to be interesting against the background of previous experiences and results, eg for different studied strategies, including \cite{Wilinski2014} obtained surprisingly different optimal length of periods of learning and testing.
-\cite{burke}\cite{hay}\cite{krutsinger}\cite{lewis}\cite{murphy}\cite{provost}\cite{wang}\cite{sinclare}\cite{person}\cite{myers}\cite{tian}
+\cite{krutsinger}\cite{lewis}\cite{murphy}\cite{provost}\cite{wang}\cite{sinclare}\cite{person}\cite{tian}
 
 
 
