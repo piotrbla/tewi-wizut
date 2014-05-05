@@ -250,7 +250,7 @@ p4 --- maximum size of the capital subsidence (eg for the currency pair EURUSD m
 \end{equation} 
 where PositionState --- is the type of open position (long or short) and PositionStates equal 0 means resignations from the opening position to the beginning of the next candle.
 \end{itemize}
-So, the above-described algorithm uses 5 parameters, as many as 3 of which are devoted to risk management strategy.\\
+So, the above-described algorithm uses 5 parameters, as many as 3 of which are devoted to risk management of the strategy.\\
 %%PBStart
 The complexity of the algorithm is illustrated in Figure \ref{fig:fig7}, which shows the individual steps and decisions made in the iteration on a single candle in the form of a decision tree. This iteration was carried out both in the search for optimal parameters p1, ..., p5 and in the process they use in the testing phase for data not used in learning period.\\
 
@@ -267,7 +267,7 @@ The figure shows in a tree form further decisions taken at the beginning of the 
 Described algorithm is implemented in the Matlab and using the MQL4 language of the Metatrader platform. The study was conducted both in the historical data (of course with the principles of machine learning --- testing was carried out using data not used in the learning phase) and a real ,,live'' market. Between the communities, there are also important differences that affect the diversity of simulation results.
 
 \section{The study of strategy}
-The study was conducted primarily on the basic EURUSD exchange rate at candlelight 1h. This market was chosen because of its popularity, a huge liquidity and also due to the possession by the authors many experiences in other machine learning strategy for this particular market such as []. These experiments suggested initially, carrying out many tests with a long learning period, about 1000 candles, then 500 candles and testing time windows of 50 to 200 candles. All these attempts have proven to be very effective and led to continuing losses. After months of trying in many markets noted that over long periods of learning, eg the order of 1000 candles strategy variability is very large. Therefore, the tests started with a decidedly shorter periods of learning and testing.\\
+The study was conducted primarily on the basic EURUSD exchange rate at candlelight 1h. This market was chosen because of its popularity, a huge liquidity and also due to the possession by the authors many experiences in other machine learning strategy for this particular market such as \cite{Wilinski2014}. These experiments suggested initially, carrying out many tests with a long learning period, about 1000 candles, then 500 candles and testing time windows of 50 to 200 candles. All these attempts have proven to be very effective and led to continuing losses. After months of trying in many markets noted that over long periods of learning, eg the order of 1000 candles strategy variability is very large. Therefore, the tests started with a decidedly shorter periods of learning and testing.\\
 
 Finally, the authors decided to present the results for the two markets - currency pairs EURUSD and GBPUSD sampled at 1h in machine learning aspect ratios matched to the reduced scope of both the learning phase and testing.\\
 
@@ -278,7 +278,7 @@ Table \ref{tab:tab1} summarizes the results for different time periods. The stud
 \caption{The test results of the algorithm for different configurations of learning and testing periods for a currency pair EURUSD.}
 \label{tab:tab1}
 \begin{tabular}{|l|r|r|r|r|} \hline
-Learning/Test &	8	 &	10 &		15	 &	20 \\ \hline
+Learning\textbackslash Test &	8	 &	10 &		15	 &	20 \\ \hline
 40 &		-0.0261 &		-0.0759	 &	-0.1424	 &	-0.0653 \\ \hline
 60 &		0.0044 &		-0.0156 &		0.0275 &		0.1647 \\ \hline
 80 &		-0.0234 &		0.0989 &		\textbf{0.2401} &		0.0618 \\ \hline
@@ -287,7 +287,7 @@ Learning/Test &	8	 &	10 &		15	 &	20 \\ \hline
 \end{table}
 \FloatBarrier
 
-The table shows that the best results were obtained for the ratio of the learning period to test period as 80/15. For this comparison periods was performed to study the market in EURUSD and shown in the Figure \ref{fig:fig8} For the 800-hour candles obtained result 0.2401 (2401 pips). Chart is definitely a growth course with a maximum of 600 pips from falling, which gives a very good, according to the authors, the criterion of Calmar (ratio of profit to capital najwiekzsego slips) about nearly 4.0.\\
+The table shows that the best results were obtained for the ratio of the learning period to test period as 80/15. For this comparison periods was performed to study the market in EURUSD and shown in the Figure \ref{fig:fig8} For the 800 one hour candles obtained result 0.2401 (2401 pips). Chart is definitely a growth course with a maximum of 600 pips from falling, which gives a very good, according to the authors, the criterion of Calmar (ratio of profit to capital najwiekzsego slips) about nearly 4.0.\\
 
 \begin{figure}[h!]
 \centering
@@ -305,7 +305,7 @@ Tests were also made for another great importance and the currency pair GBPUSD 1
 \caption{The test results of the algorithm for different configurations of learning and testing periods for GBPUSD.}
 \label{tab:tab2}
 \begin{tabular}{|l|r|r|r|r|} \hline
-Learning/Test &	8	 &	10	 &	15 &		20 \\ \hline
+Learning\textbackslash Test &	8	 &	10	 &	15 &		20 \\ \hline
 40	 &	-0.1706	 &	0.0084 &		-0.1566	 &	-0.0877 \\ \hline
 60	 &	-0.1321	 &	-0.1668 &		-0.0070	 &	-0.0644 \\ \hline
 80	 &	-0.0175	 &	-0.1375 &		\textbf{0.0870}	 &	-0.0983 \\ \hline
@@ -331,7 +331,7 @@ It was also decided to test the effectiveness of the algorithm in terms of one c
 \caption{PerCandle EURUSD.}
 \label{tab:tab3}
 \begin{tabular}{|l|r|r|r|r|} \hline
-Learning/Test &	8	 &	10 &		15	 &	20\\ \hline
+Learning\textbackslash Test &	8	 &	10 &		15	 &	20\\ \hline
 40 &		-2.207E-06 &		-6.443E-06 &		-1.219E-05 &		-5.641E-06\\ \hline
 60 &		3.695E-07 &		-1.327E-06 &		2.358E-06 &		1.425E-05\\ \hline
 80 &		-1.989E-06 &		8.427E-06	 &	\textbf{2.062E-05} &		5.3549E-06\\ \hline
@@ -345,7 +345,7 @@ Learning/Test &	8	 &	10 &		15	 &	20\\ \hline
 \caption{PerCandle GBPUSD.}
 \label{tab:tab4}
 \begin{tabular}{|l|r|r|r|r|} \hline
-Learning/Test &	8	 & 	10 &		15	 &	20\\ \hline
+Learning\textbackslash Test &	8	 & 	10 &		15	 &	20\\ \hline
 40	 & -2.949E-05 & 	1.457E-06 & 	-2.768E-05	 & -1.578E-05\\ \hline
 60	 & -2.289E-05 & 	-2.912E-05 & 	-1.250E-06 & 	-1.162E-05\\ \hline
 80	 & -3.043E-06 & 	-2.408E-05	 & \textbf{1.551E-05} & 	-1.780E-05\\ \hline
@@ -420,7 +420,7 @@ Below are presented balance comparisons in Matlab and MetaTrader environments:
 \end{itemize}
 In both approaches following assumptions were done:
 \begin{itemize}
-\item spread was 0.0028, 
+\item spread was 0.00028, 
 \item initial deposit was 50000 EUR,
 \item size of the opening positions was 1 lot,
 \item each testing period lasted 15 candles.
@@ -432,7 +432,7 @@ In both approaches following assumptions were done:
 \end{itemize}
 In both approaches following assumptions were done:
 \begin{itemize}
-\item spread was 0.0016, 
+\item spread was 0.00016, 
 \item initial deposit was 10000 EUR,
 \item size of the opening positions was 1 lot,
 \item each testing period lasted 15 candles.
