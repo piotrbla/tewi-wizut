@@ -6,6 +6,8 @@
 \usepackage{epstopdf}
 \usepackage{amsmath}
 \usepackage{placeins}
+\usepackage{subcaption}
+\captionsetup{compatibility=false}
 
 \usepackage{url}
 \urldef{\mailsa}\path|{awilinski, abera, mjarlaczynski, pblaszynski}@wi.zut.edu.pl|    
@@ -397,34 +399,39 @@ Dynamic p1-p5 & 	13 669,40 & 	17 260,00 & 	3590,60	 & 20,80\\ \hline
 \FloatBarrier
 
 \begin{figure}[h!]
+\begin{minipage}{0.49\textwidth}
 \centering
-\includegraphics[width = 0.6\textwidth]{figures/rys12.png}
-\caption{Balance (relative value) in Matlab for GBPUSD [1h] in period 2013.01.09 - 2013.12.30 with fixed parameters p1-p5.}
+\includegraphics[width = 0.9\textwidth]{figures/rys12.png}
+\subcaption{} % Balance (relative value) in Matlab for GBPUSD [1h] in period 2013.01.09 - 2013.12.30 with fixed parameters p1-p5.
 \label{fig:fig12}
-\end{figure}
-\FloatBarrier
-\begin{figure}[h!]
+\end{minipage}
+\begin{minipage}{0.49\textwidth}
 \centering
-\includegraphics[width = 0.6\textwidth]{figures/rys13.png}
-\caption{Balance (absolute value) in MetaTrader for GBPUSD [1h] in period 2013.01.09 - 2013.12.30 with fixed parameters p1-p5.}
+\includegraphics[width = \textwidth]{figures/rys13.png}
+\subcaption{} % Balance (absolute value) in MetaTrader for GBPUSD [1h] in period 2013.01.09 - 2013.12.30 with fixed parameters p1-p5.
 \label{fig:fig13}
+\end{minipage}
+\caption{CAPTION GOES HERE}
 \end{figure}
 \FloatBarrier
 
 It is important to note that every first chart from each pair above was done in Matlab and every second chart was done in MetaTrader. In Matlab chart context, every point of abscissa axis represents testing period, while on ordinate axis there is a result of testing period (relative value), so that it can be assumed that chart was done in time domain. On the other hand, every abscissa on MetaTrader chart represents each opening of position, which means that chart is not linear related with time (however in cases presented in the article it is really similar to time domain), so that chart begins with first position opening and it is denoised in comparison to Matlab chart as every line are determined by opening and closing position, no matter how long this position has lasted. Despite those differences, corellation between Matlab and MetaTrader charts for the artificial worm algorithm executions is indisputable.
 
+
 \begin{figure}[h!]
+\begin{minipage}{0.49\textwidth}
 \centering
-\includegraphics[width = 0.6\textwidth]{figures/rys14.png}
-\caption{Balance (relative value) in Matlab for GBPUSD [1h] in period 2013.01.09 - 2013.12.30 with dynamic p1-p5.}
+\includegraphics[width = 0.9\textwidth]{figures/rys14.png}
+\subcaption{} %Balance (relative value) in Matlab for GBPUSD [1h] in period 2013.01.09 - 2013.12.30 with dynamic p1-p5.
 \label{fig:fig14}
-\end{figure}
-\FloatBarrier
-\begin{figure}[h!]
+\end{minipage}
+\begin{minipage}{0.49\textwidth}
 \centering
-\includegraphics[width = 0.6\textwidth]{figures/rys15.png}
-\caption{Balance (absolute value) in MetaTrader for GBPUSD [1h] in period 2013.01.09 - 2013.12.30 with dynamic p1-p5.}
+\includegraphics[width = \textwidth]{figures/rys15.png}
+\subcaption{} %Balance (absolute value) in MetaTrader for GBPUSD [1h] in period 2013.01.09 - 2013.12.30 with dynamic p1-p5.
 \label{fig:fig15}
+\end{minipage}
+\caption{CAPTION GOES HERE}
 \end{figure}
 \FloatBarrier
 
