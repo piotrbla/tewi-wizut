@@ -77,15 +77,15 @@ Let's consider an artificial worm, which behaves like its natural inspirer. Let 
 Let's assume that candle can have color (often in a number of brokerage platforms, this procedure is used). Therefore candles may be red (when the opening of the candle is higher than its closing $O_i>C_i$) and green (when the situation is opposite $O_i<C_i$).\\
 Let's also assume --- it is a primary strategy rule - that when an artificial earthworm has a significant advantage of red candles, a short position is opened or continued. When earthworm has the significant advantage of green candles, a long position is opened or continued. Imprecise term ,,significant'' is defined by the use of the second parameter p2 according to the rules:
 \begin{equation}
-\text{If }  Lr > p1/2 -p2 \text{ then short;}
+\text{If }  Lr > p1/2 -p2 \text{ then } short;
 \end{equation}
 opening of short position will be suggested;
 \begin{equation}
-\text{If }  Lg > p1/2 -p2 \text{ then long;}
+\text{If }  Lg > p1/2 -p2 \text{ then } long;
 \end{equation}
 opening of long position will be suggested;
 \begin{equation}
-\text{If }  Lg < p1/2 -p2 \text{ and } Lr< p1/2-p2 \text{ then none;}
+\text{If }  Lg < p1/2 -p2 \text{ and } Lr< p1/2-p2 \text{ then } none;
 \label{eq:eq3}
 \end{equation}
 the continuation of state will be suggested (position or no opened position).\\
@@ -100,13 +100,13 @@ Earthworm is therefore supplied with artificial intelligence, which allows the a
 \item after absorbing and discarding one candle, worms knows how many candles inside it are red or green and how to determine its status --- red, green or white;
 \item knowing its status, earthworm knows how to make a decision about opening or continuing position; the opening of a position (long or short) means the simultaneous closing of the current position (opposite) if such position is opened;
 \item earthworm observes cumulative profit curve and if it  notices unacceptable drawdown, then opened position is changed to the opposite;
-\item unacceptable drawdown is defined by two other parameters p3 and p4. p3 is the number of previous candles, which sets a reference point in time series, in which the value of the accumulated profit for i-p3 is checked for comparison with the current value of the accumulated profit. p4 is permissible decrease of cumulative profit. If it is exceeded, the SL (Stop Loss --- closes the currently open position) mechanism is activated;
-\item worm also observes current course changes during  each next candle and reacts to unprofitable changes. If the current exchange rate causes a loss on the opened positions greater than p5 then the SL mechanism is triggered --- the position is closed and to the end of the candle worm remains in the state without an open position. p5 is therefore the fifth strategy parameter. 
+\item unacceptable drawdown is defined by two other parameters $p3$ and $p4$. $p3$ is the number of previous candles, which sets a reference point in time series, in which the value of the accumulated profit for $i-p3$ is checked for comparison with the current value of the accumulated profit. $p4$ is permissible decrease of cumulative profit. If it is exceeded, the $SL$ (Stop Loss --- closes the currently open position) mechanism is activated;
+\item worm also observes current course changes during  each next candle and reacts to unprofitable changes. If the current exchange rate causes a loss on the opened positions greater than $p5$ then the $SL$ mechanism is triggered --- the position is closed and to the end of the candle worm remains in the state without an open position. $p5$ is therefore the fifth strategy parameter. 
 \end{itemize}
 
 These features of the worm's intelligence may be extended, however, for this work they were limited to the foregoing. \\
 
-It is assumed that the time series is Si where $i = 1, 2, ...,$ and each word is a vector $Si = (O_i, H_i, L_i, C_i)$ called candle consisting of  four values: Open, High, Low and Close of time between the time t and t +1. I is the final index of word which is the last word in time series that was taken under consideration.\\
+It is assumed that the time series is Si where $i = 1, 2, ...,$ and each word is a vector $S_i = (O_i, H_i, L_i, C_i)$ called candle consisting of  four values: Open, High, Low and Close of time between the time t and t +1. I is the final index of word which is the last word in time series that was taken under consideration.\\
 
 
 Artificial worm executes the following algorithm.\\
@@ -132,7 +132,7 @@ $I$ --- is the length of the test window, after which it is necessary to change 
 \item In each $i$-th step, the loop $j = 1, ..., p1$ is performed in which a number of green $Lg$, red $Lr$ candles is calculated so the sum of $Lg$ and $Lr$ is $p1$ (to avoid the situation when $O_i = C_i$, it is assigned arbitrarily to one of the candles sets, for example green);
 \item A condition for the existence of a Rg recommendation to open a long position (or to continue it if it is open) is checked. This condition is arbitrarily adopted (one can of course consider different one): 
 \begin{equation}
-\text{If } lg> p1/2-p2 \text{ then } Rg=1
+\text{If } Lg> p1/2-p2 \text{ then } Rg=1
 \end{equation}  
                                                      
 \end{itemize}
@@ -150,7 +150,7 @@ If this condition is fulfilled, then depending on the current position status Po
 
 Similarly check the condition of recommendations Rr to open or continue short position:
 \begin{equation}
-\text{If } lr>p1/2 – p2 \text {then Rr=1.}
+\text{If } Lr>p1/2 – p2 \text {then Rr=1.}
 \end{equation}
 If this condition is fulfilled, then depending on what the current position status PositionState is, at the opening of the next candle, position is opened or continued as follows: \\
 \begin{equation}
@@ -183,7 +183,7 @@ and $spread = cost$, when short position was opened after closing or opening a l
 
 \begin{itemize}
 \item If as the result of the test the number of red and green candles in the body of the worm had not obtained any advantage from the color that would recommend to open defined position (worm was white), it is assumed to continue the position, which is open, without any cost of the transaction (with the value of $spread = 0$). If at the beginning of the candle, at the time of checking the recommendation, there was no open position then it can be assumed to continue without any position.
-\item Each of the profits calculated above is verified in terms of exceeding the allowable local position drawdown (within one candle). This additional risk management is widely used in automated trading and is called limiting losses --- Stop Loss (SL). In this algorithm, SL was introduced as the fifth parameter of the strategy --- $p5$.
+\item Each of the profits calculated above is verified in terms of exceeding the allowable local position drawdown (within one candle). This additional risk management is widely used in automated trading and is called limiting losses --- Stop Loss ($SL$). In this algorithm, $SL$ was introduced as the fifth parameter of the strategy --- $p5$.
 \end{itemize}
 
 \noindent Presented strategy was tested if:
@@ -192,19 +192,19 @@ and $spread = cost$, when short position was opened after closing or opening a l
 \begin{equation}
 \text{If } L_i-O_i<SL \text{ then } Z_i=-SL
 \end{equation}
-where Li --– the lowest rate value in the i-th candle; SL --– absolute value Stop Loss appearing as p5 parameter;
+where Li --– the lowest rate value in the i-th candle; $SL$ --– absolute value Stop Loss appearing as $p5$ parameter;
 \item in the case of opening at the beginning of the i-th candle or continuation of a short position presented condition did not occur:
 \begin{equation}
 \text{If } O_i-H_i<SL \text{ then } Z_i=-SL
 \end{equation}
 where Hi --– the highest rate value in the i-th candle.
 \end{itemize}
-This way p5 parameter was used for securing in strategy the strong local changes in exchange rate within a single candle.\\
-The meaning of p5 parameter to the behavior of the worm and the occurrence of the closing position is explained in Figure \ref{fig:fig5}.
+This way $p5$ parameter was used for securing in strategy the strong local changes in exchange rate within a single candle.\\
+The meaning of $p5$ parameter to the behavior of the worm and the occurrence of the closing position is explained in Figure \ref{fig:fig5}.
 \begin{figure}[h!]
 \centering
 \includegraphics[width = 0.5\textwidth]{figures/rys5.png}
-\caption{Method of calculating the profit (here: loss) in the case of necessity to use p5 parameter actuating mechanism SL for long positions.}
+\caption{Method of calculating the profit (here: loss) in the case of necessity to use $p5$ parameter actuating mechanism $SL$ for long positions.}
 \label{fig:fig5}
 \end{figure}
 \FloatBarrier
@@ -233,7 +233,7 @@ The complexity of the algorithm is illustrated in Figure \ref{fig:fig7}, which s
 \end{figure}
 \FloatBarrier
 
-The figure shows in a tree form further decisions taken at the beginning of the candle and then reactions to any unacceptable change in course. The first examines the state of the position taken over from the closure of the previous candle. The next step is to work out decisions / recommendations as to the direction of the opening from the set {long, short, none}. After opening position is observed return of the open position. It can be positive or negative. If it is positive, it does not take up any additional decisions. If it is negative, it checks if it is not achieved the level of SL. In the case of a negative return of the items, except for testing, SL is not exceeded within a candle tested is also a condition resulting from the use of parameters ($p3$, $p4$). Tree is a state of complete items transmitted at the beginning of the next candle.
+The figure shows in a tree form further decisions taken at the beginning of the candle and then reactions to any unacceptable change in course. The first examines the state of the position taken over from the closure of the previous candle. The next step is to work out decisions / recommendations as to the direction of the opening from the set {long, short, none}. After opening position is observed return of the open position. It can be positive or negative. If it is positive, it does not take up any additional decisions. If it is negative, it checks if it is not achieved the level of $SL$. In the case of a negative return of the items, except for testing, $SL$ is not exceeded within a candle tested is also a condition resulting from the use of parameters ($p3$, $p4$). Tree is a state of complete items transmitted at the beginning of the next candle.
 
 Described algorithm is implemented in the Matlab and using the MQL4 language of the Metatrader platform. The study was conducted both in the historical data (of course with the principles of machine learning --- testing was carried out using data not used in the learning phase) and a real ,,live'' market. Between the communities, there are also important differences that affect the diversity of simulation results.
 
@@ -330,7 +330,7 @@ The main differences between the implementation of the artificial earthworm in M
 \item Matlab
 \begin{itemize}
 \item Calculation of balance and other standard market statistics is implemented manually, including also calculation of profit and loss related with opening / closing position;
-\item SL handling is implemented manually, including trailing stop;
+\item $SL$ handling is implemented manually, including trailing stop;
 \item Lack of built-in market validations for opening / closing position;
 \item Calculations are done using only 4 discrete price values for each candle;
 \item Implementation approach from technical point of view is a matter of developer decisions;
@@ -338,7 +338,7 @@ The main differences between the implementation of the artificial earthworm in M
 \item MetaTrader
 \begin{itemize}
 \item Balance and other standard market statistics are calculated automatically, including also a strictly defined API for opening / closing position;
-\item SL handling is a built-in feature, including trailing stop;
+\item $SL$ handling is a built-in feature, including trailing stop;
 \item There are built-in market validations for opening / closing position;
 \item Prices are changing smoothly for current candle (not only final fixed OHLC values);
 \item Implementation approach from technical point of view is a not only a matter of developer decisions, but is also enforced by MetaTrader conventions (phases of initialization, candle execution, deinitialization etc.);
