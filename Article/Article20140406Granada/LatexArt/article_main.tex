@@ -73,8 +73,8 @@ The article is organized as follows: at first authors describe an authored strat
 \section{Strategy characteristics}
 In presented strategy, a metaphorical procedure is often used to explain heuristic algorithms of artificial intelligence. Said procedure is a reference to an inspiration derived from the nature.\\
 
-Let's consider an artificial worm, which behaves like its natural inspirer. Let this artificial worm have a length of p1 candles (vectors representing the knowledge about events occurring within the contractual part of the time series). Let her movement come down to the successive ,,eating'' one candle and simultaneous ,,discarding'' of one candle --- always having p1 candles. Thus the earthworm moves incrementally at length of time called the period of the candle. I-th candle is  defined as a row of data of values  $Oi$, $Hi$, $Li$, $Ci$ (Open, High, Low and Close). These values represent (in order): the value at the beginning of this period, the maximum value within the period, the minimum and the closing values - at the end of the candle.\\
-Let's assume that candle can have color (often in a number of brokerage platforms, this procedure is used). Therefore candles may be red (when the opening of the candle is higher than its closing $Oi>Ci$) and green (when the situation is opposite $Oi<Ci$).\\
+Let's consider an artificial worm, which behaves like its natural inspirer. Let this artificial worm have a length of $p1$ candles (vectors representing the knowledge about events occurring within the contractual part of the time series). Let her movement come down to the successive ,,eating'' one candle and simultaneous ,,discarding'' of one candle --- always having $p1$ candles. Thus the earthworm moves incrementally at length of time called the period of the candle. I-th candle is  defined as a row of data of values  $O_i$, $H_i$, $L_i$, $C_i$ (Open, High, Low and Close). These values represent (in order): the value at the beginning of this period, the maximum value within the period, the minimum and the closing values - at the end of the candle.\\
+Let's assume that candle can have color (often in a number of brokerage platforms, this procedure is used). Therefore candles may be red (when the opening of the candle is higher than its closing $O_i>C_i$) and green (when the situation is opposite $O_i<C_i$).\\
 Let's also assume --- it is a primary strategy rule - that when an artificial earthworm has a significant advantage of red candles, a short position is opened or continued. When earthworm has the significant advantage of green candles, a long position is opened or continued. Imprecise term ,,significant'' is defined by the use of the second parameter p2 according to the rules:
 \begin{equation}
 \text{If }  Lr > p1/2 -p2 \text{ then short;}
@@ -90,7 +90,7 @@ opening of long position will be suggested;
 \end{equation}
 the continuation of state will be suggested (position or no opened position).\\
 
-In the rules above Lr and Lg are the number of candles, respectively ,,red'' and ,,green'' in the worm of p1 length, wherein $p1 = Lr + Lg$.\\
+In the rules above Lr and Lg are the number of candles, respectively ,,red'' and ,,green'' in the worm of $p1$ length, wherein $p1 = Lr + Lg$.\\
 When dominance determined by another parameter p2 is undecided, as in \ref{eq:eq3}, then worm takes the color white and the position will not be opened. When the worm continues to open position, investor does not incur costs. On many platforms, also in literature, symbolic marking of growing candles in white and decreasing in black is used. In this article, due to the occurrence of three values, green-red-white colors are used.\\
 
 Earthworm is therefore supplied with artificial intelligence, which allows the accumulation of knowledge and decision-making:
@@ -106,7 +106,7 @@ Earthworm is therefore supplied with artificial intelligence, which allows the a
 
 These features of the worm's intelligence may be extended, however, for this work they were limited to the foregoing. \\
 
-It is assumed that the time series is Si where $i = 1, 2, ...,$ and each word is a vector $Si = (Oi, Hi, Li, Ci)$ called candle consisting of  four values: Open, High, Low and Close of time between the time t and t +1. I is the final index of word which is the last word in time series that was taken under consideration.\\
+It is assumed that the time series is Si where $i = 1, 2, ...,$ and each word is a vector $Si = (O_i, H_i, L_i, C_i)$ called candle consisting of  four values: Open, High, Low and Close of time between the time t and t +1. I is the final index of word which is the last word in time series that was taken under consideration.\\
 
 
 Artificial worm executes the following algorithm.\\
@@ -120,16 +120,16 @@ In both periods the same algorithm based on the intelligent behavior of worm is 
 \end{figure}
 \FloatBarrier
 
-This repeatable algorithm, located in both periods - learning and testing, has the following structure. In learning period the optimal value for five parameters p1, p2, ..., p5 was determined. In test period these designated values of parameters were used to perform the algorithm in the new environment. In each i-th step (candle) of time series following activities were performed:
+This repeatable algorithm, located in both periods - learning and testing, has the following structure. In learning period the optimal value for five parameters $p1$, $p2$, ..., $p5$ was determined. In test period these designated values of parameters were used to perform the algorithm in the new environment. In each i-th step (candle) of time series following activities were performed:
 \begin{itemize}
 \item For each $i = p1, p1 +1, p1 +2, ..., I$ and for $j = 1, ..., p1$ check whether the candle located at a distance i-j backwards from the current candle is:\\
-green when $Oi-j <Ci-j$, \\
-red when $Oi-j> Ci-j$, \\
-where p1 --- is the first parameter which is the length of the artificial worm - the number of candles of different colors that make up the ,,body'' of the worm; \\
-$Oi-j$ --- is the opening value of (i-j)-th candle;\\ 
-$Ci-j$ --- is the closing value of (i-j)-th candle; \\
+green when $O_{i-j} <C_{i-j}$, \\
+red when $O_{i-j}> C_{i-j}$, \\
+where $p1$ --- is the first parameter which is the length of the artificial worm - the number of candles of different colors that make up the ,,body'' of the worm; \\
+$O_{i-j}$ --- is the opening value of (i-j)-th candle;\\ 
+$C_{i-j}$ --- is the closing value of (i-j)-th candle; \\
 $I$ --- is the length of the test window, after which it is necessary to change the parameters values to the new, learned in the machine learning phase;\\
-\item In each i-th step, the loop j = 1, ..., p 1 is performed in which a number of green Lg, red Lr candles is calculated so the sum of  Lg and Lr is p1 (to avoid the situation when $Oi = Ci$, it is assigned arbitrarily to one of the candles sets, for example green);
+\item In each $i$-th step, the loop $j = 1, ..., p1$ is performed in which a number of green $Lg$, red $Lr$ candles is calculated so the sum of $Lg$ and $Lr$ is $p1$ (to avoid the situation when $O_i = C_i$, it is assigned arbitrarily to one of the candles sets, for example green);
 \item A condition for the existence of a Rg recommendation to open a long position (or to continue it if it is open) is checked. This condition is arbitrarily adopted (one can of course consider different one): 
 \begin{equation}
 \text{If } lg> p1/2-p2 \text{ then } Rg=1
@@ -164,18 +164,18 @@ If this condition is fulfilled, then depending on what the current position stat
 \text{If } Rr==1 \text{ and }  PositionState ==0 \text{ then  PositionState =short;}
 \end{equation}
 
-In formulas above there is a parameter p2. It is the second parameter of the strategy which is an arbitrarily separated part of the worm, which depending on size causes the direction of investment not to change. Large p2 causes long positions to change into short positions (or vice-versa) rarely. Small value of p2 leads to a higher frequency of these changes. The optimum value of p2 is chosen similarly like p1.
+In formulas above there is a parameter $p2$. It is the second parameter of the strategy which is an arbitrarily separated part of the worm, which depending on size causes the direction of investment not to change. Large $p2$ causes long positions to change into short positions (or vice-versa) rarely. Small value of $p2$ leads to a higher frequency of these changes. The optimum value of $p2$ is chosen similarly like $p1$.
 \begin{itemize}
 \item 	When opening long position, profit after one candle (this does not mean that position was closed after a single candle) can be calculated as:
 \begin{equation}
-Zi = Ci +1 - Ci - spread;
+Z_i = C_{i+1} - C_i - spread;
 \end{equation}
 where the spread = 0, when opened long position is continued; \\
 and spread = cost, when long position was opened after closing or opening a short position in case when there was no open position;\\
 cost is a variable that depends on the particular brokerage platform that was used for testing the strategy; in this case, for the currency pair EURUSD $cost = 0.00016$ was assumed and for the currency pair GBPUSD $cost = 0.00028$.
 \item When short position is opened, profit after one candle (it does not mean that position is closed) can be calculated as: 
 \begin{equation}
-Zi = Ci-Ci +1- spread;
+Z_i = C_i-C_{i+1}- spread;
 \end{equation}
 where the $spread = 0$, when opened short position is continued;\\ 
 and $spread = cost$, when short position was opened after closing or opening a long position in case when there was no open position.
@@ -183,19 +183,19 @@ and $spread = cost$, when short position was opened after closing or opening a l
 
 \begin{itemize}
 \item If as the result of the test the number of red and green candles in the body of the worm had not obtained any advantage from the color that would recommend to open defined position (worm was white), it is assumed to continue the position, which is open, without any cost of the transaction (with the value of $spread = 0$). If at the beginning of the candle, at the time of checking the recommendation, there was no open position then it can be assumed to continue without any position.
-\item Each of the profits calculated above is verified in terms of exceeding the allowable local position drawdown (within one candle). This additional risk management is widely used in automated trading and is called limiting losses --- Stop Loss (SL). In this algorithm, SL was introduced as the fifth parameter of the strategy --- p5.
+\item Each of the profits calculated above is verified in terms of exceeding the allowable local position drawdown (within one candle). This additional risk management is widely used in automated trading and is called limiting losses --- Stop Loss (SL). In this algorithm, SL was introduced as the fifth parameter of the strategy --- $p5$.
 \end{itemize}
 
 \noindent Presented strategy was tested if:
 \begin{itemize}
 \item in the case of opening at the beginning of the i-th candle or continuation of a long position presented condition did not occur:\\
 \begin{equation}
-\text{If } Li-Oi<SL \text{ then } Zi=-SL
+\text{If } L_i-O_i<SL \text{ then } Z_i=-SL
 \end{equation}
 where Li --– the lowest rate value in the i-th candle; SL --– absolute value Stop Loss appearing as p5 parameter;
 \item in the case of opening at the beginning of the i-th candle or continuation of a short position presented condition did not occur:
 \begin{equation}
-\text{If } Oi-Hi<SL \text{ then } Zi=-SL
+\text{If } O_i-H_i<SL \text{ then } Z_i=-SL
 \end{equation}
 where Hi --– the highest rate value in the i-th candle.
 \end{itemize}
@@ -212,19 +212,19 @@ The meaning of p5 parameter to the behavior of the worm and the occurrence of th
 \begin{itemize}
 \item To determine the current quality of the strategy and risk management summation of current gains/losses (the accumulation) is performed
 \begin{equation}
-Zci = sum ( Zi ) \text{ from } i = 1 \text{ to the current i value;}
+Zci = sum ( Z_i ) \text{ from } i = 1 \text{ to the current i value;}
 \end{equation}
 \item There is a possible local subsidence Zci capital by introducing two additional parameters to manage the risk.\\
-p3 --- the number of steps back on the curve of the cumulative profit for the determination of Zci --- p3 for comparison with the present value of Zci;
-p4 --- maximum size of the capital subsidence (eg for the currency pair EURUSD measured in pips), which if exceeded will trigger the closure position:\\
+$p3$ --- the number of steps back on the curve of the cumulative profit for the determination of $Zc_i$ --- $p3$ for comparison with the present value of $Zc_i$;
+$p4$ --- maximum size of the capital subsidence (eg for the currency pair EURUSD measured in pips), which if exceeded will trigger the closure position:\\
 \begin{equation}
-\text{If } ( Zci - p3 - Zi ) <- p4 \text{ and } PositionState \neq 0 \text{ then } PositionState = 0
+\text{If } ( Zc_i - p3 - Z_i ) <- p4 \text{ and } PositionState \neq 0 \text{ then } PositionState = 0
 \end{equation} 
 where PositionState --- is the type of open position (long or short) and PositionStates equal 0 means resignations from the opening position to the beginning of the next candle.
 \end{itemize}
 So, the above-described algorithm uses 5 parameters, as many as 3 of which are devoted to risk management of the strategy.\\
 %%PBStart
-The complexity of the algorithm is illustrated in Figure \ref{fig:fig7}, which shows the individual steps and decisions made in the iteration on a single candle in the form of a decision tree. This iteration was carried out both in the search for optimal parameters p1, ..., p5 and in the process they use in the testing phase for data not used in learning period.\\
+The complexity of the algorithm is illustrated in Figure \ref{fig:fig7}, which shows the individual steps and decisions made in the iteration on a single candle in the form of a decision tree. This iteration was carried out both in the search for optimal parameters $p1, ..., p5$ and in the process they use in the testing phase for data not used in learning period.\\
 \begin{figure}[h!]
 \centering
 \includegraphics[width = \textwidth]{figures/rys7.png}
@@ -233,7 +233,7 @@ The complexity of the algorithm is illustrated in Figure \ref{fig:fig7}, which s
 \end{figure}
 \FloatBarrier
 
-The figure shows in a tree form further decisions taken at the beginning of the candle and then reactions to any unacceptable change in course. The first examines the state of the position taken over from the closure of the previous candle. The next step is to work out decisions / recommendations as to the direction of the opening from the set {long, short, none}. After opening position is observed return of the open position. It can be positive or negative. If it is positive, it does not take up any additional decisions. If it is negative, it checks if it is not achieved the level of SL. In the case of a negative return of the items, except for testing, SL is not exceeded within a candle tested is also a condition resulting from the use of parameters (p3, p4). Tree is a state of complete items transmitted at the beginning of the next candle.
+The figure shows in a tree form further decisions taken at the beginning of the candle and then reactions to any unacceptable change in course. The first examines the state of the position taken over from the closure of the previous candle. The next step is to work out decisions / recommendations as to the direction of the opening from the set {long, short, none}. After opening position is observed return of the open position. It can be positive or negative. If it is positive, it does not take up any additional decisions. If it is negative, it checks if it is not achieved the level of SL. In the case of a negative return of the items, except for testing, SL is not exceeded within a candle tested is also a condition resulting from the use of parameters ($p3$, $p4$). Tree is a state of complete items transmitted at the beginning of the next candle.
 
 Described algorithm is implemented in the Matlab and using the MQL4 language of the Metatrader platform. The study was conducted both in the historical data (of course with the principles of machine learning --- testing was carried out using data not used in the learning phase) and a real ,,live'' market. Between the communities, there are also important differences that affect the diversity of simulation results.
 
@@ -353,7 +353,7 @@ Below are presented balance comparisons in Matlab and MetaTrader environments:
 \begin{enumerate}
 \item for GBPUSD currency pair using 1h candles values in time period of 2013.01.09 - 2013.12.30 in two different approches:
 \begin{itemize}
-\item with fixed parameters: p1=27, p2=4, p3=1, p4=-0.0060, p5=0.0060 (Figure \ref{fig:fig10} and Figure \ref{fig:fig11}). Optimal parameters in that case were computed in Matlab for the first testing period and then were used for all testing periods.
+\item with fixed parameters: $p1$=27, $p2$=4, $p3$=1, $p4$=-0.0060, $p5$=0.0060 (Figure \ref{fig:fig10} and Figure \ref{fig:fig11}). Optimal parameters in that case were computed in Matlab for the first testing period and then were used for all testing periods.
 \item with dynamic parameters that were changed every testing period, regarding to their values computed in Matlab that were put to MetaTrader (Figure \ref{fig:fig12} and Figure \ref{fig:fig13})
 \end{itemize}
 In both approaches following assumptions were done:
@@ -365,7 +365,7 @@ In both approaches following assumptions were done:
 \end{itemize}
 \item for EURUSD currency pair using 1h candles values in time period of 2012.01.20 - 2013.01.01 in two different approches:
 \begin{itemize}
-\item with fixed parameters: p1=34, p2=4, p3=3, p4=-0.0060, p5=0.0060 (Figure \ref{fig:fig14} and Figure \ref{fig:fig15}) Optimal parameters in that case were computed in Matlab for the first testing period and then were used for all testing periods.
+\item with fixed parameters: $p1$=34, $p2$=4, $p3$=3, $p4$=-0.0060, $p5$=0.0060 (Figure \ref{fig:fig14} and Figure \ref{fig:fig15}) Optimal parameters in that case were computed in Matlab for the first testing period and then were used for all testing periods.
 \item with dynamic parameters that were changed every testing period, regarding to their values computed in Matlab that were put to MetaTrader (Figure \ref{fig:fig16} and Figure \ref{fig:fig17})
 \end{itemize}
 In both approaches following assumptions were done:
@@ -387,11 +387,11 @@ Results of the algorithm execution in both environments for both currency pairs 
  &  Total net profit in MetaTrader [EUR]	 &  Total net profit in Matlab 
 [EUR]	 &  Difference [EUR]	 &  Difference [\%]\\ \hline
 \multicolumn{5}{|c|}{GBPUSD in time period 2013.01.09 - 2013.12.30}\\ \hline
-Fixed p1-p5	 & -8 823.76 & 	-7 987.00 & 	836.76 & 	10.48\\
-Dynamic p1-p5	 & 6 057.82	 & 5 555.00	 & 502.82 & 	9.05\\ \hline
+Fixed $p1$-$p5$	 & -8 823.76 & 	-7 987.00 & 	836.76 & 	10.48\\
+Dynamic $p1$-$p5$	 & 6 057.82	 & 5 555.00	 & 502.82 & 	9.05\\ \hline
 \multicolumn{5}{|c|}{EURUSD in time period 2012.01.20 - 2013.01.01}\\ \hline
-Fixed p1-p5	 & 2 305,18 & 	2 695,00	 & 389,82	 & 14,46\\
-Dynamic p1-p5 & 	13 669,40 & 	17 260,00 & 	3590,60	 & 20,80\\ \hline
+Fixed $p1$-$p5$	 & 2 305,18 & 	2 695,00	 & 389,82	 & 14,46\\
+Dynamic $p1$-$p5$ & 	13 669,40 & 	17 260,00 & 	3590,60	 & 20,80\\ \hline
 \end{tabular}
 \end{table}
 \FloatBarrier
@@ -409,7 +409,7 @@ Dynamic p1-p5 & 	13 669,40 & 	17 260,00 & 	3590,60	 & 20,80\\ \hline
 \subcaption{Balance (absolute value) in MetaTrader.}
 \label{fig:fig13}
 \end{minipage}
-\caption{Balance for GBPUSD [1h] in period 2013.01.09 - 2013.12.30 with fixed parameters p1-p5.}
+\caption{Balance for GBPUSD [1h] in period 2013.01.09 - 2013.12.30 with fixed parameters $p1$-$p5$.}
 \end{figure}
 \FloatBarrier
 
@@ -429,7 +429,7 @@ It is important to note that every first chart from each pair above was done in 
 \subcaption{Balance (absolute value) in MetaTrader.}
 \label{fig:fig15}
 \end{minipage}
-\caption{Balance for GBPUSD [1h] in period 2013.01.09 - 2013.12.30 with dynamic parameters p1-p5.}
+\caption{Balance for GBPUSD [1h] in period 2013.01.09 - 2013.12.30 with dynamic parameters $p1$-$p5$.}
 \end{figure}
 \FloatBarrier
 
