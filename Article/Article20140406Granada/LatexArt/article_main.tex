@@ -225,9 +225,6 @@ where PositionState --- is the type of open position (long or short) and Positio
 So, the above-described algorithm uses 5 parameters, as many as 3 of which are devoted to risk management of the strategy.\\
 %%PBStart
 The complexity of the algorithm is illustrated in Figure \ref{fig:fig7}, which shows the individual steps and decisions made in the iteration on a single candle in the form of a decision tree. This iteration was carried out both in the search for optimal parameters p1, ..., p5 and in the process they use in the testing phase for data not used in learning period.\\
-
-The figure shows in a tree form further decisions taken at the beginning of the candle and then reactions to any unacceptable change in course. The first examines the state of the position taken over from the closure of the previous candle. The next step is to work out decisions / recommendations as to the direction of the opening from the set {long, short, none}. After opening position is observed return of the open position. It can be positive or negative. If it is positive, it does not take up any additional decisions. If it is negative, it checks if it is not achieved the level of SL. In the case of a negative return of the items, except for testing, SL is not exceeded within a candle tested is also a condition resulting from the use of parameters (p3, p4). Tree is a state of complete items transmitted at the beginning of the next candle.
-
 \begin{figure}[h!]
 \centering
 \includegraphics[width = \textwidth]{figures/rys7.png}
@@ -236,14 +233,14 @@ The figure shows in a tree form further decisions taken at the beginning of the 
 \end{figure}
 \FloatBarrier
 
+The figure shows in a tree form further decisions taken at the beginning of the candle and then reactions to any unacceptable change in course. The first examines the state of the position taken over from the closure of the previous candle. The next step is to work out decisions / recommendations as to the direction of the opening from the set {long, short, none}. After opening position is observed return of the open position. It can be positive or negative. If it is positive, it does not take up any additional decisions. If it is negative, it checks if it is not achieved the level of SL. In the case of a negative return of the items, except for testing, SL is not exceeded within a candle tested is also a condition resulting from the use of parameters (p3, p4). Tree is a state of complete items transmitted at the beginning of the next candle.
+
 Described algorithm is implemented in the Matlab and using the MQL4 language of the Metatrader platform. The study was conducted both in the historical data (of course with the principles of machine learning --- testing was carried out using data not used in the learning phase) and a real ,,live'' market. Between the communities, there are also important differences that affect the diversity of simulation results.
 
 \section{The study of strategy}
 The study was conducted primarily on the basic EURUSD exchange rate at candlelight 1h. This market was chosen because of its popularity, a huge liquidity and also due to the possession by the authors many experiences in other machine learning strategy for this particular market such as \cite{Wilinski2014}. These experiments suggested initially, carrying out many tests with a long learning period, about 1000 candles, then 500 candles and testing time windows of 50 to 200 candles. All these attempts have proven to be very effective and led to continuing losses. After months of trying in many markets noted that over long periods of learning, eg the order of 1000 candles strategy variability is very large. Therefore, the tests started with a decidedly shorter periods of learning and testing.\\
 
 Finally, the authors decided to present the results for the two markets - currency pairs EURUSD and GBPUSD sampled at 1h in machine learning aspect ratios matched to the reduced scope of both the learning phase and testing.\\
-
-Table \ref{tab:tab1} summarizes the results for different time periods. The study was conducted at approximately constant number of candles testing period, e.g. if the testing period was 10 candles, is to perform the test algorithm 1300 candles optimal parameters were calculated 130 times. If the testing period was 20 candles are the parameters were changed 65 times, etc., if it was available long test period is not used it.
 
 \begin{table}[h!]
 \centering
@@ -258,6 +255,7 @@ Learning\textbackslash Test &	8	 &	10 &		15	 &	20 \\ \hline
 \end{tabular}
 \end{table}
 \FloatBarrier
+Table \ref{tab:tab1} summarizes the results for different time periods. The study was conducted at approximately constant number of candles testing period, e.g. if the testing period was 10 candles, is to perform the test algorithm 1300 candles optimal parameters were calculated 130 times. If the testing period was 20 candles are the parameters were changed 65 times, etc., if it was available long test period is not used it.
 
 The table shows that the best results were obtained for the ratio of the learning period to test period as 80/15. For this comparison periods was performed to study the market in EURUSD and shown in the Figure \ref{fig:fig8} For the 800 one hour candles obtained result 0.2401 (2401 pips). Chart is definitely a growth course with a maximum of 600 pips from falling, which gives a very good, according to the authors, the criterion of Calmar (ratio of profit to capital najwiekzsego slips) about nearly 4.0.\\
 
