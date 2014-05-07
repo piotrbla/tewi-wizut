@@ -73,7 +73,7 @@ The article is organized as follows: at first authors describe an authored strat
 \section{Strategy characteristics}
 In presented strategy, a metaphorical procedure is often used to explain heuristic algorithms of artificial intelligence. Said procedure is a reference to an inspiration derived from the nature.\\
 
-Let's consider an artificial worm, which behaves like its natural inspirer. Let this artificial worm have a length of $p1$ candles (vectors representing the knowledge about events occurring within the contractual part of the time series). Let her movement come down to the successive ,,eating'' one candle and simultaneous ,,discarding'' of one candle --- always having $p1$ candles. Thus the earthworm moves incrementally at length of time called the period of the candle. I-th candle is  defined as a row of data of values  $O_i$, $H_i$, $L_i$, $C_i$ (Open, High, Low and Close). These values represent (in order): the value at the beginning of this period, the maximum value within the period, the minimum and the closing values - at the end of the candle.\\
+Let's consider an artificial worm, which behaves like its natural inspirer. Let this artificial worm have a length of $p1$ candles (vectors representing the knowledge about events occurring within the contractual part of the time series). Let her movement come down to the successive ,,eating'' one candle and simultaneous ,,discarding'' of one candle --- always having $p1$ candles. Thus the earthworm moves incrementally at length of time called the period of the candle. $I-th$ candle is  defined as a row of data of values  $O_i$, $H_i$, $L_i$, $C_i$ (Open, High, Low and Close). These values represent (in order): the value at the beginning of this period, the maximum value within the period, the minimum and the closing values - at the end of the candle.\\
 Let's assume that candle can have color (often in a number of brokerage platforms, this procedure is used). Therefore candles may be red (when the opening of the candle is higher than its closing $O_i>C_i$) and green (when the situation is opposite $O_i<C_i$).\\
 Let's also assume --- it is a primary strategy rule - that when an artificial earthworm has a significant advantage of red candles, a short position is opened or continued. When earthworm has the significant advantage of green candles, a long position is opened or continued. Imprecise term ,,significant'' is defined by the use of the second parameter p2 according to the rules:
 \begin{equation}
@@ -120,7 +120,7 @@ In both periods the same algorithm based on the intelligent behavior of worm is 
 \end{figure}
 \FloatBarrier
 
-This repeatable algorithm, located in both periods - learning and testing, has the following structure. In learning period the optimal value for five parameters $p1$, $p2$, ..., $p5$ was determined. In test period these designated values of parameters were used to perform the algorithm in the new environment. In each i-th step (candle) of time series following activities were performed:
+This repeatable algorithm, located in both periods - learning and testing, has the following structure. In learning period the optimal value for five parameters $p1$, $p2$, ..., $p5$ was determined. In test period these designated values of parameters were used to perform the algorithm in the new environment. In each $i-th$ step (candle) of time series following activities were performed:
 \begin{itemize}
 \item For each $i = p1, p1 +1, p1 +2, ..., I$ and for $j = 1, ..., p1$ check whether the candle located at a distance i-j backwards from the current candle is:\\
 green when $O_{i-j} <C_{i-j}$, \\
@@ -129,7 +129,7 @@ where $p1$ --- is the first parameter which is the length of the artificial worm
 $O_{i-j}$ --- is the opening value of (i-j)-th candle;\\ 
 $C_{i-j}$ --- is the closing value of (i-j)-th candle; \\
 $I$ --- is the length of the test window, after which it is necessary to change the parameters values to the new, learned in the machine learning phase;\\
-\item In each $i$-th step, the loop $j = 1, ..., p1$ is performed in which a number of green $Lg$, red $Lr$ candles is calculated so the sum of $Lg$ and $Lr$ is $p1$ (to avoid the situation when $O_i = C_i$, it is assigned arbitrarily to one of the candles sets, for example green);
+\item In each $i-th$ step, the loop $j = 1, ..., p1$ is performed in which a number of green $Lg$, red $Lr$ candles is calculated so the sum of $Lg$ and $Lr$ is $p1$ (to avoid the situation when $O_i = C_i$, it is assigned arbitrarily to one of the candles sets, for example green);
 \item A condition for the existence of a Rg recommendation to open a long position (or to continue it if it is open) is checked. This condition is arbitrarily adopted (one can of course consider different one): 
 \begin{equation}
 \text{If } Lg> p1/2-p2 \text{ then } Rg=1
@@ -188,16 +188,16 @@ and $spread = cost$, when short position was opened after closing or opening a l
 
 \noindent Presented strategy was tested if:
 \begin{itemize}
-\item in the case of opening at the beginning of the i-th candle or continuation of a long position presented condition did not occur:\\
+\item in the case of opening at the beginning of the $i-th$ candle or continuation of a long position presented condition did not occur:\\
 \begin{equation}
 \text{If } L_i-O_i<SL \text{ then } Z_i=-SL
 \end{equation}
-where Li --– the lowest rate value in the i-th candle; $SL$ --– absolute value Stop Loss appearing as $p5$ parameter;
-\item in the case of opening at the beginning of the i-th candle or continuation of a short position presented condition did not occur:
+where Li --– the lowest rate value in the $i-th$ candle; $SL$ --– absolute value Stop Loss appearing as $p5$ parameter;
+\item in the case of opening at the beginning of the $i-th$ candle or continuation of a short position presented condition did not occur:
 \begin{equation}
 \text{If } O_i-H_i<SL \text{ then } Z_i=-SL
 \end{equation}
-where Hi --– the highest rate value in the i-th candle.
+where Hi --– the highest rate value in the $i-th$ candle.
 \end{itemize}
 This way $p5$ parameter was used for securing in strategy the strong local changes in exchange rate within a single candle.\\
 The meaning of $p5$ parameter to the behavior of the worm and the occurrence of the closing position is explained in Figure \ref{fig:fig5}.
