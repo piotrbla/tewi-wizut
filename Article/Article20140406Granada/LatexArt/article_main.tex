@@ -270,41 +270,10 @@ The table shows that the best results were obtained for the ratio of the learnin
 \vspace{-1em}
 Tests were also made for another great importance and the currency pair GBPUSD 1h. Results for the currency pair are worse than for EURUSD, however, reaffirm the overall efficiency of the algorithm.\\
 
-It was also decided to test the effectiveness of the algorithm in terms of one candle 1h. The results are shown in Table \ref{tab:tab3} and Table \ref{tab:tab4}.
-
-\begin{table}[h!]
-\centering
-\caption{PerCandle EURUSD.}
-\label{tab:tab3}
-\begin{tabular}{|l|r|r|r|r|} \hline
-Learning\textbackslash Test &	8	 &	10 &		15	 &	20\\ \hline
-40 &		-2.207E-06 &		-6.443E-06 &		-1.219E-05 &		-5.641E-06\\ \hline
-60 &		3.695E-07 &		-1.327E-06 &		2.358E-06 &		1.425E-05\\ \hline
-80 &		-1.989E-06 &		8.427E-06	 &	\textbf{2.062E-05} &		5.3549E-06\\ \hline
-100	 &	2.465E-06 &		4.517E-06 &		-8.981E-07 &		1.571E-07\\ \hline
-\end{tabular}
-\end{table}
-\FloatBarrier
-
-\begin{table}[h!]
-\centering
-\caption{PerCandle GBPUSD.}
-\label{tab:tab4}
-\begin{tabular}{|l|r|r|r|r|} \hline
-Learning\textbackslash Test &	8	 & 	10 &		15	 &	20\\ \hline
-40	 & -2.949E-05 & 	1.457E-06 & 	-2.768E-05	 & -1.578E-05\\ \hline
-60	 & -2.289E-05 & 	-2.912E-05 & 	-1.250E-06 & 	-1.162E-05\\ \hline
-80	 & -3.043E-06 & 	-2.408E-05	 & \textbf{1.551E-05} & 	-1.780E-05\\ \hline
-100	 & -1.299E-05 & 	-1.228E-05 & 	-3.110E-06	 & -2.143E-05\\ \hline
-\end{tabular}
-\end{table}
-\FloatBarrier
-
-
 The best results are obtained in both cases (for both markets) for the ratio test to the learning period as 80/15. Result for EURUSD this means achievement of profit over 100 pips per month (approximately 550 hours of trading). This result is in terms of risk at Calmar ratio around 4 should be considered as engaging.\\
 
 In addition, effectiveness studies were carried out and optimized for different test periods. To these results can be compared with each other, has been carried out their link, and the results were divided by the length of the test period, expressed by the number of candles. 
-Figure \ref{fig:fig10} and Figure \ref{fig:fig11} present the results.
+Figure \ref{fig:fig10} present the results for EURUSD currency pair.
 
 \begin{figure}[h!]
 \centering
@@ -352,27 +321,27 @@ In the article, implementation for MetaTrader4 has covered only the testing part
 
 Below are presented balance comparisons in Matlab and MetaTrader environments:
 \begin{enumerate}
-\item for GBPUSD currency pair using 1h candles values in time period of 2013.01.09 - 2013.12.30 in two different approches:
-\begin{itemize}
-\item with fixed parameters: $p1$=27, $p2$=4, $p3$=1, $p4$=-0.0060, $p5$=0.0060 (Figure \ref{fig:fig10} and Figure \ref{fig:fig11}). Optimal parameters in that case were computed in Matlab for the first testing period and then were used for all testing periods.
-\item with dynamic parameters that were changed every testing period, regarding to their values computed in Matlab that were put to MetaTrader (Figure \ref{fig:fig12} and Figure \ref{fig:fig13})
-\end{itemize}
-In both approaches following assumptions were done:
-\begin{itemize}
-\item spread was 0.00028, 
-\item initial deposit was 50000 EUR,
-\item size of the opening positions was 1 lot,
-\item each testing period lasted 15 candles.
-\end{itemize}
 \item for EURUSD currency pair using 1h candles values in time period of 2012.01.20 - 2013.01.01 in two different approches:
 \begin{itemize}
-\item with fixed parameters: $p1$=34, $p2$=4, $p3$=3, $p4$=-0.0060, $p5$=0.0060 (Figure \ref{fig:fig14} and Figure \ref{fig:fig15}) Optimal parameters in that case were computed in Matlab for the first testing period and then were used for all testing periods.
-\item with dynamic parameters that were changed every testing period, regarding to their values computed in Matlab that were put to MetaTrader (Figure \ref{fig:fig16} and Figure \ref{fig:fig17})
+\item with fixed parameters: $p1$=34, $p2$=4, $p3$=3, $p4$=-0.0060, $p5$=0.0060. Optimal parameters in that case were computed in Matlab for the first testing period and then were used for all testing periods.
+\item with dynamic parameters that were changed every testing period, regarding to their values computed in Matlab that were put to MetaTrader 
 \end{itemize}
 In both approaches following assumptions were done:
 \begin{itemize}
 \item spread was 0.00016, 
 \item initial deposit was 10000 EUR,
+\item size of the opening positions was 1 lot,
+\item each testing period lasted 15 candles.
+\end{itemize}
+\item for GBPUSD currency pair using 1h candles values in time period of 2013.01.09 - 2013.12.30 in two different approches:
+\begin{itemize}
+\item with fixed parameters: $p1$=27, $p2$=4, $p3$=1, $p4$=-0.0060, $p5$=0.0060 (Figure \ref{fig:fig12} and Figure \ref{fig:fig13}). Optimal parameters in that case were computed in Matlab for the first testing period and then were used for all testing periods.
+\item with dynamic parameters that were changed every testing period, regarding to their values computed in Matlab that were put to MetaTrader (Figure \ref{fig:fig14} and Figure \ref{fig:fig13})
+\end{itemize}
+In both approaches following assumptions were done:
+\begin{itemize}
+\item spread was 0.00028, 
+\item initial deposit was 50000 EUR,
 \item size of the opening positions was 1 lot,
 \item each testing period lasted 15 candles.
 \end{itemize}
