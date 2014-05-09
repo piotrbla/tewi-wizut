@@ -131,22 +131,22 @@ $O_{i-j}$ --- is the opening value of (i-j)-th candle;\\
 $C_{i-j}$ --- is the closing value of (i-j)-th candle; \\
 $I$ --- is the length of the test window, after which it is necessary to change the parameters values to the new, learned in the machine learning phase;\\
 \item In each $i-th$ step, the loop $j = 1, ..., p1$ is performed in which a number of green $Lg$, red $Lr$ candles is calculated so the sum of $Lg$ and $Lr$ is $p1$ (to avoid the situation when $O_i = C_i$, it is assigned arbitrarily to one of the candles sets, for example green);
-\item A condition for the existence of a Rg recommendation to open a long position (or to continue it if it is open) is checked. This condition is arbitrarily adopted (one can of course consider different one): 
+\item A condition for the existence of a $Rg$ recommendation to open a long position (or to continue it if it is open) is checked. This condition is arbitrarily adopted (one can of course consider different one): 
 \begin{equation}
 \text{If } Lg> p1/2-p2 \text{ then } Rg=1
 \end{equation}  
                                                      
 \end{itemize}
-If this condition is fulfilled, then depending on the current position status PositionState (where PositionState is a variable which takes values {long, short, 0}) at the opening of the next candle, a position is opened or continued as follows: 
+If this condition is fulfilled, then depending on the current position status $PositionState$ (where $PositionState$ is a variable which takes values {long, short, 0}) at the opening of the next candle, a position is opened or continued as follows: 
 \begin{equation}
-\text{If } Rg=1 \text{ and } PositionState =long \text{ then PositionState =long;}
+\text{If } Rg=1 \text{ and } PositionState =long \text{ then }PositionState =long;
 \end{equation}
 (costless continuation of opened position);
 \begin{equation}
-\text{If } Rg=1 \text{ and } PositionState = short \text{ then PositionState=long;}
+\text{If } Rg=1 \text{ and } PositionState = short \text{ then } PositionState=long;
 \end{equation}
 \begin{equation}
-\text{If } Rg=1 \text{ and } PositionState =0 \text{ then PositionState =long;}
+\text{If } Rg=1 \text{ and } PositionState =0 \text{ then } PositionState =long;
 \end{equation}
 
 Similarly check the condition of recommendations Rr to open or continue short position:
@@ -155,14 +155,14 @@ Similarly check the condition of recommendations Rr to open or continue short po
 \end{equation}
 If this condition is fulfilled, then depending on what the current position status PositionState is, at the opening of the next candle, position is opened or continued as follows: \\
 \begin{equation}
-\text{If } Rr=1 \text{ and } PositionState =long \text{ then PositionState =short;}
+\text{If } Rr=1 \text{ and } PositionState =long \text{ then } PositionState =short;
 \end{equation}
 \begin{equation}
-\text{If } Rr==1 \text{ and } PositionState ==short \text{ then PositionState=short;}
+\text{If } Rr==1 \text{ and } PositionState ==short \text{ then } PositionState=short;
 \end{equation}
 (costless continuing of opened position)
 \begin{equation}
-\text{If } Rr==1 \text{ and }  PositionState ==0 \text{ then  PositionState =short;}
+\text{If } Rr==1 \text{ and }  PositionState ==0 \text{ then }  PositionState =short;
 \end{equation}
 
 In formulas above there is a parameter $p2$. It is the second parameter of the strategy which is an arbitrarily separated part of the worm, which depending on size causes the direction of investment not to change. Large $p2$ causes long positions to change into short positions (or vice-versa) rarely. Small value of $p2$ leads to a higher frequency of these changes. The optimum value of $p2$ is chosen similarly like $p1$.
@@ -171,9 +171,9 @@ In formulas above there is a parameter $p2$. It is the second parameter of the s
 \begin{equation}
 Z_i = C_{i+1} - C_i - spread;
 \end{equation}
-where the spread = 0, when opened long position is continued; \\
-and spread = cost, when long position was opened after closing or opening a short position in case when there was no open position;\\
-cost is a variable that depends on the particular brokerage platform that was used for testing the strategy; in this case, for the currency pair EURUSD $cost = 0.00016$ was assumed and for the currency pair GBPUSD $cost = 0.00028$.
+where the $spread = 0$, when opened long position is continued; \\
+and $spread = cost$, when long position was opened after closing or opening a short position in case when there was no open position;\\
+$cost$ is a variable that depends on the particular brokerage platform that was used for testing the strategy; in this case, for the currency pair EURUSD $cost = 0.00016$ was assumed and for the currency pair GBPUSD $cost = 0.00028$.
 \item When short position is opened, profit after one candle (it does not mean that position is closed) can be calculated as: 
 \begin{equation}
 Z_i = C_i-C_{i+1}- spread;
@@ -193,7 +193,7 @@ and $spread = cost$, when short position was opened after closing or opening a l
 \begin{equation}
 \text{If } L_i-O_i<SL \text{ then } Z_i=-SL
 \end{equation}
-where Li --– the lowest rate value in the $i-th$ candle; $SL$ --– absolute value Stop Loss appearing as $p5$ parameter;
+where $L_i$ --– the lowest rate value in the $i-th$ candle; $SL$ --– absolute value Stop Loss appearing as $p5$ parameter;
 \item in the case of opening at the beginning of the $i-th$ candle or continuation of a short position presented condition did not occur:
 \begin{equation}
 \text{If } O_i-H_i<SL \text{ then } Z_i=-SL
@@ -217,11 +217,11 @@ Zc_i = sum ( Z_i ) \text{ from } i = 1 \text{ to the current i value;}
 \end{equation}
 \item There is a possible local subsidence $Zc_i$ capital by introducing two additional parameters to manage the risk.\\
 $p3$ --- the number of steps back on the curve of the cumulative profit for the determination of $Zc_i$ --- $p3$ for comparison with the present value of $Zc_i$;
-$p4$ --- maximum size of the capital subsidence (eg for the currency pair EURUSD measured in pips), which if exceeded will trigger the closure position:\\
+$p4$ --- maximum value measured in pips of the capital drawdown (eg for the currency pair EURUSD), which if exceeded will trigger the closure position:\\
 \begin{equation}
 \text{If } ( Zc_i - p3 - Z_i ) <- p4 \text{ and } PositionState \neq 0 \text{ then } PositionState = 0
 \end{equation} 
-where PositionState --- is the type of open position (long or short) and PositionStates equal 0 means resignations from the opening position to the beginning of the next candle.
+where $PositionState$ --- is the type of open position (long or short) and $PositionState$ equal 0 means resignations from the opening position to the beginning of the next candle.
 \end{itemize}
 So, the above-described algorithm uses 5 parameters, as many as 3 of which are devoted to risk management of the strategy.\\
 %%PBStart
