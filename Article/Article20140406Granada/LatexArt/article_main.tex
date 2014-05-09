@@ -77,7 +77,7 @@ In presented strategy, a metaphorical procedure is often used to explain heurist
 
 Let's consider an artificial earthworm, which behaves like its natural inspirer. Let this artificial worm have a length of $p1$ candles (vectors representing the knowledge about events occurring within the contractual part of the time series). Let her movement come down to the successive ,,eating'' one candle and simultaneous ,,discarding'' of one candle --- always having $p1$ candles. Thus the earthworm moves incrementally at length of time called the period of the candle. $i-th$ candle is  defined as a row of data of values  $O_i$, $H_i$, $L_i$, $C_i$ (Open, High, Low and Close). These values represent (in order): the value at the beginning of this period, the maximum value within the period, the minimum and the closing values - at the end of the candle.\\
 Let's assume that candle can have color (often in a number of brokerage platforms, this approach is used). Therefore candles may be red (when the opening of the candle is higher than its closing $O_i>C_i$) and green (when the situation is opposite $O_i<C_i$).\\
-Let's also assume --- it is a primary strategy rule - that when an artificial earthworm has a significant advantage of red candles, a short position is opened or continued. When earthworm has the significant advantage of green candles, a long position is opened or continued. Imprecise term ,,significant'' is defined by the use of the second parameter p2 according to the rules:
+Let's also assume --- it is a primary strategy rule - that when an artificial earthworm has a significant advantage of red candles, a short position is opened or continued. When earthworm has the significant advantage of green candles, a long position is opened or continued. Imprecise term ,,significant'' is defined by the use of the second parameter $p2$ according to the rules:
 \begin{equation}
 \text{If }  Lr > p1/2 -p2 \text{ then } short;
 \end{equation}
@@ -92,8 +92,8 @@ opening of long position will be suggested;
 \end{equation}
 the continuation of state will be suggested (position or no opened position).\\
 
-In the rules above Lr and Lg are the number of candles, respectively ,,red'' and ,,green'' in the worm of $p1$ length, wherein $p1 = Lr + Lg$.\\
-When dominance determined by another parameter p2 is undecided, as in \ref{eq:eq3}, then worm takes the color white and the position will not be opened. When the worm continues to open position, investor does not incur costs. On many platforms, also in literature, symbolic marking of growing candles in white and decreasing in black is used. In this article, due to the occurrence of three values, green-red-white colors are used.\\
+In the rules above $Lr$ and $Lg$ are the number of candles, respectively ,,red'' and ,,green'' in the worm of $p1$ length, wherein $p1 = Lr + Lg$.\\
+When dominance determined by another parameter $p2$ is undecided, as in (\ref{eq:eq3}), then worm takes the color white and the position will not be opened. When the worm continues to open position, investor does not incur costs. On many platforms, also in literature, symbolic marking of growing candles in white and decreasing in black is used. In this article, due to the occurrence of three values, green-red-white colors are used.\\
 
 Earthworm is therefore supplied with artificial intelligence, which allows the accumulation of knowledge and decision-making:
 \begin{itemize}
@@ -108,12 +108,11 @@ Earthworm is therefore supplied with artificial intelligence, which allows the a
 
 These features of the worm's intelligence may be extended, however, for this work they were limited to the foregoing. \\
 
-It is assumed that the time series is Si where $i = 1, 2, ...,$ and each element is a vector $S_i = (O_i, H_i, L_i, C_i)$ called candle consisting of four values: Open, High, Low and Close of time between the time $t$ and $t+1$. I is the final index of word which is the last word in time series that was taken under consideration.\\
+It is assumed that the time series is $S_i$ where $i = 1, 2, ...,$ and each element is a vector $S_i = (O_i, H_i, L_i, C_i)$ called candle.\\
 
 
-Artificial worm executes the following algorithm.\\
-The strategy is built on the principle of classical machine learning. Before starting to run the algorithm, on data located outside the environment that investor knows (like on the current market segments --- out-of-sample), it is necessary to ,,teach''  the values of parameters. Since we are dealing with time series,  the natural solution is that the period of learning preceding testing period.  This principle is presented in Figure \ref{fig:fig2}, which shows examples of learning periods and following them testing periods. Data from testing period was not used during learning.\\
-In both periods the same algorithm based on the intelligent behavior of worm is used. Of course, the typical problem of machine learning is the proper selection of the length of learning and testing period \cite{bishop2006pattern}, what will be a subject of further research.\\
+Artificial earthworm executes the following algorithm.\\
+The strategy is built on the principle of classical machine learning. Before starting to run the algorithm, on data located outside the environment that investor knows (like on the current market segments --- out-of-sample), it is necessary to ,,teach''  the values of parameters. This principle is presented in Figure \ref{fig:fig2}, which shows examples of learning periods and following them testing periods. Data from testing period was not used during learning.\\
 \begin{figure}[ht]
 \centering
 %\includegraphics[width = 0.6\textwidth]{figures/rys2.png}
