@@ -1,3 +1,4 @@
+% !TeX spellcheck = en_US
 \documentclass[runningheads,a4paper]{llncs}
 
 \usepackage{amssymb}
@@ -10,6 +11,7 @@
 \captionsetup{compatibility=false}
 \usepackage[T1]{fontenc}
 \usepackage[utf8x]{inputenc}
+\usepackage{todonotes}
 
 \usepackage{url}
 \urldef{\mailsa}\path|{awilinski, abera, mjarlaczynski, pblaszynski}@wi.zut.edu.pl|    
@@ -65,11 +67,11 @@ This paper presents an innovative concept of investment strategy derived from th
 
 \section{Introduction}
 
-Algotrading is rapidly growing new form of trading on financial markets where investor (that makes decisions) is replaced with automaton (computer program) \cite{Leshik2011}\cite{Wilinski2014}. Such machine can perform operations (opening and closing positions, placing orders to open such positions that meet certain conditions) directly in an automated brokerage platform environment. It may also be a recommendation system that helps investor with making correct decisions.\\
+Algotrading is new, rapidly growing form of trading on financial markets where investor (that makes decisions) is replaced with automaton (computer program) \cite{Leshik2011,Wilinski2014}. Such machine can perform operations (opening and closing positions, placing orders to open positions that meet certain conditions) directly in an automated brokerage platform environment. It may also be a recommendation system that helps investor with making correct decisions.\\
 
-Such computer applications (bots) require carefully prepared and tested software that most often needs to adapt to the changing situations on the observed markets. Modern trends, in the development of this software, include sophisticated methods of: artificial intelligence, pattern recognition, classification and machine learning\cite{Leshik2011}\cite{Wilinski}\cite{wang}\cite{sinclare}. Those methods are interpenetrating and complementary and are also expanded with information based on fundamental analysis, for example, automatically extracted from the Internet \cite{elder}\cite{Wilinski2014}\cite{Schwager1996}. Many strategies are based on relatively simple rules. Efficiency of this rules is amplified by using of machine learning\cite{Wilinski}\cite{person}\cite{tian}\cite{krutsinger}\cite{lewis}\cite{murphy}.\\
+Such computer applications (bots) require carefully prepared and tested software that most often needs to adapt to the changing situations on the observed markets. Modern trends, in the development of this software, include sophisticated methods of: artificial intelligence, pattern recognition, classification and machine learning \cite{Leshik2011,Wilinski,wang,sinclare}. Those methods are interpenetrating and complementary and are also expanded with information based on fundamental analysis, for example, automatically extracted from the Internet \cite{elder,Wilinski2014,Schwager1996}. Many strategies are based on relatively simple rules. Efficiency of these rules is amplified by using of machine learning \cite{Wilinski,person,tian,krutsinger,lewis,murphy}.\\
 
-Strategy presented in this paper is an example of a solution that can be used fully automated or with investor’s assistance, who makes the decision manually. To use this software, it is necessary to make sure that there are reasonable premises of achieving the success. These conditions can be achieved through inductive thinking\cite{provost}\cite{KleskWilinski}, involving the assumption that multiple validation of decision on data from the past substantiates the correctness of the decision in the future. If a certain set of rules in the strategy used to seek the pattern, leads to the success then these rules are a pattern that is encouraged for repeated use. If repeated use of said pattern results in more successes than failures, then the basic premise to consider the use of the pattern is rational\cite{bishop2006pattern}\cite{KleskWilinski}. Unfortunately, changing market is causing the pattern to become outdated therefore it is necessary to constantly update it. Search in the historical patterns, that could be effective in the data space not used for their determination (to identify these patterns), is a major challenge also applied in machine learning which is used in this paper.
+Strategy presented in this paper is an example of a solution that can be used fully automated or with investor’s assistance, who makes the decision manually. To use this software, it is necessary to make sure that there are reasonable premises of achieving the success. These conditions can be achieved through inductive thinking \cite{provost,KleskWilinski}, involving the assumption that multiple validation of decision on data from the past substantiates the correctness of the decision in the future. If a certain set of rules in the strategy used to seek the pattern, leads to the success then these rules are a pattern that is encouraged for repeated use. If repeated use of said pattern results in more successes than failures, then the basic premise to consider the use of the pattern is rational \cite{bishop2006pattern,KleskWilinski}. Unfortunately, changing market is causing the pattern to become outdated therefore it is necessary to constantly update it. Search in the historical patterns, that could be effective in the data space not used for their determination (to identify these patterns), is a major challenge also applied in machine learning which is used in this paper.
 The article is organized as follows: at first authors describe an authored strategy based on an entirely innovative, according to the authors, concept of an artificial worm. Subsequently extensive studies of effectiveness of presented strategy in terms of prediction and the aspect of investment are carried out. At the end the conclusions resulting from the study are presented and also cited bibliographic sources are included.
 
 \section{Strategy characteristics}
@@ -77,7 +79,7 @@ In presented strategy, a metaphorical procedure is often used to explain heurist
 
 Let's consider an artificial earthworm, which behaves like its natural inspirer. Let this artificial worm have a length of $p1$ candles (vectors representing the knowledge about events occurring within the contractual part of the time series). Let her movement come down to the successive ,,eating'' one candle and simultaneous ,,discarding'' of one candle --- always having $p1$ candles. Thus the earthworm moves incrementally at length of time called the period of the candle. $i-th$ candle is  defined as a row of data of values  $O_i$, $H_i$, $L_i$, $C_i$ (Open, High, Low and Close). These values represent (in order): the value at the beginning of this period, the maximum value within the period, the minimum and the closing values - at the end of the candle.\\
 Let's assume that candle can have color (often in a number of brokerage platforms, this approach is used). Therefore candles may be red (when the opening of the candle is higher than its closing $O_i>C_i$) and green (when the situation is opposite $O_i<C_i$).\\
-Let's also assume --- it is a primary strategy rule - that when an artificial earthworm has a significant advantage of red candles, a short position is opened or continued. When earthworm has the significant advantage of green candles, a long position is opened or continued. Imprecise term ,,significant'' is defined by the use of the second parameter $p2$ according to the rules:
+Let's also assume --- it is a primary strategy rule - that when an artificial earthworm has a significant dominance of red candles, a short position is opened or continued. When earthworm has the significant dominance of green candles, a long position is opened or continued. Imprecise term ,,significant'' is defined by the use of the second parameter $p2$ according to the rules:
 \begin{equation}
 \text{If }  Lr > p1/2 -p2 \text{ then } short;
 \end{equation}
@@ -99,11 +101,11 @@ Earthworm is therefore supplied with artificial intelligence, which allows the a
 \begin{itemize}
 \item right after closing of the current candle, worm ,,swallows'' the candle and ,,knows'' what color is it;
 \item earthworm knows how many candles it is composed with;
-\item after absorbing and discarding one candle, worms knows how many candles inside it are red or green and how to determine its status --- red, green or white;
+\item after absorbing and discarding one candle, worm knows how many candles inside it are red or green and how to determine its status --- red, green or white;
 \item knowing its status, earthworm knows how to make a decision about opening or continuing position; the opening of a position (long or short) means the simultaneous closing of the current position (opposite) if such position is opened;
 \item earthworm observes cumulative profit curve and if it  notices unacceptable drawdown, then opened position is changed to the opposite;
 \item unacceptable drawdown is defined by two other parameters $p3$ and $p4$. $p3$ is the number of previous candles, which sets a reference point in time series, in which the value of the accumulated profit for $i-p3$ is checked for comparison with the current value of the accumulated profit. $p4$ is permissible decrease of cumulative profit. If it is exceeded, the $SL$ (Stop Loss --- closes the currently open position) mechanism is activated;
-\item worm also observes current course changes during  each next candle and reacts to unprofitable changes. If the current exchange rate causes a loss on the opened positions greater than $p5$ then the $SL$ mechanism is triggered --- the position is closed and to the end of the candle worm remains in the state without an open position. $p5$ is therefore the fifth strategy parameter. 
+\item worm also observes current course changes during  each next candle and reacts to unprofitable changes. If the current exchange rate causes a loss on the opened positions greater than $p5$ then the $SL$ mechanism is triggered --- the position is closed and till the end of the candle worm remains in the state without an open position. $p5$ is therefore the fifth strategy parameter. 
 \end{itemize}
 
 These features of the worm's intelligence may be extended, however, for this work they were limited to the foregoing. \\
@@ -113,6 +115,7 @@ It is assumed that the time series is $S_i$ where $i = 1, 2, ...,$ and each elem
 
 Artificial earthworm executes the following algorithm.\\
 The strategy is built on the principle of classical machine learning. Before starting to run the algorithm, on data located outside the environment that investor knows (like on the current market segments --- out-of-sample), it is necessary to ,,teach''  the values of parameters. This principle is presented in Figure \ref{fig:fig2}, which shows examples of learning periods and following them testing periods. Data from testing period was not used during learning.\\
+\todo{CZY TEN RYSUNEK MA TU BYĆ? BO JEST ZAKOMENTOWANY ALE JEST DO NIEGO ODNIESIENIE W TEKŚCIE ???} 
 \begin{figure}[ht]
 \centering
 %\includegraphics[width = 0.6\textwidth]{figures/rys2.png}
@@ -126,7 +129,7 @@ This repeatable algorithm, located in both periods - learning and testing, has t
 \item For each $i = p1, p1 +1, p1 +2, ..., I$ and for $j = 1, ..., p1$ check whether the candle located at a distance i-j backwards from the current candle is:\\
 green when $O_{i-j} <C_{i-j}$, \\
 red when $O_{i-j}> C_{i-j}$, \\
-where $p1$ --- is the first parameter which is the length of the artificial worm - the number of candles of different colors that make up the ,,body'' of the worm; \\
+where $p1$ --- is the first parameter which is the length of the artificial worm --- the number of candles of different colors that make up the ,,body'' of the worm; \\
 $O_{i-j}$ --- is the opening value of (i-j)-th candle;\\ 
 $C_{i-j}$ --- is the closing value of (i-j)-th candle; \\
 $I$ --- is the length of the test window, after which it is necessary to change the parameters values to the new, learned in the machine learning phase;\\
@@ -151,7 +154,7 @@ If this condition is fulfilled, then depending on the current position status $P
 
 Similarly check the condition of recommendations Rr to open or continue short position:
 \begin{equation}
-\text{If } Lr>p1/2 – p2 \text {then Rr=1.}
+\text{If } Lr>p1/2 - p2 \text { then Rr=1.}
 \end{equation}
 If this condition is fulfilled, then depending on what the current position status PositionState is, at the opening of the next candle, position is opened or continued as follows: \\
 \begin{equation}
@@ -183,7 +186,7 @@ and $spread = cost$, when short position was opened after closing or opening a l
 \end{itemize}
 
 \begin{itemize}
-\item If as the result of the test the number of red and green candles in the body of the worm had not obtained any advantage from the color that would recommend to open defined position (worm was white), it is assumed to continue the position, which is open, without any cost of the transaction (with the value of $spread = 0$). If at the beginning of the candle, at the time of checking the recommendation, there was no open position then it can be assumed to continue without any position.
+\item If as the result of the test the number of red and green candles in the body of the worm had not obtained any dominance from the color that would recommend to open defined position (worm was white), it is assumed to continue the position, which is open, without any cost of the transaction (with the value of $spread = 0$). If at the beginning of the candle, at the time of checking the recommendation, there was no open position then it can be assumed to continue without any position.
 \item Each of the profits calculated above is verified in terms of exceeding the allowable local position drawdown (within one candle). This additional risk management is widely used in automated trading and is called limiting losses --- Stop Loss ($SL$). In this algorithm, $SL$ was introduced as the fifth parameter of the strategy --- $p5$.
 \end{itemize}
 
@@ -223,25 +226,25 @@ $p4$ --- maximum value measured in pips of the capital drawdown (eg for the curr
 \end{equation} 
 where $PositionState$ --- is the type of open position (long or short) and $PositionState$ equal 0 means resignations from the opening position to the beginning of the next candle.
 \end{itemize}
-So, the above-described algorithm uses 5 parameters, as many as 3 of which are devoted to risk management of the strategy.\\
+So, the above-described algorithm uses 5 parameters and 3 of them are devoted to risk management of the strategy.\\
 %%PBStart
-The complexity of the algorithm is illustrated in Figure \ref{fig:fig7}, which shows the individual steps and decisions made in the iteration on a single candle in the form of a decision tree. This iteration was carried out both in the search for optimal parameters $p1, ..., p5$ and in the process they use in the testing phase for data not used in learning period.\\
+The complexity of the algorithm is illustrated in Figure \ref{fig:fig7}, which shows the individual steps and decisions made in the iteration on a single candle in the form of a decision tree. This iteration was carried out both in the search for optimal parameters $p1, ..., p5$ and in the process of testing the parameters on data that was not used in the learning period.
 \begin{figure}[h!]
 \centering
 \includegraphics[width = \textwidth]{figures/rys7.png}
-\caption{Decision tree for the states and decisions in one step (candle) in the learning phase and testing.}
+\caption{Decision tree for the states and decisions in one step (candle) in the learning nd testing phase.}
 \label{fig:fig7}
 \end{figure}
 \FloatBarrier
-\vspace{-1em}
-The figure shows in a tree form further decisions taken at the beginning of the candle and then reactions to any unacceptable change in course. The first examines the state of the position taken over from the closure of the previous candle. The next step is to work out decisions / recommendations as to the direction of the opening from the set {long, short, none}. After opening position is observed return of the open position. It can be positive or negative. If it is positive, it does not take up any additional decisions. If it is negative, it checks if it is not achieved the level of $SL$. In the case of a negative return of the items, except for testing, $SL$ is not exceeded within a candle tested is also a condition resulting from the use of parameters ($p3$, $p4$). Tree is a state of complete items transmitted at the beginning of the next candle.
 
-Described algorithm is implemented in the Matlab and using the MQL4 language of the Metatrader platform. The study was conducted both in the historical data (of course with the principles of machine learning --- testing was carried out using data not used in the learning phase) and a real ,,live'' market. Between the environments, there are also important differences that affect the diversity of simulation results.
+The figure shows in a tree form further decisions taken at the beginning of the candle and then reactions to any unacceptable change in course. The first step is to examine the state of the position which is taken from the closing of the previous one. The next step is to make decisions / recommendations as to the direction of the opening from the set \{long, short, none\}. After opening position  the return of the open position is observed --- it can be positive or negative. If it is positive, no any additional decisions are necessary. In the case of a negative return from the position both the level of $SL$ and a condition resulting from the use of parameters ($p3$, $p4$) are checked. The state at the end of tree is a beginning of the next candle.
+
+Described algorithm was implemented in MATLAB environment and in Metatrader platform using the MQL4 language. The study was conducted both in the historical data (of course with the principles of machine learning --- testing was carried out using data not used in the learning phase) and a real ,,live'' market. Between the environments, there are important differences that affect the diversity of simulation results.
 
 \section{The study of strategy}
-The study was conducted primarily on the basic EURUSD exchange rate at 1h candles. This market was chosen because of its popularity, a huge liquidity and also due to the possession by the authors many experiences in other machine learning strategy for this particular market such as \cite{Wilinski2014}\cite{Wilinski}. These experiments suggested initially, carrying out many tests with a long learning period, about 1000 candles, then 500 candles and testing time windows of 50 to 200 candles. All these attempts have proven to be very effective and led to continuing losses. After months of trying in many markets noted that over long periods of learning, eg the order of 1000 candles strategy variability is very large. Therefore, the tests started with a decidedly shorter periods of learning and testing.\\
+The study was conducted primarily on the basic currency pair EURUSD at 1h candles. This market was chosen because of its popularity, a huge liquidity and also due to the fact that the authors posses many experiences in other machine learning strategies for this particular market such as in \cite{Wilinski2014,Wilinski}. These experiments suggested initially, carrying out many tests with a long learning period, about 1000 candles, then 500 candles and testing time windows of 50 to 200 candles. All these attempts have proven to be ineffective and led to continuing losses. After months of tests in many markets it was noted that over long periods of learning, e.g. the order of 1000 candles, variability in parameters was very large. Therefore, the tests started with a decidedly shorter periods of learning and testing.\\
 
-Finally, the authors decided to present the results for the two markets - currency pairs EURUSD and GBPUSD sampled at 1h in machine learning aspect ratios matched to the reduced scope of both the learning phase and testing.\\
+Finally, the authors decided to present the results for the two markets --- currency pairs EURUSD and GBPUSD sampled at 1h --- in machine learning with ratios adjusted to the reduced scope of both the learning and testing phase.\\
 
 \begin{table}[h!]
 \centering
@@ -256,48 +259,49 @@ Learning\textbackslash Test &	8	 &	10 &		15	 &	20 \\ \hline
 \end{tabular}
 \end{table}
 \FloatBarrier
-Table \ref{tab:tab1} summarizes the results for different time periods. The study was conducted at approximately constant number of candles testing period, e.g. if the testing period was 10 candles, is to perform the test algorithm 1300 candles optimal parameters were calculated 130 times. If the testing period was 20 candles are the parameters were changed 65 times, etc., if it was available long test period is not used it.
+Table \ref{tab:tab1} summarizes the results for different time periods. The study was conducted at approximately constant number of candles in testing period, e.g. if the testing period was 10 candles long, to perform the test on 1300 candles, optimal parameters were calculated 130 times. If the testing period was 20 candles long the parameters were changed 65 times, etc..
 
-The table shows that the best results were obtained for the ratio of the learning period to test period as 80/15. For this comparison periods was performed to study the market in EURUSD and shown in the Figure \ref{fig:fig8} For the 800 one hour candles the result 0.2401 (2401 pips) is obtained. Chart is definitely a growth course with a maximum of 600 pips from falling, which gives a very good, according to the authors, the criterion of Calmar (ratio of maximum profit to maximum drawdown) nearly about 4.0.\\
+The table shows that the best results were obtained for the learning to testing period ratio of 80/15. For this ratio tests were performed on the EURUSD market and shown in the Figure \ref{fig:fig8}. For the 800 one hour candles the result 0.2401 (2401 pips) is obtained. Chart is showing a growing course with a maximum fall of 600 pips, which gives a very good, according to the authors, the criterion of Calmar (ratio of maximum profit to maximum drawdown) nearly about $4.0$.\\
 
 \begin{figure}[h!]
 \centering
-\includegraphics[width = 0.6\textwidth]{figures/rys8.png}
+\includegraphics[width = 0.5\textwidth]{figures/rys8.png}
 \caption{Mileage accumulation of capital for 800 steps after 15 candles made of uses of the algorithm for the currency pair EURUSD 1h.}
 \label{fig:fig8}
 \end{figure}
 \FloatBarrier
 \vspace{-1em}
-Tests were also made for another great importance and the currency pair GBPUSD 1h. Results for the currency pair are worse than for EURUSD, however, reaffirm the overall efficiency of the algorithm.\\
+Tests were also made for another great important currency pair GBPUSD sampled every 1h. Results for this currency pair are worse than for EURUSD, however, they reaffirm the overall efficiency of the algorithm.\\
 
-The best results are obtained in both cases (for both markets) for the ratio test to the learning period as 80/15. Result for EURUSD this means achievement of profit over 100 pips per month (approximately 550 hours of trading). This result is in terms of risk at Calmar ratio around 4 should be considered as engaging.\\
+The best results are obtained in both cases (for both markets) for the learning to testing period ratio of 80/15. Result for EURUSD means that the profit higher than 100 pips per month (approximately 550 hours of trading) was achieved. This result in terms of risk with Calmar ratio around 4 should be considered as engaging.\\
 
-In addition, effectiveness studies were carried out and optimized for different test periods. To these results can be compared with each other, has been carried out their link, and the results were divided by the length of the test period, expressed by the number of candles. 
-Figure \ref{fig:fig10} present the results for EURUSD currency pair.
+In addition, effectiveness studies were carried out and optimized for different test periods. For the purpose of comparison, the results were combined. Achieved results were divided by the length of the testing period (number of candles). 
+
+Figure \ref{fig:fig10} presents the results for EURUSD currency pair.
 
 \begin{figure}[h!]
 \centering
-\includegraphics[width = 0.6\textwidth]{figures/rys10.png}
+\includegraphics[width = 0.5\textwidth]{figures/rys10.png}
 \caption{EURUSD Results per candle.}
 \label{fig:fig10}
 \end{figure}
 \FloatBarrier
 \vspace{-1em}
 
-From these results it can be concluded that the strategy is working with a short shelf life characteristics. The best results are achieved in periods of about 10-20 candles, it is unlike any other strategy presented in \cite{Wilinski2014} where the best results were achieved for the test periods with a length of 80-100 candles.\\
-All the above presented results refer to simulations in Matlab.
+From these results it can be concluded that the strategy is working with a short term duration characteristics. The best results were achieved in periods containing 10-20 candles --- unlike in any other strategy presented in \cite{Wilinski2014}, where the best results were achieved for the test periods with a length of 80-100 candles.\\
+All the results presented above refer to simulations conducted in MATLAB.
 %%PBStop
 
 \section{Strategy Verification Using Online Trading Platform}
-From a conceptual point of view implementing automated trading strategies in Matlab environment is one of proper approaches. Matlab provides a number of features to rapidly prototype such algorithms, for e.g. built-in computation functions and charting tools. What is more, Matlab enables also intuitive operations on vectors and matrices as well as flexible insight into variables values that are produced by the algorithm which greatly facilitates computing process management.\\
+From a conceptual point of view, implementing automated trading strategies in MATLAB environment is one of proper approaches. MATLAB provides a number of features to rapidly prototype such algorithms, for e.g. built-in computation functions and charting tools. What is more, MATLAB enables also intuitive operations on vectors and matrices as well as flexible insight into variables values that are produced by the algorithm which greatly facilitates computing process management.\\
 
-However in such approach it is very important to make sure that an algorithm that has been developed in Matlab can be used also regarding to real market conditions, which means a number of rules, validations and limitations, which obviously are not natively implemented in Matlab as it is just an open computing environment.\\
+However, in such approach, it is very important to make sure that an algorithm, that has been developed in MATLAB, can be used also regarding to real market conditions, which means a number of rules, validations and limitations, which obviously are not natively implemented in MATLAB, as it is just an open computing environment.\\
 
-To make sure that those market conditions are met in the algorithm, Matlab script was converted manually to MQL4 expert advisor for trading platform of MetaTrader 4, which platform is commonly used to perform the real market operations.\\
+To make sure that those market conditions are met in the algorithm, MATLAB script was converted manually to MQL4 expert advisor for trading platform of MetaTrader 4, which is commonly used to perform the real market operations.\\
 
-The main differences between the implementation of the artificial earthworm in Matlab and in MetaTrader are listed below:
+The main differences between the implementation of the artificial earthworm in MATLAB and in MetaTrader are listed below:
 \begin{itemize}
-\item Matlab
+\item MATLAB
 \begin{itemize}
 \item Calculation of balance and other standard market statistics is implemented manually, including also calculation of profit and loss related with opening / closing position;
 \item $SL$ handling is implemented manually, including trailing stop;
@@ -317,14 +321,14 @@ The main differences between the implementation of the artificial earthworm in M
 
 The elements listed above could cause some variations in the fragmentary as well as the final results of the algorithm execution.\\
 
-In the article, implementation for MetaTrader4 has covered only the testing part of the algorithm, using fixed set of parameters that have been previously computed in Matlab in the learning part of execution for every test period. It is imporntat to note that implementing full algorithm, along with the learning part in MQL4, is obviously possible, however in that in the article the main objective was to confirm that the artificial worm can run on a real market with results similar to those achieved in Matlab.\\
+In the article, implementation for MetaTrader4 has covered only the testing part of the algorithm, using fixed set of parameters that have been previously computed in MATLAB in the learning part of execution for every test period. It is important to note that implementing full algorithm, along with the learning part in MQL4, is obviously possible, however in the article the main objective was to confirm that the artificial worm can run on a real market with results similar to those achieved in MATLAB.\\
 
-Below are presented balance comparisons in Matlab and MetaTrader environments:
+Below are presented balance comparisons in MATLAB and MetaTrader environments:
 \begin{enumerate}
-\item for EURUSD currency pair using 1h candles values in time period of 2012.01.20 - 2013.01.01 in two different approches:
+\item for EURUSD currency pair using 1h candles values in time period of 2012.01.20 - 2013.01.01 in two different approaches:
 \begin{itemize}
-\item with fixed parameters: $p1$=34, $p2$=4, $p3$=3, $p4$=-0.0060, $p5$=0.0060. Optimal parameters in that case were computed in Matlab for the first testing period and then were used for all testing periods.
-\item with dynamic parameters that were changed every testing period, regarding to their values computed in Matlab that were put to MetaTrader 
+\item with fixed parameters: $p1$=34, $p2$=4, $p3$=3, $p4$=-0.0060, $p5$=0.0060. Optimal parameters in that case were computed in MATLAB for the first testing period and then were used for all testing periods.
+\item with dynamic parameters that were changed every testing period, regarding to their values computed in MATLAB that were put to MetaTrader 
 \end{itemize}
 In both approaches following assumptions were done:
 \begin{itemize}
@@ -335,8 +339,8 @@ In both approaches following assumptions were done:
 \end{itemize}
 \item for GBPUSD currency pair using 1h candles values in time period of 2013.01.09 - 2013.12.30 in two different approches:
 \begin{itemize}
-\item with fixed parameters: $p1$=27, $p2$=4, $p3$=1, $p4$=-0.0060, $p5$=0.0060 (Figure \ref{fig:fig12} and Figure \ref{fig:fig13}). Optimal parameters in that case were computed in Matlab for the first testing period and then were used for all testing periods.
-\item with dynamic parameters that were changed every testing period, regarding to their values computed in Matlab that were put to MetaTrader (Figure \ref{fig:fig14} and Figure \ref{fig:fig13})
+\item with fixed parameters: $p1$=27, $p2$=4, $p3$=1, $p4$=-0.0060, $p5$=0.0060 (Figure \ref{fig:fig12} and Figure \ref{fig:fig13}). Optimal parameters in that case were computed in MATLAB for the first testing period and then were used for all testing periods.
+\item with dynamic parameters that were changed every testing period, regarding to their values computed in MATLAB that were put to MetaTrader (Figure \ref{fig:fig14} and Figure \ref{fig:fig13})
 \end{itemize}
 In both approaches following assumptions were done:
 \begin{itemize}
@@ -354,7 +358,7 @@ Results of the algorithm execution in both environments for both currency pairs 
 \caption{Results of the algorithm execution in both environments for both currency pairs and various parameters values.}
 \label{tab:tab5}
 \begin{tabular}{|p{0.19\textwidth}|p{0.19\textwidth}|p{0.19\textwidth}|p{0.19\textwidth}|p{0.19\textwidth}|} \hline
- &  Total net profit in MetaTrader [EUR]	 &  Total net profit in Matlab 
+ &  Total net profit in MetaTrader [EUR]	 &  Total net profit in MATLAB 
 [EUR]	 &  Difference [EUR]	 &  Difference [\%]\\ \hline
 \multicolumn{5}{|c|}{GBPUSD in time period 2013.01.09 - 2013.12.30}\\ \hline
 Fixed $p1$-$p5$	 & -8 823.76 & 	-7 987.00 & 	836.76 & 	10.48\\
@@ -369,7 +373,7 @@ Dynamic $p1$-$p5$ & 	13 669,40 & 	17 260,00 & 	3590,60	 & 20,80\\ \hline
 \begin{minipage}{0.49\textwidth}
 \centering
 \includegraphics[width = 0.9\textwidth]{figures/rys12.png}
-\subcaption{Balance (relative value) in Matlab.}
+\subcaption{Balance (relative value) in MATLAB.}
 \label{fig:fig12}
 \end{minipage}
 \begin{minipage}{0.49\textwidth}
@@ -382,12 +386,12 @@ Dynamic $p1$-$p5$ & 	13 669,40 & 	17 260,00 & 	3590,60	 & 20,80\\ \hline
 \end{figure}
 \FloatBarrier
 \vspace{-1em}
-It is important to note that every first chart from each pair above was done in Matlab and every second chart was done in MetaTrader. In Matlab chart context, every point of abscissa axis represents testing period, while on ordinate axis there is a result of testing period (relative value), so that it can be assumed that chart was done in time domain. On the other hand, every abscissa on MetaTrader chart represents each opening of position, which means that chart is not linear related with time (however in cases presented in the article it is really similar to time domain), so that chart begins with first position opening and it is denoised in comparison to Matlab chart as every line are determined by opening and closing position, no matter how long this position has lasted. Despite those differences, corellation between Matlab and MetaTrader charts for the artificial worm algorithm executions is indisputable.
+It is important to note that every first chart from each pair above was done in MATLAB and every second chart was done in MetaTrader. In MATLAB chart context, every point of abscissa axis represents testing period, while on ordinate axis there is a result of testing period (relative value), so that it can be assumed that chart was done in time domain. On the other hand, every abscissa on MetaTrader chart represents each opening of position, which means that chart is not linear related with time (however in cases presented in the article it is really similar to time domain), so that chart begins with first position opening and it is denoised in comparison to MATLAB chart as every line are determined by opening and closing position, no matter how long this position has lasted. Despite those differences, correlation between MATLAB and MetaTrader charts for the artificial worm algorithm executions is indisputable.
 \begin{figure}[h!]
 \begin{minipage}{0.49\textwidth}
 \centering
 \includegraphics[width = 0.9\textwidth]{figures/rys14.png}
-\subcaption{Balance (relative value) in Matlab.}
+\subcaption{Balance (relative value) in MATLAB.}
 \label{fig:fig14}
 \end{minipage}
 \begin{minipage}{0.49\textwidth}
@@ -403,7 +407,7 @@ It is important to note that every first chart from each pair above was done in 
 
 \section{Conclusions}
 
-Presented in the paper the concept of an innovative investment strategy gave satisfactory results for a certain pair as the result of periods of machine learning. For example, in the studied data for two key market currency pairs sampled every hour, the best value is 80 hours of teaching and 15 hours of testing. One can assume that this relationship may change in a different environment (for other markets, for other periods) by becoming a sort of next parameter that optimal values should be sought. It should be emphasized that the study was conducted on data not used in the learning phase and for the basic principle of machine learning achieved results that would have satisfied many a practice. It should also be noted that outside research conducted in environment completely specified (for constant unchanging data stored in Matlab) was also performed simulations in terms of actual brokerage platform. The results obtained in both environments are similar in the sense of direction changes and logic behavior caused by the user received by the algorithm implemented in the Matlab and Metatrader. Differences explained in this work.
+Presented in the paper the concept of an innovative investment strategy gave satisfactory results for a certain pair as the result of periods of machine learning. For example, in the studied data for two key market currency pairs sampled every hour, the best value is 80 hours of teaching and 15 hours of testing. One can assume that this relationship may change in a different environment (for other markets, for other periods) by becoming a sort of next parameter that optimal values should be sought. It should be emphasized that the study was conducted on data not used in the learning phase and for the basic principle of machine learning achieved results that would have satisfied many a practice. It should also be noted that outside research conducted in environment completely specified (for constant unchanging data stored in MATLAB) was also performed simulations in terms of actual brokerage platform. The results obtained in both environments are similar in the sense of direction changes and logic behavior caused by the user received by the algorithm implemented in the MATLAB and MetaTrader. Differences explained in this work.
 The direction of further research will test the hypothesis that the variability periods to test the learner can improve the quality of prediction. This hypothesis seems to be interesting against the background of previous experiences and results, eg for different studied strategies, including \cite{Wilinski2014}\cite{Wilinski}\cite{sinclare}\cite{krutsinger} obtained surprisingly different optimal length of periods of learning and testing.
 
 
