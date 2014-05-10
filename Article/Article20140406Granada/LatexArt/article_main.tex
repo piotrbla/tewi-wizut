@@ -139,7 +139,7 @@ $I$ --- is the length of the test window, after which it is necessary to change 
 \end{equation}  
                                                      
 \end{itemize}
-If this condition is fulfilled, then depending on the current position status $PositionState$ (where $PositionState$ is a variable which takes values {long, short, 0}) at the opening of the next candle, a position is opened or continued as follows: 
+If this condition is fulfilled, then depending on the current position status $PositionState$ (where $PositionState$ is a variable which takes values from \{$long, short, none$\}) at the opening of the next candle, a position is opened or continued as follows: 
 \begin{equation}
 \text{If } Rg=1 \text{ and } PositionState =long \text{ then }PositionState =long;
 \end{equation}
@@ -148,7 +148,7 @@ If this condition is fulfilled, then depending on the current position status $P
 \text{If } Rg=1 \text{ and } PositionState = short \text{ then } PositionState=long;
 \end{equation}
 \begin{equation}
-\text{If } Rg=1 \text{ and } PositionState =0 \text{ then } PositionState =long;
+\text{If } Rg=1 \text{ and } PositionState =none \text{ then } PositionState =long;
 \end{equation}
 
 Similarly check the condition of recommendations Rr to open or continue short position:
@@ -164,7 +164,7 @@ If this condition is fulfilled, then depending on what the current position stat
 \end{equation}
 (costless continuing of opened position)
 \begin{equation}
-\text{If } Rr==1 \text{ and }  PositionState ==0 \text{ then }  PositionState =short;
+\text{If } Rr==1 \text{ and }  PositionState ==none \text{ then }  PositionState =short;
 \end{equation}
 
 In formulas above there is a parameter $p2$. It is the second parameter of the strategy which is an arbitrarily separated part of the worm, which depending on size causes the direction of investment not to change. Large $p2$ causes long positions to change into short positions (or vice-versa) rarely. Small value of $p2$ leads to a higher frequency of these changes. The optimum value of $p2$ is chosen similarly like $p1$.
