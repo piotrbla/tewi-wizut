@@ -72,14 +72,14 @@ Algotrading is a new rapidly growing form of trading on financial markets where 
 Such computer applications (bots) require carefully prepared and tested software that most often needs to adapt to the changing situations on the observed markets. Modern trends, in the development of this software, include sophisticated methods of: artificial intelligence, pattern recognition, classification and machine learning \cite{Leshik2011,Wilinski,wang,sinclare}. Those methods are interpenetrating and complementary and are also expanded with information based on fundamental analysis e.g. automatically extracted from the Internet \cite{elder,Wilinski2014,Schwager1996}. Many strategies are based on relatively simple rules. Efficiency of these rules is amplified by using of machine learning \cite{Wilinski,person,tian,krutsinger,lewis,murphy}.\\
 
 Strategy presented in this paper is an example of a solution that can be used fully automatically or with assistance of investor who makes the decision manually. Using such softwaremakes sense only if there are reasonable premises of achieving the success. These conditions can be achieved through inductive thinking \cite{provost,KleskWilinski}, involving the assumption that multiple validation of decision on data from the past substantiates the correctness of the decision in the future. If a certain set of rules in the strategy used to seek the pattern, leads to the success then these rules are a pattern that is encouraged for repeated use. If repeated use of mentioned pattern results in more successes than failures, then the basic premise to consider the use of the pattern is rational \cite{bishop2006pattern,KleskWilinski}. Unfortunately, changing market is causing the pattern to become outdated therefore it is necessary to constantly update it. Finding historically effective patterns that could be also effective in a data space not used for their determination (to identify these patterns) is a major challenge for machine learning which is applied in the paper.
-The article is organized as follows: at first authors describe an authored strategy based on an entirely innovative concept of an artificial worm. Subsequently extensive studies of effectiveness of presented strategy in terms of prediction and the aspect of investment are carried out. At the end the conclusions resulting from the study are presented and also cited bibliographic sources are included.
+The article is organized as follows: at first authors describe an authored strategy based on an entirely innovative concept of an artificial earthworm. Subsequently extensive studies of effectiveness of presented strategy in terms of prediction and the aspect of investment are carried out. At the end the conclusions resulting from the study are presented and also cited bibliographic sources are included.
 
 \section{Strategy characteristics}
-In presented strategy, a metaphorical procedure is often used to explain heuristic algorithms of artificial intelligence. Said procedure is a reference to an inspiration derived from the nature.\\
+In presented strategy, a metaphorical procedure is often used to explain heuristic algorithms of artificial intelligence. The procedure is a reference to an inspiration derived from the nature.\\
 
-Let's consider an artificial earthworm, which behaves like its natural inspirer. Let this artificial worm have a length of $p1$ candles (vectors representing the knowledge about events occurring within the contractual part of the time series). Let her movement come down to the successive ,,eating'' one candle and simultaneous ,,discarding'' of one candle (the last one) --- always having $p1$ candles. Thus the earthworm moves incrementally at length of time called the period of the candle. $i-th$ candle is  defined as a row of data of values  $O_i$, $H_i$, $L_i$, $C_i$ (Open, High, Low and Close). These values represent (in order): the value at the beginning of this period, the maximum value within the period, the minimum and the closing values - at the end of the candle.\\
-Let's assume that candle can have color (often in a number of brokerage platforms, this approach is used). Therefore candles may be red (when the opening of the candle is higher than its closing $O_i>C_i$) and green (when the situation is opposite $O_i<C_i$).\\
-Let's also assume --- it is a primary strategy rule - that when an artificial earthworm has a significant dominance of red candles, a short position is opened or continued. When earthworm has the significant dominance of green candles, a long position is opened or continued. Imprecise term ,,significant'' is defined by the use of the second parameter $p2$ according to the rules:
+Let's consider an artificial earthworm, which behaves like its natural inspirer. Let this artificial earthworm have a length of $p1$ candles (vectors representing the knowledge about events occurring within the contractual part of the time series). Let its movement come down to the successive ,,eating'' one candle and simultaneous ,,discarding'' of one candle (the last one) --- always having $p1$ candles. Thus the earthworm moves incrementally at length of time called the period of the candle. $i-th$ candle is  defined as a row of data of values  $O_i$, $H_i$, $L_i$, $C_i$ (Open, High, Low and Close). These values represent (in order): the value at the beginning of this period, the maximum value within the period, the minimum and the closing values - at the end of the candle.\\
+Let's assume that candle have a color (often in a number of brokerage platforms such approach is used). Therefore candles may be red (when the opening of the candle is higher than its closing $O_i>C_i$) and green (when the situation is opposite $O_i<C_i$).\\
+Let's also assume --- it is a primary strategy rule - that when the artificial earthworm has a significant dominance of red candles, a short position is opened or continued. When earthworm has the significant dominance of green candles, a long position is opened or continued. Imprecise term ,,significant'' is defined by the use of the second parameter $p2$ according to the rules:
 \begin{equation}
 \text{If }  Lr > p1/2 -p2 \text{ then } short;
 \end{equation}
@@ -94,21 +94,21 @@ opening of long position will be suggested;
 \end{equation}
 the continuation of state will be suggested (position or no opened position).\\
 
-In the rules above $Lr$ and $Lg$ are the number of candles, respectively ,,red'' and ,,green'' in the worm of $p1$ length, wherein $p1 = Lr + Lg$.\\
-When dominance determined by another parameter $p2$ is undecided, as in (\ref{eq:eq3}), then worm takes the color white and the position will not be opened. When the worm continues to open position, investor does not incur costs. On many platforms, also in literature, symbolic marking of growing candles in white and decreasing in black is used. In this article, due to the occurrence of three values, green-red-white colors are used.\\
+In the rules above $Lr$ and $Lg$ are the number of candles, respectively ,,red'' and ,,green'' in the earthworm of $p1$ length, wherein $p1 = Lr + Lg$.\\
+When dominance determined by another parameter $p2$ is undecided, as in (\ref{eq:eq3}), then earthworm takes the color white and the position will not be opened. When the earthworm continues to open position, investor does not incur costs. On many platforms, also in literature, symbolic marking of growing candles in white and decreasing in black is used. In this article, due to the occurrence of three values, green-red-white colors are used.\\
 
 Earthworm is therefore supplied with artificial intellect, which allows the accumulation of knowledge and decision-making:
 \begin{itemize}
-\item right after closing of the current candle, worm ,,swallows'' the candle and ,,knows'' what color is it;
+\item right after closing of the current candle, earthworm ,,swallows'' the candle and ,,knows'' what color is it;
 \item earthworm knows how many candles it is composed with;
-\item after absorbing and discarding one candle, worm knows how many candles inside it are red or green and how to determine its status --- red, green or white;
+\item after absorbing and discarding one candle, earthworm knows how many candles inside it are red or green and how to determine its status --- red, green or white;
 \item knowing its status, earthworm knows how to make a decision about opening or continuing position; the opening of a position (long or short) means the simultaneous closing of the current position (opposite) if such position is opened;
 \item earthworm observes cumulative profit curve and if it  notices unacceptable drawdown, then opened position is changed to the opposite;
 \item unacceptable drawdown is defined by two other parameters $p3$ and $p4$. $p3$ is the number of previous candles, which sets a reference point in time series, in which the value of the accumulated profit for $i-p3$ is checked for comparison with the current value of the accumulated profit. $p4$ is permissible decrease of cumulative profit. If it is exceeded, the $SL$ (Stop Loss --- closes the currently open position) mechanism is activated;
-\item worm also observes current course changes during  each next candle and reacts to unprofitable changes. If the current exchange rate causes a loss on the opened positions greater than $p5$ then the $SL$ mechanism is triggered --- the position is closed and till the end of the candle worm remains in the state without an open position. $p5$ is therefore the fifth strategy parameter. 
+\item earthworm also observes current course changes during  each next candle and reacts to unprofitable changes. If the current exchange rate causes a loss on the opened positions greater than $p5$ then the $SL$ mechanism is triggered --- the position is closed and till the end of the candle earthworm remains in the state without an open position. $p5$ is therefore the fifth strategy parameter. 
 \end{itemize}
 
-These features of the worm's intelligence may be extended, however, for this work they were limited to the foregoing. \\
+These features of the earthworm's intelligence may be extended, however, for this work they were limited to the foregoing. \\
 
 It is assumed that the time series is $S_i$ where $i = 1, 2, ...,$ and each element is a vector $S_i = (O_i, H_i, L_i, C_i)$ called candle.\\
 
@@ -128,7 +128,7 @@ This repeatable algorithm, located in both periods - learning and testing, has t
 \item For each $i = p1, p1 +1, p1 +2, ..., I$ and for $j = 1, ..., p1$ check whether the candle located at a distance $i-j$ backwards from the current candle is:\\
 green when $O_{i-j} <C_{i-j}$, \\
 red when $O_{i-j}> C_{i-j}$, \\
-where $p1$ --- is the first parameter which is the length of the artificial worm --- the number of candles of different colors that make up the ,,body'' of the worm; \\
+where $p1$ --- is the first parameter which is the length of the artificial earthworm --- the number of candles of different colors that make up the ,,body'' of the earthworm; \\
 $O_{i-j}$ --- is the opening value of (i-j)-th candle;\\ 
 $C_{i-j}$ --- is the closing value of (i-j)-th candle; \\
 $I$ --- is the length of the test window, after which it is necessary to change the parameters values to the new, learned in the machine learning phase;\\
@@ -167,7 +167,7 @@ If this condition is fulfilled, then depending on what the current position stat
 \text{If } Rr==1 \text{ and }  PositionState ==none \text{ then }  PositionState =short;
 \end{equation}
 
-In formulas above there is a parameter $p2$. It is the second parameter of the strategy which is an arbitrarily separated part of the worm, which depending on size causes the direction of investment not to change. Large $p2$ causes long positions to change into short positions (or vice-versa) rarely. Small value of $p2$ leads to a higher frequency of these changes. The optimum value of $p2$ is chosen similarly like $p1$.
+In formulas above there is a parameter $p2$. It is the second parameter of the strategy which is an arbitrarily separated part of the earthworm, which depending on size causes the direction of investment not to change. Large $p2$ causes long positions to change into short positions (or vice-versa) rarely. Small value of $p2$ leads to a higher frequency of these changes. The optimum value of $p2$ is chosen similarly like $p1$.
 \begin{itemize}
 \item 	When opening long position, profit after one candle (this does not mean that position was closed after a single candle) can be calculated as:
 \begin{equation}
@@ -185,7 +185,7 @@ and $spread = cost$, when short position was opened after closing or opening a l
 \end{itemize}
 
 \begin{itemize}
-\item If as the result of the test the number of red and green candles in the body of the worm had not obtained any dominance from the color that would recommend to open defined position (worm was white), it is assumed to continue the position, which is open, without any cost of the transaction (with the value of $spread = 0$). If at the beginning of the candle, at the time of checking the recommendation, there was no open position then it can be assumed to continue without any position.
+\item If as the result of the test the number of red and green candles in the body of the earthworm had not obtained any dominance from the color that would recommend to open defined position (earthworm was white), it is assumed to continue the position, which is open, without any cost of the transaction (with the value of $spread = 0$). If at the beginning of the candle, at the time of checking the recommendation, there was no open position then it can be assumed to continue without any position.
 \item Each of the profits calculated above is verified in terms of exceeding the allowable local position drawdown (within one candle). This additional risk management is widely used in automated trading and is called limiting losses --- Stop Loss ($SL$). In this algorithm, $SL$ was introduced as the fifth parameter of the strategy --- $p5$.
 \end{itemize}
 
@@ -203,7 +203,7 @@ where $L_i$ --– the lowest rate value in the $i-th$ candle; $SL$ --– absolut
 where $H_i$ --– the highest rate value in the $i-th$ candle.
 \end{itemize}
 This way $p5$ parameter was used for securing in strategy the strong local changes in exchange rate within a single candle.\\
-The meaning of $p5$ parameter to the behavior of the worm and the occurrence of the closing position is explained in Figure \ref{fig:fig5}.
+The meaning of $p5$ parameter to the behavior of the earthworm and the occurrence of the closing position is explained in Figure \ref{fig:fig5}.
 \begin{figure}[h!]
 \centering
 \includegraphics[width = 0.5\textwidth]{figures/rys5.png}
@@ -317,7 +317,7 @@ The main differences between the implementation of the artificial earthworm in M
 
 The elements listed above could cause some variations in the fragmentary as well as the final results of the algorithm execution.\\
 
-In the article, implementation for MetaTrader4 has covered only the testing part of the algorithm, using fixed set of parameters that have been previously computed in MATLAB in the learning part of execution for every test period. It is important to note that implementing full algorithm, along with the learning part in MQL4, is obviously possible, however in the article the main objective was to confirm that the artificial worm can run on a real market with results similar to those achieved in MATLAB.\\
+In the article, implementation for MetaTrader4 has covered only the testing part of the algorithm, using fixed set of parameters that have been previously computed in MATLAB in the learning part of execution for every test period. It is important to note that implementing full algorithm, along with the learning part in MQL4, is obviously possible, however in the article the main objective was to confirm that the artificial earthworm can run on a real market with results similar to those achieved in MATLAB.\\
 
 Below are presented balance comparisons in MATLAB and MetaTrader environments:
 \begin{enumerate}
@@ -382,7 +382,7 @@ Dynamic $p1$-$p5$ & 	13 669,40 & 	17 260,00 & 	3590,60	 & 20,80\\ \hline
 \end{figure}
 \FloatBarrier
 \vspace{-1em}
-It is important to note that every first chart from each pair above was done in MATLAB and every second chart was done in MetaTrader. In MATLAB chart context, every point of abscissa axis represents testing period, while on ordinate axis there is a result of testing period (relative value), so that it can be assumed that chart was done in time domain. On the other hand, every abscissa on MetaTrader chart represents each opening of position, which means that chart is not linear related with time (however in cases presented in the article it is really similar to time domain), so that chart begins with first position opening and it is denoised in comparison to MATLAB chart as every line are determined by opening and closing position, no matter how long this position has lasted. Despite those differences, correlation between MATLAB and MetaTrader charts for the artificial worm algorithm executions is indisputable.
+It is important to note that every first chart from each pair above was done in MATLAB and every second chart was done in MetaTrader. In MATLAB chart context, every point of abscissa axis represents testing period, while on ordinate axis there is a result of testing period (relative value), so that it can be assumed that chart was done in time domain. On the other hand, every abscissa on MetaTrader chart represents each opening of position, which means that chart is not linear related with time (however in cases presented in the article it is really similar to time domain), so that chart begins with first position opening and it is denoised in comparison to MATLAB chart as every line are determined by opening and closing position, no matter how long this position has lasted. Despite those differences, correlation between MATLAB and MetaTrader charts for the artificial earthworm algorithm executions is indisputable.
 \begin{figure}[h!]
 \begin{minipage}{0.49\textwidth}
 \centering
