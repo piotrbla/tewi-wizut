@@ -60,7 +60,7 @@ Zolnierska 49, 71210 Szczecin, Poland\\
 
 
 \begin{abstract}
-The paper presents an innovative concept of~investment strategy derived from the~general ideas of~artificial intelligence. The strategy has been tested in a~number of~simulations on historical data as well as data outside learning periods. Tests were performed mainly in the~selected currency markets, including the~primary currency pair of~EURUSD. Presented approach opens long and~short positions alternately during candle closing events. Closing a~position is based on recommendation which is deduced from changes in characteristics of~time series. The strategy has parameters that vary through time and~are adapted to a~market changes. To present the~strategy a~metaphor of~an innovative artificial earthworm that feeds on a~time series was used. The earthworm has its own artificial intelligence which enables it to analyse ,,consumed'' candles, change its preferences about movement direction or~to stay in neutral state. The goal was to implement presented strategy for trading platform to achieve the~automatic trading effect.  The strategy was tested in two development environments --- MATLAB environment and~trading platform MetaTrader after conversion of~M-file into MQL4 file. Implemented strategy enables to achieve interesting results.
+The paper presents an innovative concept of~investment strategy derived from the~general ideas of~artificial intelligence. The strategy has been tested in a~number of~simulations on historical data as well as data outside learning periods. Tests were performed mainly in the~selected currency markets, including the~primary currency pair of~\mbox{EURUSD}. Presented approach opens long and~short positions alternately during candle closing events. Closing a~position is based on recommendation which is deduced from changes in characteristics of~time series. The strategy has parameters that vary through time and~are adapted to a~market changes. To present the~strategy a~metaphor of~an innovative artificial earthworm that feeds on a~time series was used. The earthworm has its own artificial intelligence which enables it to analyse ,,consumed'' candles, change its preferences about movement direction or~to stay in neutral state. The goal was to implement presented strategy for trading platform to achieve the~automatic trading effect.  The strategy was tested in two development environments --- MATLAB environment and~trading platform MetaTrader after conversion of~M-file into MQL4 file. Implemented strategy enables to achieve interesting results.
 \keywords{investment strategy, machine learning, forecasting, time series, algotrading, mql4}
 \end{abstract}
 
@@ -139,7 +139,7 @@ $I$ --- is the~length of~the~test window, after which it is necessary to change 
 \end{equation}  
                                                      
 \end{itemize}
-If this condition is fulfilled, then depending on the~current position status $PositionState$ (where $PositionState$ is a~variable which takes values from \{$long, short, none$\}) at the~opening of~the~next candle, a~position is opened or~continued as follows: 
+If this condition is fulfilled, then depending on the~current position status \textit{PositionState} (where $PositionState$ is a~variable which takes values from \{$long$, $short$, $none$\}) at the~opening of~the~next candle, a~position is opened or~continued as follows: 
 \begin{equation}
 \text{If } Rg=1 \text{ and~} PositionState =long \text{ then }PositionState =long;
 \end{equation}
@@ -167,7 +167,7 @@ If this condition is fulfilled, then depending on what the~current position stat
 \text{If } Rr==1 \text{ and~}  PositionState ==none \text{ then }  PositionState =short;
 \end{equation}
 
-In formulas above there is a~parameter $p2$. It is the~second parameter of~the~strategy which is an arbitrarily separated part of~the~earthworm, which depending on size causes the~direction of~investment not to change. Large $p2$ causes long positions to change into short positions (or vice-versa) rarely. Small value of~$p2$ leads to a~higher frequency of~these changes. The optimum value of~$p2$ is chosen similarly like $p1$.
+In formulas above there is a~parameter $p2$. It is the~second parameter of~the strategy which is an arbitrarily separated part of~the~earthworm, which depending on size causes the~direction of~investment not to change. Large $p2$ causes long positions to change into short positions (or vice-versa) rarely. Small value of~$p2$ leads to a~higher frequency of~these changes. The optimum value of~$p2$ is chosen similarly like $p1$.
 \begin{itemize}
 \item 	When opening long position, profit after one candle (this does not mean that position was closed after a~single candle) can be calculated as:
 \begin{equation}
@@ -219,11 +219,11 @@ Zc_i = sum ( Z_i ) \text{ from } i = 1 \text{ to the~current } i \text{ value;}
 \end{equation}
 \item There is a~possible local subsidence $Zc_i$ capital by~introducing two additional parameters to manage the~risk.\\
 $p3$ --- the~number of~steps back on the~curve of~the~cumulative profit for the~determination of~$Zc_i$ --- $p3$ for comparison with the~present value of~$Zc_i$;
-$p4$ --- maximum value measured in pips of~the~capital drawdown (eg for the~currency pair EURUSD), which if exceeded will trigger the~closure position:\\
+$p4$ --- maximum value measured in pips of~the~capital drawdown (e.g. for the~currency pair EURUSD), which if exceeded will trigger the~closure position:\\
 \begin{equation}
 \text{If } ( Zc_i - p3 - Z_i ) <- p4 \text{ and~} PositionState \neq 0 \text{ then } PositionState = 0
 \end{equation} 
-where $PositionState$ --- is the~type of~open position (long or~short) and~$PositionState$ equal 0 means resignations from the~opening position to the~beginning of~the~next candle.
+where $PositionState$ --- is the~type of~open position (long or~short) and $PositionState$ equal 0 means resignations from the~opening position to the~beginning of~the~next candle.
 \end{itemize}
 So, the~above-described algorithm uses 5 parameters and~3 of~them are devoted to risk management of~the~strategy.\\
 %%PBStart
@@ -293,7 +293,7 @@ From a~conceptual point of~view implementing automated trading strategies in MAT
 
 However in such approach it is very important to make sure that an algorithm that has been developed in MATLAB could be used also regarding to real market conditions which means a~number of~rules, validations and~limitations which obviously are not natively implemented in MATLAB as it is just an generic computing environment.\\
 
-To make sure that those market conditions are met in the~algorithm MATLAB script was converted manually to MQL4 expert advisor for trading platform of~MetaTrader 4 which is commonly used to perform the~real market operations.\\
+To make sure that those market conditions are met in the algorithm \mbox{MATLAB} script was converted manually to MQL4 expert advisor for trading platform of~MetaTrader 4 which is commonly used to perform the~real market operations.\\
 
 The main differences between the~implementation of~the~artificial earthworm in MATLAB and~in MetaTrader are listed below:
 \begin{itemize}
@@ -404,7 +404,7 @@ It is important to note that every first chart from each pair above was done in 
 \section{Conclusions}
 
 The concept of~an innovative investment strategy gave satisfactory results for a~certain pair as the~result of~periods of~machine learning. E.g. in the~studied data for two key market currency pairs sampled every hour, the~best value is 80 hours of~teaching and~15 hours of~testing. One can assume that this relationship may change in a~different environment (for other markets, for other periods) by~becoming a~sort of~next parameter that optimal values should be sought. It should be emphasized that the~study was conducted on data not used in the~learning phase and~for the~basic principle of~machine learning achieved results that would have satisfied many a~practice. It should also be noted that outside research conducted in environment completely specified (for constant unchanging data stored in MATLAB) was also performed simulations in terms of~actual brokerage platform. The results obtained in both environments are similar in the~sense of~direction changes and~logic behavior caused by~the~user received by~the~algorithm implemented in the~MATLAB and~MetaTrader. Differences were explained in this work.
-The direction of~further research will test the~hypothesis that the~variability periods to test the~learner can improve the~quality of~prediction. This hypothesis seems to be interesting against the~background of~previous experiences and~results, eg for different studied strategies, including \cite{Wilinski2014}\cite{Wilinski}\cite{sinclare}\cite{krutsinger} obtained surprisingly different optimal length of~periods of~learning and~testing.
+The direction of~further research will test the~hypothesis that the~variability periods to test the~learner can improve the~quality of~prediction. This hypothesis seems to be interesting against the~background of~previous experiences and~results, e.g. for different studied strategies, including \cite{Wilinski2014}\cite{Wilinski}\cite{sinclare}\cite{krutsinger} obtained surprisingly different optimal length of~periods of~learning and~testing.
 
 
 
