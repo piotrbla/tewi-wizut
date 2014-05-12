@@ -97,7 +97,7 @@ the continuation of state will be suggested (position or no opened position).\\
 In the rules above $Lr$ and $Lg$ are the number of candles, respectively ,,red'' and ,,green'' in the earthworm of $p1$ length, wherein $p1 = Lr + Lg$.\\
 When dominance determined by another parameter $p2$ is undecided, as in (\ref{eq:eq3}), then earthworm takes the color white and the position will not be opened. When the earthworm continues to open position, investor does not incur costs. On many platforms, also in literature, symbolic marking of growing candles in white and decreasing in black is used. In this article, due to the occurrence of three values, green-red-white colors are used.\\
 
-Earthworm is therefore supplied with artificial intellect, which allows the accumulation of knowledge and decision-making:
+The earthworm is therefore supplied with artificial intellect which enables the accumulation of knowledge and decision-making:
 \begin{itemize}
 \item right after closing of the current candle, earthworm ,,swallows'' the candle and ,,knows'' what color is it;
 \item earthworm knows how many candles it is composed with;
@@ -114,7 +114,7 @@ It is assumed that the time series is $S_i$ where $i = 1, 2, ...,$ and each elem
 
 
 Artificial earthworm executes the following algorithm.\\
-The strategy is built on the principle of classical machine learning. Before starting to run the algorithm, on data located outside the environment that investor knows (like on the current market segments --- out-of-sample), it is necessary to ,,teach''  the values of parameters. This principle is presented in Figure \ref{fig:fig2}, which shows examples of learning periods and following them testing periods. Data from testing period was not used during learning.\\
+The strategy is built on the principle of classical machine learning. Before starting to run the algorithm on data located outside the scope that investor knows (like on the current market segments --- out-of-sample), it is necessary to ,,teach''  the values of parameters. This principle is presented in Figure \ref{fig:fig2}, which shows examples of learning periods and following them testing periods. Data from testing period was not used during learning.\\
 \begin{figure}[ht]
 \centering
 \includegraphics[width = 0.6\textwidth]{figures/rys2.png}
@@ -123,7 +123,7 @@ The strategy is built on the principle of classical machine learning. Before sta
 \end{figure}
 \FloatBarrier
 \vspace{-1em}
-This repeatable algorithm, located in both periods - learning and testing, has the following structure. In learning period the optimal value for five parameters $p1$, $p2$, ..., $p5$ was determined. In test period these designated values of parameters were used to perform the algorithm in the new environment. In each $i-th$ step (candle) of time series following activities were performed:
+This repeatable algorithm located in both periods - learning and testing - has the following structure. In learning period the optimal value for five parameters $p1$, $p2$, ..., $p5$ is determined. In test period these designated values of parameters are used to perform the algorithm in the new environment. In each $i-th$ step (candle) of time series following activities are performed:
 \begin{itemize}
 \item For each $i = p1, p1 +1, p1 +2, ..., I$ and for $j = 1, ..., p1$ check whether the candle located at a distance $i-j$ backwards from the current candle is:\\
 green when $O_{i-j} <C_{i-j}$, \\
@@ -132,7 +132,7 @@ where $p1$ --- is the first parameter which is the length of the artificial eart
 $O_{i-j}$ --- is the opening value of (i-j)-th candle;\\ 
 $C_{i-j}$ --- is the closing value of (i-j)-th candle; \\
 $I$ --- is the length of the test window, after which it is necessary to change the parameters values to the new, learned in the machine learning phase;\\
-\item In each $i-th$ step, the loop $j = 1, ..., p1$ is performed in which a number of green $Lg$, red $Lr$ candles is calculated so the sum of $Lg$ and $Lr$ is $p1$ (to avoid the situation when $O_i = C_i$, it is assigned arbitrarily to one of the candles sets, for example green);
+\item In each $i-th$ step, the loop $j = 1, ..., p1$ is performed in which a number of green $Lg$, red $Lr$ candles is calculated so the sum of $Lg$ and $Lr$ is $p1$ (to avoid the situation when $O_i = C_i$ is an arbitrary assignation to one of the candles sets e.g. green);
 \item A condition for the existence of a $Rg$ recommendation to open a long position (or to continue it if it is open) is checked. This condition is arbitrarily adopted (one can of course consider different one): 
 \begin{equation}
 \text{If } Lg> p1/2-p2 \text{ then } Rg=1
@@ -240,7 +240,7 @@ The figure shows in a tree form further decisions taken at the beginning of the 
 
 Described algorithm was implemented in MATLAB environment and in Metatrader platform using the MQL4 language. The study was conducted both in the historical data (of course with the principles of machine learning --- testing was carried out using data not used in the learning phase) and a real ,,live'' market. Between the environments, there are important differences that affect the diversity of simulation results.
 
-\section{The study of strategy}
+\section{Strategy studies}
 The study was conducted primarily on the basic currency pair EURUSD at 1h candles. This market was chosen because of its popularity, a huge liquidity and also due to the fact that the authors posses many experiences in other machine learning strategies for this particular market such as in \cite{Wilinski2014,Wilinski}. These experiments suggested initially, carrying out many tests with a long learning period, about 1000 candles, then 500 candles and testing time windows of 50 to 200 candles. All these attempts have proven to be ineffective and led to continuing losses. After months of tests in many markets it was noted that over long periods of learning, e.g. the order of 1000 candles, variability in parameters was very large. Therefore, the tests started with a decidedly shorter periods of learning and testing.\\
 
 Finally, the authors decided to present the results for the two markets --- currency pairs EURUSD and GBPUSD sampled at 1h --- in machine learning with ratios adjusted to the reduced scope of both the learning and testing phase.\\
@@ -288,12 +288,12 @@ All the results presented above refer to simulations conducted in MATLAB.
 
 %%PBStop
 
-\section{Strategy Verification Using Online Trading Platform}
-From a conceptual point of view, implementing automated trading strategies in MATLAB environment is one of proper approaches. MATLAB provides a number of features to rapidly prototype such algorithms, for e.g. built-in computation functions and charting tools. What is more, MATLAB enables also intuitive operations on vectors and matrices as well as flexible insight into variables values that are produced by the algorithm which greatly facilitates computing process management.\\
+\section{Strategy verification using online trading platform}
+From a conceptual point of view implementing automated trading strategies in MATLAB environment is one of proper approaches. MATLAB provides a number of features to rapidly prototype such algorithms, e.g. built-in computation functions and charting tools. What is more, MATLAB enables also intuitive operations on vectors and matrices as well as flexible insight into variables values that are produced by the algorithm which greatly facilitates computing process management.\\
 
-However, in such approach, it is very important to make sure that an algorithm, that has been developed in MATLAB, can be used also regarding to real market conditions, which means a number of rules, validations and limitations, which obviously are not natively implemented in MATLAB, as it is just an open computing environment.\\
+However in such approach it is very important to make sure that an algorithm that has been developed in MATLAB could be used also regarding to real market conditions which means a number of rules, validations and limitations which obviously are not natively implemented in MATLAB as it is just an generic computing environment.\\
 
-To make sure that those market conditions are met in the algorithm, MATLAB script was converted manually to MQL4 expert advisor for trading platform of MetaTrader 4, which is commonly used to perform the real market operations.\\
+To make sure that those market conditions are met in the algorithm MATLAB script was converted manually to MQL4 expert advisor for trading platform of MetaTrader 4 which is commonly used to perform the real market operations.\\
 
 The main differences between the implementation of the artificial earthworm in MATLAB and in MetaTrader are listed below:
 \begin{itemize}
@@ -317,7 +317,7 @@ The main differences between the implementation of the artificial earthworm in M
 
 The elements listed above could cause some variations in the fragmentary as well as the final results of the algorithm execution.\\
 
-In the article, implementation for MetaTrader4 has covered only the testing part of the algorithm, using fixed set of parameters that have been previously computed in MATLAB in the learning part of execution for every test period. It is important to note that implementing full algorithm, along with the learning part in MQL4, is obviously possible, however in the article the main objective was to confirm that the artificial earthworm can run on a real market with results similar to those achieved in MATLAB.\\
+In the paper MetaTrader4, implementation for  has covered only the testing part of the algorithm using fixed set of parameters that have been previously computed in MATLAB in the learning part of execution for every test period. It is important to note that implementing full algorithm, along with the learning part in MQL4, is obviously possible, however in the article the main objective was to confirm that the artificial earthworm can run on a real market with results similar to those achieved in MATLAB.\\
 
 Below are presented balance comparisons in MATLAB and MetaTrader environments:
 \begin{enumerate}
